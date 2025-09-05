@@ -3,41 +3,120 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>IPTV ORG SAYAN OAI</title>
+  <title>IP TV ORG SAYAN OAI</title>
+  <!-- Plyr CSS -->
+  <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
   <style>
     body {
-      background: #000;
+      background: #111;
       margin: 0;
       padding: 0;
+      min-height: 100vh;
       display: flex;
-      justify-content: center;
       align-items: center;
-      height: 100vh;
+      justify-content: center;
     }
-    #videoContainer {
+    #player-container {
       width: 100%;
       max-width: 720px;
-      padding: 10px;
+      padding: 12px;
+      box-sizing: border-box;
     }
-    iframe {
+    .plyr__video-embed {
+      border-radius: 10px;
+      overflow: hidden;
+      background: #000;
+    }
+    video {
       width: 100%;
-      min-height: 60vh;
-      border: none;
       border-radius: 10px;
       background: #000;
     }
   </style>
+  <!-- Plyr JS -->
+  <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
+  <!-- Hls.js for m3u8 (HLS) support -->
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@1.5.6/dist/hls.min.js"></script>
+  <!-- Video URL file -->
   <script src="videoData.js"></script>
 </head>
 <body>
-  <div id="videoContainer">
-    <iframe id="playerFrame" allowfullscreen></iframe>
+  <div id="player-container">
+    <video id="videoPlayer" controls playsinline></video>
   </div>
   <script>
-    // Decode the Base64 link
+    // Base64 decode
     const videoUrl = atob(base64VideoUrl);
-    // Set the iframe src
-    document.getElementById('playerFrame').src = videoUrl;
+
+    // Quality levels global
+    let currentLevel = -1;
+
+    // Initialize Plyr
+    const player = new Plyr('#videoPlayer', {
+      controls: [
+        'play-large', 'play', 'progress', 'current-time', 'mute', 'volume',
+        'settings', 'fullscreen'
+      ],
+      settings: ['quality', 'speed', 'loop'],
+      quality: {
+        default: 360,
+        options: [360, 480, 720, 1080],
+        forced: true,
+        onChange: (quality) => {
+          if (hls) {
+            for (let i = 0; i < hls.levels.length; i++) {
+              if (hls.levels[i].height === quality) {
+                hls.currentLevel = i;
+                break;
+              }
+            }
+          }
+        }
+      }
+    });
+
+    // Hls.js integration for Plyr
+    let hls;
+    const video = document.getElementById('videoPlayer');
+    if (Hls.isSupported()) {
+      hls = new Hls();
+      hls.loadSource(videoUrl);
+      hls.attachMedia(video);
+
+      // Quality menu setup
+      hls.on(Hls.Events.MANIFEST_PARSED, function (event, data) {
+        const levels = hls.levels.map(lvl => lvl.height).sort((a, b) => a - b);
+        const uniqueLevels = [...new Set(levels)];
+
+        // Set default quality to 360p if available, else lowest
+        let defaultQuality = uniqueLevels.includes(360) ? 360 : uniqueLevels[0];
+        player.quality = {
+          default: defaultQuality,
+          options: uniqueLevels,
+          forced: true,
+          onChange: (newQuality) => {
+            for (let i = 0; i < hls.levels.length; i++) {
+              if (hls.levels[i].height === newQuality) {
+                hls.currentLevel = i;
+                break;
+              }
+            }
+          }
+        };
+        // Set initial quality to 360p
+        for (let i = 0; i < hls.levels.length; i++) {
+          if (hls.levels[i].height === 360) {
+            hls.currentLevel = i;
+            break;
+          }
+        }
+      });
+    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+      // For Safari and iOS
+      video.src = videoUrl;
+    } else {
+      alert("Sorry, your browser does not support HLS playback!");
+    }
   </script>
 </body>
 </html>

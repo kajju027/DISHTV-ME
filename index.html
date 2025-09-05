@@ -1,43 +1,43 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>IP TV ORG SAYAN OAI</title>
-<style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body {
-    background: #000;
-    display: flex; justify-content: center; align-items: center;
-    height: 100vh;
-  }
-  #videoContainer {
-    width: 100%;
-    max-width: 720px;
-    padding: 10px;
-  }
-  video {
-    width: 100%; height: auto; border-radius: 8px;
-  }
-</style>
-<!-- CryptoJS লাইব্রেরি -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
-<!-- আপনার ডেটা ফাইল -->
-<script src="videoData.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>IPTV ORG SAYAN OAI</title>
+  <style>
+    body {
+      background: #000;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    #videoContainer {
+      width: 100%;
+      max-width: 720px;
+      padding: 10px;
+    }
+    iframe {
+      width: 100%;
+      min-height: 60vh;
+      border: none;
+      border-radius: 10px;
+      background: #000;
+    }
+  </style>
+  <script src="videoData.js"></script>
 </head>
 <body>
-<div id="videoContainer">
-  <video id="videoPlayer" controls autoplay></video>
-</div>
-<script>
-  // Base64 ডেটা ডিকোড করি
-  const encryptedStr = atob(encryptedBase64);
-  // ডিক্রিপ্ট করি
-  const decrypted = CryptoJS.AES.decrypt(encryptedStr, secretKey);
-  const videoUrl = decrypted.toString(CryptoJS.enc.Utf8);
-  // ভিডিও সেট করি
-  document.getElementById('videoPlayer').src = videoUrl;
-</script>
+  <div id="videoContainer">
+    <iframe id="playerFrame" allowfullscreen></iframe>
+  </div>
+  <script>
+    // Decode the Base64 link
+    const videoUrl = atob(base64VideoUrl);
+    // Set the iframe src
+    document.getElementById('playerFrame').src = videoUrl;
+  </script>
 </body>
 </html>

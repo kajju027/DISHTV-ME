@@ -3,46 +3,275 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>IPTV ORG SAYAN</title>
+  <title>SAYAN OAI x KIDS IPTV</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <!-- Video.js CSS -->
+  <link href="https://vjs.zencdn.net/8.10.0/video-js.css" rel="stylesheet" />
+  <!-- Particles.js -->
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
   <style>
     body {
-      background: #111;
       margin: 0;
-      padding: 0;
+      font-family: 'Roboto', Arial, sans-serif;
+      background: #181b20;
+      color: #fff;
       min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      position: relative;
+      overflow-x: hidden;
     }
-    #player {
+    #particles-js {
+      position: fixed;
+      z-index: 0;
+      width: 100vw;
+      height: 100vh;
+      top: 0;
+      left: 0;
+    }
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 16px;
+    }
+    .video-section {
+      margin-bottom: 24px;
+      text-align: center;
+    }
+    .video-js {
       width: 100%;
       max-width: 720px;
-      aspect-ratio: 16/9;
-      background: #000;
-      border-radius: 10px;
+      height: 220px;
+      margin: 0 auto 12px auto;
+      border-radius: 14px;
+      box-shadow: 0 4px 24px #00ffff33;
+    }
+    .channel-list {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    @media (min-width: 700px) {
+      .video-js {
+        height: 400px;
+      }
+      .channel-list {
+        grid-template-columns: repeat(6, 1fr);
+      }
+    }
+    .channel-card {
+      background: #20232aee;
+      border-radius: 13px;
+      padding: 10px 0 7px 0;
+      box-shadow: 0 2px 10px #00ffff11;
+      text-align: center;
+      cursor: pointer;
+      user-select: none;
+      position: relative;
       overflow: hidden;
-      box-shadow: 0 0 16px #222;
+      transition: transform 0.1s, box-shadow 0.2s;
+    }
+    .channel-card:active {
+      transform: scale(0.96);
+      box-shadow: 0 0 0 2px #00ffff88, 0 2px 10px #00ffff33;
+    }
+    .channel-card::after {
+      content: '';
+      position: absolute;
+      border-radius: 50%;
+      left: 50%; top: 50%;
+      pointer-events: none;
+      transform: translate(-50%, -50%) scale(0);
+      background: radial-gradient(circle, #00fff966 0%, transparent 80%);
+      width: 180px;
+      height: 180px;
+      opacity: 0.5;
+      transition: transform 0.4s cubic-bezier(.5,2,.3,.7);
+      z-index: 3;
+    }
+    .channel-card.clicked::after {
+      transform: translate(-50%, -50%) scale(1);
+      transition: transform 0.3s cubic-bezier(.5,2,.3,.7);
+      opacity: 0;
+    }
+    .channel-logo {
+      width: 55px;
+      height: 55px;
+      object-fit: contain;
+      margin: 0 auto 7px auto;
+      border-radius: 8px;
+      background: #fff;
+      box-shadow: 0 1px 5px #00ffff33;
+      display: block;
+    }
+    .channel-name {
+      font-family: 'Orbitron', Arial, sans-serif;
+      font-size: 1em;
+      color: #00ffff;
+      letter-spacing: 1px;
+      font-weight: 700;
+      white-space: normal;
+      word-break: break-all;
+    }
+    .footer {
+      width: 100vw;
+      background: #181b22e0;
+      color: #fff;
+      font-size: 1em;
+      text-align: center;
+      padding: 13px 0 8px 0;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      z-index: 2;
+      gap: 18px;
+    }
+    .footer .footer-text {
+      font-family: 'Orbitron', Arial, sans-serif;
+      font-size: 1em;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+    .footer .visitor {
+      margin: 0 6px;
+      vertical-align: middle;
+    }
+    .footer .telegram {
+      margin-left: 5px;
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      text-decoration: none;
+      color: #00ffff;
+      font-family: 'Roboto', Arial, sans-serif;
+      font-weight: 700;
+      transition: color 0.2s;
+    }
+    .footer .telegram:hover {
+      color: #0077ff;
+    }
+    .footer .telegram svg {
+      width: 21px; height: 21px;
+      vertical-align: middle;
+      fill: currentColor;
     }
   </style>
-  <!-- JW Player CDN -->
-  <script src="https://cdn.jwplayer.com/libraries/IDzF9Zmk.js"></script>
 </head>
 <body>
-  <div id="player"></div>
-  <script>
-    // Base64 encoded video URL
-    const base64Url = "aHR0cHM6Ly9saXZlLmRpbmVzaDI5LmNvbS5ucC9zdHJlYW0vamlvdHZwbHVzL2Rpc25leWNoYW5uZWwvbWFzdGVyLm0zdTg=";
-    // Decode
-    const videoUrl = atob(base64Url);
+  <div id="particles-js"></div>
+  <div class="container">
+    <div class="video-section">
+      <!-- Video.js Player -->
+      <video
+        id="main-player"
+        class="video-js vjs-default-skin"
+        controls
+        autoplay
+        preload="auto"
+        poster="https://cdn.pixabay.com/photo/2016/04/01/09/30/tv-1296106_960_720.png"
+        data-setup='{"fluid": true}'
+      >
+        <source src="https://live.dinesh29.com.np/stream/jiotvplus/disneychannel/master.m3u8" type="application/x-mpegURL" />
+        Your browser does not support the video tag.
+      </video>
+    </div>
+    <!-- Channel List -->
+    <div id="channels" class="channel-list"></div>
+  </div>
+  <!-- Footer -->
+  <div class="footer">
+    <span class="footer-text">SAYAN x OAI | All Rights Reserved</span>
+    <img class="visitor" src="https://visit-counter.vercel.app/counter.png?page=dishtv.onrender.com&s=40&c=00ffff&bg=00000000&no=1&ff=digi&tb=&ta=" alt="visitor count" />
+    <a class="telegram" href="https://t.me/sayan_xyz" target="_blank" rel="noopener">
+      <svg viewBox="0 0 240 240">
+        <circle cx="120" cy="120" r="120" fill="#0088cc"/>
+        <path d="M52,120l120-48c9.6-4.5,17.1,2.5,14.2,16l-24,112c-2.3,10.8-8.6,13.2-17.4,8.3l-48.1-35-23.2,22.4
+        c-2.6,2.6-4.7,4.7-9.7,4.7l3.4-47.7L163,83.1c3.6-3.1-0.8-4.8-5.5-1.7l-89.6,56.3l-38.6-12.1
+        c-13.2-4.1-13.4-13.2,2.7-18.1L52,120z" fill="#fff"/>
+      </svg>
+      Telegram
+    </a>
+  </div>
+  <!-- Video.js -->
+  <script src="https://vjs.zencdn.net/8.10.0/video.min.js"></script>
+  <!-- Main JS (module) -->
+  <script type="module">
+    import { channels } from './data.js';
 
-    jwplayer("player").setup({
-      file: videoUrl,
-      autostart: true,
-      mute: false,
-      width: "100%",
-      aspectratio: "16:9",
-      controls: true
+    // Channel Cards Render
+    const channelsDiv = document.getElementById('channels');
+    channels.forEach((ch, idx) => {
+      const card = document.createElement('div');
+      card.className = 'channel-card';
+      card.innerHTML = `
+        <img class="channel-logo" src="${ch.logo}" alt="${ch.name}" />
+        <div class="channel-name">${ch.name}</div>
+      `;
+      card.addEventListener('click', () => {
+        // Click animation
+        card.classList.add('clicked');
+        setTimeout(() => card.classList.remove('clicked'), 400);
+
+        // Change main video source
+        const player = window.mainPlayer;
+        if (player && player.src) {
+          player.src({type: 'application/x-mpegURL', src: ch.url});
+          player.play();
+        } else {
+          const video = document.getElementById('main-player');
+          video.pause();
+          video.src = ch.url;
+          video.load();
+          video.play();
+        }
+      });
+      channelsDiv.appendChild(card);
+    });
+
+    // Video.js Player Setup
+    window.mainPlayer = videojs('main-player', {
+      techOrder: ["html5"],
+      controlBar: {
+        pictureInPictureToggle: true,
+        volumePanel: true,
+        fullscreenToggle: true,
+        audioTrackButton: true,
+        playbackRateMenuButton: true,
+        qualitySelector: true
+      }
+    });
+
+    // Particles.js Background Config
+    particlesJS("particles-js", {
+      "particles": {
+        "number": { "value": 85, "density": { "enable": true, "value_area": 850 } },
+        "color": { "value": ["#00ffff","#ff00cc","#ffeb3b","#ff5722","#00e676","#2979ff"] },
+        "shape": { "type": "circle" },
+        "opacity": { "value": 0.65, "random": true },
+        "size": { "value": 7, "random": true },
+        "line_linked": { "enable": false },
+        "move": { "enable": true, "speed": 2.5, "random": true, "out_mode": "out" }
+      },
+      "interactivity": {
+        "detect_on": "canvas",
+        "events": {
+          "onhover": { "enable": true, "mode": "repulse" },
+          "onclick": { "enable": true, "mode": "push" }
+        },
+        "modes": {
+          "repulse": { "distance": 85, "duration": 0.4 },
+          "push": { "particles_nb": 3 }
+        }
+      },
+      "retina_detect": true
     });
   </script>
 </body>
-</html>
+                                                             </html>
+      

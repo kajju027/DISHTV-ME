@@ -3,9 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>IP TV ORG SAYAN </title>
-  <!-- Plyr CSS -->
-  <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
+  <title>IPTV ORG SAYAN</title>
   <style>
     body {
       background: #111;
@@ -16,98 +14,35 @@
       align-items: center;
       justify-content: center;
     }
-    #player-container {
+    #player {
       width: 100%;
       max-width: 720px;
-      padding: 12px;
-      box-sizing: border-box;
-    }
-    .plyr__video-embed,
-    video {
-      width: 100%;
-      border-radius: 10px;
+      aspect-ratio: 16/9;
       background: #000;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 0 16px #222;
     }
   </style>
-  <!-- Plyr JS -->
-  <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
-  <!-- Hls.js for m3u8 (HLS) support -->
-  <script src="https://cdn.jsdelivr.net/npm/hls.js@1.5.6/dist/hls.min.js"></script>
+  <!-- JW Player CDN -->
+  <script src="https://cdn.jwplayer.com/libraries/IDzF9Zmk.js"></script>
 </head>
 <body>
-  <div id="player-container">
-    <video id="videoPlayer" controls playsinline></video>
-  </div>
+  <div id="player"></div>
   <script>
-    // === Base64 encoded video URL ===
-    const base64VideoUrl = "aHR0cHM6Ly9saXZlLmRpbmVzaDI5LmNvbS5ucC9zdHJlYW0vamlvdHZwbHVzL2Rpc25leWNoYW5uZWwvbWFzdGVyLm0zdTg=";
-    const videoUrl = atob(base64VideoUrl);
+    // Base64 encoded video URL
+    const base64Url = "aHR0cHM6Ly9saXZlLmRpbmVzaDI5LmNvbS5ucC9zdHJlYW0vamlvdHZwbHVzL2Rpc25leWNoYW5uZWwvbWFzdGVyLm0zdTg=";
+    // Decode
+    const videoUrl = atob(base64Url);
 
-    // Initialize Plyr
-    const player = new Plyr('#videoPlayer', {
-      controls: [
-        'play-large', 'play', 'progress', 'current-time', 'mute', 'volume',
-        'settings', 'fullscreen'
-      ],
-      settings: ['quality', 'speed', 'loop'],
-      quality: {
-        default: 360,
-        options: [360, 480, 720, 1080],
-        forced: true,
-        onChange: (quality) => {
-          if (window.hls) {
-            for (let i = 0; i < hls.levels.length; i++) {
-              if (hls.levels[i].height === quality) {
-                hls.currentLevel = i;
-                break;
-              }
-            }
-          }
-        }
-      }
+    jwplayer("player").setup({
+      file: videoUrl,
+      autostart: true,
+      mute: false,
+      width: "100%",
+      aspectratio: "16:9",
+      controls: true
     });
-
-    // Hls.js integration for Plyr
-    const video = document.getElementById('videoPlayer');
-    if (Hls.isSupported()) {
-      window.hls = new Hls();
-      hls.loadSource(videoUrl);
-      hls.attachMedia(video);
-
-      // Quality menu setup
-      hls.on(Hls.Events.MANIFEST_PARSED, function (event, data) {
-        const levels = hls.levels.map(lvl => lvl.height).sort((a, b) => a - b);
-        const uniqueLevels = [...new Set(levels)];
-
-        // Set default quality to 360p if available, else lowest
-        let defaultQuality = uniqueLevels.includes(360) ? 360 : uniqueLevels[0];
-        player.quality = {
-          default: defaultQuality,
-          options: uniqueLevels,
-          forced: true,
-          onChange: (newQuality) => {
-            for (let i = 0; i < hls.levels.length; i++) {
-              if (hls.levels[i].height === newQuality) {
-                hls.currentLevel = i;
-                break;
-              }
-            }
-          }
-        };
-        // Set initial quality to 360p
-        for (let i = 0; i < hls.levels.length; i++) {
-          if (hls.levels[i].height === 360) {
-            hls.currentLevel = i;
-            break;
-          }
-        }
-      });
-    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-      // For Safari and iOS
-      video.src = videoUrl;
-    } else {
-      alert("Sorry, your browser does not support HLS playback!");
-    }
   </script>
 </body>
 </html>

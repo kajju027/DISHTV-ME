@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>IP TV ORG SAYAN OAI</title>
+  <title>IP TV ORG SAYAN </title>
   <!-- Plyr CSS -->
   <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
   <style>
@@ -22,11 +22,7 @@
       padding: 12px;
       box-sizing: border-box;
     }
-    .plyr__video-embed {
-      border-radius: 10px;
-      overflow: hidden;
-      background: #000;
-    }
+    .plyr__video-embed,
     video {
       width: 100%;
       border-radius: 10px;
@@ -37,19 +33,15 @@
   <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
   <!-- Hls.js for m3u8 (HLS) support -->
   <script src="https://cdn.jsdelivr.net/npm/hls.js@1.5.6/dist/hls.min.js"></script>
-  <!-- Video URL file -->
-  <script src="videoData.js"></script>
 </head>
 <body>
   <div id="player-container">
     <video id="videoPlayer" controls playsinline></video>
   </div>
   <script>
-    // Base64 decode
+    // === Base64 encoded video URL ===
+    const base64VideoUrl = "aHR0cHM6Ly9saXZlLmRpbmVzaDI5LmNvbS5ucC9zdHJlYW0vamlvdHZwbHVzL2Rpc25leWNoYW5uZWwvbWFzdGVyLm0zdTg=";
     const videoUrl = atob(base64VideoUrl);
-
-    // Quality levels global
-    let currentLevel = -1;
 
     // Initialize Plyr
     const player = new Plyr('#videoPlayer', {
@@ -63,7 +55,7 @@
         options: [360, 480, 720, 1080],
         forced: true,
         onChange: (quality) => {
-          if (hls) {
+          if (window.hls) {
             for (let i = 0; i < hls.levels.length; i++) {
               if (hls.levels[i].height === quality) {
                 hls.currentLevel = i;
@@ -76,10 +68,9 @@
     });
 
     // Hls.js integration for Plyr
-    let hls;
     const video = document.getElementById('videoPlayer');
     if (Hls.isSupported()) {
-      hls = new Hls();
+      window.hls = new Hls();
       hls.loadSource(videoUrl);
       hls.attachMedia(video);
 

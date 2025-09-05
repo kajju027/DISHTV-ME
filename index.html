@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>SAYAN OAI x KIDS IPTV</title>
+  <title>SAYAN OAI IPTV KIDS</title>
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-  <!-- DPlayer CSS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/dplayer/dist/DPlayer.min.css">
+  <!-- Video.js CSS -->
+  <link href="https://vjs.zencdn.net/8.10.0/video-js.css" rel="stylesheet" />
   <!-- Particles.js -->
   <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
   <style>
@@ -39,15 +39,13 @@
       margin-bottom: 24px;
       text-align: center;
     }
-    #dplayer {
+    .video-js {
       width: 100%;
       max-width: 720px;
+      height: 220px;
       margin: 0 auto 12px auto;
       border-radius: 14px;
-      overflow: hidden;
       box-shadow: 0 4px 24px #00ffff33;
-      background: #1f2128;
-      min-height: 220px;
     }
     .channel-list {
       display: grid;
@@ -56,8 +54,12 @@
       margin-bottom: 32px;
     }
     @media (min-width: 700px) {
-      #dplayer { min-height: 400px; }
-      .channel-list { grid-template-columns: repeat(6, 1fr); }
+      .video-js {
+        height: 400px;
+      }
+      .channel-list {
+        grid-template-columns: repeat(6, 1fr);
+      }
     }
     .channel-card {
       background: #20232aee;
@@ -165,8 +167,19 @@
   <div id="particles-js"></div>
   <div class="container">
     <div class="video-section">
-      <!-- DPlayer container -->
-      <div id="dplayer"></div>
+      <!-- Video.js Player -->
+      <video
+        id="main-player"
+        class="video-js vjs-default-skin"
+        controls
+        autoplay
+        preload="auto"
+        poster="https://cdn.pixabay.com/photo/2016/04/01/09/30/tv-1296106_960_720.png"
+        data-setup='{"fluid": true}'
+      >
+        <source src="https://live.dinesh29.com.np/stream/jiotvplus/disneychannel/master.m3u8" type="application/x-mpegURL" />
+        Your browser does not support the video tag.
+      </video>
     </div>
     <!-- Channel List -->
     <div id="channels" class="channel-list"></div>
@@ -185,52 +198,11 @@
       Telegram
     </a>
   </div>
-  <!-- DPlayer JS & Hls.js -->
-  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-  <script src="https://cdn.jsdelivr.net/npm/dplayer/dist/DPlayer.min.js"></script>
+  <!-- Video.js -->
+  <script src="https://vjs.zencdn.net/8.10.0/video.min.js"></script>
   <!-- Main JS (module) -->
   <script type="module">
     import { channels } from './data.js';
-
-    // Default Channel (Disney Channel)
-    const defaultChannel = channels[0];
-
-    // DPlayer Initial Config
-    let dp = new DPlayer({
-      container: document.getElementById('dplayer'),
-      live: true,
-      autoplay: true,
-      theme: '#00ffff',
-      screenshot: false,
-      airplay: true,
-      hotkey: true,
-      logo: defaultChannel.logo,
-      volume: 0.7,
-      lang: 'en',
-      preload: 'auto',
-      video: {
-        url: defaultChannel.url,
-        type: 'customHls',
-        customType: {
-          customHls: function (video, player) {
-            if (Hls.isSupported()) {
-              var hls = new Hls();
-              hls.loadSource(video.src);
-              hls.attachMedia(video);
-            } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-              video.src = video.src;
-            }
-          }
-        },
-        pic: defaultChannel.logo
-      },
-      contextmenu: [
-        {
-          text: 'Sayan TV',
-          link: 'https://t.me/sayan_xyz'
-        }
-      ]
-    });
 
     // Channel Cards Render
     const channelsDiv = document.getElementById('channels');
@@ -246,16 +218,33 @@
         card.classList.add('clicked');
         setTimeout(() => card.classList.remove('clicked'), 400);
 
-        // Change DPlayer's video
-        dp.switchVideo({
-          url: ch.url,
-          type: 'customHls',
-          pic: ch.logo
-        });
-        dp.options.logo = ch.logo;
-        dp.play();
+        // Change main video source
+        const player = window.mainPlayer;
+        if (player && player.src) {
+          player.src({type: 'application/x-mpegURL', src: ch.url});
+          player.play();
+        } else {
+          const video = document.getElementById('main-player');
+          video.pause();
+          video.src = ch.url;
+          video.load();
+          video.play();
+        }
       });
       channelsDiv.appendChild(card);
+    });
+
+    // Video.js Player Setup
+    window.mainPlayer = videojs('main-player', {
+      techOrder: ["html5"],
+      controlBar: {
+        pictureInPictureToggle: true,
+        volumePanel: true,
+        fullscreenToggle: true,
+        audioTrackButton: true,
+        playbackRateMenuButton: true,
+        qualitySelector: true
+      }
     });
 
     // Particles.js Background Config
@@ -284,5 +273,4 @@
     });
   </script>
 </body>
-          </html>
-      
+</html>

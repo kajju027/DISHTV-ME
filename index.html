@@ -3,10 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Sayan TV Channel</title>
+  <title>SAYAN IPTV | HOME</title>
+  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-  <!-- JW Player JS -->
-  <script src="https://cdn.jwplayer.com/libraries/DbXZPMBQ.js"></script>
+  <!-- DPlayer CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/dplayer/dist/DPlayer.min.css">
+  <!-- Particles.js -->
   <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
   <style>
     body {
@@ -37,15 +39,15 @@
       margin-bottom: 24px;
       text-align: center;
     }
-    #jwplayer_div {
+    #dplayer {
       width: 100%;
       max-width: 720px;
-      min-height: 220px;
       margin: 0 auto 12px auto;
       border-radius: 14px;
       overflow: hidden;
       box-shadow: 0 4px 24px #00ffff33;
       background: #1f2128;
+      min-height: 220px;
     }
     .channel-list {
       display: grid;
@@ -54,7 +56,7 @@
       margin-bottom: 32px;
     }
     @media (min-width: 700px) {
-      #jwplayer_div { min-height: 400px; }
+      #dplayer { min-height: 400px; }
       .channel-list { grid-template-columns: repeat(6, 1fr); }
     }
     .channel-card {
@@ -163,10 +165,13 @@
   <div id="particles-js"></div>
   <div class="container">
     <div class="video-section">
-      <div id="jwplayer_div"></div>
+      <!-- DPlayer container -->
+      <div id="dplayer"></div>
     </div>
+    <!-- Channel List -->
     <div id="channels" class="channel-list"></div>
   </div>
+  <!-- Footer -->
   <div class="footer">
     <span class="footer-text">SAYAN x OAI | All Rights Reserved</span>
     <img class="visitor" src="https://visit-counter.vercel.app/counter.png?page=dishtv.onrender.com&s=40&c=00ffff&bg=00000000&no=1&ff=digi&tb=&ta=" alt="visitor count" />
@@ -180,46 +185,54 @@
       Telegram
     </a>
   </div>
+  <!-- DPlayer JS & Hls.js -->
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+  <script src="https://cdn.jsdelivr.net/npm/dplayer/dist/DPlayer.min.js"></script>
+  <!-- Main JS (module) -->
   <script type="module">
     import { channels } from './data.js';
+
+    // Default Channel (Disney Channel)
     const defaultChannel = channels[0];
-    function setupJWPlayer(channel) {
-      jwplayer("jwplayer_div").setup({
-        file: channel.url,
-        image: channel.logo,
-        autostart: true,
-        mute: false,
-        width: "100%",
-        aspectratio: "16:9",
-        stretching: "uniform",
-        playbackRateControls: true,
-        primary: "html5",
-        preload: "auto",
-        controls: true,
-        live: true,
-        repeat: false,
-        playbackRates: [0.75, 1, 1.25, 1.5, 2],
-        logo: {
-          file: channel.logo,
-          link: "https://t.me/sayan_xyz",
-          position: "top-right"
-        },
-        abouttext: "Sayan TV",
-        aboutlink: "https://t.me/sayan_xyz",
-      });
-      jwplayer().on('levels', function (e) {
-        if (e.levels && e.levels.length > 0) {
-          let found = e.levels.findIndex(l => l.label && l.label.toString().includes('360'));
-          if(found > -1) {
-            jwplayer().setCurrentQuality(found);
+
+    // DPlayer Initial Config
+    let dp = new DPlayer({
+      container: document.getElementById('dplayer'),
+      live: true,
+      autoplay: true,
+      theme: '#00ffff',
+      screenshot: false,
+      airplay: true,
+      hotkey: true,
+      logo: defaultChannel.logo,
+      volume: 0.7,
+      lang: 'en',
+      preload: 'auto',
+      video: {
+        url: defaultChannel.url,
+        type: 'customHls',
+        customType: {
+          customHls: function (video, player) {
+            if (Hls.isSupported()) {
+              var hls = new Hls();
+              hls.loadSource(video.src);
+              hls.attachMedia(video);
+            } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+              video.src = video.src;
+            }
           }
+        },
+        pic: defaultChannel.logo
+      },
+      contextmenu: [
+        {
+          text: 'Sayan TV',
+          link: 'https://t.me/sayan_xyz'
         }
-      });
-      jwplayer().on('ready', function () {
-        jwplayer().play(true);
-      });
-    }
-    setupJWPlayer(defaultChannel);
+      ]
+    });
+
+    // Channel Cards Render
     const channelsDiv = document.getElementById('channels');
     channels.forEach((ch, idx) => {
       const card = document.createElement('div');
@@ -229,12 +242,23 @@
         <div class="channel-name">${ch.name}</div>
       `;
       card.addEventListener('click', () => {
+        // Click animation
         card.classList.add('clicked');
         setTimeout(() => card.classList.remove('clicked'), 400);
-        setupJWPlayer(ch);
+
+        // Change DPlayer's video
+        dp.switchVideo({
+          url: ch.url,
+          type: 'customHls',
+          pic: ch.logo
+        });
+        dp.options.logo = ch.logo;
+        dp.play();
       });
       channelsDiv.appendChild(card);
     });
+
+    // Particles.js Background Config
     particlesJS("particles-js", {
       "particles": {
         "number": { "value": 85, "density": { "enable": true, "value_area": 850 } },
@@ -260,4 +284,5 @@
     });
   </script>
 </body>
-</html>
+          </html>
+  

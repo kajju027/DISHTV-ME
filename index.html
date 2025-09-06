@@ -3,12 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>SAYAN OAI IPTV KIDS</title>
-  <!-- Google Fonts -->
+  <title>Sayan TV Channel</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-  <!-- JW Player JS (ডেমো) -->
+  <!-- JW Player JS -->
   <script src="https://cdn.jwplayer.com/libraries/DbXZPMBQ.js"></script>
-  <!-- Particles.js -->
   <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
   <style>
     body {
@@ -165,13 +163,10 @@
   <div id="particles-js"></div>
   <div class="container">
     <div class="video-section">
-      <!-- JW Player container -->
       <div id="jwplayer_div"></div>
     </div>
-    <!-- Channel List -->
     <div id="channels" class="channel-list"></div>
   </div>
-  <!-- Footer -->
   <div class="footer">
     <span class="footer-text">SAYAN x OAI | All Rights Reserved</span>
     <img class="visitor" src="https://visit-counter.vercel.app/counter.png?page=dishtv.onrender.com&s=40&c=00ffff&bg=00000000&no=1&ff=digi&tb=&ta=" alt="visitor count" />
@@ -185,14 +180,9 @@
       Telegram
     </a>
   </div>
-  <!-- Main JS (module) -->
   <script type="module">
     import { channels } from './data.js';
-
-    // Default Channel (Disney Channel)
     const defaultChannel = channels[0];
-
-    // JW Player Setup
     function setupJWPlayer(channel) {
       jwplayer("jwplayer_div").setup({
         file: channel.url,
@@ -208,12 +198,7 @@
         controls: true,
         live: true,
         repeat: false,
-        // qualityLabels show in default menu, auto quality switch
-        // Start at 360p if available
         playbackRates: [0.75, 1, 1.25, 1.5, 2],
-        // You can force quality by defaultQuality if provider supports
-        hlsdefaultquality: 1, // 0=lowest, 1=second, etc. (if available)
-        // Custom logo
         logo: {
           file: channel.logo,
           link: "https://t.me/sayan_xyz",
@@ -222,28 +207,19 @@
         abouttext: "Sayan TV",
         aboutlink: "https://t.me/sayan_xyz",
       });
-
-      // Auto select 360p quality if available (using jwplayer API)
       jwplayer().on('levels', function (e) {
         if (e.levels && e.levels.length > 0) {
-          // try to find 360p
           let found = e.levels.findIndex(l => l.label && l.label.toString().includes('360'));
           if(found > -1) {
             jwplayer().setCurrentQuality(found);
           }
         }
       });
-
-      // Faster play: try to autostart on ready
       jwplayer().on('ready', function () {
         jwplayer().play(true);
       });
     }
-
-    // Initial JW Player load
     setupJWPlayer(defaultChannel);
-
-    // Channel Cards Render
     const channelsDiv = document.getElementById('channels');
     channels.forEach((ch, idx) => {
       const card = document.createElement('div');
@@ -253,17 +229,12 @@
         <div class="channel-name">${ch.name}</div>
       `;
       card.addEventListener('click', () => {
-        // Click animation
         card.classList.add('clicked');
         setTimeout(() => card.classList.remove('clicked'), 400);
-
-        // Change JW Player's video
         setupJWPlayer(ch);
       });
       channelsDiv.appendChild(card);
     });
-
-    // Particles.js Background Config
     particlesJS("particles-js", {
       "particles": {
         "number": { "value": 85, "density": { "enable": true, "value_area": 850 } },

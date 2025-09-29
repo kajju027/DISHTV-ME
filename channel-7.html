@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bye - Error 999+ </title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+      text-transform: uppercase;
+      line-height: 1.6;
+    }
+    body, html {
+      height: 100%;
+      overflow: hidden;
+    }
+
+    /* Loader */
+    #loader {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      background: #1a1a2e;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      animation: fadeOut 0.5s ease 2s forwards;
+    }
+    .spinner {
+      border: 6px solid rgba(255,255,255,0.2);
+      border-top: 6px solid #ff416c;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    @keyframes fadeOut {
+      to { opacity: 0; visibility: hidden; }
+    }
+
+    /* Particle Background */
+    #particles-js {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background: linear-gradient(135deg, #2b5876, #4e4376);
+    }
+
+    /* Counter Dot */
+    .counter-dot {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      width: 20px;
+      height: 20px;
+      background: #ff416c;
+      border-radius: 50%;
+      cursor: pointer;
+      box-shadow: 0 0 15px rgba(255,65,108,0.8);
+      animation: pulse 1.5s infinite;
+      z-index: 1000;
+    }
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 rgba(255,65,108,0.8); }
+      70% { box-shadow: 0 0 20px rgba(255,65,108,0.2); }
+      100% { box-shadow: 0 0 0 rgba(255,65,108,0.8); }
+    }
+    .counter-box {
+      position: fixed;
+      top: 50px;
+      left: 20px;
+      background: rgba(0,0,0,0.85);
+      padding: 10px;
+      border-radius: 10px;
+      display: none;
+      z-index: 1000;
+    }
+
+    /* Main content */
+    .container {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 20px;
+      flex-direction: column;
+      color: #fff;
+    }
+    .card {
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(10px);
+      padding: 30px 25px;
+      border-radius: 20px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+      max-width: 420px;
+      animation: fadeIn 1.2s ease-in-out;
+    }
+    .card h1 {
+      font-size: 24px;
+      margin-bottom: 15px;
+    }
+    .card p {
+      font-size: 15px;
+      margin-bottom: 20px;
+      color: #eee;
+    }
+    .btn {
+      display: inline-block;
+      padding: 12px 25px;
+      background: linear-gradient(135deg, #ff416c, #ff4b2b);
+      color: #fff;
+      border-radius: 30px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: 0.3s;
+      box-shadow: 0 6px 15px rgba(255,65,108,0.3);
+    }
+    .btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 25px rgba(255,65,108,0.5);
+    }
+    #timer {
+      margin-top: 20px;
+      font-size: 14px;
+      color: #ffcccb;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <!-- Loader -->
+  <div id="loader">
+    <div class="spinner"></div>
+  </div>
+
+  <!-- Particle Background -->
+  <div id="particles-js"></div>
+
+  <!-- Counter Dot -->
+  <div class="counter-dot" onclick="toggleCounter()"></div>
+  <div class="counter-box" id="counterBox">
+    <div align="center">
+      <a href="https://www.counter12.com">
+        <img src="https://www.counter12.com/img-d30x5y3x8C7YCCDb-3.gif" border="0" alt="counter" />
+      </a>
+      <script type="text/javascript" src="https://www.counter12.com/ad.js?id=d30x5y3x8C7YCCDb"></script>
+    </div>
+  </div>
+
+  <!-- Main content -->
+  <div class="container">
+    <div class="card">
+      <h1>🔧 SERVER UNDER MAINTENANCE</h1>
+      <p>OUR SERVERS ARE CURRENTLY UNDERGOING UPGRADES.<br>
+      PLEASE CHECK BACK LATER.<br>
+      THANK YOU FOR YOUR PATIENCE 🥺.</p>
+      <a href="https://www.instagram.com/sonu__7xyz?igsh=MTdlNXdmc2JvMHJwNA==" target="_blank" class="btn">CONTACT US</a>
+      <div id="timer"></div>
+    </div>
+  </div>
+
+  <!-- Background music -->
+  <audio id="bg-music" loop>
+    <source src="sad-instrumental.mp3" type="audio/mpeg">
+    <!-- Fallback if mp3 not supported -->
+  </audio>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  <script>
+    // Particle config
+    particlesJS("particles-js", {
+      "particles": {
+        "number": { "value": 80 },
+        "color": { "value": "#ffffff" },
+        "shape": { "type": "circle" },
+        "opacity": { "value": 0.6 },
+        "size": { "value": 3 },
+        "line_linked": {
+          "enable": true,
+          "distance": 150,
+          "color": "#ffffff",
+          "opacity": 0.4,
+          "width": 1
+        },
+        "move": {
+          "enable": true,
+          "speed": 2,
+          "direction": "none",
+          "out_mode": "out"
+        }
+      },
+      "interactivity": {
+        "events": {
+          "onhover": { "enable": true, "mode": "repulse" },
+          "onclick": { "enable": true, "mode": "push" }
+        },
+        "modes": {
+          "repulse": { "distance": 100 },
+          "push": { "particles_nb": 4 }
+        }
+      },
+      "retina_detect": true
+    });
+
+    // Toggle counter box
+    function toggleCounter() {
+      const box = document.getElementById("counterBox");
+      box.style.display = (box.style.display === "block") ? "none" : "block";
+    }
+
+    // Timer from 29 Sept 2025 23:30
+    const startTime = new Date("Sep 29, 2025 23:30:00").getTime();
+    function updateTimer() {
+      const now = new Date().getTime();
+      const elapsed = now - startTime;
+      const days = Math.floor(elapsed / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((elapsed % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((elapsed % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((elapsed % (1000 * 60)) / 1000);
+      document.getElementById("timer").innerHTML =
+        `SITE HAS BEEN DOWN FOR: ${days}D ${hours}H ${minutes}M ${seconds}S`;
+    }
+    setInterval(updateTimer, 1000);
+
+    // Auto play background music (try)
+    window.addEventListener('load', function() {
+      const audio = document.getElementById("bg-music");
+      // Try to play
+      audio.volume = 3.5;  // low volume
+      const playPromise = audio.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(error => {
+          console.log("Autoplay prevented. Interaction needed.");
+        });
+      }
+    });
+  </script>
+</body>
+  </html>

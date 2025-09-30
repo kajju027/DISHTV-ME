@@ -1,255 +1,1037 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
+
+
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Bye - Error 999+ </title>
+
+
+
+  <meta charset="UTF-8"/>
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+
+
+  <title>CRICKET NEWS POINT -7</title>
+
+
+
+  <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css"/>
+
+
+
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+
+
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: "Poppins", sans-serif;
-      text-transform: uppercase;
-      line-height: 1.6;
-    }
-    body, html {
-      height: 100%;
-      overflow: hidden;
-    }
 
-    /* Loader */
-    #loader {
-      position: fixed;
-      width: 100%;
-      height: 100%;
-      background: #1a1a2e;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 9999;
-      animation: fadeOut 0.5s ease 2s forwards;
-    }
-    .spinner {
-      border: 6px solid rgba(255,255,255,0.2);
-      border-top: 6px solid #ff416c;
-      border-radius: 50%;
-      width: 60px;
-      height: 60px;
-      animation: spin 1s linear infinite;
-    }
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-    @keyframes fadeOut {
-      to { opacity: 0; visibility: hidden; }
-    }
 
-    /* Particle Background */
-    #particles-js {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-      background: linear-gradient(135deg, #2b5876, #4e4376);
-    }
 
-    /* Counter Dot */
-    .counter-dot {
-      position: fixed;
-      top: 20px;
-      left: 20px;
-      width: 20px;
-      height: 20px;
-      background: #ff416c;
-      border-radius: 50%;
-      cursor: pointer;
-      box-shadow: 0 0 15px rgba(255,65,108,0.8);
-      animation: pulse 1.5s infinite;
-      z-index: 1000;
-    }
-    @keyframes pulse {
-      0% { box-shadow: 0 0 0 rgba(255,65,108,0.8); }
-      70% { box-shadow: 0 0 20px rgba(255,65,108,0.2); }
-      100% { box-shadow: 0 0 0 rgba(255,65,108,0.8); }
-    }
-    .counter-box {
-      position: fixed;
-      top: 50px;
-      left: 20px;
-      background: rgba(0,0,0,0.85);
-      padding: 10px;
-      border-radius: 10px;
-      display: none;
-      z-index: 1000;
-    }
+    body {
 
-    /* Main content */
-    .container {
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 20px;
-      flex-direction: column;
-      color: #fff;
-    }
-    .card {
-      background: rgba(0,0,0,0.6);
-      backdrop-filter: blur(10px);
-      padding: 30px 25px;
-      border-radius: 20px;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.4);
-      max-width: 420px;
-      animation: fadeIn 1.2s ease-in-out;
-    }
-    .card h1 {
-      font-size: 24px;
-      margin-bottom: 15px;
-    }
-    .card p {
-      font-size: 15px;
-      margin-bottom: 20px;
-      color: #eee;
-    }
-    .btn {
-      display: inline-block;
-      padding: 12px 25px;
-      background: linear-gradient(135deg, #ff416c, #ff4b2b);
-      color: #fff;
-      border-radius: 30px;
-      font-weight: 600;
-      text-decoration: none;
-      transition: 0.3s;
-      box-shadow: 0 6px 15px rgba(255,65,108,0.3);
-    }
-    .btn:hover {
-      transform: scale(1.05);
-      box-shadow: 0 8px 25px rgba(255,65,108,0.5);
-    }
-    #timer {
-      margin-top: 20px;
-      font-size: 14px;
-      color: #ffcccb;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+
+
+      margin: 0; padding: 0;
+
+
+
+      background: #0a0a0a;
+
+
+
+      font-family: sans-serif;
+
+
+
+      color: #e0e0e0;
+
+
+
+      overflow-x: hidden;
+
+
+
+    }header {
+
+
+
+  position: fixed; top: 0; left: 0; right: 0;
+
+
+
+  height: 70px;
+
+
+
+  background: rgba(10, 10, 10, 0.95);
+
+
+
+  display: flex; align-items: center; justify-content: center;
+
+
+
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+
+
+
+  z-index: 9999;
+
+
+
+}
+
+
+
+header img { height: 85%; }
+
+
+
+
+
+
+
+.video-container {
+
+
+
+  width: 100vw; aspect-ratio: 16/9;
+
+
+
+  background: #000; margin-top: 70px;
+
+
+
+}
+
+
+
+.video-container iframe {
+
+
+
+  width: 100%; height: 100%; border: none;
+
+
+
+}
+
+
+
+
+
+
+
+/* Tabs */
+
+
+
+.tabs {
+
+
+
+  display: flex;
+
+
+
+  justify-content: space-around;
+
+
+
+  background: #111;
+
+
+
+  border-top: 1px solid rgba(255,255,255,0.1);
+
+
+
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+
+
+
+}
+
+
+
+.tab-button {
+
+
+
+  flex: 1; padding: 14px 0;
+
+
+
+  color: #bbb; background: none; border: none;
+
+
+
+  font-size: 15px; cursor: pointer;
+
+
+
+}
+
+
+
+.tab-button.active { color: #1db954; font-weight: bold; }
+
+
+
+
+
+
+
+.tab-content { display: none; }
+
+
+
+.tab-content.active { display: block; }
+
+
+
+.tab-content iframe {
+
+
+
+  width: 100%; height: 600px; border: none;
+
+
+
+}
+
+
+
+
+
+
+
+/* Sidebar */
+
+
+
+.sidebar {
+
+
+
+  position: fixed; top: 0; left: -260px;
+
+
+
+  width: 240px; height: 100%;
+
+
+
+  background: #111; z-index: 10001;
+
+
+
+  transition: left 0.3s ease;
+
+
+
+  padding-top: 70px;
+
+
+
+  border-right: 1px solid rgba(255,255,255,0.1);
+
+
+
+}
+
+
+
+.sidebar.open { left: 0; }
+
+
+
+.sidebar a {
+
+
+
+  display: block; padding: 12px 18px;
+
+
+
+  color: #fff; text-decoration: none;
+
+
+
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+
+
+
+  font-size: 15px;
+
+
+
+}
+
+
+
+.sidebar a:hover { background: rgba(255,255,255,0.1); }
+
+
+
+
+
+
+
+.menu-header {
+
+
+
+  font-size: 18px; font-weight: bold;
+
+
+
+  text-align: center; padding: 12px 0;
+
+
+
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+
+
+
+  background: rgba(255,255,255,0.05);
+
+
+
+}
+
+
+
+
+
+
+
+.overlay {
+
+
+
+  position: fixed; top: 0; left: 0;
+
+
+
+  width: 100%; height: 100%;
+
+
+
+  background: rgba(0,0,0,0.4);
+
+
+
+  z-index: 10000; display: none;
+
+
+
+}
+
+
+
+.overlay.show { display: block; }
+
+
+
+
+
+
+
+.menu-icon {
+
+
+
+  position: absolute; left: 16px; color: #fff;
+
+
+
+  font-size: 30px; cursor: pointer;
+
+
+
+}
+
+
+
+
+
+
+
+/* Popup */
+
+
+
+.popup-overlay {
+
+
+
+  position: fixed; top: 0; left: 0;
+
+
+
+  width: 100%; height: 100%;
+
+
+
+  background: rgba(0, 0, 0, 0.6);
+
+
+
+  display: flex; align-items: center; justify-content: center;
+
+
+
+  z-index: 10002; display: none;
+
+
+
+}
+
+
+
+.popup-box {
+
+
+
+  width: 320px;
+
+
+
+  background: #1a1a1a;
+
+
+
+  border-radius: 12px;
+
+
+
+  padding: 20px;
+
+
+
+  text-align: center;
+
+
+
+  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+
+
+
+}
+
+
+
+.popup-header {
+
+
+
+  font-size: 20px; font-weight: bold;
+
+
+
+  margin-bottom: 8px;
+
+
+
+  color: #fff;
+
+
+
+}
+
+
+
+.popup-subtitle {
+
+
+
+  font-size: 14px; color: #bbb;
+
+
+
+  margin-bottom: 16px;
+
+
+
+}
+
+
+
+.popup-btn {
+
+
+
+  display: inline-block;
+
+
+
+  width: 45%; margin: 5px;
+
+
+
+  padding: 10px;
+
+
+
+  border: none; border-radius: 6px;
+
+
+
+  font-size: 15px; font-weight: bold;
+
+
+
+  cursor: pointer; color: #fff;
+
+
+
+}
+
+
+
+.join-btn { background: #28a745; }
+
+
+
+.join-btn:hover { background: #22cc55; }
+
+
+
+.already-btn { background: #dc3545; }
+
+
+
+.already-btn:hover { background: #ff4455; }
+
+
+
+
+
+
+
+/* Visitor counter box */
+
+
+
+.visitor-box {
+
+
+
+  display: none;
+
+
+
+  padding: 12px; text-align: center;
+
+
+
+  border-top: 1px solid rgba(255,255,255,0.1);
+
+
+
+}
+
+
+
+.visitor-box img { width: 120px; }
+
+
+
+
+
+
+
   </style>
+
+
+
 </head>
+
+
+
 <body>
-  <!-- Loader -->
-  <div id="loader">
-    <div class="spinner"></div>
-  </div>
 
-  <!-- Particle Background -->
-  <div id="particles-js"></div>
 
-  <!-- Counter Dot -->
-  <div class="counter-dot" onclick="toggleCounter()"></div>
-  <div class="counter-box" id="counterBox">
-    <div align="center">
-      <a href="https://www.counter12.com">
-        <img src="https://www.counter12.com/img-d30x5y3x8C7YCCDb-3.gif" border="0" alt="counter" />
+
+  <!-- Popup -->
+
+
+
+  <div class="popup-overlay" id="popup">
+
+
+
+    <div class="popup-box">
+
+
+
+      <div class="popup-header">Support us</div>
+
+
+
+      <div class="popup-subtitle">
+
+
+
+        join our WhatsApp Channel
+
+
+
+      </div>
+
+
+
+      <a href="https://whatsapp.com/channel/0029VaeylYYBPzjVNomWuZ0T" target="_blank">
+
+
+
+        <button class="popup-btn join-btn">Join Now</button>
+
+
+
       </a>
-      <script type="text/javascript" src="https://www.counter12.com/ad.js?id=d30x5y3x8C7YCCDb"></script>
+
+
+
+      <button class="popup-btn already-btn" id="alreadyBtn">Already Joined</button>
+
+
+
     </div>
+
+
+
+  </div>  <header>
+
+
+
+    <span class="material-icons menu-icon" onclick="toggleSidebar()">menu</span>
+
+
+
+    <img src="https://files.catbox.moe/g2tdt0.jpeg" alt="Logo">
+
+
+
+  </header>  <div class="video-container">
+
+
+
+    <iframe src="https://sayan-mete.onrender.com/Z5/zee_cinema"
+
+
+
+      allowfullscreen allow="autoplay; encrypted-media"></iframe>
+
+
+
+  </div>  <!-- Sidebar -->  <div class="sidebar" id="sidebar">
+
+
+
+    <div class="menu-header">MENU</div>
+
+
+
+    <a href="https://whatsapp.com/channel/0029VaeylYYBPzjVNomWuZ0T" target="_blank">Join WhatsApp</a>
+
+
+
+    <a href="https://www.instagram.com/sonu__7xyz?igsh=MTdlNXdmc2JvMHJwNA==" target="_blank">Contact Us</a>
+
+
+
+    <a href="https://sayan-mete.onrender.com/copyright" target="_blank">Copyright</a>
+
+
+
+    <a href="javascript:void(0)" onclick="toggleVisitor()">Visitor Count</a>
+
+
+
+    <div class="visitor-box" id="visitorBox">
+
+
+
+      <img src="https://www.counter12.com/img-9205Yd3W54Z3y43Z-5.gif" alt="Visitor Count"/>
+
+
+
+    </div>
+
+
+
   </div>
 
-  <!-- Main content -->
-  <div class="container">
-    <div class="card">
-      <h1>🔧 SERVER UNDER MAINTENANCE</h1>
-      <p>OUR SERVERS ARE CURRENTLY UNDERGOING UPGRADES.<br>
-      PLEASE CHECK BACK LATER.<br>
-      THANK YOU FOR YOUR PATIENCE 🥺.</p>
-      <a href="https://www.instagram.com/sonu__7xyz?igsh=MTdlNXdmc2JvMHJwNA==" target="_blank" class="btn">CONTACT US</a>
-      <div id="timer"></div>
-    </div>
-  </div>
 
-  <!-- Background music -->
-  <audio id="bg-music" loop>
-    <source src="sad-instrumental.mp3" type="audio/mpeg">
-    <!-- Fallback if mp3 not supported -->
-  </audio>
 
-  <!-- Scripts -->
-  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-  <script>
-    // Particle config
-    particlesJS("particles-js", {
-      "particles": {
-        "number": { "value": 80 },
-        "color": { "value": "#ffffff" },
-        "shape": { "type": "circle" },
-        "opacity": { "value": 0.6 },
-        "size": { "value": 3 },
-        "line_linked": {
-          "enable": true,
-          "distance": 150,
-          "color": "#ffffff",
-          "opacity": 0.4,
-          "width": 1
-        },
-        "move": {
-          "enable": true,
-          "speed": 2,
-          "direction": "none",
-          "out_mode": "out"
-        }
-      },
-      "interactivity": {
-        "events": {
-          "onhover": { "enable": true, "mode": "repulse" },
-          "onclick": { "enable": true, "mode": "push" }
-        },
-        "modes": {
-          "repulse": { "distance": 100 },
-          "push": { "particles_nb": 4 }
-        }
-      },
-      "retina_detect": true
-    });
+  <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>  <!-- Tabs -->  <div class="tabs">
 
-    // Toggle counter box
-    function toggleCounter() {
-      const box = document.getElementById("counterBox");
-      box.style.display = (box.style.display === "block") ? "none" : "block";
+
+
+    <button class="tab-button active" onclick="switchTab('scoreboard')">
+
+
+
+      <span class="material-icons">leaderboard</span>
+
+
+
+      <span> </span>
+
+
+
+    </button>
+
+
+
+    <button class="tab-button" onclick="switchTab('highlights')">
+
+
+
+      <span class="material-icons">movie</span>
+
+
+
+      <span> </span>
+
+
+
+    </button>
+
+
+
+  </div>  <!-- Scoreboard -->  <div id="scoreboard" class="tab-content active">
+
+
+
+    <iframe src="https://ads-cnp.vercel.app/"></iframe>
+
+
+
+  </div>  <!-- Highlights -->  <div id="highlights" class="tab-content">
+
+
+
+    <iframe src="https://alpha-server-zero.vercel.app/ "></iframe>
+
+
+
+  </div>  <script>
+
+
+
+    // Sidebar toggle
+
+
+
+    function toggleSidebar() {
+
+
+
+      document.getElementById('sidebar').classList.toggle('open');
+
+
+
+      document.getElementById('overlay').classList.toggle('show');
+
+
+
     }
 
-    // Timer from 29 Sept 2025 23:30
-    const startTime = new Date("Sep 29, 2025 23:30:00").getTime();
-    function updateTimer() {
-      const now = new Date().getTime();
-      const elapsed = now - startTime;
-      const days = Math.floor(elapsed / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((elapsed % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((elapsed % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((elapsed % (1000 * 60)) / 1000);
-      document.getElementById("timer").innerHTML =
-        `SITE HAS BEEN DOWN FOR: ${days}D ${hours}H ${minutes}M ${seconds}S`;
-    }
-    setInterval(updateTimer, 1000);
 
-    // Auto play background music (try)
-    window.addEventListener('load', function() {
-      const audio = document.getElementById("bg-music");
-      // Try to play
-      audio.volume = 3.5;  // low volume
-      const playPromise = audio.play();
-      if (playPromise !== undefined) {
-        playPromise.catch(error => {
-          console.log("Autoplay prevented. Interaction needed.");
-        });
+
+
+
+
+
+    // Visitor toggle
+
+
+
+    function toggleVisitor() {
+
+
+
+      let vb = document.getElementById("visitorBox");
+
+
+
+      vb.style.display = (vb.style.display === "block") ? "none" : "block";
+
+
+
+    }
+
+
+
+
+
+
+
+    // Tabs switch
+
+
+
+    function switchTab(tabId) {
+
+
+
+      document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
+
+
+
+      document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+
+
+
+      document.querySelector(`.tab-button[onclick*=\"${tabId}\"]`).classList.add('active');
+
+
+
+      document.getElementById(tabId).classList.add('active');
+
+
+
+    }
+
+
+
+
+
+
+
+    /*
+
+
+
+      Popup behaviour:
+
+
+
+      1) "Already Joined" button now requires TWO clicks to close the popup.
+
+
+
+      2) Popup appears initially after 2 seconds, and will reappear every 4 minutes while the user stays on the page.
+
+
+
+    */
+
+
+
+    document.addEventListener('DOMContentLoaded', function() {
+
+
+
+      const popup = document.getElementById('popup');
+
+
+
+      const alreadyBtn = document.getElementById('alreadyBtn');
+
+
+
+      let alreadyClickCount = 0;
+
+
+
+
+
+
+
+      // Show popup
+
+
+
+      function showPopup() {
+
+
+
+        if (!popup) return;
+
+
+
+        if (popup.style.display === 'flex') return;
+
+
+
+        popup.style.display = 'flex';
+
+
+
+        alreadyClickCount = 0; // reset click count when popup reopens
+
+
+
       }
+
+
+
+
+
+
+
+      // Close popup after two clicks
+
+
+
+      function tryClosePopup() {
+
+
+
+        alreadyClickCount++;
+
+
+
+        if (alreadyClickCount >= 2) {
+
+
+
+          popup.style.display = 'none';
+
+
+
+          try { sessionStorage.setItem('popupLastClosed', Date.now().toString()); } catch(e) {}
+
+
+
+        }
+
+
+
+      }
+
+
+
+
+
+
+
+      // Attach double-click requirement to the "Already Joined" button
+
+
+
+      if (alreadyBtn) {
+
+
+
+        alreadyBtn.addEventListener('click', tryClosePopup);
+
+
+
+      }
+
+
+
+
+
+
+
+      // Initial show after 2 seconds
+
+
+
+      setTimeout(showPopup, 2000);
+
+
+
+
+
+
+
+      // Re-show every 4 minutes while the user stays on the page
+
+
+
+      const FOUR_MIN = 4 * 60 * 1000;
+
+
+
+      setInterval(function() {
+
+
+
+        try {
+
+
+
+          const last = parseInt(sessionStorage.getItem('popupLastClosed') || '0', 10);
+
+
+
+          if (Date.now() - last < 1000) return;
+
+
+
+        } catch (e) {}
+
+
+
+        showPopup();
+
+
+
+      }, FOUR_MIN);
+
+
+
+
+
+
+
     });
-  </script>
-</body>
-  </html>
+
+
+
+
+
+
+
+  </script></body>
+
+
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

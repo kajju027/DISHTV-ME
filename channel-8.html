@@ -1,255 +1,1433 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Bye - Error 999+ </title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: "Poppins", sans-serif;
-      text-transform: uppercase;
-      line-height: 1.6;
-    }
-    body, html {
-      height: 100%;
-      overflow: hidden;
-    }
-
-    /* Loader */
-    #loader {
-      position: fixed;
-      width: 100%;
-      height: 100%;
-      background: #1a1a2e;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 9999;
-      animation: fadeOut 0.5s ease 2s forwards;
-    }
-    .spinner {
-      border: 6px solid rgba(255,255,255,0.2);
-      border-top: 6px solid #ff416c;
-      border-radius: 50%;
-      width: 60px;
-      height: 60px;
-      animation: spin 1s linear infinite;
-    }
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-    @keyframes fadeOut {
-      to { opacity: 0; visibility: hidden; }
-    }
-
-    /* Particle Background */
-    #particles-js {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-      background: linear-gradient(135deg, #2b5876, #4e4376);
-    }
-
-    /* Counter Dot */
-    .counter-dot {
-      position: fixed;
-      top: 20px;
-      left: 20px;
-      width: 20px;
-      height: 20px;
-      background: #ff416c;
-      border-radius: 50%;
-      cursor: pointer;
-      box-shadow: 0 0 15px rgba(255,65,108,0.8);
-      animation: pulse 1.5s infinite;
-      z-index: 1000;
-    }
-    @keyframes pulse {
-      0% { box-shadow: 0 0 0 rgba(255,65,108,0.8); }
-      70% { box-shadow: 0 0 20px rgba(255,65,108,0.2); }
-      100% { box-shadow: 0 0 0 rgba(255,65,108,0.8); }
-    }
-    .counter-box {
-      position: fixed;
-      top: 50px;
-      left: 20px;
-      background: rgba(0,0,0,0.85);
-      padding: 10px;
-      border-radius: 10px;
-      display: none;
-      z-index: 1000;
-    }
-
-    /* Main content */
-    .container {
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 20px;
-      flex-direction: column;
-      color: #fff;
-    }
-    .card {
-      background: rgba(0,0,0,0.6);
-      backdrop-filter: blur(10px);
-      padding: 30px 25px;
-      border-radius: 20px;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.4);
-      max-width: 420px;
-      animation: fadeIn 1.2s ease-in-out;
-    }
-    .card h1 {
-      font-size: 24px;
-      margin-bottom: 15px;
-    }
-    .card p {
-      font-size: 15px;
-      margin-bottom: 20px;
-      color: #eee;
-    }
-    .btn {
-      display: inline-block;
-      padding: 12px 25px;
-      background: linear-gradient(135deg, #ff416c, #ff4b2b);
-      color: #fff;
-      border-radius: 30px;
-      font-weight: 600;
-      text-decoration: none;
-      transition: 0.3s;
-      box-shadow: 0 6px 15px rgba(255,65,108,0.3);
-    }
-    .btn:hover {
-      transform: scale(1.05);
-      box-shadow: 0 8px 25px rgba(255,65,108,0.5);
-    }
-    #timer {
-      margin-top: 20px;
-      font-size: 14px;
-      color: #ffcccb;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-  </style>
-</head>
-<body>
-  <!-- Loader -->
-  <div id="loader">
-    <div class="spinner"></div>
-  </div>
-
-  <!-- Particle Background -->
-  <div id="particles-js"></div>
-
-  <!-- Counter Dot -->
-  <div class="counter-dot" onclick="toggleCounter()"></div>
-  <div class="counter-box" id="counterBox">
-    <div align="center">
-      <a href="https://www.counter12.com">
-        <img src="https://www.counter12.com/img-d30x5y3x8C7YCCDb-3.gif" border="0" alt="counter" />
-      </a>
-      <script type="text/javascript" src="https://www.counter12.com/ad.js?id=d30x5y3x8C7YCCDb"></script>
-    </div>
-  </div>
-
-  <!-- Main content -->
-  <div class="container">
-    <div class="card">
-      <h1>🔧 SERVER UNDER MAINTENANCE</h1>
-      <p>OUR SERVERS ARE CURRENTLY UNDERGOING UPGRADES.<br>
-      PLEASE CHECK BACK LATER.<br>
-      THANK YOU FOR YOUR PATIENCE 🥺.</p>
-      <a href="https://www.instagram.com/sonu__7xyz?igsh=MTdlNXdmc2JvMHJwNA==" target="_blank" class="btn">CONTACT US</a>
-      <div id="timer"></div>
-    </div>
-  </div>
-
-  <!-- Background music -->
-  <audio id="bg-music" loop>
-    <source src="sad-instrumental.mp3" type="audio/mpeg">
-    <!-- Fallback if mp3 not supported -->
-  </audio>
-
-  <!-- Scripts -->
-  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-  <script>
-    // Particle config
-    particlesJS("particles-js", {
-      "particles": {
-        "number": { "value": 80 },
-        "color": { "value": "#ffffff" },
-        "shape": { "type": "circle" },
-        "opacity": { "value": 0.6 },
-        "size": { "value": 3 },
-        "line_linked": {
-          "enable": true,
-          "distance": 150,
-          "color": "#ffffff",
-          "opacity": 0.4,
-          "width": 1
-        },
-        "move": {
-          "enable": true,
-          "speed": 2,
-          "direction": "none",
-          "out_mode": "out"
-        }
-      },
-      "interactivity": {
-        "events": {
-          "onhover": { "enable": true, "mode": "repulse" },
-          "onclick": { "enable": true, "mode": "push" }
-        },
-        "modes": {
-          "repulse": { "distance": 100 },
-          "push": { "particles_nb": 4 }
-        }
-      },
-      "retina_detect": true
-    });
-
-    // Toggle counter box
-    function toggleCounter() {
-      const box = document.getElementById("counterBox");
-      box.style.display = (box.style.display === "block") ? "none" : "block";
-    }
-
-    // Timer from 29 Sept 2025 23:30
-    const startTime = new Date("Sep 29, 2025 23:30:00").getTime();
-    function updateTimer() {
-      const now = new Date().getTime();
-      const elapsed = now - startTime;
-      const days = Math.floor(elapsed / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((elapsed % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((elapsed % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((elapsed % (1000 * 60)) / 1000);
-      document.getElementById("timer").innerHTML =
-        `SITE HAS BEEN DOWN FOR: ${days}D ${hours}H ${minutes}M ${seconds}S`;
-    }
-    setInterval(updateTimer, 1000);
-
-    // Auto play background music (try)
-    window.addEventListener('load', function() {
-      const audio = document.getElementById("bg-music");
-      // Try to play
-      audio.volume = 3.5;  // low volume
-      const playPromise = audio.play();
-      if (playPromise !== undefined) {
-        playPromise.catch(error => {
-          console.log("Autoplay prevented. Interaction needed.");
-        });
-      }
-    });
-  </script>
-</body>
-  </html>
+<!DOCTYPE html>
+
+
+
+<html lang="en">
+
+
+
+
+
+
+
+<head>
+
+
+
+  <meta charset="UTF-8" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+
+
+  <title>CRICKET NEWS POINT -8</title>
+
+
+
+  <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
+
+
+
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+
+
+  <style>
+
+
+
+    /* ---------- base ---------- */
+
+
+
+    :root {
+
+
+
+      --bg: #0a0a0a;
+
+
+
+      --panel: #1a1a1a;
+
+
+
+      --muted: #bbb;
+
+
+
+      --accent: #28a745;
+
+
+
+      --danger: #dc3545;
+
+
+
+    }
+
+
+
+
+
+
+
+    html, body {
+
+
+
+      height: 100%;
+
+
+
+      margin: 0;
+
+
+
+      padding: 0;
+
+
+
+      background: var(--bg);
+
+
+
+      font-family: sans-serif;
+
+
+
+      color: #e0e0e0;
+
+
+
+      overflow-x: hidden;
+
+
+
+    }
+
+
+
+
+
+
+
+    /* ---------- header / main layout ---------- */
+
+
+
+    header {
+
+
+
+      position: fixed; top: 0; left: 0; right: 0;
+
+
+
+      height: 70px;
+
+
+
+      background: rgba(10, 10, 10, 0.95);
+
+
+
+      display: flex; align-items: center; justify-content: center;
+
+
+
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+
+
+
+      z-index: 10;
+
+
+
+    }
+
+
+
+    header img { height: 85%; }
+
+
+
+
+
+
+
+    .main-wrapper { margin-top: 70px; } /* content area sits under header */
+
+
+
+
+
+
+
+    .video-container {
+
+
+
+      width: 100vw; aspect-ratio: 16/9;
+
+
+
+      background: #000;
+
+
+
+    }
+
+
+
+    .video-container iframe { width: 100%; height: 100%; border: none; }
+
+
+
+
+
+
+
+    .tabs {
+
+
+
+      display: flex;
+
+
+
+      justify-content: space-around;
+
+
+
+      background: #111;
+
+
+
+      border-top: 1px solid rgba(255,255,255,0.06);
+
+
+
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+
+
+
+      z-index: 1;
+
+
+
+    }
+
+
+
+    .tab-button {
+
+
+
+      flex: 1; padding: 14px 0;
+
+
+
+      color: #bbb; background: none; border: none;
+
+
+
+      font-size: 15px; cursor: pointer;
+
+
+
+    }
+
+
+
+    .tab-button.active { color: #1db954; font-weight: bold; }
+
+
+
+
+
+
+
+    .tab-content { display: none; }
+
+
+
+    .tab-content.active { display: block; }
+
+
+
+    .tab-content iframe { width: 100%; height: 600px; border: none; }
+
+
+
+
+
+
+
+    /* Sidebar */
+
+
+
+    .sidebar {
+
+
+
+      position: fixed; top: 0; left: -260px;
+
+
+
+      width: 240px; height: 100%;
+
+
+
+      background: #111; z-index: 12;
+
+
+
+      transition: left 0.28s ease;
+
+
+
+      padding-top: 70px;
+
+
+
+      border-right: 1px solid rgba(255,255,255,0.06);
+
+
+
+    }
+
+
+
+    .sidebar.open { left: 0; }
+
+
+
+    .sidebar a {
+
+
+
+      display: block; padding: 12px 18px;
+
+
+
+      color: #fff; text-decoration: none;
+
+
+
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+
+
+
+      font-size: 15px;
+
+
+
+    }
+
+
+
+    .menu-header { font-size: 18px; font-weight: bold; text-align:center; padding:12px 0; }
+
+
+
+
+
+
+
+    .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 11; display: none; }
+
+
+
+    .overlay.show { display: block; }
+
+
+
+
+
+
+
+    .menu-icon {
+
+
+
+      position: absolute; left: 16px; color: #fff;
+
+
+
+      font-size: 30px; cursor: pointer;
+
+
+
+    }
+
+
+
+
+
+
+
+    /* visitor */
+
+
+
+    .visitor-box { display: none; padding: 12px; text-align: center; border-top: 1px solid rgba(255,255,255,0.06); }
+
+
+
+    .visitor-box img { width: 120px; }
+
+
+
+
+
+
+
+    /* ---------- POPUP OVERLAY + ANIMATION BACKGROUND ---------- */
+
+
+
+    /* Fullscreen overlay that covers everything and shows animated black background */
+
+
+
+    .popup-overlay {
+
+
+
+      position: fixed;
+
+
+
+      inset: 0;
+
+
+
+      display: flex;
+
+
+
+      align-items: center;
+
+
+
+      justify-content: center;
+
+
+
+      z-index: 1000; /* highest */
+
+
+
+      /* We'll layer an animated background behind the popup box */
+
+
+
+      background: rgba(0,0,0,0.85);
+
+
+
+      overflow: hidden;
+
+
+
+    }
+
+
+
+
+
+
+
+    /* animated black pattern (subtle moving gradient) */
+
+
+
+    .popup-overlay::before {
+
+
+
+      content: "";
+
+
+
+      position: absolute;
+
+
+
+      inset: 0;
+
+
+
+      background:
+
+
+
+        radial-gradient(1200px 600px at 10% 20%, rgba(20,20,20,0.9), transparent 20%),
+
+
+
+        radial-gradient(900px 500px at 80% 80%, rgba(30,30,30,0.9), transparent 25%),
+
+
+
+        linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.95));
+
+
+
+      z-index: 0;
+
+
+
+      animation: bgMove 12s linear infinite;
+
+
+
+      mix-blend-mode: normal;
+
+
+
+    }
+
+
+
+
+
+
+
+    @keyframes bgMove {
+
+
+
+      0% { transform: translate3d(0,0,0) scale(1); filter: hue-rotate(0deg); }
+
+
+
+      50% { transform: translate3d(-6%,4%,0) scale(1.02); filter: hue-rotate(6deg) blur(0.4px); }
+
+
+
+      100% { transform: translate3d(0,0,0) scale(1); filter: hue-rotate(0deg); }
+
+
+
+    }
+
+
+
+
+
+
+
+    /* popup box (center) */
+
+
+
+    .popup-box {
+
+
+
+      position: relative;
+
+
+
+      z-index: 2;
+
+
+
+      width: min(520px, 92%);
+
+
+
+      background: linear-gradient(180deg, rgba(30,30,30,0.98), rgba(20,20,20,0.98));
+
+
+
+      border-radius: 14px;
+
+
+
+      padding: 28px;
+
+
+
+      text-align: center;
+
+
+
+      box-shadow: 0 20px 60px rgba(0,0,0,0.7);
+
+
+
+      border: 1px solid rgba(255,255,255,0.03);
+
+
+
+      transform-origin: center;
+
+
+
+      animation: popupIn 260ms ease;
+
+
+
+    }
+
+
+
+
+
+
+
+    @keyframes popupIn {
+
+
+
+      from { transform: translateY(-14px) scale(0.98); opacity: 0; }
+
+
+
+      to { transform: translateY(0) scale(1); opacity: 1; }
+
+
+
+    }
+
+
+
+
+
+
+
+    .popup-header { font-size: 22px; font-weight: 800; margin-bottom: 8px; color: #fff; }
+
+
+
+    .popup-subtitle { font-size: 15px; color: var(--muted); margin-bottom: 18px; }
+
+
+
+
+
+
+
+    .popup-actions {
+
+
+
+      display: flex;
+
+
+
+      gap: 12px;
+
+
+
+      justify-content: center;
+
+
+
+      margin-top: 6px;
+
+
+
+    }
+
+
+
+
+
+
+
+    .popup-btn {
+
+
+
+      flex: 0 0 48%;
+
+
+
+      padding: 12px 14px;
+
+
+
+      border-radius: 8px;
+
+
+
+      border: none;
+
+
+
+      font-size: 15px;
+
+
+
+      font-weight: 700;
+
+
+
+      cursor: pointer;
+
+
+
+      color: #fff;
+
+
+
+      transition: transform .12s ease;
+
+
+
+    }
+
+
+
+    .popup-btn:active { transform: scale(0.99); }
+
+
+
+
+
+
+
+    .already-btn { background: var(--danger); }
+
+
+
+    .already-btn:hover { filter: brightness(1.05); }
+
+
+
+
+
+
+
+    .join-btn { background: var(--accent); text-decoration: none; display: inline-block; text-align:center; line-height:1; }
+
+
+
+    .join-btn:hover { filter: brightness(1.03); }
+
+
+
+
+
+
+
+    /* smaller note under buttons */
+
+
+
+    .popup-note { margin-top: 12px; font-size: 13px; color: #c9c9c9; }
+
+
+
+
+
+
+
+    /* ---------- when overlay active, prevent scroll on body ---------- */
+
+
+
+    body.no-scroll { overflow: hidden; }
+
+
+
+
+
+
+
+    /* small screens adjustments */
+
+
+
+    @media (max-width: 420px) {
+
+
+
+      .popup-box { padding: 20px; border-radius: 12px; }
+
+
+
+      .popup-header { font-size: 18px; }
+
+
+
+      .popup-subtitle { font-size: 13px; }
+
+
+
+      .popup-btn { font-size: 14px; padding: 10px; }
+
+
+
+    }
+
+
+
+  </style>
+
+
+
+</head>
+
+
+
+
+
+
+
+<body>
+
+
+
+  <!-- POPUP OVERLAY (shown on page open) -->
+
+
+
+  <div class="popup-overlay" id="popupOverlay" aria-hidden="false" role="dialog" style="display:flex;">
+
+
+
+    <div class="popup-box" role="document" aria-labelledby="popupTitle" aria-describedby="popupDesc">
+
+
+
+      <div class="popup-header" id="popupTitle">Support us</div>
+
+
+
+      <div class="popup-subtitle" id="popupDesc">Join our WhatsApp Channel to support the stream</div>
+
+
+
+
+
+
+
+      <!-- Buttons: Already (left) — Join (right) -->
+
+
+
+      <div class="popup-actions">
+
+
+
+        <button class="popup-btn already-btn" id="alreadyBtn" aria-pressed="false">Maybe Later </button>
+
+
+
+
+
+
+
+        <!-- Join as link (on right) -->
+
+
+
+        <a href="https://whatsapp.com/channel/0029VaeylYYBPzjVNomWuZ0T" target="_blank" rel="noopener noreferrer" style="width:70%;">
+
+
+
+          <button class="popup-btn join-btn" id="joinBtn">ㅤㅤㅤㅤJoin Now          ㅤ  ㅤ</button>
+
+
+
+        </a>
+
+
+
+      </div>
+
+
+
+
+
+
+
+      <div class="popup-note">Already Joined button needs <strong>two clicks</strong> to close the popup.</div>
+
+
+
+    </div>
+
+
+
+  </div>
+
+
+
+
+
+
+
+  <!-- MAIN SITE CONTENT (still loads but beneath overlay) -->
+
+
+
+  <header>
+
+
+
+    <span class="material-icons menu-icon" onclick="toggleSidebar()">menu</span>
+
+
+
+    <img src="https://files.catbox.moe/g2tdt0.jpeg" alt="Logo">
+
+
+
+  </header>
+
+
+
+
+
+
+
+  <div id="mainContent" class="main-wrapper" aria-hidden="true">
+
+
+
+    <div class="video-container">
+
+
+
+      <iframe src="https://bita-server-one.vercel.app/" allowfullscreen allow="autoplay; encrypted-media"></iframe>
+
+
+
+    </div>
+
+
+
+
+
+
+
+    <!-- Sidebar -->
+
+
+
+    <div class="sidebar" id="sidebar">
+
+
+
+      <div class="menu-header">MENU</div>
+
+
+
+      <a href="https://whatsapp.com/channel/0029VaeylYYBPzjVNomWuZ0T" target="_blank">Join WhatsApp</a>
+
+
+
+      <a href="https://www.instagram.com/sonu__7xyz?" target="_blank">Contact Us</a>
+
+
+
+      <a href="https://sayan-mete.onrender.com/copyright" target="_blank">Copyright</a>
+
+
+
+      <a href="javascript:void(0)" onclick="toggleVisitor()">Visitor Count</a>
+
+
+
+      <div class="visitor-box" id="visitorBox">
+
+
+
+        <img src="https://www.counter12.com/img-9205Yd3W54Z3y43Z-5.gif" alt="Visitor Count" />
+
+
+
+      </div>
+
+
+
+    </div>
+
+
+
+
+
+
+
+    <div class="tabs">
+
+
+
+      <button class="tab-button active" onclick="switchTab('scoreboard')">
+
+
+
+        <span class="material-icons">leaderboard</span>
+
+
+
+      </button>
+
+
+
+      <button class="tab-button" onclick="switchTab('highlights')">
+
+
+
+        <span class="material-icons">movie</span>
+
+
+
+      </button>
+
+
+
+    </div>
+
+
+
+
+
+
+
+    <div id="scoreboard" class="tab-content active">
+
+
+
+      <iframe src="https://ads-cnp.vercel.app/"></iframe>
+
+
+
+    </div>
+
+
+
+
+
+
+
+    <div id="highlights" class="tab-content">
+
+
+
+      <iframe src=" cnp "></iframe>
+
+
+
+    </div>
+
+
+
+  </div>
+
+
+
+
+
+
+
+  <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
+
+
+
+
+
+
+
+  <script>
+
+
+
+    // Sidebar toggle
+
+
+
+    function toggleSidebar() {
+
+
+
+      document.getElementById('sidebar').classList.toggle('open');
+
+
+
+      document.getElementById('overlay').classList.toggle('show');
+
+
+
+    }
+
+
+
+
+
+
+
+    // Visitor toggle
+
+
+
+    function toggleVisitor() {
+
+
+
+      let vb = document.getElementById("visitorBox");
+
+
+
+      vb.style.display = (vb.style.display === "block") ? "none" : "block";
+
+
+
+    }
+
+
+
+
+
+
+
+    // Tabs switch
+
+
+
+    function switchTab(tabId) {
+
+
+
+      document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
+
+
+
+      document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+
+
+
+      document.querySelector(`.tab-button[onclick*="${tabId}"]`).classList.add('active');
+
+
+
+      document.getElementById(tabId).classList.add('active');
+
+
+
+    }
+
+
+
+
+
+
+
+    // ---------- POPUP BEHAVIOUR ----------
+
+
+
+    document.addEventListener('DOMContentLoaded', function () {
+
+
+
+      const overlay = document.getElementById('popupOverlay');
+
+
+
+      const alreadyBtn = document.getElementById('alreadyBtn');
+
+
+
+      const joinBtn = document.getElementById('joinBtn');
+
+
+
+      const mainContent = document.getElementById('mainContent');
+
+
+
+
+
+
+
+      let alreadyClickCount = 0;
+
+
+
+
+
+
+
+      // Show popup immediately on page open
+
+
+
+      function showPopup() {
+
+
+
+        overlay.style.display = 'flex';
+
+
+
+        overlay.setAttribute('aria-hidden', 'false');
+
+
+
+        // prevent body scroll while popup visible
+
+
+
+        document.documentElement.classList.add('no-scroll');
+
+
+
+        document.body.classList.add('no-scroll');
+
+
+
+        // mark main content aria-hidden true while popup active
+
+
+
+        if (mainContent) mainContent.setAttribute('aria-hidden', 'true');
+
+
+
+      }
+
+
+
+
+
+
+
+      function closePopup() {
+
+
+
+        overlay.style.display = 'none';
+
+
+
+        overlay.setAttribute('aria-hidden', 'true');
+
+
+
+        document.documentElement.classList.remove('no-scroll');
+
+
+
+        document.body.classList.remove('no-scroll');
+
+
+
+        if (mainContent) mainContent.setAttribute('aria-hidden', 'false');
+
+
+
+        // optional: reset click count
+
+
+
+        alreadyClickCount = 0;
+
+
+
+        // record last closed time to avoid immediate re-show if you want - optional:
+
+
+
+        try { sessionStorage.setItem('popupLastClosed', Date.now().toString()); } catch (e) {}
+
+
+
+      }
+
+
+
+
+
+
+
+      // Already Joined logic: Requires TWO clicks
+
+
+
+      alreadyBtn.addEventListener('click', function (e) {
+
+
+
+        alreadyClickCount++;
+
+
+
+        alreadyBtn.setAttribute('aria-pressed', 'true');
+
+
+
+        // small visual feedback (shake or scale) could be added; keeping simple
+
+
+
+        if (alreadyClickCount >= 2) {
+
+
+
+          closePopup();
+
+
+
+        } else {
+
+
+
+          // brief feedback: flash the button to indicate "one click done"
+
+
+
+          alreadyBtn.animate([{ transform: 'scale(1)' }, { transform: 'scale(0.98)' }, { transform: 'scale(1)' }], { duration: 140 });
+
+
+
+        }
+
+
+
+      });
+
+
+
+
+
+
+
+      // Join Now button: it opens wa channel — we keep popup open so user can still click Already twice
+
+
+
+      joinBtn.addEventListener('click', function () {
+
+
+
+        // allow user to open the channel in new tab; popup remains until Already clicked twice
+
+
+
+        // small optional feedback:
+
+
+
+        joinBtn.animate([{ transform: 'translateY(0)' }, { transform: 'translateY(-3px)' }, { transform: 'translateY(0)' }], { duration: 160 });
+
+
+
+      });
+
+
+
+
+
+
+
+      // show immediately
+
+
+
+      showPopup();
+
+
+
+
+
+
+
+      // (Optional) re-show every 4 minutes if closed — but because user asked "block until already clicked twice",
+
+
+
+      // we will not auto re-show while it's open. If you want to re-show after close, uncomment below:
+
+
+
+      /* const FOUR_MIN = 4 * 60 * 1000;
+
+
+
+      setInterval(function() {
+
+
+
+        try {
+
+
+
+          const last = parseInt(sessionStorage.getItem('popupLastClosed') || '0', 10);
+
+
+
+          if (Date.now() - last < 1000) return;
+
+
+
+        } catch (e) {}
+
+
+
+        showPopup();
+
+
+
+      }, FOUR_MIN); */
+
+
+
+
+
+
+
+      // Accessibility: close on Escape only after two clicks not allowed, so ignore ESC to prevent accidental close.
+
+
+
+      window.addEventListener('keydown', function (e) {
+
+
+
+        if (e.key === 'Escape') {
+
+
+
+          // do nothing to enforce two-click rule
+
+
+
+          e.preventDefault();
+
+
+
+        }
+
+
+
+      });
+
+
+
+    });
+
+
+
+  </script>
+
+
+
+</body>
+
+
+
+
+
+
+
+      </html>

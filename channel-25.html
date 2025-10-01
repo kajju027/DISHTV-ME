@@ -1,255 +1,336 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Bye - Error 999+ </title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CRICKET NEWS POINT -25</title>
+
+  <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: "Poppins", sans-serif;
-      text-transform: uppercase;
-      line-height: 1.6;
-    }
-    body, html {
-      height: 100%;
-      overflow: hidden;
+    :root{
+      --bg: #0a0a0a;
+      --panel: #111;
+      --muted: #bbb;
+      --accent-start: #00a4ff;
+      --accent-end: #7a5cff;
+      --white: #eaeaea;
+      --black: #000;
     }
 
-    /* Loader */
-    #loader {
-      position: fixed;
-      width: 100%;
-      height: 100%;
-      background: #1a1a2e;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 9999;
-      animation: fadeOut 0.5s ease 2s forwards;
-    }
-    .spinner {
-      border: 6px solid rgba(255,255,255,0.2);
-      border-top: 6px solid #ff416c;
-      border-radius: 50%;
-      width: 60px;
-      height: 60px;
-      animation: spin 1s linear infinite;
-    }
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-    @keyframes fadeOut {
-      to { opacity: 0; visibility: hidden; }
+    html,body{
+      height:100%;
+      margin:0;
+      background:var(--bg);
+      color:var(--white);
+      font-family:Inter, system-ui, Arial, Helvetica, sans-serif;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
     }
 
-    /* Particle Background */
-    #particles-js {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-      background: linear-gradient(135deg, #2b5876, #4e4376);
+    header{
+      position:fixed;
+      top:0;
+      left:0;
+      right:0;
+      height:70px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between; /* menu left, logo right */
+      background: rgba(10,10,10,0.95);
+      border-bottom:1px solid rgba(255,255,255,0.04);
+      z-index:20;
+      padding:0 12px;
+    }
+    header img{ height:85%; }
+    .menu-icon{ cursor:pointer; font-size:28px; }
+
+    .main-wrapper{ margin-top:70px; }
+
+    .video-container{
+      width:100vw;
+      aspect-ratio:16/9;
+      background:#000;
+    }
+    .video-container iframe{ width:100%; height:100%; border:0; display:block; }
+
+    .tabs{
+      display:flex;
+      justify-content:space-around;
+      background:var(--panel);
+      border-top:1px solid rgba(255,255,255,0.04);
+      border-bottom:1px solid rgba(255,255,255,0.04);
+    }
+    .tab-button{
+      flex:1;
+      padding:14px 0;
+      color:var(--muted);
+      background:none;
+      border:0;
+      font-size:15px;
+      cursor:pointer;
+    }
+    .tab-button.active{ color:#1db954; font-weight:700; }
+
+    .tab-content{ display:none; }
+    .tab-content.active{ display:block; }
+    .tab-content iframe{ width:100%; height:600px; border:0; }
+
+    /* Sidebar */
+    .sidebar{
+      position:fixed;
+      top:0; left:-260px;
+      width:240px; height:100%;
+      background:#0f0f0f;
+      padding-top:70px;
+      transition:left .28s ease;
+      z-index:18;
+      border-right:1px solid rgba(255,255,255,0.03);
+    }
+    .sidebar.open{ left:0; }
+    .sidebar a{
+      display:block; padding:12px 18px;
+      color:#fff; text-decoration:none;
+      border-bottom:1px solid rgba(255,255,255,0.03);
+      font-size:15px;
+    }
+    .menu-header{ font-size:18px; font-weight:700; text-align:center; padding:12px 0; color:#fff; }
+
+    .overlay{ position:fixed; top:0; left:0; width:100%; height:100%; z-index:17; display:none; }
+    .overlay.show{ display:block; }
+
+    .visitor-box{ display:none; padding:12px; text-align:center; border-top:1px solid rgba(255,255,255,0.04); }
+    .visitor-box img{ width:120px; }
+
+    /* Popup overlay & animated background */
+    .popup-overlay {
+      position:fixed;
+      inset:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      z-index:1000;
+      background:rgba(0,0,0,0.85);
+      overflow:hidden;
+    }
+    .popup-overlay::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(1200px 600px at 10% 20%, rgba(20,20,20,0.9), transparent 20%),
+        radial-gradient(900px 500px at 80% 80%, rgba(30,30,30,0.9), transparent 25%),
+        linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.95));
+      z-index:0;
+      animation: bgMove 12s linear infinite;
+    }
+    @keyframes bgMove{
+      0% { transform: translate3d(0,0,0) scale(1); }
+      50% { transform: translate3d(-6%,4%,0) scale(1.02); filter: blur(.4px); }
+      100% { transform: translate3d(0,0,0) scale(1); }
     }
 
-    /* Counter Dot */
-    .counter-dot {
-      position: fixed;
-      top: 20px;
-      left: 20px;
-      width: 20px;
-      height: 20px;
-      background: #ff416c;
-      border-radius: 50%;
-      cursor: pointer;
-      box-shadow: 0 0 15px rgba(255,65,108,0.8);
-      animation: pulse 1.5s infinite;
-      z-index: 1000;
+    .popup-box{
+      position:relative;
+      z-index:2;
+      width:min(520px, 94%);
+      background: linear-gradient(180deg, rgba(30,30,30,0.98), rgba(22,22,22,0.98));
+      border-radius:14px;
+      padding:28px;
+      text-align:center;
+      box-shadow:0 20px 60px rgba(0,0,0,0.7);
+      border:1px solid rgba(255,255,255,0.03);
+      transform-origin:center;
+      animation: popupIn .26s ease;
     }
-    @keyframes pulse {
-      0% { box-shadow: 0 0 0 rgba(255,65,108,0.8); }
-      70% { box-shadow: 0 0 20px rgba(255,65,108,0.2); }
-      100% { box-shadow: 0 0 0 rgba(255,65,108,0.8); }
-    }
-    .counter-box {
-      position: fixed;
-      top: 50px;
-      left: 20px;
-      background: rgba(0,0,0,0.85);
-      padding: 10px;
-      border-radius: 10px;
-      display: none;
-      z-index: 1000;
+    @keyframes popupIn{
+      from{ transform: translateY(-14px) scale(.98); opacity:0; }
+      to{ transform: translateY(0) scale(1); opacity:1; }
     }
 
-    /* Main content */
-    .container {
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 20px;
-      flex-direction: column;
-      color: #fff;
+    .popup-header{ font-size:22px; font-weight:800; margin:0 0 8px; color:#fff; }
+    .popup-subtitle{ margin:0 0 18px; color:var(--muted); font-size:15px; }
+
+    .popup-actions{
+      display:flex;
+      gap:12px;
+      justify-content:center;
+      margin-top:6px;
     }
-    .card {
-      background: rgba(0,0,0,0.6);
-      backdrop-filter: blur(10px);
-      padding: 30px 25px;
-      border-radius: 20px;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.4);
-      max-width: 420px;
-      animation: fadeIn 1.2s ease-in-out;
+
+    .popup-btn{
+      flex:0 0 48%;
+      padding:12px 14px;
+      border-radius:8px;
+      border:0;
+      font-size:15px;
+      font-weight:700;
+      cursor:pointer;
+      color:#fff;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      text-decoration:none;
+      user-select:none;
     }
-    .card h1 {
-      font-size: 24px;
-      margin-bottom: 15px;
+    .popup-btn:active{ transform:scale(.99); }
+
+    .already-btn{
+      background: var(--black);
+      color:#fff;
+      border:1px solid rgba(255,255,255,0.03);
     }
-    .card p {
-      font-size: 15px;
-      margin-bottom: 20px;
-      color: #eee;
+
+    .join-btn{
+      background: linear-gradient(90deg, var(--accent-start), var(--accent-end));
+      color:#fff;
+      text-decoration:none;
+      border:0;
     }
-    .btn {
-      display: inline-block;
-      padding: 12px 25px;
-      background: linear-gradient(135deg, #ff416c, #ff4b2b);
-      color: #fff;
-      border-radius: 30px;
-      font-weight: 600;
-      text-decoration: none;
-      transition: 0.3s;
-      box-shadow: 0 6px 15px rgba(255,65,108,0.3);
-    }
-    .btn:hover {
-      transform: scale(1.05);
-      box-shadow: 0 8px 25px rgba(255,65,108,0.5);
-    }
-    #timer {
-      margin-top: 20px;
-      font-size: 14px;
-      color: #ffcccb;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+
+    .popup-note{ margin-top:12px; font-size:13px; color:#c9c9c9; }
+
+    body.no-scroll{ overflow:hidden; }
+
+    @media (max-width:420px){
+      .popup-box{ padding:18px; border-radius:12px; }
+      .popup-header{ font-size:18px; }
+      .popup-subtitle{ font-size:13px; }
+      .popup-btn{ font-size:14px; padding:10px; }
     }
   </style>
 </head>
 <body>
-  <!-- Loader -->
-  <div id="loader">
-    <div class="spinner"></div>
-  </div>
+  <!-- Popup overlay -->
+  <div class="popup-overlay" id="popupOverlay" aria-hidden="true" role="dialog" style="display:none;">
+    <div class="popup-box" role="document" aria-labelledby="popupTitle" aria-describedby="popupDesc">
+      <div class="popup-header" id="popupTitle">Support Us</div>
+      <div class="popup-subtitle" id="popupDesc">Join our WhatsApp Channel to support the stream</div>
 
-  <!-- Particle Background -->
-  <div id="particles-js"></div>
-
-  <!-- Counter Dot -->
-  <div class="counter-dot" onclick="toggleCounter()"></div>
-  <div class="counter-box" id="counterBox">
-    <div align="center">
-      <a href="https://www.counter12.com">
-        <img src="https://www.counter12.com/img-d30x5y3x8C7YCCDb-3.gif" border="0" alt="counter" />
-      </a>
-      <script type="text/javascript" src="https://www.counter12.com/ad.js?id=d30x5y3x8C7YCCDb"></script>
+      <div class="popup-actions" role="group" aria-label="popup actions">
+        <button class="popup-btn already-btn" id="alreadyBtn" aria-pressed="false">Already Joined</button>
+        <a id="joinLink" class="popup-btn join-btn" href="https://whatsapp.com/channel/0029VaeylYYBPzjVNomWuZ0T" target="_blank" rel="noopener noreferrer">Join Now</a>
+      </div>
     </div>
   </div>
 
   <!-- Main content -->
-  <div class="container">
-    <div class="card">
-      <h1>🔧 SERVER UNDER MAINTENANCE</h1>
-      <p>OUR SERVERS ARE CURRENTLY UNDERGOING UPGRADES.<br>
-      PLEASE CHECK BACK LATER.<br>
-      THANK YOU FOR YOUR PATIENCE 🥺.</p>
-      <a href="https://www.instagram.com/sonu__7xyz?igsh=MTdlNXdmc2JvMHJwNA==" target="_blank" class="btn">CONTACT US</a>
-      <div id="timer"></div>
+  <header>
+    <span class="material-icons menu-icon" onclick="toggleSidebar()">menu</span>
+    <img src="https://files.catbox.moe/g2tdt0.jpeg" alt="Logo">
+  </header>
+
+  <div id="mainContent" class="main-wrapper" aria-hidden="true">
+    <div class="video-container">
+      <iframe src="https://cricketstan.github.io/channel-5/" allowfullscreen allow="autoplay; encrypted-media"></iframe>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar" aria-hidden="true">
+      <div class="menu-header">MENU</div>
+      <a href="https://whatsapp.com/channel/0029VaeylYYBPzjVNomWuZ0T" target="_blank">Join WhatsApp</a>
+      <a href="https://www.instagram.com/sonu__7xyz?" target="_blank">Contact Us</a>
+      <a href="https://sayan-mete.onrender.com/copyright" target="_blank">Copyright</a>
+      <a href="javascript:void(0)" onclick="toggleVisitor()">Visitor Count</a>
+      <div class="visitor-box" id="visitorBox">
+        <img src="https://www.counter12.com/img-9205Yd3W54Z3y43Z-5.gif" alt="Visitor Count" />
+      </div>
+    </div>
+
+    <div class="tabs" role="tablist">
+      <button class="tab-button active" onclick="switchTab('scoreboard')" aria-selected="true"><span class="material-icons">leaderboard</span></button>
+      <button class="tab-button" onclick="switchTab('highlights')" aria-selected="false"><span class="material-icons">movie</span></button>
+    </div>
+
+    <div id="scoreboard" class="tab-content active">
+      <iframe src="https://alpha-server-zero.vercel.app"></iframe>
+    </div>
+
+    <div id="highlights" class="tab-content">
+      <iframe src="https://ads-cnp.vercel.app/"></iframe>
     </div>
   </div>
 
-  <!-- Background music -->
-  <audio id="bg-music" loop>
-    <source src="sad-instrumental.mp3" type="audio/mpeg">
-    <!-- Fallback if mp3 not supported -->
-  </audio>
+  <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
 
-  <!-- Scripts -->
-  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
   <script>
-    // Particle config
-    particlesJS("particles-js", {
-      "particles": {
-        "number": { "value": 80 },
-        "color": { "value": "#ffffff" },
-        "shape": { "type": "circle" },
-        "opacity": { "value": 0.6 },
-        "size": { "value": 3 },
-        "line_linked": {
-          "enable": true,
-          "distance": 150,
-          "color": "#ffffff",
-          "opacity": 0.4,
-          "width": 1
-        },
-        "move": {
-          "enable": true,
-          "speed": 2,
-          "direction": "none",
-          "out_mode": "out"
-        }
-      },
-      "interactivity": {
-        "events": {
-          "onhover": { "enable": true, "mode": "repulse" },
-          "onclick": { "enable": true, "mode": "push" }
-        },
-        "modes": {
-          "repulse": { "distance": 100 },
-          "push": { "particles_nb": 4 }
-        }
-      },
-      "retina_detect": true
-    });
-
-    // Toggle counter box
-    function toggleCounter() {
-      const box = document.getElementById("counterBox");
-      box.style.display = (box.style.display === "block") ? "none" : "block";
+    function toggleSidebar(){
+      document.getElementById('sidebar').classList.toggle('open');
+      document.getElementById('overlay').classList.toggle('show');
     }
 
-    // Timer from 29 Sept 2025 23:30
-    const startTime = new Date("Sep 29, 2025 23:30:00").getTime();
-    function updateTimer() {
-      const now = new Date().getTime();
-      const elapsed = now - startTime;
-      const days = Math.floor(elapsed / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((elapsed % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((elapsed % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((elapsed % (1000 * 60)) / 1000);
-      document.getElementById("timer").innerHTML =
-        `SITE HAS BEEN DOWN FOR: ${days}D ${hours}H ${minutes}M ${seconds}S`;
+    function toggleVisitor(){
+      const vb = document.getElementById('visitorBox');
+      vb.style.display = (vb.style.display === 'block') ? 'none' : 'block';
     }
-    setInterval(updateTimer, 1000);
 
-    // Auto play background music (try)
-    window.addEventListener('load', function() {
-      const audio = document.getElementById("bg-music");
-      // Try to play
-      audio.volume = 3.5;  // low volume
-      const playPromise = audio.play();
-      if (playPromise !== undefined) {
-        playPromise.catch(error => {
-          console.log("Autoplay prevented. Interaction needed.");
-        });
+    function switchTab(tabId){
+      document.querySelectorAll('.tab-button').forEach(b=>b.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));
+      const btn = Array.from(document.querySelectorAll('.tab-button')).find(x => x.getAttribute('onclick')?.includes(tabId));
+      if(btn) btn.classList.add('active');
+      const content = document.getElementById(tabId);
+      if(content) content.classList.add('active');
+    }
+
+    document.addEventListener('DOMContentLoaded', function(){
+      const popup = document.getElementById('popupOverlay');
+      const alreadyBtn = document.getElementById('alreadyBtn');
+      const joinLink = document.getElementById('joinLink');
+      const mainContent = document.getElementById('mainContent');
+      const REOPEN_INTERVAL = 5 * 60 * 1000;
+      let alreadyClickCount = 0;
+
+      function showPopup(){
+        if (popup.style.display === 'flex') return;
+        popup.style.display = 'flex';
+        popup.setAttribute('aria-hidden', 'false');
+        document.documentElement.classList.add('no-scroll');
+        document.body.classList.add('no-scroll');
+        if (mainContent) mainContent.setAttribute('aria-hidden', 'true');
       }
+
+      function closePopup(){
+        popup.style.display = 'none';
+        popup.setAttribute('aria-hidden', 'true');
+        document.documentElement.classList.remove('no-scroll');
+        document.body.classList.remove('no-scroll');
+        if (mainContent) mainContent.setAttribute('aria-hidden', 'false');
+        alreadyClickCount = 0;
+        try { sessionStorage.setItem('popupLastClosed', Date.now().toString()); } catch (e) {}
+      }
+
+      const lastClosed = Number(sessionStorage.getItem('popupLastClosed') || '0');
+      if (!lastClosed || (Date.now() - lastClosed) >= REOPEN_INTERVAL) {
+        showPopup();
+      }
+
+      alreadyBtn.addEventListener('click', function(){
+        alreadyClickCount++;
+        alreadyBtn.setAttribute('aria-pressed', 'true');
+        if (alreadyClickCount >= 1) {
+          closePopup();
+        } else {
+          alreadyBtn.animate([{ transform:'scale(1)' }, { transform:'scale(.98)' }, { transform:'scale(1)' }], { duration:140 });
+        }
+      });
+
+      joinLink.addEventListener('click', function(){
+        joinLink.animate([{ transform:'translateY(0)' }, { transform:'translateY(-3px)' }, { transform:'translateY(0)' }], { duration:160 });
+      });
+
+      setInterval(function(){
+        const last = Number(sessionStorage.getItem('popupLastClosed') || '0');
+        if (popup.style.display !== 'flex' && (Date.now() - last) >= REOPEN_INTERVAL) {
+          showPopup();
+        }
+      }, REOPEN_INTERVAL);
+
+      window.addEventListener('keydown', function(e){
+        if (e.key === 'Escape') e.preventDefault();
+      });
     });
   </script>
 </body>
-  </html>
+</html>

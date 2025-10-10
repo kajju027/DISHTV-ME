@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HINDI</title>
+  <title>TNT 3 Sports</title>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <style>
     html, body {
@@ -16,13 +16,22 @@
       font-family: Arial, sans-serif;
     }
 
-    #contentFrame {
-      position: absolute;
-      top: 0;
-      left: 0;
+    .video-container {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 90%;
+      max-width: 720px;
+      aspect-ratio: 16/9;
+      z-index: 1;
+    }
+
+    .video-container iframe {
       width: 100%;
       height: 100%;
       border: none;
+      border-radius: 10px;
     }
 
     .popup-overlay {
@@ -30,23 +39,23 @@
       top: 0; left: 0;
       width: 100%; height: 100%;
       background: rgba(0, 0, 0, 0.6);
-      display: none;
+      display: flex;
       align-items: center;
       justify-content: center;
       z-index: 10002;
     }
 
     .popup-box {
-      width: 300px;
-      background: rgba(25, 25, 35, 0.75);
-      border: 1px solid rgba(173, 216, 230, 0.2);
-      border-radius: 16px;
-      backdrop-filter: blur(12px);
-      box-shadow: 0 0 18px rgba(0, 255, 255, 0.35), 0 0 60px rgba(173, 216, 230, 0.1);
-      padding: 1.8rem 1.3rem;
+      width: 380px;
+      background: rgba(25, 25, 35, 0.8);
+      border: 1px solid rgba(173, 216, 230, 0.25);
+      border-radius: 20px;
+      backdrop-filter: blur(15px);
+      box-shadow: 0 0 25px rgba(0, 255, 255, 0.4);
+      padding: 2.2rem 1.8rem;
       text-align: center;
-      animation: fadeIn 0.5s ease forwards;
       position: relative;
+      animation: fadeIn 0.5s ease forwards;
     }
 
     @keyframes fadeIn {
@@ -55,48 +64,41 @@
     }
 
     .popup-header {
-      font-size: 1.8rem;
+      font-size: 2.2rem;
       font-weight: 700;
-      background: linear-gradient(45deg, #00eaff, #bd00ff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin-bottom: 0.4rem;
-      text-shadow: 0 0 6px rgba(0, 255, 255, 0.35);
+      color: #fff;
+      margin-bottom: 0.7rem;
+      letter-spacing: 0.5px;
     }
 
     .popup-subtitle {
-      font-size: 0.95rem;
-      color: #aaa;
-      margin-bottom: 1rem;
+      font-size: 1.05rem;
+      color: #ccc;
+      margin-bottom: 1.4rem;
+      line-height: 1.5;
     }
 
     .popup-buttons {
       display: flex;
       flex-direction: column;
-      gap: 0.6rem;
+      gap: 0.8rem;
     }
 
     .popup-buttons a,
     .popup-buttons button {
-      padding: 0.7rem;
-      border-radius: 10px;
+      padding: 0.9rem;
+      border-radius: 12px;
       font-weight: 600;
-      font-size: 0.95rem;
+      font-size: 1.05rem;
       color: #fff;
       cursor: pointer;
       transition: all 0.35s ease;
       border: none;
-      text-decoration: none; /* underline removed */
+      text-decoration: none;
     }
 
     .join-btn {
       background: linear-gradient(135deg, #00eaff, #9c00ff);
-      box-shadow: 0 0 10px rgba(0, 255, 255, 0.35);
-    }
-
-    .join-btn:hover {
-      background: linear-gradient(135deg, #00ffff, #c000ff);
-      box-shadow: 0 0 14px rgba(0, 255, 255, 0.55);
     }
 
     .already-btn {
@@ -111,86 +113,130 @@
       position: absolute;
       top: 10px;
       right: 16px;
-      font-size: 1.2rem;
+      font-size: 1.5rem;
       color: #00eaff;
       background: none;
       border: none;
       cursor: pointer;
-      transition: color 0.3s;
-    }
-
-    .close-btn:hover {
-      color: #ff00cc;
     }
 
     #floatingTelegramBtn {
       position: fixed;
       top: 12px;
       left: 12px;
-      padding: 0.7rem 1rem;
+      padding: 0.8rem 1.2rem;
       background: linear-gradient(135deg, #00eaff, #9c00ff);
       color: #fff;
       font-weight: 600;
       font-size: 1rem;
-      border-radius: 12px;
+      border-radius: 14px;
       text-decoration: none;
       z-index: 10003;
-      box-shadow: 0 0 10px rgba(0, 255, 255, 0.35);
-      transition: all 0.3s ease;
       display: flex;
       align-items: center;
       gap: 6px;
     }
 
-    #floatingTelegramBtn:hover {
-      background: linear-gradient(135deg, #00ffff, #c000ff);
-      box-shadow: 0 0 14px rgba(0, 255, 255, 0.55);
+    .material-icons { font-size: 1.3rem; }
+
+    #visitorToggle {
+      position: fixed;
+      top: 10px;
+      right: 14px;
+      font-size: 20px;
+      color: #00eaff;
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: none;
+      z-index: 10004;
     }
 
-    .material-icons {
-      font-size: 1.3rem;
+    #visitorCounter {
+      position: fixed;
+      top: 45px;
+      right: 10px;
+      display: none;
+      z-index: 10004;
+    }
+
+    #visitorCounter img {
+      width: 130px;
+    }
+
+    @media (max-width: 600px) {
+      .popup-box {
+        width: 88%;
+        padding: 1.8rem;
+      }
+      .popup-header { font-size: 1.8rem; }
+      .popup-subtitle { font-size: 0.95rem; }
+      .popup-buttons a, .popup-buttons button { font-size: 0.95rem; }
     }
   </style>
 </head>
 <body>
 
-  <iframe id="contentFrame"
-          sandbox="allow-forms allow-pointer-lock allow-same-origin allow-scripts allow-top-navigation"
-          frameborder="0"
-          gesture="media"
-          allow="encrypted-media"
-          allowfullscreen="true"
-          scrolling="no"
-          src="https://cricketstan.github.io/Channel-13">
-  </iframe>
+  <div class="video-container">
+    <iframe id="videoBox"
+      src="https://channel-03.vercel.app"
+      allow="autoplay; encrypted-media"
+      allowfullscreen>
+    </iframe>
+  </div>
 
   <a href="https://whatsapp.com/channel/0029VaeylYYBPzjVNomWuZ0T" target="_blank" id="floatingTelegramBtn">
     <span class="material-icons">send</span> Join WhatsApp
   </a>
 
   <div class="popup-overlay" id="telegramPopup">
-    <div class="popup-box">
+    <div class="popup-box" id="popupBox">
       <button class="close-btn" onclick="closePopup()">×</button>
       <div class="popup-header">Support Us!</div>
-      <div class="popup-subtitle">Join our WhatsApp for latest updates.</div>
+      <div class="popup-subtitle">Join our WhatsApp for the latest news, updates, and releases.</div>
       <div class="popup-buttons">
-        <a href="https://whatsapp.com/channel/0029VaeylYYBPzjVNomWuZ0T" target="_blank" class="join-btn">Join Now</a>
+        <a href="https://whatsapp.com/channel/0029VaeylYYBPzjVNomWuZ0T" target="_blank" class="join-btn" id="joinBtn">Join Now</a>
         <button class="already-btn" onclick="closePopup()">Already Joined</button>
       </div>
     </div>
   </div>
 
+  <button id="visitorToggle">×</button>
+  <div id="visitorCounter">
+    <img src="https://www.counter12.com/img-9205Yd3W54Z3y43Z-5.gif" alt="Visitor Counter">
+  </div>
+
   <script>
-    window.onload = function() {
-      setTimeout(() => {
-        document.getElementById('telegramPopup').style.display = 'flex';
-      }, 1000);
-    }
+    const popup = document.getElementById('telegramPopup');
+    const popupBox = document.getElementById('popupBox');
+    const joinBtn = document.getElementById('joinBtn');
+    const colors = [
+      {header:'#FFD700',btn:'#FFD700'}, // yellow
+      {header:'#FF4040',btn:'#FF4040'}, // red
+      {header:'#00FF66',btn:'#00FF66'}, // green
+      {header:'#FFA500',btn:'#FFA500'}, // orange
+      {header:'#00BFFF',btn:'#00BFFF'}, // blue
+      {header:'#FF1493',btn:'#FF1493'}, // pink
+      {header:'#9400D3',btn:'#9400D3'}, // violet
+      {header:'#00CED1',btn:'#00CED1'}  // turquoise
+    ];
+    
+    // Pick a new random color each time website reloads
+    const color = colors[Math.floor(Math.random() * colors.length)];
+    popupBox.style.boxShadow = `0 0 35px ${color.header}`;
+    joinBtn.style.background = color.btn;
+    popupBox.querySelector('.popup-header').style.color = color.header;
 
     function closePopup() {
-      document.getElementById('telegramPopup').style.display = 'none';
+      popup.style.display = 'none';
+      document.getElementById('visitorToggle').style.display = 'block';
     }
+
+    document.getElementById('visitorToggle').addEventListener('click', function() {
+      const counter = document.getElementById('visitorCounter');
+      counter.style.display = counter.style.display === 'block' ? 'none' : 'block';
+    });
   </script>
+
 </body>
 </html>
-

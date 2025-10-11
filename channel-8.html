@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>CRICKET NEWS POINT -8</title>
+  <title>CRICKET NEWS POINT - 8</title>
 
   <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -25,8 +25,6 @@
       background:var(--bg);
       color:var(--white);
       font-family:Inter, system-ui, Arial, Helvetica, sans-serif;
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
     }
 
     header{
@@ -37,14 +35,21 @@
       height:70px;
       display:flex;
       align-items:center;
-      justify-content:space-between; /* menu left, logo right */
+      justify-content:center; /* ✅ logo center */
       background: rgba(10,10,10,0.95);
       border-bottom:1px solid rgba(255,255,255,0.04);
       z-index:20;
       padding:0 12px;
     }
+
     header img{ height:85%; }
-    .menu-icon{ cursor:pointer; font-size:28px; }
+
+    .menu-icon{
+      cursor:pointer;
+      font-size:28px;
+      position:absolute;   /* ✅ menu always left */
+      left:12px;
+    }
 
     .main-wrapper{ margin-top:70px; }
 
@@ -279,11 +284,8 @@
       const alreadyBtn = document.getElementById('alreadyBtn');
       const joinLink = document.getElementById('joinLink');
       const mainContent = document.getElementById('mainContent');
-      const REOPEN_INTERVAL = 5 * 60 * 1000;
-      let alreadyClickCount = 0;
 
       function showPopup(){
-        if (popup.style.display === 'flex') return;
         popup.style.display = 'flex';
         popup.setAttribute('aria-hidden', 'false');
         document.documentElement.classList.add('no-scroll');
@@ -297,35 +299,18 @@
         document.documentElement.classList.remove('no-scroll');
         document.body.classList.remove('no-scroll');
         if (mainContent) mainContent.setAttribute('aria-hidden', 'false');
-        alreadyClickCount = 0;
-        try { sessionStorage.setItem('popupLastClosed', Date.now().toString()); } catch (e) {}
       }
 
-      const lastClosed = Number(sessionStorage.getItem('popupLastClosed') || '0');
-      if (!lastClosed || (Date.now() - lastClosed) >= REOPEN_INTERVAL) {
-        showPopup();
-      }
+      // ✅ Always show popup on every visit
+      showPopup();
 
       alreadyBtn.addEventListener('click', function(){
-        alreadyClickCount++;
-        alreadyBtn.setAttribute('aria-pressed', 'true');
-        if (alreadyClickCount >= 1) {
-          closePopup();
-        } else {
-          alreadyBtn.animate([{ transform:'scale(1)' }, { transform:'scale(.98)' }, { transform:'scale(1)' }], { duration:140 });
-        }
+        closePopup();
       });
 
       joinLink.addEventListener('click', function(){
         joinLink.animate([{ transform:'translateY(0)' }, { transform:'translateY(-3px)' }, { transform:'translateY(0)' }], { duration:160 });
       });
-
-      setInterval(function(){
-        const last = Number(sessionStorage.getItem('popupLastClosed') || '0');
-        if (popup.style.display !== 'flex' && (Date.now() - last) >= REOPEN_INTERVAL) {
-          showPopup();
-        }
-      }, REOPEN_INTERVAL);
 
       window.addEventListener('keydown', function(e){
         if (e.key === 'Escape') e.preventDefault();

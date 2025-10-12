@@ -1,22 +1,422 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <script>
-    function decodeHtml() {
-      let code = "fmx0OyFET0NUWVBFIGh0bWx+Z3Q7fm5sO35sdDtodG1sIGxhbmc9fnF1b3Q7ZW5+cXVvdDt+Z3Q7fm5sO35sdDtoZWFkfmd0O35ubDsgIH5sdDttZXRhIGNoYXJzZXQ9fnF1b3Q7VVRGLTh+cXVvdDsgL35ndDt+bmw7ICB+bHQ7bWV0YSBuYW1lPX5xdW90O3ZpZXdwb3J0fnF1b3Q7IGNvbnRlbnQ9fnF1b3Q7d2lkdGg9ZGV2aWNlLXdpZHRoLCBpbml0aWFsLXNjYWxlPTEuMH5xdW90Oy9+Z3Q7fm5sOyAgfmx0O3RpdGxlfmd0O1NBWUFOIElQVFYgfCBIT01Ffmx0Oy90aXRsZX5ndDt+bmw7ICB+bHQ7IS0tIEdvb2dsZSBGb250cyAtLX5ndDt+bmw7ICB+bHQ7bGluayBocmVmPX5xdW90O2h0dHBzOi8vZm9udHMuZ29vZ2xlYXBpcy5jb20vY3NzMj9mYW1pbHk9T3JiaXRyb246d2dodEA3MDAmZmFtaWx5PVJvYm90bzp3Z2h0QDQwMDs3MDAmZGlzcGxheT1zd2FwfnF1b3Q7IHJlbD1+cXVvdDtzdHlsZXNoZWV0fnF1b3Q7fmd0O35ubDsgIH5sdDshLS0gRFBsYXllciBDU1MgLS1+Z3Q7fm5sOyAgfmx0O2xpbmsgcmVsPX5xdW90O3N0eWxlc2hlZXR+cXVvdDsgaHJlZj1+cXVvdDtodHRwczovL2Nkbi5qc2RlbGl2ci5uZXQvbnBtL2RwbGF5ZXIvZGlzdC9EUGxheWVyLm1pbi5jc3N+cXVvdDt+Z3Q7fm5sOyAgfmx0OyEtLSBQYXJ0aWNsZXMuanMgLS1+Z3Q7fm5sOyAgfmx0O3NjcmlwdCBzcmM9fnF1b3Q7aHR0cHM6Ly9jZG4uanNkZWxpdnIubmV0L25wbS9wYXJ0aWNsZXMuanNAMi4wLjAvcGFydGljbGVzLm1pbi5qc35xdW90O35ndDt+bHQ7L3NjcmlwdH5ndDt+bmw7ICB+bHQ7c3R5bGV+Z3Q7fm5sOyAgICBib2R5IHt+bmw7ICAgICAgbWFyZ2luOiAwO35ubDsgICAgICBmb250LWZhbWlseTogfmFwb3M7Um9ib3RvfmFwb3M7LCBBcmlhbCwgc2Fucy1zZXJpZjt+bmw7ICAgICAgYmFja2dyb3VuZDogIzE4MWIyMDt+bmw7ICAgICAgY29sb3I6ICNmZmY7fm5sOyAgICAgIG1pbi1oZWlnaHQ6IDEwMHZoO35ubDsgICAgICBwb3NpdGlvbjogcmVsYXRpdmU7fm5sOyAgICAgIG92ZXJmbG93LXg6IGhpZGRlbjt+bmw7ICAgIH1+bmw7ICAgICNwYXJ0aWNsZXMtanMge35ubDsgICAgICBwb3NpdGlvbjogZml4ZWQ7fm5sOyAgICAgIHotaW5kZXg6IDA7fm5sOyAgICAgIHdpZHRoOiAxMDB2dzt+bmw7ICAgICAgaGVpZ2h0OiAxMDB2aDt+bmw7ICAgICAgdG9wOiAwO35ubDsgICAgICBsZWZ0OiAwO35ubDsgICAgfX5ubDsgICAgLmNvbnRhaW5lciB7fm5sOyAgICAgIHBvc2l0aW9uOiByZWxhdGl2ZTt+bmw7ICAgICAgei1pbmRleDogMTt+bmw7ICAgICAgbWF4LXdpZHRoOiA5MDBweDt+bmw7ICAgICAgbWFyZ2luOiAwIGF1dG87fm5sOyAgICAgIHBhZGRpbmc6IDE2cHg7fm5sOyAgICB9fm5sOyAgICAudmlkZW8tc2VjdGlvbiB7fm5sOyAgICAgIG1hcmdpbi1ib3R0b206IDI0cHg7fm5sOyAgICAgIHRleHQtYWxpZ246IGNlbnRlcjt+bmw7ICAgIH1+bmw7ICAgICNkcGxheWVyIHt+bmw7ICAgICAgd2lkdGg6IDEwMCU7fm5sOyAgICAgIG1heC13aWR0aDogNzIwcHg7fm5sOyAgICAgIG1hcmdpbjogMCBhdXRvIDEycHggYXV0bzt+bmw7ICAgICAgYm9yZGVyLXJhZGl1czogMTRweDt+bmw7ICAgICAgb3ZlcmZsb3c6IGhpZGRlbjt+bmw7ICAgICAgYm94LXNoYWRvdzogMCA0cHggMjRweCAjMDBmZmZmMzM7fm5sOyAgICAgIGJhY2tncm91bmQ6ICMxZjIxMjg7fm5sOyAgICAgIG1pbi1oZWlnaHQ6IDIyMHB4O35ubDsgICAgfX5ubDsgICAgLmNoYW5uZWwtbGlzdCB7fm5sOyAgICAgIGRpc3BsYXk6IGdyaWQ7fm5sOyAgICAgIGdyaWQtdGVtcGxhdGUtY29sdW1uczogcmVwZWF0KDMsIDFmcik7fm5sOyAgICAgIGdhcDogMTZweDt+bmw7ICAgICAgbWFyZ2luLWJvdHRvbTogMzJweDt+bmw7ICAgIH1+bmw7ICAgIEBtZWRpYSAobWluLXdpZHRoOiA3MDBweCkge35ubDsgICAgICAjZHBsYXllciB7IG1pbi1oZWlnaHQ6IDQwMHB4OyB9fm5sOyAgICAgIC5jaGFubmVsLWxpc3QgeyBncmlkLXRlbXBsYXRlLWNvbHVtbnM6IHJlcGVhdCg2LCAxZnIpOyB9fm5sOyAgICB9fm5sOyAgICAuY2hhbm5lbC1jYXJkIHt+bmw7ICAgICAgYmFja2dyb3VuZDogIzIwMjMyYWVlO35ubDsgICAgICBib3JkZXItcmFkaXVzOiAxM3B4O35ubDsgICAgICBwYWRkaW5nOiAxMHB4IDAgN3B4IDA7fm5sOyAgICAgIGJveC1zaGFkb3c6IDAgMnB4IDEwcHggIzAwZmZmZjExO35ubDsgICAgICB0ZXh0LWFsaWduOiBjZW50ZXI7fm5sOyAgICAgIGN1cnNvcjogcG9pbnRlcjt+bmw7ICAgICAgdXNlci1zZWxlY3Q6IG5vbmU7fm5sOyAgICAgIHBvc2l0aW9uOiByZWxhdGl2ZTt+bmw7ICAgICAgb3ZlcmZsb3c6IGhpZGRlbjt+bmw7ICAgICAgdHJhbnNpdGlvbjogdHJhbnNmb3JtIDAuMXMsIGJveC1zaGFkb3cgMC4yczt+bmw7ICAgIH1+bmw7ICAgIC5jaGFubmVsLWNhcmQ6YWN0aXZlIHt+bmw7ICAgICAgdHJhbnNmb3JtOiBzY2FsZSgwLjk2KTt+bmw7ICAgICAgYm94LXNoYWRvdzogMCAwIDAgMnB4ICMwMGZmZmY4OCwgMCAycHggMTBweCAjMDBmZmZmMzM7fm5sOyAgICB9fm5sOyAgICAuY2hhbm5lbC1jYXJkOjphZnRlciB7fm5sOyAgICAgIGNvbnRlbnQ6IH5hcG9zO35hcG9zOzt+bmw7ICAgICAgcG9zaXRpb246IGFic29sdXRlO35ubDsgICAgICBib3JkZXItcmFkaXVzOiA1MCU7fm5sOyAgICAgIGxlZnQ6IDUwJTsgdG9wOiA1MCU7fm5sOyAgICAgIHBvaW50ZXItZXZlbnRzOiBub25lO35ubDsgICAgICB0cmFuc2Zvcm06IHRyYW5zbGF0ZSgtNTAlLCAtNTAlKSBzY2FsZSgwKTt+bmw7ICAgICAgYmFja2dyb3VuZDogcmFkaWFsLWdyYWRpZW50KGNpcmNsZSwgIzAwZmZmOTY2IDAlLCB0cmFuc3BhcmVudCA4MCUpO35ubDsgICAgICB3aWR0aDogMTgwcHg7fm5sOyAgICAgIGhlaWdodDogMTgwcHg7fm5sOyAgICAgIG9wYWNpdHk6IDAuNTt+bmw7ICAgICAgdHJhbnNpdGlvbjogdHJhbnNmb3JtIDAuNHMgY3ViaWMtYmV6aWVyKC41LDIsLjMsLjcpO35ubDsgICAgICB6LWluZGV4OiAzO35ubDsgICAgfX5ubDsgICAgLmNoYW5uZWwtY2FyZC5jbGlja2VkOjphZnRlciB7fm5sOyAgICAgIHRyYW5zZm9ybTogdHJhbnNsYXRlKC01MCUsIC01MCUpIHNjYWxlKDEpO35ubDsgICAgICB0cmFuc2l0aW9uOiB0cmFuc2Zvcm0gMC4zcyBjdWJpYy1iZXppZXIoLjUsMiwuMywuNyk7fm5sOyAgICAgIG9wYWNpdHk6IDA7fm5sOyAgICB9fm5sOyAgICAuY2hhbm5lbC1sb2dvIHt+bmw7ICAgICAgd2lkdGg6IDU1cHg7fm5sOyAgICAgIGhlaWdodDogNTVweDt+bmw7ICAgICAgb2JqZWN0LWZpdDogY29udGFpbjt+bmw7ICAgICAgbWFyZ2luOiAwIGF1dG8gN3B4IGF1dG87fm5sOyAgICAgIGJvcmRlci1yYWRpdXM6IDhweDt+bmw7ICAgICAgYmFja2dyb3VuZDogI2ZmZjt+bmw7ICAgICAgYm94LXNoYWRvdzogMCAxcHggNXB4ICMwMGZmZmYzMzt+bmw7ICAgICAgZGlzcGxheTogYmxvY2s7fm5sOyAgICB9fm5sOyAgICAuY2hhbm5lbC1uYW1lIHt+bmw7ICAgICAgZm9udC1mYW1pbHk6IH5hcG9zO09yYml0cm9ufmFwb3M7LCBBcmlhbCwgc2Fucy1zZXJpZjt+bmw7ICAgICAgZm9udC1zaXplOiAxZW07fm5sOyAgICAgIGNvbG9yOiAjMDBmZmZmO35ubDsgICAgICBsZXR0ZXItc3BhY2luZzogMXB4O35ubDsgICAgICBmb250LXdlaWdodDogNzAwO35ubDsgICAgICB3aGl0ZS1zcGFjZTogbm9ybWFsO35ubDsgICAgICB3b3JkLWJyZWFrOiBicmVhay1hbGw7fm5sOyAgICB9fm5sOyAgICAuZm9vdGVyIHt+bmw7ICAgICAgd2lkdGg6IDEwMHZ3O35ubDsgICAgICBiYWNrZ3JvdW5kOiAjMTgxYjIyZTA7fm5sOyAgICAgIGNvbG9yOiAjZmZmO35ubDsgICAgICBmb250LXNpemU6IDFlbTt+bmw7ICAgICAgdGV4dC1hbGlnbjogY2VudGVyO35ubDsgICAgICBwYWRkaW5nOiAxM3B4IDAgOHB4IDA7fm5sOyAgICAgIGRpc3BsYXk6IGZsZXg7fm5sOyAgICAgIGZsZXgtZGlyZWN0aW9uOiByb3c7fm5sOyAgICAgIGFsaWduLWl0ZW1zOiBjZW50ZXI7fm5sOyAgICAgIGp1c3RpZnktY29udGVudDogY2VudGVyO35ubDsgICAgICBwb3NpdGlvbjogZml4ZWQ7fm5sOyAgICAgIGxlZnQ6IDA7fm5sOyAgICAgIGJvdHRvbTogMDt+bmw7ICAgICAgei1pbmRleDogMjt+bmw7ICAgICAgZ2FwOiAxOHB4O35ubDsgICAgfX5ubDsgICAgLmZvb3RlciAuZm9vdGVyLXRleHQge35ubDsgICAgICBmb250LWZhbWlseTogfmFwb3M7T3JiaXRyb25+YXBvczssIEFyaWFsLCBzYW5zLXNlcmlmO35ubDsgICAgICBmb250LXNpemU6IDFlbTt+bmw7ICAgICAgZm9udC13ZWlnaHQ6IDcwMDt+bmw7ICAgICAgbGV0dGVyLXNwYWNpbmc6IDAuNXB4O35ubDsgICAgfX5ubDsgICAgLmZvb3RlciAudmlzaXRvciB7fm5sOyAgICAgIG1hcmdpbjogMCA2cHg7fm5sOyAgICAgIHZlcnRpY2FsLWFsaWduOiBtaWRkbGU7fm5sOyAgICB9fm5sOyAgICAuZm9vdGVyIC50ZWxlZ3JhbSB7fm5sOyAgICAgIG1hcmdpbi1sZWZ0OiA1cHg7fm5sOyAgICAgIGRpc3BsYXk6IGZsZXg7fm5sOyAgICAgIGFsaWduLWl0ZW1zOiBjZW50ZXI7fm5sOyAgICAgIGdhcDogM3B4O35ubDsgICAgICB0ZXh0LWRlY29yYXRpb246IG5vbmU7fm5sOyAgICAgIGNvbG9yOiAjMDBmZmZmO35ubDsgICAgICBmb250LWZhbWlseTogfmFwb3M7Um9ib3RvfmFwb3M7LCBBcmlhbCwgc2Fucy1zZXJpZjt+bmw7ICAgICAgZm9udC13ZWlnaHQ6IDcwMDt+bmw7ICAgICAgdHJhbnNpdGlvbjogY29sb3IgMC4yczt+bmw7ICAgIH1+bmw7ICAgIC5mb290ZXIgLnRlbGVncmFtOmhvdmVyIHt+bmw7ICAgICAgY29sb3I6ICMwMDc3ZmY7fm5sOyAgICB9fm5sOyAgICAuZm9vdGVyIC50ZWxlZ3JhbSBzdmcge35ubDsgICAgICB3aWR0aDogMjFweDsgaGVpZ2h0OiAyMXB4O35ubDsgICAgICB2ZXJ0aWNhbC1hbGlnbjogbWlkZGxlO35ubDsgICAgICBmaWxsOiBjdXJyZW50Q29sb3I7fm5sOyAgICB9fm5sOyAgfmx0Oy9zdHlsZX5ndDt+bmw7fmx0Oy9oZWFkfmd0O35ubDt+bHQ7Ym9keX5ndDt+bmw7ICB+bHQ7ZGl2IGlkPX5xdW90O3BhcnRpY2xlcy1qc35xdW90O35ndDt+bHQ7L2Rpdn5ndDt+bmw7ICB+bHQ7ZGl2IGNsYXNzPX5xdW90O2NvbnRhaW5lcn5xdW90O35ndDt+bmw7ICAgIH5sdDtkaXYgY2xhc3M9fnF1b3Q7dmlkZW8tc2VjdGlvbn5xdW90O35ndDt+bmw7ICAgICAgfmx0OyEtLSBEUGxheWVyIGNvbnRhaW5lciAtLX5ndDt+bmw7ICAgICAgfmx0O2RpdiBpZD1+cXVvdDtkcGxheWVyfnF1b3Q7fmd0O35sdDsvZGl2fmd0O35ubDsgICAgfmx0Oy9kaXZ+Z3Q7fm5sOyAgICB+bHQ7IS0tIENoYW5uZWwgTGlzdCAtLX5ndDt+bmw7ICAgIH5sdDtkaXYgaWQ9fnF1b3Q7Y2hhbm5lbHN+cXVvdDsgY2xhc3M9fnF1b3Q7Y2hhbm5lbC1saXN0fnF1b3Q7fmd0O35sdDsvZGl2fmd0O35ubDsgIH5sdDsvZGl2fmd0O35ubDsgIH5sdDshLS0gRm9vdGVyIC0tfmd0O35ubDsgIH5sdDtkaXYgY2xhc3M9fnF1b3Q7Zm9vdGVyfnF1b3Q7fmd0O35ubDsgICAgfmx0O3NwYW4gY2xhc3M9fnF1b3Q7Zm9vdGVyLXRleHR+cXVvdDt+Z3Q7U0FZQU4geCBPQUkgfCBBbGwgUmlnaHRzIFJlc2VydmVkfmx0Oy9zcGFufmd0O35ubDsgICAgfmx0O2ltZyBjbGFzcz1+cXVvdDt2aXNpdG9yfnF1b3Q7IHNyYz1+cXVvdDtodHRwczovL3d3dy5jb3VudGVyMTIuY29tL2ltZy05MjA1WWQzVzU0WjN5NDNaLTUuZ2lmfnF1b3Q7IGFsdD1+cXVvdDt2aXNpdG9yIGNvdW50fnF1b3Q7IC9+Z3Q7fm5sOyAgICB+bHQ7YSBjbGFzcz1+cXVvdDt0ZWxlZ3JhbX5xdW90OyBocmVmPX5xdW90O2h0dHBzOi8vdC5tZS9+cXVvdDsgdGFyZ2V0PX5xdW90O19ibGFua35xdW90OyByZWw9fnF1b3Q7bm9vcGVuZXJ+cXVvdDt+Z3Q7fm5sOyAgICAgIH5sdDtzdmcgdmlld0JveD1+cXVvdDswIDAgMjQwIDI0MH5xdW90O35ndDt+bmw7ICAgICAgICB+bHQ7Y2lyY2xlIGN4PX5xdW90OzEyMH5xdW90OyBjeT1+cXVvdDsxMjB+cXVvdDsgcj1+cXVvdDsxMjB+cXVvdDsgZmlsbD1+cXVvdDsjMDA4OGNjfnF1b3Q7L35ndDt+bmw7ICAgICAgICB+bHQ7cGF0aCBkPX5xdW90O001MiwxMjBsMTIwLTQ4YzkuNi00LjUsMTcuMSwyLjUsMTQuMiwxNmwtMjQsMTEyYy0yLjMsMTAuOC04LjYsMTMuMi0xNy40LDguM2wtNDguMS0zNS0yMy4yLDIyLjR+bmw7ICAgICAgICBjLTIuNiwyLjYtNC43LDQuNy05LjcsNC43bDMuNC00Ny43TDE2Myw4My4xYzMuNi0zLjEtMC44LTQuOC01LjUtMS43bC04OS42LDU2LjNsLTM4LjYtMTIuMX5ubDsgICAgICAgIGMtMTMuMi00LjEtMTMuNC0xMy4yLDIuNy0xOC4xTDUyLDEyMHp+cXVvdDsgZmlsbD1+cXVvdDsjZmZmfnF1b3Q7L35ndDt+bmw7ICAgICAgfmx0Oy9zdmd+Z3Q7fm5sOyAgICAgIFRlbGVncmFtfm5sOyAgICB+bHQ7L2F+Z3Q7fm5sOyAgfmx0Oy9kaXZ+Z3Q7fm5sOyAgfmx0OyEtLSBEUGxheWVyIEpTICYgSGxzLmpzIC0tfmd0O35ubDsgIH5sdDtzY3JpcHQgc3JjPX5xdW90O2h0dHBzOi8vY2RuLmpzZGVsaXZyLm5ldC9ucG0vaGxzLmpzQGxhdGVzdH5xdW90O35ndDt+bHQ7L3NjcmlwdH5ndDt+bmw7ICB+bHQ7c2NyaXB0IHNyYz1+cXVvdDtodHRwczovL2Nkbi5qc2RlbGl2ci5uZXQvbnBtL2RwbGF5ZXIvZGlzdC9EUGxheWVyLm1pbi5qc35xdW90O35ndDt+bHQ7L3NjcmlwdH5ndDt+bmw7ICB+bHQ7IS0tIE1haW4gSlMgKG1vZHVsZSkgLS1+Z3Q7fm5sOyAgfmx0O3NjcmlwdCB0eXBlPX5xdW90O21vZHVsZX5xdW90O35ndDt+bmw7ICAgIGltcG9ydCB7IGNoYW5uZWxzIH0gZnJvbSB+YXBvczsuL2RhdGEuanN+YXBvczs7fm5sO35ubDsgICAgLy8gRGVmYXVsdCBDaGFubmVsIChEaXNuZXkgQ2hhbm5lbCl+bmw7ICAgIGNvbnN0IGRlZmF1bHRDaGFubmVsID0gY2hhbm5lbHNbMF07fm5sO35ubDsgICAgLy8gRFBsYXllciBJbml0aWFsIENvbmZpZ35ubDsgICAgbGV0IGRwID0gbmV3IERQbGF5ZXIoe35ubDsgICAgICBjb250YWluZXI6IGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKH5hcG9zO2RwbGF5ZXJ+YXBvczspLH5ubDsgICAgICBsaXZlOiB0cnVlLH5ubDsgICAgICBhdXRvcGxheTogdHJ1ZSx+bmw7ICAgICAgdGhlbWU6IH5hcG9zOyMwMGZmZmZ+YXBvczssfm5sOyAgICAgIHNjcmVlbnNob3Q6IGZhbHNlLH5ubDsgICAgICBhaXJwbGF5OiB0cnVlLH5ubDsgICAgICBob3RrZXk6IHRydWUsfm5sOyAgICAgIGxvZ286IGRlZmF1bHRDaGFubmVsLmxvZ28sfm5sOyAgICAgIHZvbHVtZTogMC43LH5ubDsgICAgICBsYW5nOiB+YXBvcztlbn5hcG9zOyx+bmw7ICAgICAgcHJlbG9hZDogfmFwb3M7YXV0b35hcG9zOyx+bmw7ICAgICAgdmlkZW86IHt+bmw7ICAgICAgICB1cmw6IGRlZmF1bHRDaGFubmVsLnVybCx+bmw7ICAgICAgICB0eXBlOiB+YXBvcztjdXN0b21IbHN+YXBvczssfm5sOyAgICAgICAgY3VzdG9tVHlwZToge35ubDsgICAgICAgICAgY3VzdG9tSGxzOiBmdW5jdGlvbiAodmlkZW8sIHBsYXllcikge35ubDsgICAgICAgICAgICBpZiAoSGxzLmlzU3VwcG9ydGVkKCkpIHt+bmw7ICAgICAgICAgICAgICB2YXIgaGxzID0gbmV3IEhscygpO35ubDsgICAgICAgICAgICAgIGhscy5sb2FkU291cmNlKHZpZGVvLnNyYyk7fm5sOyAgICAgICAgICAgICAgaGxzLmF0dGFjaE1lZGlhKHZpZGVvKTt+bmw7ICAgICAgICAgICAgfSBlbHNlIGlmICh2aWRlby5jYW5QbGF5VHlwZSh+YXBvczthcHBsaWNhdGlvbi92bmQuYXBwbGUubXBlZ3VybH5hcG9zOykpIHt+bmw7ICAgICAgICAgICAgICB2aWRlby5zcmMgPSB2aWRlby5zcmM7fm5sOyAgICAgICAgICAgIH1+bmw7ICAgICAgICAgIH1+bmw7ICAgICAgICB9LH5ubDsgICAgICAgIHBpYzogZGVmYXVsdENoYW5uZWwubG9nb35ubDsgICAgICB9LH5ubDsgICAgICBjb250ZXh0bWVudTogW35ubDsgICAgICAgIHt+bmw7ICAgICAgICAgIHRleHQ6IH5hcG9zO1NheWFuIFRWfmFwb3M7LH5ubDsgICAgICAgICAgbGluazogfmFwb3M7aHR0cHM6Ly90Lm1lL35hcG9zO35ubDsgICAgICAgIH1+bmw7ICAgICAgXX5ubDsgICAgfSk7fm5sO35ubDsgICAgLy8gQ2hhbm5lbCBDYXJkcyBSZW5kZXJ+bmw7ICAgIGNvbnN0IGNoYW5uZWxzRGl2ID0gZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQofmFwb3M7Y2hhbm5lbHN+YXBvczspO35ubDsgICAgY2hhbm5lbHMuZm9yRWFjaCgoY2gsIGlkeCkgPX5ndDsge35ubDsgICAgICBjb25zdCBjYXJkID0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudCh+YXBvcztkaXZ+YXBvczspO35ubDsgICAgICBjYXJkLmNsYXNzTmFtZSA9IH5hcG9zO2NoYW5uZWwtY2FyZH5hcG9zOzt+bmw7ICAgICAgY2FyZC5pbm5lckhUTUwgPSBgfm5sOyAgICAgICAgfmx0O2ltZyBjbGFzcz1+cXVvdDtjaGFubmVsLWxvZ29+cXVvdDsgc3JjPX5xdW90OyR7Y2gubG9nb31+cXVvdDsgYWx0PX5xdW90OyR7Y2gubmFtZX1+cXVvdDsgL35ndDt+bmw7ICAgICAgICB+bHQ7ZGl2IGNsYXNzPX5xdW90O2NoYW5uZWwtbmFtZX5xdW90O35ndDske2NoLm5hbWV9fmx0Oy9kaXZ+Z3Q7fm5sOyAgICAgIGA7fm5sOyAgICAgIGNhcmQuYWRkRXZlbnRMaXN0ZW5lcih+YXBvcztjbGlja35hcG9zOywgKCkgPX5ndDsge35ubDsgICAgICAgIC8vIENsaWNrIGFuaW1hdGlvbn5ubDsgICAgICAgIGNhcmQuY2xhc3NMaXN0LmFkZCh+YXBvcztjbGlja2VkfmFwb3M7KTt+bmw7ICAgICAgICBzZXRUaW1lb3V0KCgpID1+Z3Q7IGNhcmQuY2xhc3NMaXN0LnJlbW92ZSh+YXBvcztjbGlja2VkfmFwb3M7KSwgNDAwKTt+bmw7fm5sOyAgICAgICAgLy8gQ2hhbmdlIERQbGF5ZXJ+YXBvcztzIHZpZGVvfm5sOyAgICAgICAgZHAuc3dpdGNoVmlkZW8oe35ubDsgICAgICAgICAgdXJsOiBjaC51cmwsfm5sOyAgICAgICAgICB0eXBlOiB+YXBvcztjdXN0b21IbHN+YXBvczssfm5sOyAgICAgICAgICBwaWM6IGNoLmxvZ29+bmw7ICAgICAgICB9KTt+bmw7ICAgICAgICBkcC5vcHRpb25zLmxvZ28gPSBjaC5sb2dvO35ubDsgICAgICAgIGRwLnBsYXkoKTt+bmw7ICAgICAgfSk7fm5sOyAgICAgIGNoYW5uZWxzRGl2LmFwcGVuZENoaWxkKGNhcmQpO35ubDsgICAgfSk7fm5sO35ubDsgICAgLy8gUGFydGljbGVzLmpzIEJhY2tncm91bmQgQ29uZmlnfm5sOyAgICBwYXJ0aWNsZXNKUyh+cXVvdDtwYXJ0aWNsZXMtanN+cXVvdDssIHt+bmw7ICAgICAgfnF1b3Q7cGFydGljbGVzfnF1b3Q7OiB7fm5sOyAgICAgICAgfnF1b3Q7bnVtYmVyfnF1b3Q7OiB7IH5xdW90O3ZhbHVlfnF1b3Q7OiA4NSwgfnF1b3Q7ZGVuc2l0eX5xdW90OzogeyB+cXVvdDtlbmFibGV+cXVvdDs6IHRydWUsIH5xdW90O3ZhbHVlX2FyZWF+cXVvdDs6IDg1MCB9IH0sfm5sOyAgICAgICAgfnF1b3Q7Y29sb3J+cXVvdDs6IHsgfnF1b3Q7dmFsdWV+cXVvdDs6IFt+cXVvdDsjMDBmZmZmfnF1b3Q7LH5xdW90OyNmZjAwY2N+cXVvdDssfnF1b3Q7I2ZmZWIzYn5xdW90Oyx+cXVvdDsjZmY1NzIyfnF1b3Q7LH5xdW90OyMwMGU2NzZ+cXVvdDssfnF1b3Q7IzI5NzlmZn5xdW90O10gfSx+bmw7ICAgICAgICB+cXVvdDtzaGFwZX5xdW90OzogeyB+cXVvdDt0eXBlfnF1b3Q7OiB+cXVvdDtjaXJjbGV+cXVvdDsgfSx+bmw7ICAgICAgICB+cXVvdDtvcGFjaXR5fnF1b3Q7OiB7IH5xdW90O3ZhbHVlfnF1b3Q7OiAwLjY1LCB+cXVvdDtyYW5kb21+cXVvdDs6IHRydWUgfSx+bmw7ICAgICAgICB+cXVvdDtzaXplfnF1b3Q7OiB7IH5xdW90O3ZhbHVlfnF1b3Q7OiA3LCB+cXVvdDtyYW5kb21+cXVvdDs6IHRydWUgfSx+bmw7ICAgICAgICB+cXVvdDtsaW5lX2xpbmtlZH5xdW90OzogeyB+cXVvdDtlbmFibGV+cXVvdDs6IGZhbHNlIH0sfm5sOyAgICAgICAgfnF1b3Q7bW92ZX5xdW90OzogeyB+cXVvdDtlbmFibGV+cXVvdDs6IHRydWUsIH5xdW90O3NwZWVkfnF1b3Q7OiAyLjUsIH5xdW90O3JhbmRvbX5xdW90OzogdHJ1ZSwgfnF1b3Q7b3V0X21vZGV+cXVvdDs6IH5xdW90O291dH5xdW90OyB9fm5sOyAgICAgIH0sfm5sOyAgICAgIH5xdW90O2ludGVyYWN0aXZpdHl+cXVvdDs6IHt+bmw7ICAgICAgICB+cXVvdDtkZXRlY3Rfb25+cXVvdDs6IH5xdW90O2NhbnZhc35xdW90Oyx+bmw7ICAgICAgICB+cXVvdDtldmVudHN+cXVvdDs6IHt+bmw7ICAgICAgICAgIH5xdW90O29uaG92ZXJ+cXVvdDs6IHsgfnF1b3Q7ZW5hYmxlfnF1b3Q7OiB0cnVlLCB+cXVvdDttb2RlfnF1b3Q7OiB+cXVvdDtyZXB1bHNlfnF1b3Q7IH0sfm5sOyAgICAgICAgICB+cXVvdDtvbmNsaWNrfnF1b3Q7OiB7IH5xdW90O2VuYWJsZX5xdW90OzogdHJ1ZSwgfnF1b3Q7bW9kZX5xdW90OzogfnF1b3Q7cHVzaH5xdW90OyB9fm5sOyAgICAgICAgfSx+bmw7ICAgICAgICB+cXVvdDttb2Rlc35xdW90Ozoge35ubDsgICAgICAgICAgfnF1b3Q7cmVwdWxzZX5xdW90OzogeyB+cXVvdDtkaXN0YW5jZX5xdW90OzogODUsIH5xdW90O2R1cmF0aW9ufnF1b3Q7OiAwLjQgfSx+bmw7ICAgICAgICAgIH5xdW90O3B1c2h+cXVvdDs6IHsgfnF1b3Q7cGFydGljbGVzX25ifnF1b3Q7OiAzIH1+bmw7ICAgICAgICB9fm5sOyAgICAgIH0sfm5sOyAgICAgIH5xdW90O3JldGluYV9kZXRlY3R+cXVvdDs6IHRydWV+bmw7ICAgIH0pO35ubDsgIH5sdDsvc2NyaXB0fmd0O35ubDt+bHQ7L2JvZHl+Z3Q7fm5sOyAgICAgICAgICB+bHQ7L2h0bWx+Z3Q7fm5sOyAg";
-      code = atob(code);
-      code = code.replace(/~lt;/g, '<')
-                .replace(/~gt;/g, '>')
-                .replace(/~nl;/g, '\n')
-                .replace(/~quot;/g, '"')
-                .replace(/~apos;/g, "'");
-      document.open();
-      document.write(code);
-      document.close();
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CRICKET NEWS POINT</title>
+
+  <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg: #0a0a0a;
+      --panel: #111;
+      --muted: #bbb;
+      --accent-start: #00a4ff;
+      --accent-end: #7a5cff;
+      --white: #eaeaea;
+      --black: #000;
     }
-  </script>
+
+    html,body{
+      height:100%;
+      margin:0;
+      background:var(--bg);
+      color:var(--white);
+      font-family:Inter, system-ui, Arial, Helvetica, sans-serif;
+    }
+
+    header{
+      position:fixed;
+      top:0;
+      left:0;
+      right:0;
+      height:70px;
+      display:flex;
+      align-items:center;
+      justify-content:center; /* ✅ logo center */
+      background: rgba(10,10,10,0.95);
+      border-bottom:1px solid rgba(255,255,255,0.04);
+      z-index:20;
+      padding:0 12px;
+    }
+
+    header img{ height:85%; }
+
+    .menu-icon{
+      cursor:pointer;
+      font-size:28px;
+      position:absolute;   /* ✅ menu always left */
+      left:12px;
+    }
+
+    .main-wrapper{ margin-top:70px; }
+
+    .video-container{
+      width:100vw;
+      aspect-ratio:16/9;
+      background:#000;
+    }
+    /* NOTE: iframe inside will be inserted dynamically */
+    .video-container iframe{ width:100%; height:100%; border:0; display:block; }
+
+    .tabs{
+      display:flex;
+      justify-content:space-around;
+      background:var(--panel);
+      border-top:1px solid rgba(255,255,255,0.04);
+      border-bottom:1px solid rgba(255,255,255,0.04);
+    }
+    .tab-button{
+      flex:1;
+      padding:14px 0;
+      color:var(--muted);
+      background:none;
+      border:0;
+      font-size:15px;
+      cursor:pointer;
+    }
+    .tab-button.active{ color:#1db954; font-weight:700; }
+
+    .tab-content{ display:none; }
+    .tab-content.active{ display:block; }
+    .tab-content iframe{ width:100%; height:600px; border:0; }
+
+    /* Sidebar */
+    .sidebar{
+      position:fixed;
+      top:0; left:-260px;
+      width:240px; height:100%;
+      background:#0f0f0f;
+      padding-top:70px;
+      transition:left .28s ease;
+      z-index:18;
+      border-right:1px solid rgba(255,255,255,0.03);
+    }
+    .sidebar.open{ left:0; }
+    .sidebar a{
+      display:block; padding:12px 18px;
+      color:#fff; text-decoration:none;
+      border-bottom:1px solid rgba(255,255,255,0.03);
+      font-size:15px;
+    }
+    .menu-header{ font-size:18px; font-weight:700; text-align:center; padding:12px 0; color:#fff; }
+
+    .overlay{ position:fixed; top:0; left:0; width:100%; height:100%; z-index:17; display:none; }
+    .overlay.show{ display:block; }
+
+    .visitor-box{ display:none; padding:12px; text-align:center; border-top:1px solid rgba(255,255,255,0.04); }
+    .visitor-box img{ width:120px; }
+
+    /* Popup overlay & animated background */
+    .popup-overlay {
+      position:fixed;
+      inset:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      z-index:1000;
+      background:rgba(0,0,0,0.85);
+      overflow:hidden;
+    }
+    .popup-overlay::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(1200px 600px at 10% 20%, rgba(20,20,20,0.9), transparent 20%),
+        radial-gradient(900px 500px at 80% 80%, rgba(30,30,30,0.9), transparent 25%),
+        linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.95));
+      z-index:0;
+      animation: bgMove 12s linear infinite;
+    }
+    @keyframes bgMove{
+      0% { transform: translate3d(0,0,0) scale(1); }
+      50% { transform: translate3d(-6%,4%,0) scale(1.02); filter: blur(.4px); }
+      100% { transform: translate3d(0,0,0) scale(1); }
+    }
+
+    .popup-box{
+      position:relative;
+      z-index:2;
+      width:min(520px, 94%);
+      background: linear-gradient(180deg, rgba(30,30,30,0.98), rgba(22,22,22,0.98));
+      border-radius:14px;
+      padding:28px;
+      text-align:center;
+      box-shadow:0 20px 60px rgba(0,0,0,0.7);
+      border:1px solid rgba(255,255,255,0.03);
+      transform-origin:center;
+      animation: popupIn .26s ease;
+    }
+    @keyframes popupIn{
+      from{ transform: translateY(-14px) scale(.98); opacity:0; }
+      to{ transform: translateY(0) scale(1); opacity:1; }
+    }
+
+    .popup-header{ font-size:22px; font-weight:800; margin:0 0 8px; color:#fff; }
+    .popup-subtitle{ margin:0 0 18px; color:var(--muted); font-size:15px; }
+
+    .popup-actions{
+      display:flex;
+      gap:12px;
+      justify-content:center;
+      margin-top:6px;
+    }
+
+    .popup-btn{
+      flex:0 0 48%;
+      padding:12px 14px;
+      border-radius:8px;
+      border:0;
+      font-size:15px;
+      font-weight:700;
+      cursor:pointer;
+      color:#fff;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      text-decoration:none;
+      user-select:none;
+    }
+    .popup-btn:active{ transform:scale(.99); }
+
+    .already-btn{
+      background: var(--black);
+      color:#fff;
+      border:1px solid rgba(255,255,255,0.03);
+    }
+
+    .join-btn{
+      background: linear-gradient(90deg, var(--accent-start), var(--accent-end));
+      color:#fff;
+      text-decoration:none;
+      border:0;
+    }
+
+    .popup-note{ margin-top:12px; font-size:13px; color:#c9c9c9; }
+
+    body.no-scroll{ overflow:hidden; }
+
+    @media (max-width:420px){
+      .popup-box{ padding:18px; border-radius:12px; }
+      .popup-header{ font-size:18px; }
+      .popup-subtitle{ font-size:13px; }
+      .popup-btn{ font-size:14px; padding:10px; }
+    }
+
+    /* Simple error message style for video area */
+    .video-error {
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      height:100%;
+      color:var(--muted);
+      font-size:16px;
+      padding:12px;
+      text-align:center;
+    }
+  </style>
 </head>
-<body onload="decodeHtml()">
-  Loading...
+<body>
+  <!-- Popup overlay -->
+  <div class="popup-overlay" id="popupOverlay" aria-hidden="true" role="dialog" style="display:none;">
+    <div class="popup-box" role="document" aria-labelledby="popupTitle" aria-describedby="popupDesc">
+      <div class="popup-header" id="popupTitle">Support Us</div>
+      <div class="popup-subtitle" id="popupDesc">Join our WhatsApp Channel to support the stream</div>
+
+      <div class="popup-actions" role="group" aria-label="popup actions">
+        <button class="popup-btn already-btn" id="alreadyBtn" aria-pressed="false">Already Joined</button>
+        <a id="joinLink" class="popup-btn join-btn" href="https://whatsapp.com/channel/0029VaeylYYBPzjVNomWuZ0T" target="_blank" rel="noopener noreferrer">Join Now</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main content -->
+  <header>
+    <span class="material-icons menu-icon" onclick="toggleSidebar()">menu</span>
+    <img src="https://files.catbox.moe/g2tdt0.jpeg" alt="Logo">
+  </header>
+
+  <div id="mainContent" class="main-wrapper" aria-hidden="true">
+    <div class="video-container" id="videoContainer">
+      <!-- The iframe will be injected here dynamically based on ?id= -->
+      <!-- Static src removed as requested -->
+      <div class="video-error" id="videoPlaceholder">Loading stream...</div>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar" aria-hidden="true">
+      <div class="menu-header">MENU</div>
+      <a href="https://whatsapp.com/channel/0029VaeylYYBPzjVNomWuZ0T" target="_blank">Join WhatsApp</a>
+      <a href="https://www.instagram.com/sonu__7xyz?" target="_blank">Contact Us</a>
+      <a href="https://sayan-mete.onrender.com/copyright" target="_blank">Copyright</a>
+      <a href="javascript:void(0)" onclick="toggleVisitor()">Visitor Count</a>
+      <div class="visitor-box" id="visitorBox">
+        <img src="https://www.counter12.com/img-9205Yd3W54Z3y43Z-5.gif" alt="Visitor Count" />
+      </div>
+    </div>
+
+    <div class="tabs" role="tablist">
+      <button class="tab-button active" onclick="switchTab('scoreboard')" aria-selected="true"><span class="material-icons">leaderboard</span></button>
+      <button class="tab-button" onclick="switchTab('highlights')" aria-selected="false"><span class="material-icons">movie</span></button>
+    </div>
+
+    <div id="scoreboard" class="tab-content active">
+      <iframe src="https://alpha-server-zero.vercel.app" title="Scoreboard"></iframe>
+    </div>
+
+    <div id="highlights" class="tab-content">
+      <iframe src="https://ads-cnp.vercel.app/" title="Highlights"></iframe>
+    </div>
+  </div>
+
+  <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
+
+  <script>
+    // CONFIG: update this URL to point to your hosted id.json when ready
+    const ID_JSON_URL = 'https://raw.githubusercontent.com/Cricketstan/Allrounder-/refs/heads/main/id.json';
+
+    // Sample fallback data (used if fetch fails). Each item should have: id, name, iframeSrc
+    const sampleData = {
+      "iframes": [
+        {
+          "id": "match1",
+          "name": "Match 1 - Live",
+          "iframeSrc": "https://cricketstan.github.io/Y/"
+        },
+        {
+          "id": "match2",
+          "name": "Match 2 - Live",
+          "iframeSrc": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+        },
+        {
+          "id": "match3",
+          "name": "Match 3 - Live",
+          "iframeSrc": "https://player.vimeo.com/video/76979871"
+        }
+      ]
+    };
+
+    function toggleSidebar(){
+      document.getElementById('sidebar').classList.toggle('open');
+      document.getElementById('overlay').classList.toggle('show');
+    }
+
+    function toggleVisitor(){
+      const vb = document.getElementById('visitorBox');
+      vb.style.display = (vb.style.display === 'block') ? 'none' : 'block';
+    }
+
+    function switchTab(tabId){
+      document.querySelectorAll('.tab-button').forEach(b=>b.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));
+      const btn = Array.from(document.querySelectorAll('.tab-button')).find(x => x.getAttribute('onclick')?.includes(tabId));
+      if(btn) btn.classList.add('active');
+      const content = document.getElementById(tabId);
+      if(content) content.classList.add('active');
+    }
+
+    // Render the video iframe into the .video-container element
+    function renderVideoIframe(iframeSrc, title) {
+      const container = document.getElementById('videoContainer');
+      container.innerHTML = ''; // clear placeholder / existing
+      const iframe = document.createElement('iframe');
+      iframe.src = iframeSrc;
+      iframe.allow = "autoplay; encrypted-media; fullscreen";
+      iframe.allowFullscreen = true;
+      iframe.setAttribute('title', title || 'Live Stream');
+      iframe.style.width = '100%';
+      iframe.style.height = '100%';
+      iframe.style.border = '0';
+      container.appendChild(iframe);
+    }
+
+    function renderVideoError(message) {
+      const container = document.getElementById('videoContainer');
+      container.innerHTML = `<div class="video-error">${message}</div>`;
+    }
+
+    // Initialize: fetch JSON, read ?id=, set iframe
+    async function initializeStreams() {
+      // Parse ?id=
+      const urlParams = new URLSearchParams(window.location.search);
+      const streamId = urlParams.get('id');
+
+      // Try fetching remote id.json; fallback to sampleData
+      let data = null;
+      try {
+        const res = await fetch(ID_JSON_URL, { cache: 'no-store' });
+        if (!res.ok) throw new Error('Failed to fetch id.json');
+        data = await res.json();
+      } catch (err) {
+        // fallback
+        data = sampleData;
+        console.warn('Using fallback sampleData for streams because fetch failed or was unavailable.', err);
+      }
+
+      if (!data || !Array.isArray(data.iframes)) {
+        renderVideoError('Stream data is not available.');
+        return;
+      }
+
+      if (streamId) {
+        // Find the matching stream
+        const streamData = data.iframes.find(item => String(item.id) === String(streamId));
+        if (streamData && streamData.iframeSrc) {
+          document.title = streamData.name || 'CRICKET NEWS POINT';
+          renderVideoIframe(streamData.iframeSrc, streamData.name || 'Live Stream');
+        } else {
+          renderVideoError('Stream not found for the provided id.');
+        }
+      } else {
+        // No id provided — show friendly message and do not auto-load any stream
+        renderVideoError('No stream selected. Append ?id=your_stream_id to the URL to load a stream.');
+      }
+    }
+
+    // Popup logic (unchanged)
+    document.addEventListener('DOMContentLoaded', function(){
+      const popup = document.getElementById('popupOverlay');
+      const alreadyBtn = document.getElementById('alreadyBtn');
+      const joinLink = document.getElementById('joinLink');
+      const mainContent = document.getElementById('mainContent');
+
+      function showPopup(){
+        popup.style.display = 'flex';
+        popup.setAttribute('aria-hidden', 'false');
+        document.documentElement.classList.add('no-scroll');
+        document.body.classList.add('no-scroll');
+        if (mainContent) mainContent.setAttribute('aria-hidden', 'true');
+      }
+
+      function closePopup(){
+        popup.style.display = 'none';
+        popup.setAttribute('aria-hidden', 'true');
+        document.documentElement.classList.remove('no-scroll');
+        document.body.classList.remove('no-scroll');
+        if (mainContent) mainContent.setAttribute('aria-hidden', 'false');
+      }
+
+      // Always show popup on every visit (keeps original behavior)
+      showPopup();
+
+      alreadyBtn.addEventListener('click', function(){
+        closePopup();
+      });
+
+      joinLink.addEventListener('click', function(){
+        joinLink.animate([{ transform:'translateY(0)' }, { transform:'translateY(-3px)' }, { transform:'translateY(0)' }], { duration:160 });
+      });
+
+      window.addEventListener('keydown', function(e){
+        if (e.key === 'Escape') e.preventDefault();
+      });
+
+      // Initialize streams after DOM ready
+      initializeStreams();
+    });
+  </script>
 </body>
-</html>
+  </html>

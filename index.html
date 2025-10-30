@@ -12,12 +12,13 @@
 <style>
 :root {
     --bg-color: #121212;
-    --primary-red: #e50914; 
-    --primary-red-dark: #b91c1c;
+    --primary-blue: #4169E1; /* Royal Blue */
+    --primary-blue-dark: #27408B;
     --card-bg: #1e1e1e;
     --text-light: #f1f5f9;
     --text-muted: #94a3b8;
     --border-color: #2d2d2d;
+    --primary-red: #e50914; /* শুধু LIVE ব্যাজে ব্যবহৃত হবে */
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -55,6 +56,7 @@ body {
 }
 .stream-header h1 { font-size: 1.25rem; font-weight: 600; }
 
+/* LIVE ব্যাজের জন্য আগের লাল রংই থাকবে */
 .live-badge {
     background-color: var(--primary-red);
     color: white;
@@ -110,7 +112,7 @@ body {
     width: 100%;
     padding: 0.8rem 1rem;
     border-radius: 8px;
-    background: linear-gradient(90deg, var(--primary-red), var(--primary-red-dark));
+    background: linear-gradient(90deg, var(--primary-blue), var(--primary-blue-dark));
     color: white;
     font-weight: 600;
     text-decoration: none;
@@ -120,7 +122,7 @@ body {
 }
 .action-button:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 15px rgba(229, 9, 20, 0.4);
+    box-shadow: 0 6px 15px rgba(65, 105, 225, 0.4);
 }
 .action-button.copied { background: linear-gradient(90deg, #22c55e, #4ade80); }
 
@@ -144,9 +146,9 @@ body {
     border: 1px solid var(--border-color);
     border-radius: 12px;
 }
-.error-message h2 { color: var(--primary-red); font-size: 1.5rem; margin-bottom: 0.5rem; }
+.error-message h2 { color: var(--primary-blue); font-size: 1.5rem; margin-bottom: 0.5rem; }
 
-/* IMPROVED TELEGRAM POPUP */
+/* Telegram Popup -> এখন Blue theme */
 .telegram-popup {
     position: fixed;
     top: 50%; left: 50%;
@@ -155,8 +157,8 @@ body {
     color: var(--text-light);
     padding: 35px 25px;
     border-radius: 18px;
-    border: 1px solid rgba(229,9,20,0.4);
-    box-shadow: 0 0 25px rgba(229,9,20,0.5);
+    border: 1px solid rgba(65,105,225,0.4);
+    box-shadow: 0 0 25px rgba(65,105,225,0.5);
     z-index: 10000;
     text-align: center;
     width: 90%;
@@ -172,11 +174,11 @@ body {
 
 .telegram-popup h2 {
     margin-top: 0;
-    color: var(--primary-red);
+    color: var(--primary-blue);
     font-size: 1.7rem;
     font-weight: 700;
     margin-bottom: 0.75rem;
-    text-shadow: 0 0 10px rgba(229,9,20,0.4);
+    text-shadow: 0 0 10px rgba(65,105,225,0.4);
 }
 
 .telegram-popup p {
@@ -199,13 +201,13 @@ body {
 }
 
 .telegram-popup .join-btn {
-    background: linear-gradient(90deg, var(--primary-red), var(--primary-red-dark));
+    background: linear-gradient(90deg, var(--primary-blue), var(--primary-blue-dark));
     color: white;
-    box-shadow: 0 0 10px rgba(229,9,20,0.4);
+    box-shadow: 0 0 10px rgba(65,105,225,0.4);
 }
 .telegram-popup .join-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 0 20px rgba(229,9,20,0.7);
+    box-shadow: 0 0 20px rgba(65,105,225,0.7);
 }
 
 .telegram-popup .joined-btn {
@@ -217,6 +219,34 @@ body {
     background-color: #333;
 }
 
+/* ভিজিটর কাউন্টার বাটন */
+.visitor-dot {
+    position: fixed;
+    bottom: 20px;
+    right: 25px;
+    width: 20px;
+    height: 20px;
+    background-color: var(--primary-blue);
+    border-radius: 50%;
+    box-shadow: 0 0 15px rgba(65,105,225,0.7);
+    cursor: pointer;
+    z-index: 9999;
+}
+.visitor-popup {
+    display: none;
+    position: fixed;
+    bottom: 60px;
+    right: 20px;
+    background-color: #1c1c1c;
+    border: 1px solid rgba(65,105,225,0.5);
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(65,105,225,0.5);
+}
+.visitor-popup img {
+    width: 150px;
+    height: auto;
+}
 @media (max-width: 480px) {
     .telegram-popup {
         padding: 28px 20px;
@@ -235,11 +265,17 @@ body {
 
 <div class="telegram-popup" id="telegramPopup">
     <h2><i class="fa-brands fa-telegram"></i> Support Us!</h2>
-    <p>Join our WhatsApp Channel<strong>CRICKET NEWS POINT</strong> </p>
+    <p>Join our WhatsApp Channel <strong>CRICKET NEWS POINT</strong></p>
     <a href="https://whatsapp.com/channel/0029VaeylYYBPzjVNomWuZ0T" target="_blank" rel="noopener">
         <button class="join-btn">Join Now</button>
     </a>
     <button class="joined-btn" onclick="closePopup()">Already Joined</button>
+</div>
+
+<!-- Visitor Dot -->
+<div class="visitor-dot" id="visitorDot"></div>
+<div class="visitor-popup" id="visitorPopup">
+    <img src="https://counter1.optistats.ovh/private/freecounterstat.php?c=5ggh91rsudsf178p2fp3f6r7e4jmw8jj" alt="Visitor Counter">
 </div>
 
 <script>
@@ -279,7 +315,7 @@ function renderIframeUI(data) {
         <div class="info-card">
             <h2><i class="fa-solid fa-bell"></i> Follow us for Updates!</h2>
             <a href="https://whatsapp.com/channel/0029VaeylYYBPzjVNomWuZ0T" target="_blank" rel="noopener" class="action-button">
-                <i class="fa-brands fa-telegram"></i> Click Here To Join WhatsApp 
+                <i class="fa-brands fa-whatsapp"></i> Click Here To Join WhatsApp 
             </a>
         </div>
         <div class="info-card">
@@ -323,9 +359,13 @@ function closePopup() {
     popup.style.opacity = '0';
     popup.style.transform = 'translate(-50%, -48%) scale(0.95)';
     setTimeout(() => popup.style.display = 'none', 300);
-    
-    // https://www.counter12.com/img-9205Yd3W54Z3y43Z-5.gif
 }
+
+/* ভিজিটর কাউন্টার */
+document.getElementById('visitorDot').addEventListener('click', () => {
+    const popup = document.getElementById('visitorPopup');
+    popup.style.display = popup.style.display === 'block' ? 'none' : 'block';
+});
 
 document.addEventListener("DOMContentLoaded", initializeApp);
 </script>

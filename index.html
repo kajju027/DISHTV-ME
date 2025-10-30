@@ -18,7 +18,6 @@
     --text-light: #f1f5f9;
     --text-muted: #94a3b8;
     --border-color: #2d2d2d;
-    --blue-glow: #00b7ff;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -27,12 +26,10 @@ body {
     background-color: var(--bg-color);
     color: var(--text-light);
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    justify-content: center;
+    align-items: flex-start;
     min-height: 100vh;
     padding: 1rem;
-    position: relative;
-    overflow-x: hidden;
 }
 
 .container {
@@ -149,7 +146,7 @@ body {
 }
 .error-message h2 { color: var(--primary-red); font-size: 1.5rem; margin-bottom: 0.5rem; }
 
-/* Telegram Popup */
+/* IMPROVED TELEGRAM POPUP */
 .telegram-popup {
     position: fixed;
     top: 50%; left: 50%;
@@ -173,40 +170,60 @@ body {
     to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
 }
 
-/* Footer */
-.footer {
-    text-align: center;
-    color: var(--text-muted);
-    font-size: 0.9rem;
-    padding: 1.5rem 0;
-    margin-top: 2rem;
-    border-top: 1px solid var(--border-color);
+.telegram-popup h2 {
+    margin-top: 0;
+    color: var(--primary-red);
+    font-size: 1.7rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    text-shadow: 0 0 10px rgba(229,9,20,0.4);
 }
-.footer a { color: var(--text-muted); text-decoration: none; }
-.footer a:hover { text-decoration: underline; }
 
-/* Blue glowing tiny corner light */
-.corner-light {
-    position: fixed;
-    bottom: 10px;
-    right: 10px;
-    width: 10px;
-    height: 10px;
-    background-color: var(--blue-glow);
-    border-radius: 50%;
-    box-shadow: 0 0 15px rgba(0, 183, 255, 0.7);
-    animation: softGlow 3s ease-in-out infinite;
+.telegram-popup p {
+    font-size: 1rem;
+    color: var(--text-muted);
+    margin-bottom: 1.75rem;
+    line-height: 1.5;
+}
+
+.telegram-popup button {
+    width: 100%;
+    padding: 14px;
+    margin-top: 10px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 10px;
     cursor: pointer;
-    z-index: 9999;
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    font-weight: 600;
+    transition: all 0.25s ease;
 }
-@keyframes softGlow {
-    0%, 100% { opacity: 0.7; box-shadow: 0 0 8px rgba(0,183,255,0.4); }
-    50% { opacity: 1; box-shadow: 0 0 15px rgba(0,183,255,0.8); }
+
+.telegram-popup .join-btn {
+    background: linear-gradient(90deg, var(--primary-red), var(--primary-red-dark));
+    color: white;
+    box-shadow: 0 0 10px rgba(229,9,20,0.4);
 }
-.corner-light.clicked {
-    transform: scale(1.8);
-    box-shadow: 0 0 25px rgba(0,183,255,1);
+.telegram-popup .join-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 20px rgba(229,9,20,0.7);
+}
+
+.telegram-popup .joined-btn {
+    background-color: #2b2b2b;
+    color: var(--text-light);
+    border: 1px solid var(--border-color);
+}
+.telegram-popup .joined-btn:hover {
+    background-color: #333;
+}
+
+@media (max-width: 480px) {
+    .telegram-popup {
+        padding: 28px 20px;
+        max-width: 90%;
+    }
+    .telegram-popup h2 { font-size: 1.45rem; }
+    .telegram-popup p { font-size: 0.9rem; }
 }
 </style>
 </head>
@@ -216,23 +233,9 @@ body {
     <div id="stream-content"></div>
 </main>
 
-<!-- Blue corner light -->
-<div class="corner-light" id="cornerLight"></div>
-
-<!-- Footer with visitor counter -->
-<footer class="footer">
-    <p>SAYAN OAI | ALL RIGHTS RESERVED</p>
-    <div class="counter">
-        <script type="text/javascript" src="https://www.counters-free.net/count/iufm"></script><br>
-        <a href='https://www.free-counters.org/'>Free Hit Counter</a> 
-        <script type='text/javascript' src='https://www.whomania.com/ctr?id=2cf07b4078029f39a13b7e32039c8484f53751a7'></script>
-    </div>
-</footer>
-
-<!-- Telegram Popup -->
 <div class="telegram-popup" id="telegramPopup">
     <h2><i class="fa-brands fa-telegram"></i> Support Us!</h2>
-    <p>Join our WhatsApp Channel <strong>CRICKET NEWS POINT</strong></p>
+    <p>Join our WhatsApp Channel<strong>CRICKET NEWS POINT</strong> </p>
     <a href="https://whatsapp.com/channel/0029VaeylYYBPzjVNomWuZ0T" target="_blank" rel="noopener">
         <button class="join-btn">Join Now</button>
     </a>
@@ -320,14 +323,9 @@ function closePopup() {
     popup.style.opacity = '0';
     popup.style.transform = 'translate(-50%, -48%) scale(0.95)';
     setTimeout(() => popup.style.display = 'none', 300);
+    
+    // https://www.counter12.com/img-9205Yd3W54Z3y43Z-5.gif
 }
-
-/* Blue corner light click animation */
-document.getElementById('cornerLight').addEventListener('click', function() {
-    const light = this;
-    light.classList.add('clicked');
-    setTimeout(() => light.classList.remove('clicked'), 400);
-});
 
 document.addEventListener("DOMContentLoaded", initializeApp);
 </script>

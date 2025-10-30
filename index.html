@@ -2,25 +2,27 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, maximum-scale=1.0, user-scalable=no">
-<title>CRICKET NEWS POINT</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>PRIME 𝗟𝗜𝗡𝗞𝗦 ™</title>
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/shaka-player@4.3.4/dist/controls.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 <style>
 :root {
     --bg-color: #121212;
-    --primary-blue: #4169E1; /* Royal Blue */
-    --primary-blue-dark: #27408B;
+    --primary-blue: #00b4d8;
+    --primary-blue-dark: #0077b6;
     --card-bg: #1e1e1e;
     --text-light: #f1f5f9;
     --text-muted: #94a3b8;
     --border-color: #2d2d2d;
-    --primary-red: #e50914; /* শুধু LIVE ব্যাজে ব্যবহৃত হবে */
+    --popup-bg: #282828;
+    --popup-shadow-color: rgba(0, 180, 216, 0.4);
 }
-
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body {
     font-family: 'Poppins', sans-serif;
@@ -32,18 +34,14 @@ body {
     min-height: 100vh;
     padding: 1rem;
 }
-
 .container {
     width: 100%;
     max-width: 800px;
     opacity: 0;
     transform: translateY(20px);
-    animation: fadeIn 0.6s ease-out forwards;
+    animation: fadeIn 0.5s ease-out forwards;
 }
-@keyframes fadeIn {
-    to { opacity: 1; transform: translateY(0); }
-}
-
+@keyframes fadeIn { to { opacity: 1; transform: translateY(0); } }
 .stream-header {
     background-color: var(--card-bg);
     border: 1px solid var(--border-color);
@@ -55,10 +53,8 @@ body {
     margin-bottom: 1rem;
 }
 .stream-header h1 { font-size: 1.25rem; font-weight: 600; }
-
-/* LIVE ব্যাজের জন্য আগের লাল রংই থাকবে */
 .live-badge {
-    background-color: var(--primary-red);
+    background-color: var(--primary-blue);
     color: white;
     padding: 0.25rem 0.75rem;
     border-radius: 20px;
@@ -70,21 +66,19 @@ body {
     animation: pulse 1.5s infinite;
 }
 @keyframes pulse {
-    0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(229, 9, 20, 0.7); }
-    70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(229, 9, 20, 0); }
-    100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(229, 9, 20, 0); }
+    0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(0, 180, 216, 0.7); }
+    70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(0, 180, 216, 0); }
+    100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(0, 180, 216, 0); }
 }
-
 #player-container {
     width: 100%;
     height: 50vh;
     max-height: 600px;
     background-color: #000;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
     border-radius: 12px;
     overflow: hidden;
 }
-
 .info-card {
     background-color: var(--card-bg);
     border: 1px solid var(--border-color);
@@ -103,7 +97,6 @@ body {
     gap: 0.5rem;
     color: var(--text-muted);
 }
-
 .action-button {
     display: inline-flex;
     align-items: center;
@@ -122,10 +115,9 @@ body {
 }
 .action-button:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 15px rgba(65, 105, 225, 0.4);
+    box-shadow: 0 6px 15px var(--popup-shadow-color);
 }
 .action-button.copied { background: linear-gradient(90deg, #22c55e, #4ade80); }
-
 .back-link {
     display: inline-block;
     width: 100%;
@@ -138,47 +130,44 @@ body {
     transition: background-color 0.2s ease;
 }
 .back-link:hover { background-color: var(--card-bg); color: var(--text-light); }
-
 .error-message {
-    text-align: center;
-    padding: 4rem 1rem;
-    background-color: var(--card-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 12px;
+     text-align: center;
+     padding: 4rem 1rem;
+     background-color: var(--card-bg);
+     border: 1px solid var(--border-color);
+     border-radius: 12px;
 }
 .error-message h2 { color: var(--primary-blue); font-size: 1.5rem; margin-bottom: 0.5rem; }
-
-/* Telegram Popup -> এখন Blue theme */
 .telegram-popup {
     position: fixed;
     top: 50%; left: 50%;
-    transform: translate(-50%, -50%) scale(0.9);
-    background: #1c1c1c;
+    transform: translate(-50%, -50%);
+    background: linear-gradient(145deg, #181818, #1f1f1f);
     color: var(--text-light);
-    padding: 35px 25px;
-    border-radius: 18px;
-    border: 1px solid rgba(65,105,225,0.4);
-    box-shadow: 0 0 25px rgba(65,105,225,0.5);
+    padding: 40px 25px;
+    border-radius: 16px;
+    box-shadow: 0 0 50px 10px rgba(0, 180, 216, 0.5), 0 0 20px rgba(0, 180, 216, 0.3) inset;
     z-index: 10000;
     text-align: center;
     width: 90%;
-    max-width: 380px;
+    max-width: 400px;
     display: none;
-    opacity: 0;
-    animation: popupFade 0.4s ease forwards;
+    border: 2px solid var(--primary-blue);
+    animation: popIn 0.4s ease-out forwards, glowPulse 2.5s infinite alternate;
 }
-@keyframes popupFade {
-    from { opacity: 0; transform: translate(-50%, -45%) scale(0.9); }
-    to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+
+@keyframes glowPulse {
+    0% { box-shadow: 0 0 20px rgba(0, 180, 216, 0.3), 0 0 10px rgba(0, 180, 216, 0.2) inset; }
+    100% { box-shadow: 0 0 40px rgba(0, 180, 216, 0.7), 0 0 20px rgba(0, 180, 216, 0.4) inset; }
 }
 
 .telegram-popup h2 {
     margin-top: 0;
     color: var(--primary-blue);
-    font-size: 1.7rem;
+    font-size: 1.75rem;
     font-weight: 700;
+    text-shadow: 0 0 10px rgba(0, 180, 216, 0.5);
     margin-bottom: 0.75rem;
-    text-shadow: 0 0 10px rgba(65,105,225,0.4);
 }
 
 .telegram-popup p {
@@ -191,73 +180,46 @@ body {
 .telegram-popup button {
     width: 100%;
     padding: 14px;
-    margin-top: 10px;
+    margin-top: 12px;
     font-size: 1rem;
     border: none;
     border-radius: 10px;
     cursor: pointer;
     font-weight: 600;
-    transition: all 0.25s ease;
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.telegram-popup button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
 }
 
 .telegram-popup .join-btn {
     background: linear-gradient(90deg, var(--primary-blue), var(--primary-blue-dark));
     color: white;
-    box-shadow: 0 0 10px rgba(65,105,225,0.4);
+    box-shadow: 0 0 12px rgba(0, 180, 216, 0.4);
 }
+
 .telegram-popup .join-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 0 20px rgba(65,105,225,0.7);
+    box-shadow: 0 0 25px rgba(0, 180, 216, 0.7);
 }
 
 .telegram-popup .joined-btn {
-    background-color: #2b2b2b;
+    background-color: var(--border-color);
     color: var(--text-light);
-    border: 1px solid var(--border-color);
-}
-.telegram-popup .joined-btn:hover {
-    background-color: #333;
+    border: 1px solid var(--primary-blue-dark);
 }
 
-/* ভিজিটর কাউন্টার বাটন */
-.visitor-dot {
-    position: fixed;
-    bottom: 20px;
-    right: 25px;
-    width: 20px;
-    height: 20px;
-    background-color: var(--primary-blue);
-    border-radius: 50%;
-    box-shadow: 0 0 15px rgba(65,105,225,0.7);
-    cursor: pointer;
-    z-index: 9999;
-}
-.visitor-popup {
-    display: none;
-    position: fixed;
-    bottom: 60px;
-    right: 20px;
-    background-color: #1c1c1c;
-    border: 1px solid rgba(65,105,225,0.5);
-    padding: 10px;
-    border-radius: 10px;
-    box-shadow: 0 0 20px rgba(65,105,225,0.5);
-}
-.visitor-popup img {
-    width: 150px;
-    height: auto;
-}
 @media (max-width: 480px) {
     .telegram-popup {
-        padding: 28px 20px;
+        padding: 30px 20px;
         max-width: 90%;
     }
-    .telegram-popup h2 { font-size: 1.45rem; }
+    .telegram-popup h2 { font-size: 1.5rem; }
     .telegram-popup p { font-size: 0.9rem; }
 }
 </style>
 </head>
-
 <body>
 <main class="container">
     <div id="stream-content"></div>
@@ -265,17 +227,9 @@ body {
 
 <div class="telegram-popup" id="telegramPopup">
     <h2><i class="fa-brands fa-telegram"></i> Support Us!</h2>
-    <p>Join our WhatsApp Channel <strong>CRICKET NEWS POINT</strong></p>
-    <a href="https://whatsapp.com/channel/0029VaeylYYBPzjVNomWuZ0T" target="_blank" rel="noopener">
-        <button class="join-btn">Join Now</button>
-    </a>
-    <button class="joined-btn" onclick="closePopup()">Already Joined</button>
-</div>
-
-<!-- Visitor Dot -->
-<div class="visitor-dot" id="visitorDot"></div>
-<div class="visitor-popup" id="visitorPopup">
-    <img src="https://counter1.optistats.ovh/private/freecounterstat.php?c=5ggh91rsudsf178p2fp3f6r7e4jmw8jj" alt="Visitor Counter">
+    <p>Join our WhatsApp channel <strong>CRICKET NEWS POINT</strong> </p>
+    <a href="https://whatsapp.com/channel/0029VaeylYYBPzjVNomWuZ0T" target="_blank" rel="noopener"><button class="join-btn">Join Now</button></a>
+    <button class="joined-btn" onclick="document.getElementById('telegramPopup').style.display='none';">Already Joined</button>
 </div>
 
 <script>
@@ -290,9 +244,11 @@ async function initializeApp() {
         const streamData = data.iframes.find(item => item.id === streamId);
 
         if (streamData) {
-            document.title = `${streamData.name}`;
+            // document.title = `${streamData.name}`; // 🔒 Title stays original (𝗗𝗜𝗟𝗟𝗭𝗬 𝗟𝗜𝗡𝗞𝗦 ™)
             renderIframeUI(streamData);
-            setTimeout(() => showPopup(), 1200);
+            setTimeout(() => {
+                document.getElementById('telegramPopup').style.display = 'block';
+            }, 1000);
         } else {
             renderErrorUI();
         }
@@ -315,7 +271,7 @@ function renderIframeUI(data) {
         <div class="info-card">
             <h2><i class="fa-solid fa-bell"></i> Follow us for Updates!</h2>
             <a href="https://whatsapp.com/channel/0029VaeylYYBPzjVNomWuZ0T" target="_blank" rel="noopener" class="action-button">
-                <i class="fa-brands fa-whatsapp"></i> Click Here To Join WhatsApp 
+                <i class="fa-brands fa-telegram"></i> Click Here To Join Telegram
             </a>
         </div>
         <div class="info-card">
@@ -346,26 +302,6 @@ function renderErrorUI() {
             <a href="#" class="back-link"><i class="fa-solid fa-arrow-left"></i> Back to All Streams</a>
         </div>`;
 }
-
-function showPopup() {
-    const popup = document.getElementById('telegramPopup');
-    popup.style.display = 'block';
-    popup.style.opacity = '1';
-}
-
-function closePopup() {
-    const popup = document.getElementById('telegramPopup');
-    popup.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
-    popup.style.opacity = '0';
-    popup.style.transform = 'translate(-50%, -48%) scale(0.95)';
-    setTimeout(() => popup.style.display = 'none', 300);
-}
-
-/* ভিজিটর কাউন্টার */
-document.getElementById('visitorDot').addEventListener('click', () => {
-    const popup = document.getElementById('visitorPopup');
-    popup.style.display = popup.style.display === 'block' ? 'none' : 'block';
-});
 
 document.addEventListener("DOMContentLoaded", initializeApp);
 </script>

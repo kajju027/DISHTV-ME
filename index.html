@@ -27,8 +27,8 @@ body {
     background-color: var(--bg-color);
     color: var(--text-light);
     display: flex;
-    justify-content: center;
-    align-items: flex-start;
+    flex-direction: column;
+    align-items: center;
     min-height: 100vh;
     padding: 1rem;
     position: relative;
@@ -173,61 +173,17 @@ body {
     to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
 }
 
-.telegram-popup h2 {
-    margin-top: 0;
-    color: var(--primary-red);
-    font-size: 1.7rem;
-    font-weight: 700;
-    margin-bottom: 0.75rem;
-    text-shadow: 0 0 10px rgba(229,9,20,0.4);
-}
-
-.telegram-popup p {
-    font-size: 1rem;
+/* Footer */
+.footer {
+    text-align: center;
     color: var(--text-muted);
-    margin-bottom: 1.75rem;
-    line-height: 1.5;
+    font-size: 0.9rem;
+    padding: 1.5rem 0;
+    margin-top: 2rem;
+    border-top: 1px solid var(--border-color);
 }
-
-.telegram-popup button {
-    width: 100%;
-    padding: 14px;
-    margin-top: 10px;
-    font-size: 1rem;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    font-weight: 600;
-    transition: all 0.25s ease;
-}
-
-.telegram-popup .join-btn {
-    background: linear-gradient(90deg, var(--primary-red), var(--primary-red-dark));
-    color: white;
-    box-shadow: 0 0 10px rgba(229,9,20,0.4);
-}
-.telegram-popup .join-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 0 20px rgba(229,9,20,0.7);
-}
-
-.telegram-popup .joined-btn {
-    background-color: #2b2b2b;
-    color: var(--text-light);
-    border: 1px solid var(--border-color);
-}
-.telegram-popup .joined-btn:hover {
-    background-color: #333;
-}
-
-/* Hidden visitor counter */
-.hidden-counter {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    opacity: 0;
-    pointer-events: none;
-}
+.footer a { color: var(--text-muted); text-decoration: none; }
+.footer a:hover { text-decoration: underline; }
 
 /* Blue glowing tiny corner light */
 .corner-light {
@@ -260,12 +216,20 @@ body {
     <div id="stream-content"></div>
 </main>
 
-<!-- Hidden visitor counter (background only) -->
-<img src="https://www.counter12.com/img-9205Yd3W54Z3y43Z-5.gif" alt="hidden counter" class="hidden-counter" loading="lazy">
-
-<!-- Tiny glowing blue corner light -->
+<!-- Blue corner light -->
 <div class="corner-light" id="cornerLight"></div>
 
+<!-- Footer with visitor counter -->
+<footer class="footer">
+    <p>SAYAN OAI | ALL RIGHTS RESERVED</p>
+    <div class="counter">
+        <script type="text/javascript" src="https://www.counters-free.net/count/iufm"></script><br>
+        <a href='https://www.free-counters.org/'>Free Hit Counter</a> 
+        <script type='text/javascript' src='https://www.whomania.com/ctr?id=2cf07b4078029f39a13b7e32039c8484f53751a7'></script>
+    </div>
+</footer>
+
+<!-- Telegram Popup -->
 <div class="telegram-popup" id="telegramPopup">
     <h2><i class="fa-brands fa-telegram"></i> Support Us!</h2>
     <p>Join our WhatsApp Channel <strong>CRICKET NEWS POINT</strong></p>

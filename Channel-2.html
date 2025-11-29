@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CRICKET NEWS POINT -  2</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    :root{
+      --bg: #000000; /* Deep Black */
+      --panel-dark: rgba(10, 10, 10, 0.85);
+      --muted: #a0a0a0;
+      --accent-primary: #E70000; /* Striking Red */
+      --accent-secondary: #00BCD4; /* Cyan/Aqua */
+      --white: #f5f5f5;
+      --glass-border: rgba(255, 255, 255, 0.15);
+      --shadow-intense: 0 8px 30px rgba(0, 0, 0, 0.8);
+    }
+
+    /* Base Setup */
+    *, *::before, *::after { box-sizing: border-box; }
+    /* BODY MUST BE INITIALLY HIDDEN to prevent flash of content before blackout */
+    html,body{ height:100%; margin:0; background:var(--bg); color:var(--white); font-family:'Inter', system-ui, Arial, Helvetica, sans-serif; }
+    
+    /* Initially hide the main content and set body to prevent scrolling */
+    body { overflow: hidden; } 
+    .site-content-wrapper { filter: blur(5px); opacity: 0; pointer-events: none; transition: filter 0.3s, opacity 0.3s; }
+    
+    /* When unlocked, the main content appears */
+    body.unlocked { overflow-y: auto; }
+    body.unlocked .site-content-wrapper { filter: none; opacity: 1; pointer-events: auto; }
+
+    /* Performance Scrollbar */
+    body::-webkit-scrollbar { width: 6px; }
+    body::-webkit-scrollbar-track { background: var(--bg); }
+    body::-webkit-scrollbar-thumb { background-color: var(--accent-primary); border-radius: 3px; }
+    
+    /* Header (Optimized Glassmorphism) */
+    header{
+      position:fixed; top:0; left:0; right:0; height:60px;
+      display:flex; align-items:center; justify-content:center;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-bottom:1px solid var(--glass-border);
+      box-shadow: var(--shadow-intense);
+      z-index:100;
+      padding:0 12px;
+    }
+    header img{ height:80%; border-radius: 4px; }
+    
+    .menu-icon{
+      cursor:pointer; font-size:28px; position:absolute; left:12px;
+      color: var(--accent-primary); transition: color 0.2s;
+    }
+
+    .main-wrapper{ margin-top:60px; }
+
+    /* Video Player */
+    .video-container{ width:100vw; aspect-ratio:16/9; background:#000; }
+    .video-container iframe{ width:100%; height:100%; border:0; display:block; }
+
+    /* Tabs (Optimized Glassmorphism) */
+    .tabs{
+      display:flex; justify-content:space-around;
+      background: var(--panel-dark);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6-x);
+      border-top:1px solid var(--glass-border);
+      border-bottom:1px solid var(--glass-border);
+    }
+    .tab-button{
+      flex:1; padding:12px 0;
+      color:var(--muted); background:none; border:0;
+      font-size:15px; font-weight:700; cursor:pointer;
+      transition: all 0.2s; display:flex; align-items:center; justify-content:center; gap: 8px;
+      letter-spacing: 0.5px;
+    }
+    .tab-button:hover:not(.active) { color: var(--white); background: rgba(255,255,255,0.05); }
+    .tab-button.active{ color:var(--accent-primary); border-bottom: 3px solid var(--accent-primary); }
+
+    .tab-content{ display:none; }
+    .tab-content.active{ display:block; }
+    .tab-content iframe{ width:100%; height:600px; border:0; background: var(--panel-dark); }
+
+    /* Sidebar (Optimized Glassmorphism & Speed) */
+    .sidebar{
+      position:fixed; top:0; left:-270px;
+      width:250px; height:100%;
+      background: rgba(0, 0, 0, 0.9);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding-top:60px;
+      transition:left .25s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index:90;
+      border-right:1px solid var(--glass-border);
+      box-shadow: 2px 0 15px rgba(0,0,0,0.7);
+      display: flex; flex-direction: column;
+    }
+    .sidebar.open{ left:0; }
+
+    .sidebar a{
+      display:flex; align-items:center; padding:12px 18px;
+      color:var(--white); text-decoration:none;
+      border-bottom:1px solid rgba(255,255,255,0.03);
+      font-size:14px; gap: 10px;
+      transition: background 0.15s, color 0.15s;
+    }
+    .sidebar a:hover{ background: rgba(255, 255, 255, 0.08); color: var(--accent-secondary); }
+    .menu-header{
+      font-size:18px; font-weight:900; text-align:center; padding:15px 0;
+      color:var(--accent-secondary); border-bottom:1px solid var(--glass-border);
+      margin-bottom: 5px; text-shadow: 0 0 5px rgba(0, 188, 212, 0.5);
+    }
+    .visitor-box{
+      display:none; padding:15px; text-align:center;
+      border-top:1px solid var(--glass-border); margin-top: auto;
+      background: rgba(255, 255, 255, 0.02);
+    }
+    .visitor-box img{ width:130px; }
+
+    /* Overlay for Sidebar */
+    .overlay{ position:fixed; top:0; left:0; width:100%; height:100%; z-index:80; display:none; background: rgba(0,0,0,0.8); transition: background 0.3s; }
+    .overlay.show{ display:block; }
+    
+    /* --- NEW POPUP STYLES from user's code --- */
+    .visitor-dot,
+    .visitor-popup{
+      display: none !important;
+    }
+    .telegram-popup{
+      position:fixed;
+      top:50%;
+      left:50%;
+      transform:translate(-50%,-50%) scale(.96);
+      background:#131313;
+      color:var(--white);
+      padding:30px 22px;
+      border-radius:16px;
+      border:1px solid rgba(231,0,0,0.2); 
+      box-shadow:0 30px 90px rgba(0,0,0,0.7);
+      z-index:12000; 
+      width:92%;
+      max-width:420px;
+      display:none; /* Initially hidden by CSS */
+      opacity:0;
+      transition:all .28s cubic-bezier(.2,.9,.2,1);
+      text-align:center;
+    }
+    /* Show class is applied instantly via JS for "milli-second" effect */
+    .telegram-popup.show{ 
+      display:block; 
+      opacity:1; 
+      transform:translate(-50%,-50%) scale(1); 
+    }
+    .telegram-popup h2{ 
+      color:var(--accent-primary); 
+      font-size:1.6rem; 
+      margin-bottom:.55rem; 
+      text-shadow:0 0 12px rgba(231,0,0,0.08); 
+    }
+    .telegram-popup p{ 
+      color:var(--muted); 
+      line-height:1.5; 
+      margin-bottom:1rem; 
+    }
+
+    /* join/ok buttons inside popup */
+    .telegram-popup button{
+      width:100%;
+      padding:12px;
+      border-radius:10px;
+      border:0;
+      font-weight:800;
+      cursor:pointer;
+      font-family:'Inter', system-ui, Arial, Helvetica, sans-serif;
+    }
+    .telegram-popup .join-btn{
+      background:linear-gradient(90deg,var(--accent-primary),#B80000); 
+      color:#fff;
+      box-shadow:0 10px 30px rgba(231,0,0,0.18);
+      margin-bottom:.6rem;
+      transition: transform 0.15s;
+    }
+    .telegram-popup .join-btn:active { transform: scale(0.98); }
+
+    .telegram-popup .joined-btn{
+      background:#222;
+      color:var(--white);
+      border:1px solid rgba(255,255,255,0.02);
+      transition: background 0.15s;
+    }
+    .telegram-popup .joined-btn:hover { background: #333; }
+    
+    @media (max-width:480px){
+      .telegram-popup{ padding:22px; width:94%; max-width:360px; }
+    }
+  </style>
+</head>
+<body id="pageBody">
+  <div class="telegram-popup" id="telegramPopup" role="dialog" aria-modal="true" aria-hidden="true">
+    <h2><i class="fa-brands fa-whatsapp"></i> Support Us!</h2>
+    <p>Join our WhatsApp Channel <strong>𝗖𝗥𝗜𝗖𝗞𝗘𝗧 𝗡𝗘𝗪𝗦 𝗣𝗢𝗜𝗡𝗧</strong></p>
+    <a id="joinLink" href="https://whatsapp.com/channel/0029VaeylYYBPzjVNomWuZ0T" target="_blank" rel="noopener">
+      <button class="join-btn">Join Now</button>
+    </a>
+    <button class="joined-btn" id="alreadyJoinedBtn">Already Joined</button>
+  </div>
+  <div class="visitor-dot" id="visitorDot" title="Visitors"></div>
+  <div class="visitor-popup" id="visitorPopup" aria-hidden="true">
+    <img src="        " alt="Visitor Counter">
+  </div>
+  <div id="siteContentWrapper" class="site-content-wrapper">
+    <header>
+      <span class="material-icons menu-icon" onclick="toggleSidebar()" role="button" aria-controls="sidebar" aria-expanded="false">menu</span>
+      <img src="https://i.ibb.co/chDsctn4/g2tdt0.jpg" alt="CRICKET NEWS POINT">
+    </header>
+
+    <div id="mainContent" class="main-wrapper">
+      <div class="video-container">
+        <iframe src="https://cricketstan.github.io/Channel-14/" allowfullscreen allow="autoplay; encrypted-media"></iframe>
+      </div>
+
+      <div class="sidebar" id="sidebar" aria-hidden="true">
+        <div class="menu-header">YOUR MENU</div>
+        <a href="https://whatsapp.com/channel/0029VaeylYYBPzjVNomWuZ0T" target="_blank"><span class="material-icons">rss_feed</span> VIP Channel Access</a>
+        <a href="https://www.instagram.com/sonu__7xyz?" target="_blank"><span class="material-icons">contact_support</span> Contact Developer </a>
+        <a href="https://sayan-mete.onrender.com/copyright" target="_blank"><span class="material-icons">policy</span> Legal / DMCA</a>
+        <a href="javascript:void(0)" onclick="toggleVisitor()" role="button" aria-expanded="false"><span class="material-icons">trending_up</span> Live Visitor Counter</a>
+        <div class="visitor-box" id="visitorBox">
+          <img src="https://www.counter12.com/img-9205Yd3W54Z3y43Z-5.gif" alt="Visitor Count" />
+        </div>
+      </div>
+
+      <div class="tabs" role="tablist">
+        <button id="tab-scoreboard-btn" class="tab-button active" onclick="switchTab('scoreboard')" aria-selected="true" role="tab" aria-controls="scoreboard">
+          <span class="material-icons">scoreboard</span> Live Score
+        </button>
+        <button id="tab-highlights-btn" class="tab-button" onclick="switchTab('highlights')" aria-selected="false" role="tab" aria-controls="highlights">
+          <span class="material-icons">play_circle_filled</span> Match Highlights
+        </button>
+      </div>
+
+      <div id="scoreboard" class="tab-content active" role="tabpanel" aria-labelledby="tab-scoreboard-btn">
+        <iframe src="https://alpha-server-zero.vercel.app"></iframe>
+      </div>
+
+      <div id="highlights" class="tab-content" role="tabpanel" aria-labelledby="tab-highlights-btn">
+        <iframe src="https://ads-cnp.vercel.app/"></iframe>
+      </div>
+    </div>
+
+    <div class="overlay" id="overlay" onclick="toggleSidebar()" aria-hidden="true"></div>
+  </div> <script>
+    // Function to unlock the main website
+    function unlockWebsite(){
+      document.getElementById('telegramPopup').classList.remove('show');
+      document.getElementById('telegramPopup').setAttribute('aria-hidden', 'true');
+      document.getElementById('pageBody').classList.add('unlocked');
+    }
+
+    // Function to lock the website (Show Popup & Blackout)
+    function lockWebsite(){
+      document.getElementById('pageBody').classList.remove('unlocked'); // Ensure it's locked initially
+      document.getElementById('telegramPopup').classList.add('show');
+      document.getElementById('telegramPopup').setAttribute('aria-hidden', 'false');
+    }
+
+    // --- Existing Optimized JavaScript ---
+    function toggleSidebar(){
+      const sidebar = document.getElementById('sidebar');
+      const overlay = document.getElementById('overlay');
+      const isOpen = sidebar.classList.toggle('open');
+      overlay.classList.toggle('show', isOpen);
+      sidebar.setAttribute('aria-hidden', !isOpen);
+      document.querySelector('.menu-icon').setAttribute('aria-expanded', isOpen);
+    }
+
+    function toggleVisitor(){
+      const vb = document.getElementById('visitorBox');
+      const isVisible = vb.style.display === 'block';
+      vb.style.display = isVisible ? 'none' : 'block';
+      document.querySelector('a[onclick="toggleVisitor()"]').setAttribute('aria-expanded', !isVisible);
+    }
+
+    function switchTab(tabId){
+      document.querySelectorAll('.tab-button').forEach(b => {
+        b.classList.remove('active');
+        b.setAttribute('aria-selected', 'false');
+      });
+      document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+
+      const btn = document.getElementById(`tab-${tabId}-btn`);
+      const content = document.getElementById(tabId);
+
+      if(btn) {
+        btn.classList.add('active');
+        btn.setAttribute('aria-selected', 'true');
+      }
+      if(content) content.classList.add('active');
+    }
+
+    document.addEventListener('DOMContentLoaded', function(){
+      const alreadyJoinedBtn = document.getElementById('alreadyJoinedBtn');
+      const joinLink = document.getElementById('joinLink');
+
+      // 1. INSTANTLY LOCK/SHOW POPUP on page load (No delay)
+      lockWebsite();
+      
+      // 2. Attach click listeners to UNLOCK
+      if(alreadyJoinedBtn) {
+        alreadyJoinedBtn.addEventListener('click', unlockWebsite);
+      }
+
+      if(joinLink) {
+        joinLink.addEventListener('click', function(){
+          // Unlock the site when the user clicks the external link
+          unlockWebsite();
+        });
+      }
+
+      // 3. Escape key handler (Only closes popup if it's open, then sidebar if open)
+      document.addEventListener('keydown', (e)=>{
+        const telegramPopup = document.getElementById('telegramPopup');
+        const sidebar = document.getElementById('sidebar');
+
+        if(e.key === 'Escape') {
+          if(telegramPopup && telegramPopup.classList.contains('show')) {
+             unlockWebsite(); 
+             e.preventDefault();
+          }
+          else if (sidebar && sidebar.classList.contains('open')) {
+            toggleSidebar();
+          }
+        }
+      });
+      
+    });
+  </script>
+</body>
+</html>

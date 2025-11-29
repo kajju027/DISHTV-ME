@@ -4,16 +4,11 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, maximum-scale=1.0, user-scalable=no" />
 <title>CRICKET NEWS POINT ™</title>
-
-<!-- Fonts (user requested) -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Amaranth:ital,wght@0,400;0,700;1,700&family=Bebas+Neue&family=Momo+Trust+Display&family=Science+Gothic:slnt,wdth,wght,CTRS@-10..0,50..200,100..900,0..85&display=swap" rel="stylesheet">
-
-<!-- Player / icons -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/shaka-player@4.3.4/dist/controls.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
 <style>
 :root{
   --bg-color: #121212;
@@ -199,32 +194,11 @@ body{
   border:1px solid rgba(255,255,255,0.02);
 }
 
-/* visitor dot & popup */
-.visitor-dot{
-  position:fixed;
-  right:24px;
-  bottom:22px;
-  width:22px;
-  height:22px;
-  border-radius:50%;
-  background:var(--primary-main);
-  box-shadow:0 8px 28px rgba(199,12,12,0.25);
-  z-index:11000;
-  cursor:pointer;
-}
+/* visitor dot & popup - Hiding these elements via CSS */
+.visitor-dot,
 .visitor-popup{
-  display:none;
-  position:fixed;
-  right:24px;
-  bottom:64px;
-  background:#0f0f0f;
-  border-radius:10px;
-  padding:10px;
-  border:1px solid rgba(255,255,255,0.03);
-  box-shadow:0 12px 40px rgba(0,0,0,0.6);
-  z-index:11000;
+  display: none !important;
 }
-.visitor-popup img{ width:150px; height:auto; display:block; }
 
 /* error */
 .error-message{ text-align:center; padding:3.2rem 1rem; background:var(--card-bg); border-radius:12px; border:1px solid var(--border-color); }
@@ -242,8 +216,6 @@ body{
 <main class="container">
   <div id="stream-content" aria-live="polite"></div>
 </main>
-
-<!-- Telegram / WhatsApp popup -->
 <div class="telegram-popup" id="telegramPopup" role="dialog" aria-modal="true" aria-hidden="true">
   <h2><i class="fa-brands fa-telegram"></i> Support Us!</h2>
   <p>Join our WhatsApp Channel <strong>𝗖𝗥𝗜𝗖𝗞𝗘𝗧 𝗡𝗘𝗪𝗦 𝗣𝗢𝗜𝗡𝗧</strong></p>
@@ -252,23 +224,14 @@ body{
   </a>
   <button class="joined-btn" id="alreadyJoinedBtn">Already Joined</button>
 </div>
-
-<!-- visitor UI -->
 <div class="visitor-dot" id="visitorDot" title="Visitors"></div>
 <div class="visitor-popup" id="visitorPopup" aria-hidden="true">
-  <img src="https://www.counter12.com/img-9205Yd3W54Z3y43Z-5.gif" alt="Visitor Counter">
+  <img src="        " alt="Visitor Counter">
 </div>
-
-<!-- All JS (single block) -->
 <script>
-/*
-  Full page JS: fetch JSON, render UI, share-copy, popup logic, visitor dot toggle.
-  NOTE: If you want different JSON source change the FETCH_URL variable.
-*/
 (function(){
   const FETCH_URL = 'https://raw.githubusercontent.com/Cricketstan/Allrounder-/refs/heads/main/id.json';
 
-  // DOM refs
   const streamContent = document.getElementById('stream-content');
   const telegramPopup = document.getElementById('telegramPopup');
   const joinLink = document.getElementById('joinLink');
@@ -276,10 +239,8 @@ body{
   const visitorDot = document.getElementById('visitorDot');
   const visitorPopup = document.getElementById('visitorPopup');
 
-  // helpers
   function safeHTML(str){ const d = document.createElement('div'); d.textContent = str; return d.innerHTML; }
 
-  // Render functions
   function renderIframeUI(data){
     document.title = `${data.name} • CRICKET NEWS POINT`;
     streamContent.innerHTML = `
@@ -307,7 +268,6 @@ body{
       <a href="#" class="back-link" id="backLink"><i class="fa-solid fa-arrow-left"></i> Back to All Streams</a>
     `;
 
-    // share button
     const shareBtn = document.getElementById('shareButton');
     if(shareBtn){
       shareBtn.addEventListener('click', async function(){
@@ -316,7 +276,6 @@ body{
           if(navigator.clipboard && navigator.clipboard.writeText){
             await navigator.clipboard.writeText(url);
           } else {
-            // fallback
             const ta = document.createElement('textarea');
             ta.value = url;
             document.body.appendChild(ta);
@@ -346,7 +305,6 @@ body{
     `;
   }
 
-  // Popup logic
   function showPopup(delay = 1200){
     setTimeout(()=>{
       telegramPopup.classList.add('show');
@@ -358,34 +316,18 @@ body{
     telegramPopup.setAttribute('aria-hidden','true');
   }
 
-  // visitor dot toggle
-  visitorDot.addEventListener('click', ()=>{
-    if(visitorPopup.style.display === 'block'){
-      visitorPopup.style.display = 'none';
-      visitorPopup.setAttribute('aria-hidden','true');
-    } else {
-      visitorPopup.style.display = 'block';
-      visitorPopup.setAttribute('aria-hidden','false');
-    }
-  });
-
-  // already joined closes popup
   alreadyJoinedBtn.addEventListener('click', closePopup);
 
-  // Main init
   async function initializeApp(){
     try{
       const resp = await fetch(FETCH_URL, {cache:'no-store'});
       if(!resp.ok) throw new Error('Fetch failed: ' + resp.status);
       const data = await resp.json();
 
-      // find by id param
       const urlParams = new URLSearchParams(window.location.search);
       const streamId = urlParams.get('id') || urlParams.get('channel') || null;
 
       if(!streamId){
-        // fallback — if only one entry or first entry desired, you can adjust here.
-        // We'll try to render first iframe if exists
         if(Array.isArray(data.iframes) && data.iframes.length){
           renderIframeUI(data.iframes[0]);
           showPopup(1200);
@@ -408,18 +350,15 @@ body{
     }
   }
 
-  // Kick off on DOM ready
   if(document.readyState === 'loading'){
     document.addEventListener('DOMContentLoaded', initializeApp);
   } else {
     initializeApp();
   }
 
-  // Accessibility: close popup on Escape
   document.addEventListener('keydown', (e)=>{
     if(e.key === 'Escape') {
       if(telegramPopup.classList.contains('show')) closePopup();
-      if(visitorPopup.style.display === 'block') { visitorPopup.style.display = 'none'; visitorPopup.setAttribute('aria-hidden','true'); }
     }
   });
 

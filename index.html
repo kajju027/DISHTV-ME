@@ -4,11 +4,12 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, maximum-scale=1.0, user-scalable=no" />
 <title>CRICKET NEWS POINT ™</title>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Amaranth:ital,wght@0,400;0,700;1,700&family=Bebas+Neue&family=Momo+Trust+Display&family=Science+Gothic:slnt,wdth,wght,CTRS@-10..0,50..200,100..900,0..85&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/shaka-player@4.3.4/dist/controls.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Amaranth:ital,wght@0,400;0,700;1,700&family=Bebas+Neue&display=swap" rel="stylesheet">
+
 <style>
 :root{
   --bg-color: #121212;
@@ -24,7 +25,7 @@
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%}
 body{
-  font-family: 'Amaranth','Momo Trust Display','Science Gothic','Bebas Neue', sans-serif;
+  font-family: 'Amaranth','Bebas Neue', sans-serif; /* ফন্ট লিস্ট ছোট করা হলো */
   background:var(--bg-color);
   color:var(--text-light);
   display:flex;
@@ -216,6 +217,10 @@ body{
   .telegram-popup{ padding:22px; width:94%; max-width:360px; }
 }
 </style>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/shaka-player@4.3.4/dist/controls.css" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
+
 </head>
 <body>
 <main class="container">
@@ -236,6 +241,7 @@ body{
 <div class="visitor-popup" id="visitorPopup" aria-hidden="true">
   <img src="        " alt="Visitor Counter">
 </div>
+
 <script>
 (function(){
   const FETCH_URL = 'https://raw.githubusercontent.com/Cricketstan/Allrounder-/refs/heads/main/id.json';
@@ -327,6 +333,8 @@ body{
 
   async function initializeApp(){
     try{
+      // 6. JSON Fetch অপটিমাইজেশন: GitHub-এর পরিবর্তে দ্রুত CDN ব্যবহার করা ভালো।
+      // বর্তমানে কোড পরিবর্তন না করে Fetch call-এর উপর নির্ভর করতে হচ্ছে।
       const resp = await fetch(FETCH_URL, {cache:'no-store'});
       if(!resp.ok) throw new Error('Fetch failed: ' + resp.status);
       const data = await resp.json();

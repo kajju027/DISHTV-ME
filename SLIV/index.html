@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>SONYLIV PREMIUM EVENTS | SAYAN X MD</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* =========================================
+           1. CORE VARIABLES & RESET
+           ========================================= */
+        :root {
+            --bg-dark: #050505;
+            --bg-card: rgba(255, 255, 255, 0.05);
+            --bg-card-hover: rgba(255, 255, 255, 0.1);
+            --primary: #f97316; /* Orange - Sony Brand */
+            --accent: #3b82f6;  /* Blue */
+            --live: #ef4444;    /* Red for Live */
+            --text-main: #ffffff;
+            --text-muted: #9ca3af;
+            --glass-border: 1px solid rgba(255, 255, 255, 0.1);
+            --blur: blur(16px);
+            --radius: 16px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            
+            /* Popup Colors */
+            --popup-bg: #0f172a;
+            --popup-accent: #0088cc; /* Telegram Blue */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(249, 115, 22, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(59, 130, 246, 0.15) 0%, transparent 40%);
+            color: var(--text-main);
+            min-height: 100vh;
+            overflow-x: hidden;
+            padding-bottom: 40px;
+        }
+
+        /* Scrollbar Styling */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-dark); }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--primary); }
+
+        /* Logic Class to lock scroll when popup is open */
+        body.locked { overflow: hidden; }
+
+        /* =========================================
+           2. POPUP MODAL STYLES
+           ========================================= */
+        .backdrop {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            z-index: 9998;
+            opacity: 0; pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+
+        .backdrop.active { opacity: 1; pointer-events: all; }
+
+        .modal {
+            position: fixed;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%) scale(0.9);
+            width: 90%; max-width: 400px;
+            background: var(--popup-bg);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 24px;
+            padding: 30px;
+            text-align: center;
+            z-index: 9999;
+            opacity: 0; pointer-events: none;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            transition: var(--transition);
+        }
+
+        .modal.active { opacity: 1; pointer-events: all; transform: translate(-50%, -50%) scale(1); }
+
+        .modal-icon {
+            font-size: 3rem;
+            color: var(--popup-accent);
+            margin-bottom: 15px;
+            filter: drop-shadow(0 0 10px rgba(0,136,204,0.4));
+        }
+
+        .modal h2 { font-size: 1.5rem; margin-bottom: 10px; font-weight: 700; }
+        .modal p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 25px; line-height: 1.6; }
+
+        .btn-join {
+            background: linear-gradient(135deg, #0088cc 0%, #005f8f 100%);
+            color: white; border: none; padding: 14px; width: 100%;
+            border-radius: 12px; font-weight: 600; font-size: 1rem;
+            cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px;
+            text-decoration: none; transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(0,136,204,0.3);
+        }
+
+        .btn-join:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,136,204,0.5); }
+        
+        .btn-close {
+            background: transparent; border: 1px solid rgba(255,255,255,0.2);
+            color: var(--text-muted); padding: 12px; width: 100%;
+            border-radius: 12px; margin-top: 10px; font-weight: 500; cursor: pointer;
+            transition: var(--transition);
+        }
+        .btn-close:hover { background: rgba(255,255,255,0.05); color: white; border-color: white; }
+
+        /* =========================================
+           3. HEADER & HERO
+           ========================================= */
+        .container {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            padding: 40px 0 20px;
+            text-align: center;
+        }
+
+        .logo-area h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, #fff, #999);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .logo-area h1 span {
+            color: var(--primary);
+            -webkit-text-fill-color: initial;
+            background: linear-gradient(135deg, var(--primary), #ff9100);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* =========================================
+           4. FILTERS
+           ========================================= */
+        .filter-container {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin: 30px 0 40px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: var(--bg-card);
+            border: var(--glass-border);
+            color: var(--text-muted);
+            padding: 10px 24px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--text-main);
+            color: black;
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(255,255,255,0.3);
+            border-color: transparent;
+        }
+
+        .filter-btn.active i { color: var(--primary); }
+
+        /* =========================================
+           5. GRID & CARDS
+           ========================================= */
+        .matches-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            min-height: 300px;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: var(--glass-border);
+            border-radius: var(--radius);
+            overflow: hidden;
+            position: relative;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            animation: fadeIn 0.5s ease forwards;
+            opacity: 0;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            background: var(--bg-card-hover);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            border-color: rgba(255,255,255,0.2);
+        }
+
+        /* Image Area */
+        .card-poster {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%; /* 16:9 Aspect Ratio */
+            overflow: hidden;
+        }
+
+        .card-poster img {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .card:hover .card-poster img { transform: scale(1.1); }
+
+        /* Overlays */
+        .live-tag {
+            position: absolute;
+            top: 12px; left: 12px;
+            background: var(--live);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            box-shadow: 0 0 10px rgba(239, 68, 68, 0.6);
+            animation: pulse 2s infinite;
+            z-index: 2;
+            display: flex; align-items: center; gap: 5px;
+        }
+
+        .live-tag::before {
+            content: ''; width: 6px; height: 6px; background: white; border-radius: 50%;
+        }
+
+        .play-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.4);
+            display: flex; align-items: center; justify-content: center;
+            opacity: 0; transition: var(--transition);
+            backdrop-filter: blur(2px);
+        }
+
+        .card:hover .play-overlay { opacity: 1; }
+
+        .play-icon {
+            width: 50px; height: 50px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            backdrop-filter: blur(10px);
+            display: flex; align-items: center; justify-content: center;
+            border: 1px solid rgba(255,255,255,0.4);
+            transform: scale(0.8);
+            transition: var(--transition);
+        }
+
+        .card:hover .play-icon { transform: scale(1); background: var(--primary); border-color: var(--primary); }
+
+        /* Content Area */
+        .card-body {
+            padding: 18px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .meta-row {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 8px;
+            font-size: 0.75rem;
+        }
+
+        .badge {
+            background: rgba(255,255,255,0.1);
+            padding: 3px 8px;
+            border-radius: 4px;
+            color: var(--text-muted);
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .match-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+            line-height: 1.3;
+            color: #fff;
+        }
+
+        .event-name {
+            font-size: 0.9rem;
+            color: var(--primary);
+            font-weight: 500;
+            margin-bottom: 12px;
+        }
+
+        .channel-info {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-top: auto;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 12px;
+        }
+
+        .btn-watch {
+            margin-top: 15px;
+            width: 100%;
+            padding: 10px;
+            background: var(--text-main);
+            color: black;
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .btn-watch.upcoming {
+            background: rgba(255,255,255,0.1);
+            color: var(--text-muted);
+            cursor: not-allowed;
+        }
+
+        .btn-watch:hover:not(.upcoming) {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* =========================================
+           6. FOOTER & LOADING
+           ========================================= */
+        .loading-state {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 50px;
+            color: var(--text-muted);
+        }
+
+        .spinner {
+            width: 40px; height: 40px;
+            border: 4px solid rgba(255,255,255,0.1);
+            border-top: 4px solid var(--primary);
+            border-radius: 50%;
+            margin: 0 auto 15px;
+            animation: spin 1s linear infinite;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            color: rgba(255,255,255,0.4);
+            font-size: 0.85rem;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            margin-top: 50px;
+        }
+
+        /* Animations */
+        @keyframes fadeIn { to { opacity: 1; } }
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); } 70% { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); } 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); } }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+
+        /* Mobile Adjustments */
+        @media (max-width: 600px) {
+            .logo-area h1 { font-size: 1.8rem; }
+            .matches-grid { grid-template-columns: 1fr; }
+            .modal { width: 95%; padding: 25px 20px; }
+        }
+    </style>
+</head>
+<body class="locked">
+
+    <div class="backdrop active" id="backdrop"></div>
+    <div class="modal active" id="telegramPopup">
+        <div class="modal-icon">
+            <i class="fa-brands fa-telegram"></i>
+        </div>
+        <h2>Support Our Channel</h2>
+        <p>Join <strong>CRICKET NEWS POINT</strong> on WhatsApp/Telegram for instant match links and updates.</p>
+        
+        <a href="https://whatsapp.com/channel/0029VaeylYYBPzjVNomWuZ0T" target="_blank" id="joinBtn" class="btn-join">
+            <i class="fa-brands fa-whatsapp"></i> Join Channel
+        </a>
+        <button id="closeBtn" class="btn-close">I've Already Joined</button>
+    </div>
+
+    <header>
+        <div class="container logo-area">
+            <h1>SONYLIV <span>EVENTS</span></h1>
+            <p class="subtitle">Stream Exclusive Sports & Live Matches in HD</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="filter-container">
+            <button class="filter-btn active" onclick="filterData('all', this)">
+                <i class="fa-solid fa-border-all"></i> All
+            </button>
+            <button class="filter-btn" onclick="filterData('live', this)">
+                <i class="fa-solid fa-satellite-dish"></i> Live Now
+            </button>
+            <button class="filter-btn" onclick="filterData('upcoming', this)">
+                <i class="fa-regular fa-calendar"></i> Upcoming
+            </button>
+        </div>
+
+        <div id="matches-grid" class="matches-grid">
+            <div class="loading-state">
+                <div class="spinner"></div>
+                <p>Loading events...</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 SonyLiv Events | Developed by Cricket News Point</p>
+    </footer>
+
+    <script>
+        // --- CONSTANTS & STATE ---
+        const API_URL = "https://raw.githubusercontent.com/drmlive/sliv-live-events/main/sonyliv.json";
+        let allMatches = [];
+        const grid = document.getElementById('matches-grid');
+
+        // --- POPUP LOGIC ---
+        const popup = document.getElementById('telegramPopup');
+        const backdrop = document.getElementById('backdrop');
+        const joinBtn = document.getElementById('joinBtn');
+        const closeBtn = document.getElementById('closeBtn');
+
+        function hidePopup() {
+            popup.classList.remove('active');
+            backdrop.classList.remove('active');
+            document.body.classList.remove('locked');
+            
+            // Allow pointer events on body after popup closes
+            setTimeout(() => {
+                popup.style.display = 'none';
+                backdrop.style.display = 'none';
+            }, 400); 
+        }
+
+        // Logic: Close popup only on clicking button or link
+        joinBtn.addEventListener('click', hidePopup);
+        closeBtn.addEventListener('click', hidePopup);
+
+        // --- DATA FETCHING ---
+        async function fetchMatches() {
+            try {
+                const response = await fetch(API_URL);
+                if (!response.ok) throw new Error("Network Error");
+                
+                const data = await response.json();
+                
+                if (data.matches && Array.isArray(data.matches)) {
+                    allMatches = data.matches;
+                    renderMatches(allMatches);
+                } else {
+                    throw new Error("Invalid Data Format");
+                }
+
+            } catch (error) {
+                console.error(error);
+                grid.innerHTML = `
+                    <div class="loading-state">
+                        <i class="fa-solid fa-triangle-exclamation" style="font-size: 2rem; color: var(--live); margin-bottom: 10px;"></i>
+                        <p>Failed to load matches. Please check your connection.</p>
+                    </div>
+                `;
+            }
+        }
+
+        // --- RENDERING LOGIC ---
+        function renderMatches(data) {
+            grid.innerHTML = ''; // Clear loader
+
+            if (data.length === 0) {
+                grid.innerHTML = `<div class="loading-state"><p>No events found in this category.</p></div>`;
+                return;
+            }
+
+            data.forEach((match, index) => {
+                // Determine Live Status
+                const isLive = match.isLive === true;
+                
+                // Construct Card HTML
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.style.animationDelay = `${index * 0.1}s`; // Staggered animation
+
+                // Fallback for missing images
+                const imageSrc = match.src || 'https://via.placeholder.com/400x225?text=No+Image';
+
+                    // Determine Button Text & Function
+                const btnText = isLive ? '<i class="fa-solid fa-play"></i> Watch Now' : '<i class="fa-solid fa-bell"></i> Upcoming';
+                const btnClass = isLive ? '' : 'upcoming';
+                const clickAction = isLive ? `onclick="playVideo('${match.video_url}')"` : '';
+
+                card.innerHTML = `
+                    <div class="card-poster">
+                        <img src="${imageSrc}" alt="${match.event_name}" loading="lazy">
+                        ${isLive ? '<div class="live-tag">LIVE</div>' : ''}
+                        <div class="play-overlay">
+                            <div class="play-icon"><i class="fa-solid fa-play" style="color:white"></i></div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div>
+                            <div class="meta-row">
+                                <span class="badge">${match.event_category || 'Sports'}</span>
+                                <span class="badge">${match.audioLanguageName || 'ENG'}</span>
+                            </div>
+                            <h3 class="match-title">${match.match_name || match.event_name}</h3>
+                            <div class="event-name">${match.event_name}</div>
+                        </div>
+                        
+                        <div>
+                            <div class="channel-info">
+                                <i class="fa-solid fa-tv"></i> ${match.broadcast_channel || 'Sony Network'}
+                            </div>
+                            <button class="btn-watch ${btnClass}" ${clickAction}>
+                                ${btnText}
+                            </button>
+                        </div>
+                    </div>
+                `;
+
+                grid.appendChild(card);
+            });
+        }
+
+        // --- FILTER FUNCTION ---
+        window.filterData = function(type, btn) {
+            // Update Active Button
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            // Filter Array
+            let filtered = [];
+            if (type === 'all') {
+                filtered = allMatches;
+            } else if (type === 'live') {
+                filtered = allMatches.filter(m => m.isLive === true);
+            } else if (type === 'upcoming') {
+                filtered = allMatches.filter(m => m.isLive !== true);
+            }
+
+            renderMatches(filtered);
+        }
+
+        // --- PLAYER LOGIC ---
+        window.playVideo = function(url) {
+            if (!url) {
+                alert("Stream URL not available yet.");
+                return;
+            }
+            // Logic provided in original request
+            const proxyUrl = "https://mini.allinonereborn.fun/events/stream_proxy.php?url=" + encodeURIComponent(url);
+            window.open("player.html?url=" + encodeURIComponent(proxyUrl), "_blank");
+        }
+
+        // --- INITIALIZATION ---
+        window.onload = function() {
+            fetchMatches();
+        };
+
+    </script>
+</body>
+</html>
+
+
+
+

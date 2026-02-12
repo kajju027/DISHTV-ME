@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title> CRICKET NEWS POINT | WATCH FREE HD CRICKET, FOOTBALL & SPORTS ONLINE | 24/7 HLS STREAMING </title>
+<meta name="description" content="WATCH ALL LIVE STREAMS, INCLUDING HD CRICKET, FOOTBALL, AND KABADDI, ON OUR CUSTOM HLS PLAYER. FREE, SMOOTH, AND SECURE LIVE SPORTS STREAMING .CRICKET NEWS POINT OFFICIAL WEBSITE LIVE | WATCH FREE HD CRICKET, FOOTBALL & SPORTS ONLINE | 24/7 HLS STREAMING">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/shaka-player@4.3.4/dist/controls.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+:root {
+    --bg-color: #121212;
+    --primary-blue: #e30000;
+    --primary-blue-dark: #e30000;
+    
+    --card-bg: #1e1e1e;
+    --text-light: #f1f5f9;
+    --text-muted: #94a3b8;
+    --border-color: #2d2d2d;
+    --popup-bg: #282828;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #0a0a0a;
+    color: var(--text-light);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding: 1rem;
+}
+
+.popup-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000000;
+    z-index: 9998;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+.popup-backdrop.show {
+    display: block;
+    opacity: 1;
+}
+
+.container {
+    width: 100%;
+    max-width: 800px;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeIn 0.5s ease-out forwards;
+    z-index: 1;
+}
+@keyframes fadeIn { to { opacity: 1; transform: translateY(0); } }
+
+.stream-header {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    padding: 0.75rem 1.25rem;
+    border-radius: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+.stream-header h1 { font-size: 1.25rem; font-weight: 600; }
+.live-badge {
+    background-color: var(--primary-blue);
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    animation: pulse 1.5s infinite;
+}
+@keyframes pulse {
+    0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(227, 0, 0, 0.7); }
+    70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(227, 0, 0, 0); }
+    100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(227, 0, 0, 0); }
+}
+
+#player-container {
+    width: 100%;
+    height: 50vh;
+    max-height: 600px;
+    background-color: #000;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+}
+
+.rotate-fallback-notice{
+    position:absolute;
+    left:12px;
+    bottom:12px;
+    z-index:22000;
+    background:rgba(0,0,0,0.55);
+    color:var(--text-light);
+    padding:.4rem .6rem;
+    border-radius:8px;
+    font-size:.8rem;
+    display:none;
+}
+.player-rotated{
+    transform-origin: center center;
+    width:100vh;
+    height:100vw;
+    position:fixed;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%) rotate(90deg);
+    z-index:21000;
+    border-radius:0;
+}
+
+/* --- UPDATED VIEW COUNTER CSS --- */
+.view-counter {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    background: rgba(0, 0, 0, 0.4); 
+    padding: 4px 8px;
+    border-radius: 6px;
+    z-index: 9999;
+    text-align: right;
+    pointer-events: none;
+    backdrop-filter: blur(2px);
+}
+.view-counter .name {
+    font-size: 10px;
+    font-weight: 600; 
+    color: #fff;
+    opacity: 0.9;
+    margin-bottom: 1px;
+    text-shadow: none;
+    letter-spacing: 0.3px;
+    text-transform: capitalize; 
+}
+.view-counter .views {
+    font-size: 11px;
+    font-weight: 600;
+    color: #fff; 
+    text-shadow: 0 1px 2px rgba(0,0,0,0.5); 
+    letter-spacing: 0.3px;
+    transition: color 0.3s ease; 
+}
+
+.info-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1.25rem;
+    margin-top: 1rem;
+    text-align: center;
+}
+.info-card h2 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    color: var(--text-muted);
+}
+.action-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border-radius: 8px;
+    background: linear-gradient(90deg, var(--primary-blue), var(--primary-blue-dark));
+    color: white;
+    font-weight: 600;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.action-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(227, 0, 0, 0.4);
+}
+.action-button.copied { background: linear-gradient(90deg, #22c55e, #4ade80); }
+.back-link {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    margin-top: 1.5rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    padding: 0.5rem;
+    border-radius: 8px;
+    transition: background-color 0.2s ease;
+}
+.back-link:hover { background-color: var(--card-bg); color: var(--text-light); }
+
+.telegram-popup {
+    position: fixed;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    background: linear-gradient(145deg, #181818, #1f1f1f);
+    color: var(--text-light);
+    padding: 40px 25px;
+    border-radius: 16px;
+    box-shadow: 0 0 50px 10px rgba(227, 0, 0, 0.5), 0 0 20px rgba(227, 0, 0, 0.3) inset;
+    z-index: 10000;
+    text-align: center;
+    width: 90%;
+    max-width: 400px;
+    display: none;
+    border: 2px solid var(--primary-blue);
+    animation: popIn 0.4s ease-out forwards;
+}
+
+.telegram-popup h2 {
+    margin-top: 0;
+    color: var(--primary-blue);
+    font-size: 1.75rem;
+    font-weight: 700;
+    text-shadow: 0 0 10px rgba(227, 0, 0, 0.5);
+    margin-bottom: 0.75rem;
+}
+.telegram-popup p {
+    font-size: 1rem;
+    color: var(--text-muted);
+    margin-bottom: 1.75rem;
+    line-height: 1.5;
+}
+.telegram-popup button {
+    width: 100%;
+    padding: 14px;
+    margin-top: 12px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+.telegram-popup button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+}
+.telegram-popup .join-btn {
+    background: linear-gradient(90deg, var(--primary-blue), var(--primary-blue-dark));
+    color: white;
+    box-shadow: 0 0 12px rgba(227, 0, 0, 0.4);
+}
+.telegram-popup .join-btn:hover {
+    box-shadow: 0 0 25px rgba(227, 0, 0, 0.7);
+}
+.telegram-popup .joined-btn {
+    background-color: var(--border-color);
+    color: var(--text-light);
+    border: 1px solid var(--primary-blue-dark);
+}
+
+@media (max-width: 480px) {
+    .telegram-popup { padding: 30px 20px; max-width: 90%; }
+    .telegram-popup h2 { font-size: 1.5rem; }
+}
+
+
+.error-container {
+    width: 100%;
+    max-width: 700px;
+    min-height: 65vh;
+    text-align: center;
+    background: radial-gradient(circle at center, #1a1a1a 0%, #000000 100%);
+    border: 1px solid #2d2d2d;
+    border-radius: 24px;
+    padding: 4rem 2rem;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.9);
+}
+
+.error-container::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+    pointer-events: none;
+}
+
+.error-icon-wrapper {
+    position: relative;
+    margin-bottom: 2.5rem;
+}
+
+.error-icon {
+    font-size: 5rem;
+    color: #ffffff;
+    animation: float 3s ease-in-out infinite;
+}
+
+.error-ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 140px;
+    height: 140px;
+    border: 2px solid rgba(255, 255, 255, 0.15);
+    border-radius: 50%;
+    animation: ripple 2.5s linear infinite;
+}
+
+.error-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #ffffff;
+    letter-spacing: 6px;
+    margin-bottom: 1.2rem;
+    text-shadow: 0 0 15px rgba(255,255,255,0.2);
+}
+
+.error-desc {
+    color: #94a3b8;
+    font-size: 1.05rem;
+    max-width: 450px;
+    margin: 0 auto 3rem;
+    line-height: 1.6;
+}
+
+.btn-premium-bw {
+    background: #ffffff;
+    color: #000000;
+    padding: 16px 45px;
+    border-radius: 50px;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 1.5px;
+    text-decoration: none;
+    border: 2px solid #ffffff;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(255,255,255,0.15);
+}
+
+.btn-premium-bw:hover {
+    background: transparent;
+    color: #ffffff;
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(255,255,255,0.25);
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+@keyframes ripple {
+    0% { width: 0; height: 0; opacity: 0.6; }
+    100% { width: 220px; height: 220px; opacity: 0; }
+}
+
+@media (max-width: 480px) {
+    .error-title { font-size: 1.8rem; letter-spacing: 3px; }
+    .error-icon { font-size: 4rem; }
+    .error-desc { font-size: 0.9rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="popup-backdrop" id="popupBackdrop"></div>
+
+<main class="container">
+    <div id="stream-content"></div>
+</main>
+
+<div class="telegram-popup" id="telegramPopup">
+    <h2><i class="fa-brands fa-whatsapp"></i> Support Us!</h2>
+    <p>Join our WhatsApp channel <strong>𝗖𝗥𝗜𝗖𝗞𝗘𝗧 𝗡𝗘𝗪𝗦 𝗣𝗢𝗜𝗡𝗧 ™</strong> For Instant Updates & Exclusive Links.</p>
+    <a href="https://whatsapp.com/channel/0029VaeylYYBPzjVNomWuZ0T" target="_blank" rel="noopener"><button class="join-btn">Join Now</button></a>
+    <button class="joined-btn" id="closePopupBtn">Already Joined</button>
+</div>
+
+<script>
+const telegramPopup = document.getElementById('telegramPopup');
+const popupBackdrop = document.getElementById('popupBackdrop');
+const closePopupBtn = document.getElementById('closePopupBtn');
+
+function showPopup(){
+    telegramPopup.style.display = 'block';
+    popupBackdrop.classList.add('show');
+}
+
+function hidePopup(){
+    telegramPopup.style.display = 'none';
+    popupBackdrop.classList.remove('show');
+}
+
+closePopupBtn.addEventListener('click', hidePopup);
+
+async function lockLandscape() {
+    try {
+      if ('orientation' in screen && screen.orientation && screen.orientation.lock) {
+        await screen.orientation.lock("landscape");
+        return { locked: true, method: 'screen.orientation.lock' };
+      } else if (window.screen && window.screen.lockOrientation) {
+        let ok = window.screen.lockOrientation('landscape');
+        return { locked: !!ok, method: 'screen.lockOrientation' };
+      } else {
+        return { locked: false, reason: 'no-api' };
+      }
+    } catch (e) {
+      console.warn("Orientation lock failed:", e);
+      return { locked: false, error: e };
+    }
+}
+
+async function unlockOrientation() {
+    try {
+      if ('orientation' in screen && screen.orientation && screen.orientation.unlock) {
+        screen.orientation.unlock();
+      } else if (window.screen && window.screen.unlockOrientation) {
+        window.screen.unlockOrientation();
+      }
+    } catch (e) { console.warn('unlock orientation failed', e); }
+}
+
+function applyRotateCssFallback(){
+    const pc = document.getElementById('player-container');
+    if(!pc) return;
+    pc.classList.add('player-rotated');
+    const notice = document.querySelector('.rotate-fallback-notice');
+    if(notice) notice.style.display = 'block';
+}
+
+function removeRotateCssFallback(){
+    const pc = document.getElementById('player-container');
+    if(!pc) return;
+    pc.classList.remove('player-rotated');
+    const notice = document.querySelector('.rotate-fallback-notice');
+    if(notice) notice.style.display = 'none';
+}
+
+async function onFullScreenChange() {
+    const fsElement = document.fullscreenElement || document.webkitFullscreenElement || document.msFullscreenElement;
+    if (fsElement) {
+      const lockRes = await lockLandscape();
+      if (!lockRes.locked) {
+        applyRotateCssFallback();
+      }
+    } else {
+      await unlockOrientation();
+      removeRotateCssFallback();
+    }
+}
+
+document.addEventListener('fullscreenchange', onFullScreenChange);
+document.addEventListener('webkitfullscreenchange', onFullScreenChange);
+document.addEventListener('msfullscreenchange', onFullScreenChange);
+
+/* --- DUAL JSON SOURCE LOGIC --- */
+async function initializeApp() {
+    try {
+        const jsonUrl1 = 'https://allrounderlive.pages.dev/id.json'; 
+        const jsonUrl2 = 'https://sayan-json-official.pages.dev/ID.json'; 
+        
+        const [res1, res2] = await Promise.allSettled([
+            fetch(jsonUrl1),
+            fetch(jsonUrl2)
+        ]);
+
+        let data1 = [];
+        let data2 = [];
+
+        if (res1.status === 'fulfilled' && res1.value.ok) {
+            try {
+                const json1 = await res1.value.json();
+                data1 = json1.iframes || [];
+            } catch(e) { console.error("Error parsing JSON 1", e); }
+        }
+
+        if (res2.status === 'fulfilled' && res2.value.ok) {
+            try {
+                const json2 = await res2.value.json();
+                data2 = json2.iframes || [];
+            } catch(e) { console.error("Error parsing JSON 2", e); }
+        }
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const streamId = urlParams.get('id');
+
+        let streamData = data1.find(item => item.id === streamId);
+
+        if (!streamData) {
+            streamData = data2.find(item => item.id === streamId);
+        }
+
+        if (streamData) {
+            renderIframeUI(streamData);
+            setTimeout(showPopup, 1000); 
+        } else {
+            renderErrorUI();
+        }
+    } catch (err) {
+        console.error(err);
+        renderErrorUI();
+    }
+}
+
+function renderIframeUI(data) {
+    const contentDiv = document.getElementById('stream-content');
+    contentDiv.innerHTML = `
+        <div class="stream-header">
+            <h1>${data.name}</h1>
+            <div class="live-badge"><i class="fa-solid fa-circle"></i> LIVE</div>
+        </div>
+        <div id="player-container">
+            <iframe src="${data.iframeSrc}" style="width:100%; height:100%; border:0;" allow="encrypted-media; autoplay; fullscreen" allowfullscreen></iframe>
+            
+            <div class="view-counter">
+                <div class="name" id="viewChannelName">${data.name}</div>
+                <div class="views" id="viewCount">...</div>
+            </div>
+            <div class="rotate-fallback-notice" id="rotateNotice">Rotation active — tap exit to return</div>
+        </div>
+        
+        <div class="info-card">
+            <h2><i class="fa-solid fa-bell"></i> Follow us for Updates !!</h2>
+            <a href="https://whatsapp.com/channel/0029VaeylYYBPzjVNomWuZ0T" target="_blank" rel="noopener" class="action-button">
+                <i class="fa-brands fa-whatsapp"></i> Click Here To Join WhatsApp
+            </a>
+        </div>
+        <div class="info-card">
+            <h2><i class="fa-solid fa-link"></i> Copy Link & Share</h2>
+            <button class="action-button" id="shareButton"><i class="fa-solid fa-share-nodes"></i> Click Here To Share This Page Link</button>
+        </div>
+        <a href="https://Cnpoint.pages.dev/Feedback" class="back-link"><i class="fa-solid fa-arrow-left"></i> Join Live Chat</a>
+    `;
+
+    document.getElementById('shareButton').addEventListener('click', async () => {
+        try {
+            await navigator.clipboard.writeText(window.location.href);
+            const btn = document.getElementById('shareButton');
+            const original = btn.innerHTML;
+            btn.innerHTML = `<i class="fa-solid fa-check"></i> Link Copied!`;
+            btn.classList.add('copied');
+            setTimeout(() => { btn.innerHTML = original; btn.classList.remove('copied'); }, 2000);
+        } catch (err) { console.error(err); }
+    });
+
+    startViewCounter(data.id);
+}
+
+function renderErrorUI() {
+    const contentDiv = document.getElementById('stream-content');
+    document.title = "Signal Lost - Support";
+    
+    contentDiv.innerHTML = `
+    <div class="error-container">
+        <div class="error-icon-wrapper">
+            <div class="error-ring"></div>
+            <i class="fa-solid fa-tower-broadcast error-icon"></i>
+        </div>
+
+        <h1 class="error-title">Signal Lost</h1>
+
+        <p class="error-desc">
+            We Couldn't Connect To The Requested Stream. The ID Might Be Invalid,
+            Expired, Or The Broadcast Has Ended.
+        </p>
+
+        <a href="https://sayan-mete.pages.dev/contact" target="_blank" class="btn-premium-bw">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 1C6.486 1 2 5.486 2 11v5a3 3 0 003 3h1v-7H5v-1c0-3.86 3.141-7 7-7s7 3.14 7 7v1h-1v7h1a3 3 0 003-3v-5c0-5.514-4.486-10-10-10z"/>
+            </svg>
+            Contact Admin
+        </a>
+    </div>`;
+}
+
+document.addEventListener("DOMContentLoaded", initializeApp);
+
+/* --- UPDATED: ROBUST VIEW COUNTER LOGIC --- */
+let globalRawViews = 0; 
+let isMillionCycleState = false; 
+
+// Cycle Timer: 25s Normal (K/M based on tier) -> 6s Highlight (Red M)
+function startMillionToggleCycle() {
+    const runCycle = () => {
+        // State 1: Normal (Wait 25s)
+        isMillionCycleState = false;
+        updateDisplay(); 
+        
+        setTimeout(() => {
+            // State 2: Red Million Mode (Wait 6s)
+            isMillionCycleState = true;
+            updateDisplay();
+            
+            setTimeout(() => {
+                runCycle(); 
+            }, 6000); 
+        }, 25000); 
+    };
+    runCycle();
+}
+
+function updateDisplay() {
+    const el = document.getElementById("viewCount");
+    if(!el) return;
+
+    // Safety fallback
+    if(globalRawViews === 0 || isNaN(globalRawViews)) {
+        el.innerText = "0 Views";
+        el.style.color = "#ffffff";
+        return;
+    }
+
+    let displayStr = "";
+    let isRedMode = false;
+    
+    // TIER 1: < 10,000 -> Just Number (No K)
+    if (globalRawViews < 10000) {
+        displayStr = globalRawViews + " Views";
+    }
+    // TIER 2: 10,000 to 1,500,000 -> Always K (White)
+    else if (globalRawViews < 1500000) {
+        let val = (globalRawViews / 1000).toFixed(1);
+        displayStr = val + "K Views";
+    } 
+    // TIER 3: 1,500,000 to 100,000,000 (10 Crore) -> Cycle K and M
+    else if (globalRawViews < 100000000) {
+        if (isMillionCycleState) {
+            // RED MODE: Show Million
+            let val = (globalRawViews / 1000000).toFixed(2);
+            displayStr = val + "M Views";
+            isRedMode = true;
+        } else {
+            // NORMAL MODE: Show K
+            let val = (globalRawViews / 1000).toFixed(1);
+            displayStr = val + "K Views";
+            isRedMode = false;
+        }
+    }
+    // TIER 4: > 100,000,000 (10 Crore) -> Permanent M (Red)
+    else {
+        let val = (globalRawViews / 1000000).toFixed(2);
+        displayStr = val + "M Views";
+        isRedMode = true;
+    }
+    
+    el.innerText = displayStr;
+    el.style.color = isRedMode ? "#e30000" : "#ffffff";
+}
+
+async function fetchViews(streamId) {
+    const API_BASE = 'https://sayan-prime.pages.dev/api'; 
+    
+    try {
+
+        const res = await fetch(`${API_BASE}/get?key=${streamId}`, {
+            method: 'GET',
+            credentials: 'omit'
+        });
+        
+        if (!res.ok) throw new Error("Network response was not ok");
+
+        const json = await res.json();
+        
+        if(json.total) {
+            globalRawViews = parseInt(json.total);
+        } else {
+
+             if(globalRawViews === 0) globalRawViews = 0;
+        }
+        
+    } catch(err) {
+        console.log("View counter blocked or failed:", err);
+        
+        if(globalRawViews === 0) {
+             const el = document.getElementById("viewCount");
+             if(el) el.innerText = "N/A";
+        }
+    }
+    
+    updateDisplay();
+}
+
+async function startViewCounter(streamId) {
+    const API_BASE = 'https://sayan-prime.pages.dev/api';
+   
+    try {
+        await fetch(`${API_BASE}/hit?key=${streamId}&unique=1`, { credentials: 'omit' });
+    } catch(e) { console.warn("Hit blocked by client"); }
+    
+    await fetchViews(streamId);
+
+    setInterval(() => fetchViews(streamId), 10000); 
+    
+    startMillionToggleCycle();
+}
+</script>
+</body>
+</html>

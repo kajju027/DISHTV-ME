@@ -1,0 +1,438 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>JioTV Cricket Widget</title>
+    <style>
+        .footer--hidden {
+            display: none;
+        }
+        /* Hide Taboola ad container */
+#rbox-c2m,
+.trc_rbox_div,
+div[id^="rbox-"] {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    width: 0 !important;
+}
+#ad-1 {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    width: 0 !important;
+}
+
+    </style>
+</head>
+
+<body>
+    <div class="view"></div>
+    <div class="sticker-section"></div>
+    <div class="footer footer--hidden"><span class="footer__title">Powered By</span> <span class="footer__brandname"><img src="https://widget.jionews.com/jiotv-cricket/prod/v1/assets/espncricinfo-logo.svg" /> </span></div>
+    <script src="https://widget.jionews.com/assets/widget_sdk/v1.0/dist/jionews_sdk.min.js"></script>
+    <script>
+        /*! For license information please see main.a1d9a83668c6a0f7f814.js.LICENSE.txt */
+        (() => { "use strict"; var e = { 311: (e, t, a) => { a.d(t, { A: () => s }); var r = a(601),
+                            n = a.n(r),
+                            o = a(314),
+                            i = a.n(o)()(n());
+                        i.push([e.id, '*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}article,aside,details,figcaption,figure,footer,header,main,nav,section,summary{display:block}body{font-family:"JioType",helvetica,arial,sans-serif;line-height:1.5;background-color:var(--color-background)}a{text-decoration:none;color:inherit;outline:none}ul,ol{list-style:none}img{max-width:100%;height:auto}button,input,select,textarea{border:none;outline:none;background:none;font-family:inherit;font-size:inherit;line-height:inherit}table{border-collapse:collapse;border-spacing:0}html{font-size:16px}html,body{height:100%}@font-face{font-family:JioType;src:url(https://dev-jiostatic.azurewebsites.net/static/fonts/JioType/JioType-Medium.woff2) format("woff2"),url(https://dev-jiostatic.azurewebsites.net/static/fonts/JioType/JioType-Medium.woff) format("woff"),url(https://dev-jiostatic.azurewebsites.net/static/fonts/JioType/JioType-Medium.ttf) format("truetype");font-weight:500;font-style:normal;font-display:swap}body.theme-dark{background-color:#000}.view{padding:1rem;min-height:calc(100vh - 36px);display:flex;flex-direction:column}.loader{border-top:10px solid #db3434;border-radius:50%;width:100px;height:100px;margin:auto;position:relative;top:50px;animation:spin 2s linear infinite}.footer{display:flex;flex-direction:row;align-items:center;gap:5px;margin-top:auto;padding:0 1rem}.footer--hidden{display:none}.footer__title{font-size:.75rem;margin-bottom:8px;color:#2b2b2b}.footer__brandname{color:#2b2b2b;font-size:.75rem;font-weight:900;margin-bottom:8px;display:flex;flex-direction:row}.footer__brandname img{height:12px;margin-bottom:4px}.footer__jionews-logo{display:flex;flex-direction:row;margin-left:auto;margin-bottom:8px}.footer__jionews-logo span{font-size:.75rem;font-weight:700;line-height:.75rem;color:#2b2b2b;padding-left:.25rem;margin-top:auto;margin-bottom:auto}body.theme-dark .footer__title{color:#e0e0e0}body.theme-dark .footer__brandname{color:#e0e0e0}body.theme-dark .footer__jionews-logo span{color:#e0e0e0}', ""]); const s = i }, 374: (e, t, a) => { a.d(t, { A: () => s }); var r = a(601),
+                            n = a.n(r),
+                            o = a(314),
+                            i = a.n(o)()(n());
+                        i.push([e.id, '.card{background:#141414;padding:1rem;border-radius:.62rem;margin:1rem 0rem;gap:1rem;border:1px solid #5d5d5d;color:#e0e0e0;position:relative;display:flex;flex-direction:column}.card__live-tag{background-color:#2b2b2b;border-radius:16px;padding:4px 12px;font-size:12px;color:#e02934;font-weight:700;width:fit-content;position:absolute;top:16px;right:36px}.card__live-tag::before{content:"";display:inline-block;width:8px;height:8px;background-color:#e02934;border-radius:50%;margin-right:5px;animation-name:livetag;animation-duration:1s;animation-timing-function:linear;animation-direction:alternate;animation-iteration-count:infinite}.card__top-row{display:flex;flex-direction:row}.card__match-info-series-name{font-size:12px;font-weight:700}.card__match-info-series-name .dot-seperator{display:inline-block;border-radius:50%;height:4px;width:4px;background-color:#e0e0e0}.card__match-info-match-name{font-size:12px;font-weight:300}.card__match-info-match-name .dot-seperator{display:inline-block;position:relative;border-radius:50%;height:4px;width:4px;background-color:#e0e0e0;top:-2px}.card__match-info-venue{font-size:12px;font-weight:300}.card__expander{margin-left:auto}.card__expander.hidden,.card__expander svg.hidden{display:none}.card__team-score-details{display:flex;flex-direction:row;justify-content:space-between}.card__team-score-details__versus-text{font-size:12px;font-weight:700;margin-top:5px}.card__team-1-score-details,.card__team-2-score-details{display:flex;flex-direction:column}.card__team-1-score-details__top-row,.card__team-2-score-details__top-row{display:flex;flex-direction:row;gap:8px;align-items:center}.card__team-1-score-details__captain-img,.card__team-2-score-details__captain-img{width:30px;height:30px;border-radius:2.5px;overflow:hidden}.card__team-1-score-details__captain-img.hidden,.card__team-2-score-details__captain-img.hidden{display:none}.card__team-1-score-details__captain-img img,.card__team-2-score-details__captain-img img{width:100%;height:100%}.card__team-1-score-details__team-name,.card__team-2-score-details__team-name{font-weight:700}.card__team-1-score-details__team-logo,.card__team-2-score-details__team-logo{width:30px;height:30px;border-radius:2.5px;overflow:hidden}.card__team-1-score-details__team-logo img,.card__team-2-score-details__team-logo img{width:100%;height:100%}.card__team-1-score-details__bottom-row,.card__team-2-score-details__bottom-row{display:flex;flex-direction:column;margin-top:8px;text-align:center}.card__team-1-score-details__bottom-row__runs,.card__team-2-score-details__bottom-row__runs{font-size:14px;font-weight:700}.card__team-1-score-details__bottom-row__overs,.card__team-2-score-details__bottom-row__overs{font-size:12px}.card__team-2-score-details__top-row{margin-left:auto}.card__match-status-row{text-align:center;font-size:12px}.card__live-tabs{display:flex;flex-direction:row;width:fit-content;justify-content:center;gap:16px;width:100%}.card__live-tabs.hidden{display:none}.card__live-tab{background-color:#2b2b2b;border-radius:16px;padding:4px 24px;color:#f5f5f5;font-size:12px;border:1px solid #5d5d5d;white-space:nowrap}.card__live-tab--selected{border:1px solid #c11539}@keyframes livetag{0%{opacity:.2}25%{opacity:.3}50%{opacity:.5}75%{opacity:.75}100%{opacity:1}}', ""]); const s = i }, 732: (e, t, a) => { a.d(t, { A: () => s }); var r = a(601),
+                            n = a.n(r),
+                            o = a(314),
+                            i = a.n(o)()(n());
+                        i.push([e.id, ".card__commentary{display:flex;flex-direction:column;gap:8px}.card__commentary.hidden{display:none}.card__commentary-row{display:flex;flex-direction:row;gap:16px;align-items:center}.card__commentary-ball-number{color:#f5f5f5;font-size:12px;min-width:40px;text-align:center}.card__commentary-ball-runs{border-radius:50%;font-size:14px;font-weight:700;background-color:#a1a1a1;color:#141414;min-width:40px;height:40px;display:flex;flex-direction:row}.card__commentary-ball-runs--six{background-color:#03753c;color:#f5f5f5}.card__commentary-ball-runs--four{background-color:#0078ad;color:#f5f5f5}.card__commentary-ball-runs--wicket{background-color:#a80000;color:#f5f5f5}.card__commentary-ball-runs span{margin:auto}.card__commentary-details{color:#f5f5f5;font-size:12px}", ""]); const s = i }, 584: (e, t, a) => { a.d(t, { A: () => s }); var r = a(601),
+                            n = a.n(r),
+                            o = a(314),
+                            i = a.n(o)()(n());
+                        i.push([e.id, ".loader-logo{margin:auto;animation:logo 1.5s linear infinite;text-align:center}.loader-logo svg{width:80px;height:80px}.loader-logo__text{color:#2b2b2b;font-size:1.5rem;font-weight:700}@keyframes logo{0%{transform:scale(0.5)}50%{transform:scale(0.7)}100%{transform:scale(0.5)}}body.theme-dark .loader-logo__text{color:#e0e0e0}", ""]); const s = i }, 158: (e, t, a) => { a.d(t, { A: () => s }); var r = a(601),
+                            n = a.n(r),
+                            o = a(314),
+                            i = a.n(o)()(n());
+                        i.push([e.id, ".card__ball-by-ball-row{display:flex;flex-direction:row;gap:8px;overflow:scroll}.card__ball-by-ball-row::-webkit-scrollbar{display:none}.card__ball-by-ball-row.hidden{display:none}.card__over-box-wrapper{display:flex;flex-direction:column}.card__over-box{display:flex;flex-direction:row;gap:1px}.card__over-box-title{color:#b5b5b5;font-size:10px}.card__ball-box{padding:4px;font-size:12px;background-color:#2b2b2b;min-width:15px}.card__ball-box--six{background-color:#03753c}.card__ball-box--four{background-color:#0078ad}.card__ball-box--wicket{background-color:#a80000}", ""]); const s = i }, 110: (e, t, a) => { a.d(t, { A: () => s }); var r = a(601),
+                            n = a.n(r),
+                            o = a(314),
+                            i = a.n(o)()(n());
+                        i.push([e.id, ".card__points-table-wrapper.hidden{display:none}.card__points-table{width:100%;margin-bottom:1rem}.card__points-table-header{font-size:12px;font-weight:700;color:#fff}.card__points-table thead{font-size:10px;color:#8e8e8e;border-bottom:1px solid #2b2b2b}.card__points-table thead th{text-align:left;padding:4px 0}.card__points-table tbody{font-size:12px;color:#f5f5f5}.card__points-table tbody td{padding:4px 0;width:13%}.card__points-table tbody td:first-child{width:30%}", ""]); const s = i }, 660: (e, t, a) => { a.d(t, { A: () => s }); var r = a(601),
+                            n = a.n(r),
+                            o = a(314),
+                            i = a.n(o)()(n());
+                        i.push([e.id, ".card__score-table-row.hidden{display:none}.card__batting-table,.card__bowling-table{width:100%}.card__batting-table thead,.card__bowling-table thead{font-size:10px;color:#8e8e8e;border-bottom:1px solid #2b2b2b}.card__batting-table thead th,.card__bowling-table thead th{text-align:left;padding:4px 0}.card__batting-table tbody,.card__bowling-table tbody{font-size:12px;color:#f5f5f5}.card__batting-table tbody td,.card__bowling-table tbody td{padding:4px 0;width:13%}.card__batting-table tbody td:first-child,.card__bowling-table tbody td:first-child{width:30%}", ""]); const s = i }, 68: (e, t, a) => { a.d(t, { A: () => s }); var r = a(601),
+                            n = a.n(r),
+                            o = a(314),
+                            i = a.n(o)()(n());
+                        i.push([e.id, ".stickers{display:flex;flex-direction:column;align-items:center;background:rgba(71,135,231,.1);backdrop-filter:blur(30px);padding:10px;border:1px solid hsla(0,0%,100%,.1);border-radius:25px;box-shadow:0 4px 10px rgba(0,0,0,.2);position:fixed;bottom:0;left:0;right:0;margin:.3rem 1rem;transition:bottom .3s ease-in}.stickers__group{display:flex;align-items:center}.stickers__scrolled{bottom:30px}.stickers__row{display:grid;grid-template-columns:repeat(5, 60px);justify-items:center;gap:4px;transition:all .3s ease-in-out}.stickers__expanded{grid-template-rows:repeat(2, auto)}.stickers__sticker{width:40px;height:40px;cursor:pointer;transition:transform .2s ease-in-out}.stickers__sticker img{width:100%;height:auto}.stickers__expand{padding:5px 10px;font-size:16px;cursor:pointer;border:none;color:red;border-radius:5px;transition:background .2s}.stickers__expand svg{height:32px;width:32px}.stickers__floating{position:absolute;left:var(--x, 50vw);animation:floatSticker 4s linear infinite alternate;z-index:1001}@keyframes floatSticker{0%{bottom:calc(50px - var(--scroll-y));transform:translate3d(var(--x-random, 0px), 0px, 0px) scale(1);left:clamp(30vw,var(--x, 50vw) - 50px,70vw)}50%{bottom:calc(50vh - var(--scroll-y));transform:translate3d(calc(var(--x-random, 0px) * -1), 0px, 0px) scale(2)}100%{bottom:calc(100vh - var(--scroll-y));transform:translate3d(var(--x-random, 0px), 0px, 0px) scale(1);left:clamp(30vw,var(--x, 50vw) + 50px,70vw)}}body.theme-dark .stickers__expand{color:#fff}", ""]); const s = i }, 754: (e, t, a) => { a.d(t, { A: () => s }); var r = a(601),
+                            n = a.n(r),
+                            o = a(314),
+                            i = a.n(o)()(n());
+                        i.push([e.id, ".tabs-wrapper{padding-left:16px;padding-right:16px;padding-top:16px;overflow-x:scroll}.tabs-wrapper::-webkit-scrollbar{display:none}.tabs{display:flex;flex-direction:row;width:fit-content;min-width:100vw;gap:8px}.tabs__tournament{background-color:#141414;border-radius:16px;padding:4px 16px;color:#f5f5f5;font-size:14px;border:1px solid #5d5d5d;white-space:nowrap}.tabs__tournament--selected{border:1px solid #c11539}", ""]); const s = i }, 314: e => { e.exports = function(e) { var t = []; return t.toString = function() { return this.map((function(t) { var a = "",
+                                        r = void 0 !== t[5]; return t[4] && (a += "@supports (".concat(t[4], ") {")), t[2] && (a += "@media ".concat(t[2], " {")), r && (a += "@layer".concat(t[5].length > 0 ? " ".concat(t[5]) : "", " {")), a += e(t), r && (a += "}"), t[2] && (a += "}"), t[4] && (a += "}"), a })).join("") }, t.i = function(e, a, r, n, o) { "string" == typeof e && (e = [
+                                    [null, e, void 0]
+                                ]); var i = {}; if (r)
+                                    for (var s = 0; s < this.length; s++) { var c = this[s][0];
+                                        null != c && (i[c] = !0) }
+                                for (var l = 0; l < e.length; l++) { var d = [].concat(e[l]);
+                                    r && i[d[0]] || (void 0 !== o && (void 0 === d[5] || (d[1] = "@layer".concat(d[5].length > 0 ? " ".concat(d[5]) : "", " {").concat(d[1], "}")), d[5] = o), a && (d[2] ? (d[1] = "@media ".concat(d[2], " {").concat(d[1], "}"), d[2] = a) : d[2] = a), n && (d[4] ? (d[1] = "@supports (".concat(d[4], ") {").concat(d[1], "}"), d[4] = n) : d[4] = "".concat(n)), t.push(d)) } }, t } }, 601: e => { e.exports = function(e) { return e[1] } }, 72: e => { var t = [];
+                        
+                        function a(e) { for (var a = -1, r = 0; r < t.length; r++)
+                                if (t[r].identifier === e) { a = r; break } return a }
+                        
+                        function r(e, r) { for (var o = {}, i = [], s = 0; s < e.length; s++) { var c = e[s],
+                                    l = r.base ? c[0] + r.base : c[0],
+                                    d = o[l] || 0,
+                                    m = "".concat(l, " ").concat(d);
+                                o[l] = d + 1; var u = a(m),
+                                    p = { css: c[1], media: c[2], sourceMap: c[3], supports: c[4], layer: c[5] }; if (-1 !== u) t[u].references++, t[u].updater(p);
+                                else { var _ = n(p, r);
+                                    r.byIndex = s, t.splice(s, 0, { identifier: m, updater: _, references: 1 }) } i.push(m) } return i }
+                        
+                        function n(e, t) { var a = t.domAPI(t); return a.update(e),
+                                function(t) { if (t) { if (t.css === e.css && t.media === e.media && t.sourceMap === e.sourceMap && t.supports === e.supports && t.layer === e.layer) return;
+                                        a.update(e = t) } else a.remove() } } e.exports = function(e, n) { var o = r(e = e || [], n = n || {}); return function(e) { e = e || []; for (var i = 0; i < o.length; i++) { var s = a(o[i]);
+                                    t[s].references-- } for (var c = r(e, n), l = 0; l < o.length; l++) { var d = a(o[l]);
+                                    0 === t[d].references && (t[d].updater(), t.splice(d, 1)) } o = c } } }, 659: e => { var t = {};
+                        e.exports = function(e, a) { var r = function(e) { if (void 0 === t[e]) { var a = document.querySelector(e); if (window.HTMLIFrameElement && a instanceof window.HTMLIFrameElement) try { a = a.contentDocument.head } catch (e) { a = null } t[e] = a } return t[e] }(e); if (!r) throw new Error("Couldn't find a style target. This probably means that the value for the 'insert' parameter is invalid.");
+                            r.appendChild(a) } }, 540: e => { e.exports = function(e) { var t = document.createElement("style"); return e.setAttributes(t, e.attributes), e.insert(t, e.options), t } }, 56: (e, t, a) => { e.exports = function(e) { var t = a.nc;
+                            t && e.setAttribute("nonce", t) } }, 825: e => { e.exports = function(e) { if ("undefined" == typeof document) return { update: function() {}, remove: function() {} }; var t = e.insertStyleElement(e); return { update: function(a) {! function(e, t, a) { var r = "";
+                                        a.supports && (r += "@supports (".concat(a.supports, ") {")), a.media && (r += "@media ".concat(a.media, " {")); var n = void 0 !== a.layer;
+                                        n && (r += "@layer".concat(a.layer.length > 0 ? " ".concat(a.layer) : "", " {")), r += a.css, n && (r += "}"), a.media && (r += "}"), a.supports && (r += "}"); var o = a.sourceMap;
+                                        o && "undefined" != typeof btoa && (r += "\n/*# sourceMappingURL=data:application/json;base64,".concat(btoa(unescape(encodeURIComponent(JSON.stringify(o)))), " */")), t.styleTagTransform(r, e, t.options) }(t, e, a) }, remove: function() {! function(e) { if (null === e.parentNode) return !1;
+                                        e.parentNode.removeChild(e) }(t) } } } }, 113: e => { e.exports = function(e, t) { if (t.styleSheet) t.styleSheet.cssText = e;
+                            else { for (; t.firstChild;) t.removeChild(t.firstChild);
+                                t.appendChild(document.createTextNode(e)) } } } },
+                t = {};
+            
+            function a(r) { var n = t[r]; if (void 0 !== n) return n.exports; var o = t[r] = { id: r, exports: {} }; return e[r](o, o.exports, a), o.exports } a.n = e => { var t = e && e.__esModule ? () => e.default : () => e; return a.d(t, { a: t }), t }, a.d = (e, t) => { for (var r in t) a.o(t, r) && !a.o(e, r) && Object.defineProperty(e, r, { enumerable: !0, get: t[r] }) }, a.o = (e, t) => Object.prototype.hasOwnProperty.call(e, t), a.nc = void 0; var r = a(72),
+                n = a.n(r),
+                o = a(825),
+                i = a.n(o),
+                s = a(659),
+                c = a.n(s),
+                l = a(56),
+                d = a.n(l),
+                m = a(540),
+                u = a.n(m),
+                p = a(113),
+                _ = a.n(p),
+                f = a(311),
+                h = {};
+            
+            function b(e) { return b = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(e) { return typeof e } : function(e) { return e && "function" == typeof Symbol && e.constructor === Symbol && e !== Symbol.prototype ? "symbol" : typeof e }, b(e) }
+            
+            function v(e, t) { var a = Object.keys(e); if (Object.getOwnPropertySymbols) { var r = Object.getOwnPropertySymbols(e);
+                    t && (r = r.filter((function(t) { return Object.getOwnPropertyDescriptor(e, t).enumerable }))), a.push.apply(a, r) } return a }
+            
+            function g(e) { for (var t = 1; t < arguments.length; t++) { var a = null != arguments[t] ? arguments[t] : {};
+                    t % 2 ? v(Object(a), !0).forEach((function(t) { y(e, t, a[t]) })) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(a)) : v(Object(a)).forEach((function(t) { Object.defineProperty(e, t, Object.getOwnPropertyDescriptor(a, t)) })) } return e }
+            
+            function y(e, t, a) { return (t = x(t)) in e ? Object.defineProperty(e, t, { value: a, enumerable: !0, configurable: !0, writable: !0 }) : e[t] = a, e }
+            
+            function w(e, t) { for (var a = 0; a < t.length; a++) { var r = t[a];
+                    r.enumerable = r.enumerable || !1, r.configurable = !0, "value" in r && (r.writable = !0), Object.defineProperty(e, x(r.key), r) } }
+            
+            function x(e) { var t = function(e) { if ("object" != b(e) || !e) return e; var t = e[Symbol.toPrimitive]; if (void 0 !== t) { var a = t.call(e, "string"); if ("object" != b(a)) return a; throw new TypeError("@@toPrimitive must return a primitive value.") } return String(e) }(e); return "symbol" == b(t) ? t : t + "" } h.styleTagTransform = _(), h.setAttributes = d(), h.insert = c().bind(null, "head"), h.domAPI = i(), h.insertStyleElement = u(), n()(f.A, h), f.A && f.A.locals && f.A.locals; var k = function(e, t, a, r) { fetch(e, t).then((function(e) { if (e.ok) return e.json(); throw { status: e.status, errorPromise: e.json() } })).then((function(e) { return a(e) })).catch((function(e) { return r(e) })) },
+                A = new(function() { return e = function e() {! function(e, t) { if (!(e instanceof t)) throw new TypeError("Cannot call a class as a function") }(this, e) }, (t = [{ key: "getRequest", value: function(e, t, a, r) { var n = { method: "GET", headers: g({}, t) };
+                            k(e, n, a, r) } }, { key: "postRequest", value: function(e, t, a, r, n) { var o = { method: "POST", headers: g({}, t), body: a };
+                            k(e, o, r, n) } }, { key: "deleteRequest", value: function(e, t, a, r, n) { var o = { method: "DELETE", headers: g({}, t), body: a };
+                            k(e, o, r, n) } }, { key: "putRequest", value: function(e, t, a, r, n) { var o = { method: "PUT", headers: g({}, t), body: a };
+                            k(e, o, r, n) } }, { key: "patchRequest", value: function() {} }]) && w(e.prototype, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; var e, t }()),
+                S = a(374),
+                T = {};
+            T.styleTagTransform = _(), T.setAttributes = d(), T.insert = c().bind(null, "head"), T.domAPI = i(), T.insertStyleElement = u(), n()(S.A, T), S.A && S.A.locals && S.A.locals; var P = a(660),
+                L = {};
+            L.styleTagTransform = _(), L.setAttributes = d(), L.insert = c().bind(null, "head"), L.domAPI = i(), L.insertStyleElement = u(), n()(P.A, L), P.A && P.A.locals && P.A.locals; var E = function() { var e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {},
+                        t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {},
+                        a = document.createElement("div");
+                    a.className = "card__score-table-row"; var r = function(e) { var t = document.createElement("table");
+                        t.className = "card__batting-table"; var a = "\n        <thead>\n            <th>Batting</th>\n            <th>R</th>\n            <th>B</th>\n            <th>4S</th>\n            <th>6S</th>\n            <th>SR</th>\n        </thead>\n        <tbody>\n            <tr>\n                <td>".concat(e.batsman1.batting, " *</td>\n                <td>").concat(e.batsman1.runs, "</td>\n                <td>").concat(e.batsman1.balls, "</td>\n                <td>").concat(e.batsman1.fours, "</td>\n                <td>").concat(e.batsman1.sixes, "</td>\n                <td>").concat(e.batsman1.strike_rate, "</td>\n            </tr>\n    "); return e.batsman2 && (a += "\n            <tr>\n                <td>".concat(e.batsman2.batting, "</td>\n                <td>").concat(e.batsman2.runs, "</td>\n                <td>").concat(e.batsman2.balls, "</td>\n                <td>").concat(e.batsman2.fours, "</td>\n                <td>").concat(e.batsman2.sixes, "</td>\n                <td>").concat(e.batsman2.strike_rate, "</td>\n            </tr>\n        ")), a += "</tbody>", t.innerHTML = a, t }(e);
+                    a.appendChild(r); var n = function(e) { var t = document.createElement("table");
+                        t.className = "card__bowling-table"; var a = "\n        <thead>\n            <th>Bowling</th>\n            <th>O</th>\n            <th>M</th>\n            <th>R</th>\n            <th>W</th>\n            <th>ECO</th>\n        </thead>\n        <tbody>\n            <tr>\n                <td>".concat(e.bowler, "</td>\n                <td>").concat(e.overs, "</td>\n                <td>").concat(e.maidens, "</td>\n                <td>").concat(e.runs, "</td>\n                <td>").concat(e.wickets, "</td>\n                <td>").concat(e.economy, "</td>\n            </tr>\n        </tbody>\n    "); return t.innerHTML = a, t }(t); return a.appendChild(n), a },
+                j = a(158),
+                I = {};
+            I.styleTagTransform = _(), I.setAttributes = d(), I.insert = c().bind(null, "head"), I.domAPI = i(), I.insertStyleElement = u(), n()(j.A, I), j.A && j.A.locals && j.A.locals; var M = function(e) { var t = document.createElement("div");
+                    t.className = "card__ball-by-ball-row"; for (var a = "", r = 0; r < e.length; r++) { var n = e[r],
+                            o = "";
+                        n.isFour ? o = "card__ball-box--four" : n.isSix ? o = "card__ball-box--six" : n.isWicket && (o = "card__ball-box--wicket"), 0 == r ? a += '\n                <div class="card__over-box-wrapper">\n                    <p class="card__over-box-title">'.concat(n.overNumber, 'ov</p>\n                    <div class="card__over-box">\n                        <div class="card__ball-box ').concat(o, '">').concat(n.ballScorePrint, "</div>  \n            ") : 1 == n.startingBall && r != e.length - 1 ? a += '\n                </div>\n            </div>\n            <div class="card__over-box-wrapper">\n                <p class="card__over-box-title">'.concat(n.overNumber, 'ov</p>\n                <div class="card__over-box">\n                    <div class="card__ball-box ').concat(o, '">').concat(n.ballScorePrint, "</div>\n            ") : 1 == n.startingBall && r == e.length - 1 ? a += '\n                </div>\n            </div>\n            <div class="card__over-box-wrapper">\n                <p class="card__over-box-title">'.concat(n.overNumber, 'ov</p>\n                <div class="card__over-box">\n                    <div class="card__ball-box ').concat(o, '">').concat(n.ballScorePrint, "</div>\n                </div>\n            </div>\n            ") : a += '\n                <div class="card__ball-box '.concat(o, '">').concat(n.ballScorePrint, "</div>\n            ") } return t.innerHTML = a, t },
+                O = a(732),
+                N = {};
+            N.styleTagTransform = _(), N.setAttributes = d(), N.insert = c().bind(null, "head"), N.domAPI = i(), N.insertStyleElement = u(), n()(O.A, N), O.A && O.A.locals && O.A.locals; var C = function(e) { var t = document.createElement("div");
+                    t.className = "card__commentary"; var a = "",
+                        r = e.length > 3 ? e.slice(e.length - 3, e.length) : e.slice(0, e.length); return (r = r.reverse()).forEach((function(e) { var t = "";
+                        e.isFour ? t = "card__commentary-ball-runs--four" : e.isSix ? t = "card__commentary-ball-runs--six" : e.isWicket && (t = "card__commentary-ball-runs--wicket"), a += '\n        <div class="card__commentary-row">\n            <p class="card__commentary-ball-number">'.concat(e.oversActual, '</p>\n            <div class="card__commentary-ball-runs ').concat(t, '">\n                <span>').concat(e.ballScorePrint, '</span>\n            </div>\n            <div class="card__commentary-details">\n                <p>').concat(e.title, "</p>\n                <p>").concat(e.ballComment, "</p>\n            </div>\n        </div>        \n    ") })), t.innerHTML = a, t },
+                q = { screen: "JioTV - Cricket Widget", section: "JioTV", content_type: "Widget", platform: "JioNews-mWeb", widget_title: "JioTV Cricket Widget" },
+                R = { hasScrolled: !1, milestones: { 25: !1, 50: !1, 75: !1, 100: !1 } },
+                H = function(e) { var t = new Date(e),
+                        a = t.getHours(),
+                        r = t.getMinutes(),
+                        n = "AM";
+                    a >= 12 && (n = "PM"), a > 12 && (a -= 12); var o = "".concat(r); return 0 === r && (o = "00"), "".concat(a, ":").concat(o).concat(n, " (+5:30) IST") },
+                z = function(e) { var t = new Date(e),
+                        a = t.getDate(),
+                        r = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"][t.getMonth()],
+                        n = t.getFullYear(),
+                        o = "th",
+                        i = a.toString(); return "1" == i[i.length - 1] ? o = "st" : "2" == i[i.length - 1] ? o = "nd" : "3" == i[i.length - 1] && (o = "rd"), a >= 11 && a <= 19 && (o = "th"), "".concat(a).concat(o, " ").concat(r, ", ").concat(n) },
+                B = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJAAAACQCAQAAABNTyozAAAE1ElEQVR4AWIYBYB27kHNsiQIAnCObc/atm3btm3btm3btm0ro+q2NWZ359q7zTyovPXHG8R3WIqKXRRFURRFURRFOAAPV/Wh6L9IZ1zJwoKPS2eg6J9K5sCrLL+l0m1Bf4qkCx/Lk1j+GjxcmJZ+FrkN8RnLf2QMH1v0zyO/Jt5h+f+gig/1PYr0tnJb4S2WFqQcx1cMo2JSPpSPRQlLKzIZN2GRorhu/EZ4kKewtCkfuoPKh5JN0hHLuktQzdK+YCoedluaenhLp8JKfBmXsShmIh7CdnX9KWwl0/GuuAe1LMkEU/GyO8YtJh0pLL6HXxMX8Ocs6QTVfIfb0Y0M4BFcWBKH4xmexJJF8DGfi3UxgPKmrr9bAyfx8xjPkn3QiI/5Mr81ZqZsSTe3mNsLN/AXaGTJZSrwkDvarV4YROmp6YtleV93Ld7jKSzB5Afcy8di3YR+gKv6uEWxHc7AI8wsYQe1eJkv430KK/EI0oLvWExmYdLBFTYL8iuQDh5jtKA1SQdPtlmQW590oMHoFbQx6WCxGWxKOtBotKJNSAfq4y3WJJ5osyCsF1/zTcatET8UU/pQ/MHoFbQY6cBnNgvC3KSD37BZkNrgB560WZDa5BHutFgP6qUD6XCXshhMBWnBiSavoM9IC+/DYjAvKi5xMlnQ7aQFi1gsCGeSlrIhFgtye5MeTDB4Ba1Levgrg9/RC5AePGvwChpAevh6c/WMJU04isVY3idNWM/cFXQLacLM5go6gjRJB4yPL/km4R0WU5mJdOFGU9fPOOlAuvgwUwW9Tdr8WiyGcj1pKwyyNEOPPUgff26nIDcv6cM1Zgqqkw6kz+1opqDHKAl+VjM32NHUlLiIwS1PyeD7TRQ0JbFtwu5gEwW9SUnx85m4wU6hpsSVQm5RSg4uCr0elEgHSg6vHHxBVyR8hA3XhV2QX4uSxbeFPZch3ShZbougC7o3hS2ZPCXggranJsQVi1NS2d6LzYK9fu6hNEhXrgy0oNUoHTg7yHq+lw6UDj9bHAVqBr8Q3PUzlUdQetxWLIHlgZTP7UB1/MVoEp8fVEFI/RAmPyvqTS120cd3hDMPlsmhcH7+UCaj3cmUDTwSxlKXwiDKhl8iiOvnHMoO35f7gkb5gdkekz013wXhSMoWrsp1PYXMD1vmERiX44p2IQVmVy/iLelI2ZMu+DSfu5pLFqJ8cMvlsqCLSYHZVdQorelL+YEBKJjaaqDPrZ6nPzNcTYrMnc+A7yp7U/6U9uQv8/H2wjKUT37+PGyawlGUX7xN9oPz0oHyDBdnWs9X+i93/e/qV7Jb/YO5Kf9KB+PrbKYG/ZoUBp6Jy9MvyO1I4eCFMdbUzLs+t3qap1C7Syk8fq3UzoC9TDpQiLBaGsfq4EIKV2EljDM1qaMPyyS6DuQ4Cp+fNaHjmSb5rckGDNBfkYYqLEN2SBe+TveQSMxM1rgdtR7YuKG8F1lUOid/1P4fUt6G7JLufHm76nnPz0bWYVV826Z6JrqjpQsVA98DZ7R2VQie9bNSMfHz8RuteKVvT8VHOrgtmh9awzg+tbYfFSvp7PZE6f/v7+LLKodTsSvtiSO4/N/l4GY3C0W/km5uxz+/kVCD091Iiv4Jq+BR/sLtVdqTilgURVEURVEURVH0I2MPVq94puCXAAAAAElFTkSuQmCC",
+                W = function(e) { var t, a, r, n, o = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {},
+                        i = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : {},
+                        s = arguments.length > 3 && void 0 !== arguments[3] ? arguments[3] : {},
+                        c = arguments.length > 4 && void 0 !== arguments[4] ? arguments[4] : "false",
+                        l = arguments.length > 6 && void 0 !== arguments[6] ? arguments[6] : null,
+                        d = document.createElement("div"); if (d.className = "card", d.setAttribute("matchid", e.matchId), d.setAttribute("match-status", e.status), d.innerHTML = '\n        <div class="card__top-row">\n            <div class="card__match-details">\n                <p class="card__match-info-series-name">'.concat(e.series_name, '</p>\n                <p class="card__match-info-match-name">').concat(e.match_name, ' <span class="dot-seperator"></span> ').concat(e.match_date, '</p>\n                <p class="card__match-info-venue">').concat(e.match_venue, '</p>\n            </div>\n            <div class="card__expander ').concat("PRE" == e.status || "POST" == e.status ? "hidden" : "LIVE" == e.status && l ? "" : "hidden", '">\n                <svg width="8" height="4" viewBox="0 0 8 4" fill="none" xmlns="http://www.w3.org/2000/svg">\n                    <path d="M4 4L7.4641 0.25L0.535898 0.25L4 4Z" fill="#B5B5B5"/>\n                </svg>\n                <svg class="hidden" width="8" height="4" viewBox="0 0 8 4" fill="none" xmlns="http://www.w3.org/2000/svg">\n                    <path d="M4 3.49691e-07L7.4641 3.75L0.535898 3.75L4 3.49691e-07Z" fill="#B5B5B5" />\n                </svg>\n            </div>\n        </div>\n        <div class="card__middle-row">\n            <div class="card__team-score-details">\n                <div class="card__team-1-score-details">\n                    <div class="card__team-1-score-details__top-row">\n                        <div class="card__team-1-score-details__captain-img ').concat((null == e || null === (t = e.team1) || void 0 === t || null === (t = t.captain_img) || void 0 === t ? void 0 : t.length) > 0 ? "" : "hidden", '">\n                            <img src="').concat(null == e || null === (a = e.team1) || void 0 === a ? void 0 : a.captain_img, '" onerror="this.onerror=null;src=\'assets/avatar.svg\'"/>\n                        </div>\n                        <div class="card__team-1-score-details__team-name">\n                            ').concat(e.team1.team_name, '\n                        </div>\n                        <div class="card__team-1-score-details__team-logo">\n                            <img src="').concat(e.team1.team_logo, '" onerror="this.onerror=null;src=\'').concat(B, '\'"/>\n                        </div>\n                    </div>\n                    <div class="card__team-1-score-details__bottom-row">\n                        <span class="card__team-1-score-details__bottom-row__runs">').concat("PRE" == e.status ? "" : e.team1.score ? e.team1.score : "", '</span> <span class="card__team-1-score-details__bottom-row__overs">').concat("PRE" == e.status ? "" : e.team1.overs ? "(" + e.team1.overs + ")" : "", '</span>\n                    </div>  \n                </div>\n                <div class="card__team-score-details__versus-text">VS</div>\n                <div class="card__team-2-score-details">\n                    <div class="card__team-2-score-details__top-row">\n                        <div class="card__team-2-score-details__team-logo">\n                            <img src="').concat(e.team2.team_logo, '" onerror="this.onerror=null;src=\'').concat(B, '\'"/>\n                        </div>\n                        <div class="card__team-2-score-details__team-name">\n                            ').concat(e.team2.team_name, '\n                        </div>\n                        <div class="card__team-2-score-details__captain-img ').concat((null == e || null === (r = e.team2) || void 0 === r || null === (r = r.captain_img) || void 0 === r ? void 0 : r.length) > 0 ? "" : "hidden", '">\n                            <img src="').concat(null == e || null === (n = e.team2) || void 0 === n ? void 0 : n.captain_img, '" onerror="this.onerror=null;src=\'assets/avatar.svg\'"/>\n                        </div>\n                    </div>\n                    <div class="card__team-2-score-details__bottom-row">\n                        <span class="card__team-2-score-details__bottom-row__runs">').concat("PRE" == e.status ? "" : e.team2.score ? e.team2.score : "", '</span> <span class="card__team-2-score-details__bottom-row__overs">').concat("PRE" == e.status ? "" : e.team2.overs ? "(" + e.team2.overs + ")" : "", '</span>\n                    </div>  \n                </div>\n            </div>\n        </div>\n        <div class="card__match-status-row">\n            ').concat(e.statusText, "\n        </div>\n    "), "LIVE" == e.status && l) { d.innerHTML += '<p class="card__live-tag">Live</p>'; var m = d.querySelectorAll("svg")[0],
+                            u = d.querySelectorAll("svg")[1],
+                            p = E(o, i);
+                        d.appendChild(p); var _ = M(s);
+                        d.appendChild(_); var f = C(s);
+                        d.appendChild(f); var h = document.createElement("div");
+                        h.className = "card__points-table-wrapper hidden", d.appendChild(h), d.setAttribute("is-open", c), "false" == c ? (m.classList.remove("hidden"), u.classList.add("hidden"), p.classList.add("hidden"), _.classList.add("hidden"), f.classList.add("hidden")) : "true" == c && (m.classList.add("hidden"), u.classList.remove("hidden"), p.classList.remove("hidden"), _.classList.remove("hidden"), f.classList.remove("hidden")), d.querySelector(".card__expander").addEventListener("click", (function() { var e = d.querySelectorAll("svg")[0],
+                                t = d.querySelectorAll("svg")[1];
+                            e.classList.toggle("hidden"), t.classList.toggle("hidden"), d.querySelector(".card__score-table-row").classList.toggle("hidden"), d.querySelector(".card__ball-by-ball-row").classList.toggle("hidden"); var a = d.getAttribute("is-open"),
+                                r = d.querySelector(".card__commentary");
+                            d.querySelector(".card__points-table-wrapper"), "true" == a ? r.classList.add("hidden") : "false" == a && r.classList.remove("hidden"), "true" == d.getAttribute("is-open") ? d.setAttribute("is-open", "false") : "false" == d.getAttribute("is-open") && d.setAttribute("is-open", "true") })) } else e.status; return d },
+                J = function(e) { var t, a, r, n, o = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : "",
+                        i = document.createElement("div"); switch (o) {
+                        case "middle-row":
+                            i.className = "card__middle-row", i.innerHTML = '\n                <div class="card__team-score-details">\n                    <div class="card__team-1-score-details">\n                        <div class="card__team-1-score-details__top-row">\n                            <div class="card__team-1-score-details__captain-img '.concat((null == e || null === (t = e.team1) || void 0 === t || null === (t = t.captain_img) || void 0 === t ? void 0 : t.length) > 0 ? "" : "hidden", '">\n                                <img src="').concat(null == e || null === (a = e.team1) || void 0 === a ? void 0 : a.captain_img, '" onerror="this.onerror=null;src=\'assets/avatar.svg\'"/>\n                            </div>\n                            <div class="card__team-1-score-details__team-name">\n                                ').concat(e.team1.team_name, '\n                            </div>\n                            <div class="card__team-1-score-details__team-logo">\n                                <img src="').concat(e.team1.team_logo, '"/>\n                            </div>\n                        </div>\n                        <div class="card__team-1-score-details__bottom-row">\n                            <span class="card__team-1-score-details__bottom-row__runs">').concat(e.team1.score ? e.team1.score : "", '</span> <span class="card__team-1-score-details__bottom-row__overs">').concat(e.team1.overs ? "(" + e.team1.overs + ")" : "", '</span>\n                        </div>  \n                    </div>\n                    <div class="card__team-score-details__versus-text">VS</div>\n                    <div class="card__team-2-score-details">\n                        <div class="card__team-2-score-details__top-row">\n                            <div class="card__team-2-score-details__team-logo">\n                                <img src="').concat(e.team2.team_logo, '"/>\n                            </div>\n                            <div class="card__team-2-score-details__team-name">\n                                ').concat(e.team2.team_name, '\n                            </div>\n                            <div class="card__team-2-score-details__captain-img ').concat((null == e || null === (r = e.team2) || void 0 === r || null === (r = r.captain_img) || void 0 === r ? void 0 : r.length) > 0 ? "" : "hidden", '">\n                                <img src="').concat(null == e || null === (n = e.team2) || void 0 === n ? void 0 : n.captain_img, '" onerror="this.onerror=null;src=\'assets/avatar.svg\'"/>\n                            </div>\n                        </div>\n                        <div class="card__team-2-score-details__bottom-row">\n                            <span class="card__team-2-score-details__bottom-row__runs">').concat(e.team2.score ? e.team2.score : "", '</span> <span class="card__team-2-score-details__bottom-row__overs">').concat(e.team2.overs ? "(" + e.team2.overs + ")" : "", "</span>\n                        </div>  \n                    </div>\n                </div>\n            "); break;
+                        case "match-status-row":
+                            i.className = "card__match-status-row", i.innerHTML = "\n                ".concat(e.statusText, "\n            ") } return i },
+                D = function(e, t, a) { var r = arguments.length > 4 ? arguments[4] : void 0,
+                        n = null; switch (arguments.length > 3 && void 0 !== arguments[3] ? arguments[3] : "") {
+                        case "score-table":
+                            n = E(e, t), "false" == r ? n.classList.add("hidden") : "true" == r && n.classList.remove("hidden"); break;
+                        case "ball-by-ball-row":
+                            n = M(a), "false" == r ? n.classList.add("hidden") : "true" == r && n.classList.remove("hidden"); break;
+                        case "commentary-box":
+                            n = C(a), "false" == r ? n.classList.add("hidden") : "true" == r && n.classList.remove("hidden") } return n },
+                U = a(754),
+                V = {};
+            
+            function F(e) { return F = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(e) { return typeof e } : function(e) { return e && "function" == typeof Symbol && e.constructor === Symbol && e !== Symbol.prototype ? "symbol" : typeof e }, F(e) }
+            
+            function K(e, t) { for (var a = 0; a < t.length; a++) { var r = t[a];
+                    r.enumerable = r.enumerable || !1, r.configurable = !0, "value" in r && (r.writable = !0), Object.defineProperty(e, Q(r.key), r) } }
+            
+            function Q(e) { var t = function(e) { if ("object" != F(e) || !e) return e; var t = e[Symbol.toPrimitive]; if (void 0 !== t) { var a = t.call(e, "string"); if ("object" != F(a)) return a; throw new TypeError("@@toPrimitive must return a primitive value.") } return String(e) }(e); return "symbol" == F(t) ? t : t + "" } V.styleTagTransform = _(), V.setAttributes = d(), V.insert = c().bind(null, "head"), V.domAPI = i(), V.insertStyleElement = u(), n()(U.A, V), U.A && U.A.locals && U.A.locals; var Y = new(function() { return e = function e() {! function(e, t) { if (!(e instanceof t)) throw new TypeError("Cannot call a class as a function") }(this, e), this.subscribers = [] }, (t = [{ key: "publish", value: function(e, t) { var a = this.subscribers[e]; if (a)
+                                for (var r = 0; r < a.length; r++) a[r][0](t) } }, { key: "subscribe", value: function(e, t) { this.subscribers[e] || (this.subscribers[e] = []); var a = "#".concat(e, "--").concat(t.name, "--").concat(Math.random().toString().substring(2, 12)); return this.subscribers[e].push([t, a]), a } }, { key: "unsubscribe", value: function(e, t) { if (this.subscribers[e]) { var a = -1;
+                                this.subscribers[e].forEach((function(e, r) { e[1] == t && (a = r) })), this.subscribers[e].splice(a, 1) } } }]) && K(e.prototype, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; var e, t }()),
+                G = [],
+                Z = function(e, t) { for (var a = [], r = [], n = [], o = 0; o < t.length; o++) { var i = t[o]; "LIVE" == i.state && "Not covered Live" != i.status && a.push({ matchId: i.objectId, seriesId: i.series.objectId, status: "LIVE" }) } for (var s = 0; s < t.length; s++) { var c = t[s]; if ("PRE" == c.state && 0 == r.length) { r.push({ matchId: c.objectId, seriesId: c.series.objectId, status: "PRE", series_name: c.series.name, match_name: c.title, match_venue: c.ground.name, match_date: z(c.startDate), team1: { team_name: c.teams[0].team.abbreviation, team_logo: "https://img1.hscicdn.com/image/upload/f_auto,t_ds_square_w_80".concat(c.teams[0].team.imageUrl) }, team2: { team_name: c.teams[1].team.abbreviation, team_logo: "https://img1.hscicdn.com/image/upload/f_auto,t_ds_square_w_80".concat(c.teams[1].team.imageUrl) }, statusText: "Match starts in {{MATCH_START_HOURS}} {{MATCH_START_MINS}}" == c.statusText ? "Match will begin at ".concat(H(c.startTime)) : c.statusText }); break } } for (var l = 0; l < t.length; l++) { var d = t[l]; "POST" == d.state && n.push({ matchId: d.objectId, seriesId: d.series.objectId, status: "POST", series_name: d.series.name, match_name: d.title, match_venue: d.ground.name, match_date: z(d.startDate), team1: { team_name: d.teams[0].team.abbreviation, team_logo: "https://img1.hscicdn.com/image/upload/f_auto,t_ds_square_w_80".concat(d.teams[0].team.imageUrl), score: d.teams[0].score, overs: d.teams[0].scoreInfo }, team2: { team_name: d.teams[1].team.abbreviation, team_logo: "https://img1.hscicdn.com/image/upload/f_auto,t_ds_square_w_80".concat(d.teams[1].team.imageUrl), score: d.teams[1].score, overs: d.teams[1].scoreInfo }, statusText: d.statusText }) } G.push({ tournament_id: e, series_id: t[0].series.objectId, matches_live: a, matches_upcoming: r, matches_completed: n }) },
+                X = function(e) { var t = { matchId: e.match.objectId, seriesId: e.match.series.objectId, series_name: e.match.series.name, match_name: e.match.title, match_venue: e.match.ground.name, match_date: z(e.match.startDate), team1: { captain_img: "https://img1.hscicdn.com/image/upload/f_auto,t_ds_square_w_80".concat(e.match.teams[0].captain.headshotImageUrl || e.match.teams[0].captain.imageUrl), team_name: e.match.teams[0].team.abbreviation, team_logo: "https://img1.hscicdn.com/image/upload/f_auto,t_ds_square_w_80".concat(e.match.teams[0].team.imageUrl) }, team2: { captain_img: "https://img1.hscicdn.com/image/upload/f_auto,t_ds_square_w_80".concat(e.match.teams[1].captain.headshotImageUrl || e.match.teams[1].captain.imageUrl), team_name: e.match.teams[1].team.abbreviation, team_logo: "https://img1.hscicdn.com/image/upload/f_auto,t_ds_square_w_80".concat(e.match.teams[1].team.imageUrl) }, status: e.match.state, statusText: e.match.statusText || e.match.status }; return "LIVE" != t.status && "POST" != t.status || (t.team1.score = e.match.teams[0].score, t.team1.overs = e.match.teams[0].scoreInfo, t.team2.score = e.match.teams[1].score, t.team2.overs = e.match.teams[1].scoreInfo), "Match starts in {{MATCH_START_HOURS}} {{MATCH_START_MINS}}" == t.statusText && (t.statusText = "Match will begin at ".concat(H(e.match.startTime))), t },
+                $ = function(e) { for (var t, a, r, n, o, i, s, c, l, d = [], m = Math.min(e.length, 18), u = 0; u < m; u++) { var p, _, f, h = e[u];
+                        d.push({ ballNumber: h.ballNumber, overNumber: h.overNumber, oversActual: h.oversActual, isFour: h.isFour, isSix: h.isSix, isWicket: h.isWicket, wides: h.wides, byes: h.byes, legbyes: h.legbyes, noballs: h.noballs, totalRuns: h.totalRuns, batsmanRuns: h.batsmanRuns, ballComment: null != h && null !== (p = h.commentTextItems) && void 0 !== p && null !== (p = p[0]) && void 0 !== p && p.html ? h.commentTextItems[0].html : "", startingBall: (null === (_ = e[u]) || void 0 === _ ? void 0 : _.overNumber) > (null === (f = e[u + 1]) || void 0 === f ? void 0 : f.overNumber) || u == m - 1, ballScorePrint: (t = h.isFour, a = h.isSix, r = h.isWicket, n = h.wides, o = h.byes, i = h.legbyes, s = h.noballs, c = h.batsmanRuns, l = void 0, l = "", t ? l += "4" : a ? l += "6" : c > 0 ? l += c.toString() : 0 == c && (l += "0"), r && (0 == c ? l = "W" : l += "+W"), o > 0 && (l = "".concat(o, "b")), i > 0 && (l = "".concat(i, "lb")), s > 0 && (l = "".concat(s, "nb")), n > 0 && (l = "".concat(n, "wd")), l), title: null == h ? void 0 : h.title }) } return d.reverse() },
+                ee = function(e) { var t = { batsman1: { on_strike: !1, batting: e.livePerformance.batsmen[0].player.battingName, runs: e.livePerformance.batsmen[0].runs, balls: e.livePerformance.batsmen[0].balls, fours: e.livePerformance.batsmen[0].fours, sixes: e.livePerformance.batsmen[0].sixes, strike_rate: e.livePerformance.batsmen[0].strikerate } }; return e.livePerformance.batsmen[1] && (t.batsman2 = { on_strike: !1, batting: e.livePerformance.batsmen[1].player.battingName, runs: e.livePerformance.batsmen[1].runs, balls: e.livePerformance.batsmen[1].balls, fours: e.livePerformance.batsmen[1].fours, sixes: e.livePerformance.batsmen[1].sixes, strike_rate: e.livePerformance.batsmen[1].strikerate }), t },
+                te = function(e) { return { bowler: e.livePerformance.bowlers[0].player.name, overs: e.livePerformance.bowlers[0].overs, maidens: e.livePerformance.bowlers[0].maidens, runs: e.livePerformance.bowlers[0].conceded, wickets: e.livePerformance.bowlers[0].wickets, economy: e.livePerformance.bowlers[0].economy } },
+                ae = function() { var e, t, a;
+                    window._taboola = window._taboola || [], _taboola.push({ category: "auto" }), e = document.createElement("script"), t = document.getElementsByTagName("script")[0], a = "tb_loader_script", document.getElementById(a) || (e.async = 1, e.src = "//cdn.taboola.com/libtrc/jioplatforms-jionews/loader.js", e.id = a, t.parentNode.insertBefore(e, t)), window.performance && "function" == typeof window.performance.mark && window.performance.mark("tbl_ic") },
+                re = function(e) { var t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : "cricket_news",
+                        a = document.createElement("div"); switch (a.id = "ad-".concat(e), a.style.paddingTop = "1rem", t) {
+                        case "cricket_news":
+                            a.innerHTML += '\n                <div id="taboola-cricket-news-thumbnails"></div>\n            '; break;
+                        case "cricket_news_2":
+                            a.innerHTML += '\n                <div id="taboola-cricket-news-thumbnails-2"></div>\n            '; break;
+                        case "cricket_news_3":
+                            a.innerHTML += '\n                <div id="taboola-cricket-news-thumbnails-3"></div>\n            '; break;
+                        case "score_card":
+                            a.innerHTML += '\n                <div id="taboola-score-card-thumbnails"></div>\n            '; break;
+                        case "score_card_2":
+                            a.innerHTML += '\n                <div id="taboola-score-card-thumbnails-2"></div>\n            '; break;
+                        case "web_stories":
+                            a.innerHTML += '\n                <div id="taboola-web-stories-thumbnails"></div>\n            '; break;
+                        case "web_stories_2":
+                            a.innerHTML += '\n                <div id="taboola-web-stories-thumbnails-2"></div>\n            '; break;
+                        case "web_stories_3":
+                            a.innerHTML += '\n                <div id="taboola-web-stories-thumbnails-3"></div>\n            '; break;
+                        case "score_card_feed_end":
+                            a.innerHTML += '\n            <div id="taboola-below-score-card-thumbnails"></div>\n            '; break;
+                        case "cricket_newstab_feed_end":
+                            a.innerHTML += '\n            <div id="taboola-below-cricket-news-thumbnails"></div>\n             '; break;
+                        case "webstories_feed_end":
+                            a.innerHTML += '\n            <div id="taboola-below-web-stories-thumbnails"></div>\n             ' } return a },
+                ne = a(110),
+                oe = {};
+            oe.styleTagTransform = _(), oe.setAttributes = d(), oe.insert = c().bind(null, "head"), oe.domAPI = i(), oe.insertStyleElement = u(), n()(ne.A, oe), ne.A && ne.A.locals && ne.A.locals; var ie = a(68),
+                se = {};
+            se.styleTagTransform = _(), se.setAttributes = d(), se.insert = c().bind(null, "head"), se.domAPI = i(), se.insertStyleElement = u(), n()(ie.A, se), ie.A && ie.A.locals && ie.A.locals; var ce = a(584),
+                le = {};
+            
+            function de(e) { return de = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(e) { return typeof e } : function(e) { return e && "function" == typeof Symbol && e.constructor === Symbol && e !== Symbol.prototype ? "symbol" : typeof e }, de(e) }
+            
+            function me() { me = function() { return t }; var e, t = {},
+                    a = Object.prototype,
+                    r = a.hasOwnProperty,
+                    n = Object.defineProperty || function(e, t, a) { e[t] = a.value },
+                    o = "function" == typeof Symbol ? Symbol : {},
+                    i = o.iterator || "@@iterator",
+                    s = o.asyncIterator || "@@asyncIterator",
+                    c = o.toStringTag || "@@toStringTag";
+                
+                function l(e, t, a) { return Object.defineProperty(e, t, { value: a, enumerable: !0, configurable: !0, writable: !0 }), e[t] } try { l({}, "") } catch (e) { l = function(e, t, a) { return e[t] = a } }
+                
+                function d(e, t, a, r) { var o = t && t.prototype instanceof b ? t : b,
+                        i = Object.create(o.prototype),
+                        s = new j(r || []); return n(i, "_invoke", { value: T(e, a, s) }), i }
+                
+                function m(e, t, a) { try { return { type: "normal", arg: e.call(t, a) } } catch (e) { return { type: "throw", arg: e } } } t.wrap = d; var u = "suspendedStart",
+                    p = "suspendedYield",
+                    _ = "executing",
+                    f = "completed",
+                    h = {};
+                
+                function b() {}
+                
+                function v() {}
+                
+                function g() {} var y = {};
+                l(y, i, (function() { return this })); var w = Object.getPrototypeOf,
+                    x = w && w(w(I([])));
+                x && x !== a && r.call(x, i) && (y = x); var k = g.prototype = b.prototype = Object.create(y);
+                
+                function A(e) {
+                    ["next", "throw", "return"].forEach((function(t) { l(e, t, (function(e) { return this._invoke(t, e) })) })) }
+                
+                function S(e, t) {
+                    function a(n, o, i, s) { var c = m(e[n], e, o); if ("throw" !== c.type) { var l = c.arg,
+                                d = l.value; return d && "object" == de(d) && r.call(d, "__await") ? t.resolve(d.__await).then((function(e) { a("next", e, i, s) }), (function(e) { a("throw", e, i, s) })) : t.resolve(d).then((function(e) { l.value = e, i(l) }), (function(e) { return a("throw", e, i, s) })) } s(c.arg) } var o;
+                    n(this, "_invoke", { value: function(e, r) {
+                            function n() { return new t((function(t, n) { a(e, r, t, n) })) } return o = o ? o.then(n, n) : n() } }) }
+                
+                function T(t, a, r) { var n = u; return function(o, i) { if (n === _) throw Error("Generator is already running"); if (n === f) { if ("throw" === o) throw i; return { value: e, done: !0 } } for (r.method = o, r.arg = i;;) { var s = r.delegate; if (s) { var c = P(s, r); if (c) { if (c === h) continue; return c } } if ("next" === r.method) r.sent = r._sent = r.arg;
+                            else if ("throw" === r.method) { if (n === u) throw n = f, r.arg;
+                                r.dispatchException(r.arg) } else "return" === r.method && r.abrupt("return", r.arg);
+                            n = _; var l = m(t, a, r); if ("normal" === l.type) { if (n = r.done ? f : p, l.arg === h) continue; return { value: l.arg, done: r.done } } "throw" === l.type && (n = f, r.method = "throw", r.arg = l.arg) } } }
+                
+                function P(t, a) { var r = a.method,
+                        n = t.iterator[r]; if (n === e) return a.delegate = null, "throw" === r && t.iterator.return && (a.method = "return", a.arg = e, P(t, a), "throw" === a.method) || "return" !== r && (a.method = "throw", a.arg = new TypeError("The iterator does not provide a '" + r + "' method")), h; var o = m(n, t.iterator, a.arg); if ("throw" === o.type) return a.method = "throw", a.arg = o.arg, a.delegate = null, h; var i = o.arg; return i ? i.done ? (a[t.resultName] = i.value, a.next = t.nextLoc, "return" !== a.method && (a.method = "next", a.arg = e), a.delegate = null, h) : i : (a.method = "throw", a.arg = new TypeError("iterator result is not an object"), a.delegate = null, h) }
+                
+                function L(e) { var t = { tryLoc: e[0] };
+                    1 in e && (t.catchLoc = e[1]), 2 in e && (t.finallyLoc = e[2], t.afterLoc = e[3]), this.tryEntries.push(t) }
+                
+                function E(e) { var t = e.completion || {};
+                    t.type = "normal", delete t.arg, e.completion = t }
+                
+                function j(e) { this.tryEntries = [{ tryLoc: "root" }], e.forEach(L, this), this.reset(!0) }
+                
+                function I(t) { if (t || "" === t) { var a = t[i]; if (a) return a.call(t); if ("function" == typeof t.next) return t; if (!isNaN(t.length)) { var n = -1,
+                                o = function a() { for (; ++n < t.length;)
+                                        if (r.call(t, n)) return a.value = t[n], a.done = !1, a; return a.value = e, a.done = !0, a }; return o.next = o } } throw new TypeError(de(t) + " is not iterable") } return v.prototype = g, n(k, "constructor", { value: g, configurable: !0 }), n(g, "constructor", { value: v, configurable: !0 }), v.displayName = l(g, c, "GeneratorFunction"), t.isGeneratorFunction = function(e) { var t = "function" == typeof e && e.constructor; return !!t && (t === v || "GeneratorFunction" === (t.displayName || t.name)) }, t.mark = function(e) { return Object.setPrototypeOf ? Object.setPrototypeOf(e, g) : (e.__proto__ = g, l(e, c, "GeneratorFunction")), e.prototype = Object.create(k), e }, t.awrap = function(e) { return { __await: e } }, A(S.prototype), l(S.prototype, s, (function() { return this })), t.AsyncIterator = S, t.async = function(e, a, r, n, o) { void 0 === o && (o = Promise); var i = new S(d(e, a, r, n), o); return t.isGeneratorFunction(a) ? i : i.next().then((function(e) { return e.done ? e.value : i.next() })) }, A(k), l(k, c, "Generator"), l(k, i, (function() { return this })), l(k, "toString", (function() { return "[object Generator]" })), t.keys = function(e) { var t = Object(e),
+                        a = []; for (var r in t) a.push(r); return a.reverse(),
+                        function e() { for (; a.length;) { var r = a.pop(); if (r in t) return e.value = r, e.done = !1, e } return e.done = !0, e } }, t.values = I, j.prototype = { constructor: j, reset: function(t) { if (this.prev = 0, this.next = 0, this.sent = this._sent = e, this.done = !1, this.delegate = null, this.method = "next", this.arg = e, this.tryEntries.forEach(E), !t)
+                            for (var a in this) "t" === a.charAt(0) && r.call(this, a) && !isNaN(+a.slice(1)) && (this[a] = e) }, stop: function() { this.done = !0; var e = this.tryEntries[0].completion; if ("throw" === e.type) throw e.arg; return this.rval }, dispatchException: function(t) { if (this.done) throw t; var a = this;
+                        
+                        function n(r, n) { return s.type = "throw", s.arg = t, a.next = r, n && (a.method = "next", a.arg = e), !!n } for (var o = this.tryEntries.length - 1; o >= 0; --o) { var i = this.tryEntries[o],
+                                s = i.completion; if ("root" === i.tryLoc) return n("end"); if (i.tryLoc <= this.prev) { var c = r.call(i, "catchLoc"),
+                                    l = r.call(i, "finallyLoc"); if (c && l) { if (this.prev < i.catchLoc) return n(i.catchLoc, !0); if (this.prev < i.finallyLoc) return n(i.finallyLoc) } else if (c) { if (this.prev < i.catchLoc) return n(i.catchLoc, !0) } else { if (!l) throw Error("try statement without catch or finally"); if (this.prev < i.finallyLoc) return n(i.finallyLoc) } } } }, abrupt: function(e, t) { for (var a = this.tryEntries.length - 1; a >= 0; --a) { var n = this.tryEntries[a]; if (n.tryLoc <= this.prev && r.call(n, "finallyLoc") && this.prev < n.finallyLoc) { var o = n; break } } o && ("break" === e || "continue" === e) && o.tryLoc <= t && t <= o.finallyLoc && (o = null); var i = o ? o.completion : {}; return i.type = e, i.arg = t, o ? (this.method = "next", this.next = o.finallyLoc, h) : this.complete(i) }, complete: function(e, t) { if ("throw" === e.type) throw e.arg; return "break" === e.type || "continue" === e.type ? this.next = e.arg : "return" === e.type ? (this.rval = this.arg = e.arg, this.method = "return", this.next = "end") : "normal" === e.type && t && (this.next = t), h }, finish: function(e) { for (var t = this.tryEntries.length - 1; t >= 0; --t) { var a = this.tryEntries[t]; if (a.finallyLoc === e) return this.complete(a.completion, a.afterLoc), E(a), h } }, catch: function(e) { for (var t = this.tryEntries.length - 1; t >= 0; --t) { var a = this.tryEntries[t]; if (a.tryLoc === e) { var r = a.completion; if ("throw" === r.type) { var n = r.arg;
+                                    E(a) } return n } } throw Error("illegal catch attempt") }, delegateYield: function(t, a, r) { return this.delegate = { iterator: I(t), resultName: a, nextLoc: r }, "next" === this.method && (this.arg = e), h } }, t }
+            
+            function ue(e, t, a, r, n, o, i) { try { var s = e[o](i),
+                        c = s.value } catch (e) { return void a(e) } s.done ? t(c) : Promise.resolve(c).then(r, n) }
+            
+            function pe(e, t) { var a = Object.keys(e); if (Object.getOwnPropertySymbols) { var r = Object.getOwnPropertySymbols(e);
+                    t && (r = r.filter((function(t) { return Object.getOwnPropertyDescriptor(e, t).enumerable }))), a.push.apply(a, r) } return a }
+            
+            function _e(e) { for (var t = 1; t < arguments.length; t++) { var a = null != arguments[t] ? arguments[t] : {};
+                    t % 2 ? pe(Object(a), !0).forEach((function(t) { fe(e, t, a[t]) })) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(a)) : pe(Object(a)).forEach((function(t) { Object.defineProperty(e, t, Object.getOwnPropertyDescriptor(a, t)) })) } return e }
+            
+            function fe(e, t, a) { return (t = function(e) { var t = function(e) { if ("object" != de(e) || !e) return e; var t = e[Symbol.toPrimitive]; if (void 0 !== t) { var a = t.call(e, "string"); if ("object" != de(a)) return a; throw new TypeError("@@toPrimitive must return a primitive value.") } return String(e) }(e); return "symbol" == de(t) ? t : t + "" }(t)) in e ? Object.defineProperty(e, t, { value: a, enumerable: !0, configurable: !0, writable: !0 }) : e[t] = a, e } le.styleTagTransform = _(), le.setAttributes = d(), le.insert = c().bind(null, "head"), le.domAPI = i(), le.insertStyleElement = u(), n()(ce.A, le), ce.A && ce.A.locals && ce.A.locals; var he = document.querySelector(".view"),
+                be = 0,
+                ve = "Women's World Cup 2025",
+                ge = [],
+                ye = function(e) { switch (e.event_name) {
+                        case "TAB_SELECTED":
+                            if (be != e.data.id) { be = e.data.id, ve = e.data.tournamentName; var t = { series_id: be, series_title: ve };
+                                JioNewsWidget.sendAnalytics("cricket_widget_header_click_jiotv", _e(_e({}, q), t)), window.removeEventListener("scroll", Le), R.hasScrolled = !1, R.milestones = { 25: !1, 50: !1, 75: !1, 100: !1 }, window.addEventListener("scroll", Le); for (var a = 0; a < ge; a++) clearInterval(ge[a]);
+                                he.innerHTML = "", Se(be) } break;
+                        case "TAB_INIT":
+                            be = e.data.id, ve = e.data.tournamentName, window.addEventListener("scroll", Le) } },
+                we = function() { var e, t, a, r, n, o, i, s, c, l, d = (e = be, G.filter((function(t) { return t.tournament_id == e }))[0]); if (xe(d.matches_live, d.matches_upcoming, d.matches_completed, d.series_id), localStorage) { var m = "impression_fired_time_jiotv_cricket_widget",
+                            u = localStorage.getItem(m);
+                        u && (u = parseInt(u)); var p = (new Date).getTime();
+                        u ? (t = u, r = (a = new Date).getDate(), n = Number(a.getMonth()) + 1, o = a.getFullYear(), s = (i = new Date(t)).getDate(), c = Number(i.getMonth()) + 1, l = i.getFullYear(), (r > s || n > c || o > l) && (localStorage.setItem(m, p), JioNewsWidget.sendAnalytics("cricket_widget_impressions_JioTV", _e({}, q)))) : (localStorage.setItem(m, p), JioNewsWidget.sendAnalytics("cricket_widget_impressions_JioTV", _e({}, q))) } },
+                xe = function(e, t, a, r) { var n = 0; if (0 == e.length) { ke(t), Ae(a), ae(); var o = re(1, "score_card"),
+                            i = he.querySelectorAll(".card")[0].querySelectorAll(".card__match-status-row")[0];
+                        null == i || i.insertAdjacentElement("afterend", o), window._taboola = window._taboola || [], _taboola.push({ mode: "thumbnails-score-card-mob", container: "taboola-score-card-thumbnails", placement: "Score Card Thumbnails", target_type: "mix" }) } else
+                        for (var s = function(r) { var o = "https://cdnwidgetapi.jionews.com/v1/pages/match/details?lang=en&seriesId=".concat(e[r].seriesId, "&matchId=").concat(e[r].matchId, "&source=jiotv_cricket");
+                                A.getRequest(o, { Authorization: "Basic amlvdXNlcjpqaW9VJDNyMTIz" }, (function(o) { var i, s, c = X(o),
+                                        l = o.livePerformance ? ee(o) : {},
+                                        d = o.livePerformance ? te(o) : {},
+                                        m = null != o && null !== (i = o.recentBallCommentary) && void 0 !== i && i.ballComments ? $(null == o || null === (s = o.recentBallCommentary) || void 0 === s ? void 0 : s.ballComments) : {};
+                                    he.appendChild(W(c, l, d, m, 0 == r ? "true" : "false", 0 == r ? "true" : "false", o.livePerformance)); var u = he.querySelectorAll(".card__match-status-row")[0];
+                                    ae(); var p = re(1, "score_card");
+                                    null == u || u.insertAdjacentElement("afterend", p), window._taboola = window._taboola || [], _taboola.push({ mode: "thumbnails-score-card-mob", container: "taboola-score-card-thumbnails", placement: "Score Card Thumbnails", target_type: "mix" }); var _ = setInterval((function() { Te(c.matchId, c.seriesId, r) }), 2e4);
+                                    ge.push(_), ++n == e.length && (ke(t), Ae(a)) }), (function(e) { console.log(e) })) }, c = 0; c < e.length; c++) s(c) },
+                ke = function(e) { for (var t = 0; t < e.length; t++) he.appendChild(W(e[t])) },
+                Ae = function(e) { for (var t = e.length - 1; t >= 0; t--) he.appendChild(W(e[t])) },
+                Se = function() { var e, t = (e = me().mark((function e(t) { var a, r, n, o, i, s, c, l, d, m, u; return me().wrap((function(e) { for (;;) switch (e.prev = e.next) {
+                                case 0:
+                                    return a = { Authorization: "Basic amlvdXNlcjpqaW9VJDNyMTIz" }, r = [], n = function(e) { return new Promise((function(r, n) { var o = "https://cdnwidgetapi.jionews.com/v1/pages/match/search?lang=en&mode=BOTH&sort=DATE_ASC&filterSeriesIds=".concat(t, "&page=").concat(e, "&records=50&source=jiotv_cricket");
+                                            A.getRequest(o, a, (function(t) { t && t.results ? r(t) : n("Failed to fetch page ".concat(e)) }), (function(e) { n(e) })) })) }, e.prev = 3, e.next = 6, n(1);
+                                case 6:
+                                    if (o = e.sent, r = r.concat(o), i = o.total, !((s = Math.ceil(i / 50)) > 1)) { e.next = 25; break } c = [], l = 2;
+                                case 13:
+                                    if (!(l <= s)) { e.next = 21; break } return e.next = 16, n(l);
+                                case 16:
+                                    d = e.sent, c.push(d);
+                                case 18:
+                                    l++, e.next = 13; break;
+                                case 21:
+                                    return e.next = 23, Promise.all(c);
+                                case 23:
+                                    if ((m = e.sent).length > 1)
+                                        for (u = 0; u < m.length; u++) r[0].results = r[0].results.concat(m[u].results);
+                                    else r[0].results = r[0].results.concat(m[0].results);
+                                case 25:
+                                    Z(t, r[0].results), we(), e.next = 32; break;
+                                case 29:
+                                    e.prev = 29, e.t0 = e.catch(3), console.error("Error fetching tournament matches:", e.t0);
+                                case 32:
+                                case "end":
+                                    return e.stop() } }), e, null, [
+                            [3, 29]
+                        ]) })), function() { var t = this,
+                            a = arguments; return new Promise((function(r, n) { var o = e.apply(t, a);
+                            
+                            function i(e) { ue(o, r, n, i, s, "next", e) }
+                            
+                            function s(e) { ue(o, r, n, i, s, "throw", e) } i(void 0) })) }); return function(e) { return t.apply(this, arguments) } }(),
+                Te = function(e, t, a) { var r = he.querySelector(".card[matchid='".concat(e, "']")); if (r) { var n = r.getAttribute("is-open"); if (r) { var o = "https://cdnwidgetapi.jionews.com/v1/pages/match/details?lang=en&seriesId=".concat(t, "&matchId=").concat(e, "&source=jiotv_cricket");
+                            A.getRequest(o, { Authorization: "Basic amlvdXNlcjpqaW9VJDNyMTIz" }, (function(e) { var t, o, i = X(e),
+                                    s = e.livePerformance ? ee(e) : {},
+                                    c = e.livePerformance ? te(e) : {},
+                                    l = null != e && null !== (t = e.recentBallCommentary) && void 0 !== t && t.ballComments ? $(null == e || null === (o = e.recentBallCommentary) || void 0 === o ? void 0 : o.ballComments) : {}; if (0 == a) { r.querySelector(".card__middle-row").replaceWith(J(i, "middle-row")), r.querySelector(".card__match-status-row").replaceWith(J(i, "match-status-row")); var d = r.querySelector(".card__score-table-row");
+                                    null == d || d.replaceWith(D(s, c, l, "score-table", n)); var m = r.querySelector(".card__ball-by-ball-row");
+                                    null == m || m.replaceWith(D(s, c, l, "ball-by-ball-row", n)); var u = r.querySelector(".card__commentary"),
+                                        p = D(s, c, l, "commentary-box", n);
+                                    null == u || u.replaceWith(p) } else r.replaceWith(W(i, s, c, l, n, "false", e.livePerformance)) }), (function(e) { console.log(e) })) } } else
+                        for (var i = 0; i < ge; i++) clearInterval(ge[i]) },
+                Pe = function(e, t) { var a = { series_id: be, series_title: ve };
+                    JioNewsWidget.sendAnalytics("page_scroll_cricket_jiotv", _e(_e(_e({}, q), a), {}, { page_scroll: e, scroll_count: t })) },
+                Le = function() { var e = (window.scrollY || document.documentElement.scrollTop) / (document.documentElement.scrollHeight - document.documentElement.clientHeight) * 100,
+                        t = R;
+                    t.hasScrolled || (Pe(Math.ceil(e), 1), t.hasScrolled = !0), e >= 25 && !t.milestones[25] && (Pe(Math.ceil(e), 2), t.milestones[25] = !0), e >= 50 && !t.milestones[50] && (Pe(Math.ceil(e), 2), t.milestones[50] = !0), e >= 75 && !t.milestones[75] && (Pe(Math.ceil(e), 3), t.milestones[75] = !0), e >= 100 && !t.milestones[100] && (Pe(Math.ceil(e), 4), t.milestones[100] = !0) };
+            document.addEventListener("DOMContentLoaded", (function() { var e = new URLSearchParams(window.location.search).get("theme");
+                document.body.className = "dark" === e ? "theme-dark" : "theme-light"; var t = window.location.href.indexOf("prod") > -1 ? "8R5-4K5-466Z" : "TEST-9R5-4K5-466Z";
+
+
+
+
+const urlParams = new URLSearchParams(window.location.search);
+const tournamentIdx = urlParams.get('tournamentid');
+console.log(tournamentIdx); // Outputs: 17068
+
+
+
+
+
+
+
+
+                JioNewsWidget.init({ commonAnalyticsData: q, widgetOption: {}, ctAccountId: t }).then((function() { Y.subscribe("app__events", ye), A.getRequest("https://widget.jionews.com/data/widget-data/tournaments.json", {}, (function(e) { e.tournaments = [{ tournamentIndex: 1, tornamentName: "Women's World Cup 2025", tournamentId: tournamentIdx }], be = e.tournaments[0].tournamentId, Se(be) }), (function(e) { console.log(e) })), document.querySelector(".footer").classList.remove("footer--hidden") })) })) })();
+    </script>
+<!-- Cloudflare Pages Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "28d3b64c41d840bfa1ef0adf1d4b2a8c"}'></script><!-- Cloudflare Pages Analytics --></body>
+
+</html>

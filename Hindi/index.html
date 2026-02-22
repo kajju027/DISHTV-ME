@@ -6,7 +6,8 @@
     <meta name="description" content="Premium Live Stream Player">
     <meta name="theme-color" content="#e0eafc">
     <meta name="color-scheme" content="light">
-    <title>Premium Live Stream</title>
+    <title>Star Sports Hindi // cricket news point</title>
+    <link rel="icon" href="data:,">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Amaranth:wght@400;700&display=swap" rel="stylesheet">
@@ -27,14 +28,12 @@
             --success: #10b981;
             --success-glow: rgba(16, 185, 129, 0.25);
         }
-
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
             outline: none;
         }
-
         body {
             font-family: "Amaranth", sans-serif;
             font-weight: 400;
@@ -47,7 +46,6 @@
             padding: 1.5rem 1rem;
             overflow-x: hidden;
         }
-
         .container {
             width: 100%;
             max-width: 1300px;
@@ -58,11 +56,9 @@
             transform: translateY(15px);
             animation: slideUpFade 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
         }
-
         @keyframes slideUpFade { 
             to { opacity: 1; transform: translateY(0); } 
         }
-
         .header-section {
             background: var(--glass-bg);
             backdrop-filter: var(--glass-blur);
@@ -77,7 +73,6 @@
             box-shadow: var(--glass-shadow);
             gap: 0.8rem;
         }
-
         .header-section h1 {
             font-size: 1.6rem;
             font-weight: 700;
@@ -87,7 +82,6 @@
             gap: 8px;
             text-align: center;
         }
-
         .header-badges {
             display: flex;
             gap: 0.8rem;
@@ -95,7 +89,6 @@
             flex-wrap: wrap;
             justify-content: center;
         }
-
         .online-badge {
             background: rgba(16, 185, 129, 0.1);
             color: var(--success);
@@ -110,13 +103,11 @@
             box-shadow: 0 4px 10px var(--success-glow);
             letter-spacing: 0.5px;
         }
-
         .online-badge svg {
             width: 14px;
             height: 14px;
             fill: currentColor;
         }
-
         .live-badge {
             background: rgba(239, 68, 68, 0.1);
             color: var(--danger);
@@ -132,20 +123,17 @@
             letter-spacing: 0.5px;
             text-transform: uppercase;
         }
-
         .live-badge svg {
             width: 10px;
             height: 10px;
             fill: currentColor;
             animation: pulseRed 2s infinite;
         }
-
         @keyframes pulseRed {
             0% { transform: scale(0.9); opacity: 0.7; }
             50% { transform: scale(1.2); opacity: 1; }
             100% { transform: scale(0.9); opacity: 0.7; }
         }
-
         .player-section {
             width: 100%;
             aspect-ratio: 16 / 9;
@@ -161,19 +149,16 @@
             color: #fff;
             font-size: 1.2rem;
         }
-
         .player-section iframe {
             width: 100%;
             height: 100%;
             border: none;
         }
-
         .action-section {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 1.2rem;
         }
-
         .action-card {
             background: var(--glass-bg);
             backdrop-filter: var(--glass-blur);
@@ -184,12 +169,10 @@
             box-shadow: var(--glass-shadow);
             transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
-
         .action-card:hover {
             transform: translateY(-3px);
             box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.1);
         }
-
         .action-card h2 {
             font-size: 1.1rem;
             font-weight: 700;
@@ -200,13 +183,11 @@
             justify-content: center;
             gap: 8px;
         }
-        
         .action-card h2 svg {
             width: 20px;
             height: 20px;
             fill: var(--text-secondary);
         }
-
         .btn {
             display: flex;
             align-items: center;
@@ -226,24 +207,19 @@
             transition: all 0.2s ease;
             box-shadow: 0 6px 15px rgba(37, 99, 235, 0.15);
         }
-
         .btn svg { width: 18px; height: 18px; fill: currentColor; }
-        
         .btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
         }
-        
         .btn.btn-telegram {
             background: var(--telegram-gradient);
             box-shadow: 0 6px 15px rgba(0, 136, 204, 0.2);
         }
-        
         .btn.copied {
             background: var(--success);
             box-shadow: 0 6px 15px rgba(16, 185, 129, 0.2);
         }
-
         .modal-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -256,7 +232,6 @@
             opacity: 0;
             transition: opacity 0.3s ease;
         }
-
         .modal-content {
             background: #ffffff;
             padding: 2rem 1.5rem;
@@ -268,10 +243,8 @@
             transform: scale(0.9);
             transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-
         .modal-overlay.active { display: flex; opacity: 1; }
         .modal-overlay.active .modal-content { transform: scale(1); }
-        
         .modal-content h2 {
             color: #1e293b;
             font-size: 1.4rem;
@@ -281,16 +254,13 @@
             align-items: center;
             gap: 8px;
         }
-        
         .modal-content h2 svg { width: 24px; height: 24px; fill: var(--telegram-blue); }
-        
         .modal-content p {
             color: #64748b;
             font-size: 0.95rem;
             line-height: 1.5;
             margin-bottom: 1.5rem;
         }
-        
         .btn-outline {
             background: transparent;
             color: var(--text-secondary);
@@ -298,12 +268,10 @@
             margin-top: 0.8rem;
             box-shadow: none;
         }
-        
         .btn-outline:hover {
             background: #f1f5f9;
             transform: none;
         }
-
         @media (max-width: 768px) {
             .header-section { padding: 1rem; }
             .player-section { border-radius: 12px; }
@@ -312,9 +280,7 @@
     </style>
 </head>
 <body>
-
     <main class="container">
-        
         <header class="header-section">
             <h1 id="stream-title">
                 <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M21 3H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h5v2h8v-2h5c1.1 0 1.99-.9 1.99-2L23 5c0-1.1-.9-2-2-2zm0 14H3V5h18v12z"/></svg>
@@ -331,11 +297,9 @@
                 </div>
             </div>
         </header>
-
         <section class="player-section" id="video-container">
              Loading player...
         </section>
-
         <section class="action-section">
             <div class="action-card">
                 <h2>
@@ -346,7 +310,6 @@
                     Join WhatsApp Now
                 </a>
             </div>
-
             <div class="action-card">
                 <h2>
                     <svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/></svg>
@@ -356,7 +319,6 @@
             </div>
         </section>
     </main>
-
     <div class="modal-overlay" id="telegramModal">
         <div class="modal-content">
             <h2>
@@ -364,15 +326,15 @@
                 Join For Updates
             </h2>
             <p>Get Instant Live Links & Exclusive Updates On Our Official Channel.</p>
-            <a href="https://whatsapp.com/channel/0029VaeylYYBPzjVNomWuZ0T" target="_blank" rel="noopener noreferrer" class="btn btn-telegram">Join  Now</a>
+            <a href="https://whatsapp.com/channel/0029VaeylYYBPzjVNomWuZ0T" target="_blank" rel="noopener noreferrer" class="btn btn-telegram">Join Now</a>
             <button class="btn btn-outline" onclick="closeModal()"> Already Joined</button>
         </div>
     </div>
-
     <script>
         const TARGET_STREAM_ID = "Hindi"; 
         const JSON_URL = "https://sayan-json-official.pages.dev/api/Events.json";
         const TRACKER_API_URL = "https://sayan-primee.pages.dev/api/online";
+        let isFired = false;
 
         document.addEventListener("DOMContentLoaded", () => {
             initializeApp();
@@ -383,16 +345,16 @@
         async function startOnlineUserTracking() {
             const currentDomain = window.location.hostname || "dishtv.pages.dev";
             
-            const fetchOnlineCount = async () => {
+            const fetchOnlineCount = async (doIncrement = false) => {
                 try {
-                    const response = await fetch(`${TRACKER_API_URL}?domain=${currentDomain}`);
+                    const url = doIncrement ? `${TRACKER_API_URL}?domain=${currentDomain}` : `${TRACKER_API_URL}?domain=${currentDomain}&increment=false`;
+                    const response = await fetch(url);
                     if (!response.ok) throw new Error("Tracker API Error");
                     const data = await response.json();
                     
                     if (data.status === "success" && data.online_users !== undefined) {
                         const badge = document.getElementById('online-users-badge');
                         const countSpan = document.getElementById('online-count');
-                        
                         countSpan.innerText = data.online_users;
                         badge.style.display = "flex";
                     }
@@ -401,8 +363,12 @@
                 }
             };
 
-            fetchOnlineCount();
-            setInterval(fetchOnlineCount, 180000);
+            if (!isFired) {
+                isFired = true;
+                fetchOnlineCount(true);
+            }
+
+            setInterval(() => fetchOnlineCount(false), 180000);
         }
 
         async function initializeApp() {
@@ -413,23 +379,15 @@
                 const response = await fetch(JSON_URL);
                 if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
                 const data = await response.json();
-
                 const streamData = data.channels.find(channel => channel.id === TARGET_STREAM_ID);
-
                 if (streamData) {
                     document.title = `${streamData.name} // Live Stream`;
                     streamTitle.innerHTML = `<svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M21 3H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h5v2h8v-2h5c1.1 0 1.99-.9 1.99-2L23 5c0-1.1-.9-2-2-2zm0 14H3V5h18v12z"/></svg> ${streamData.name}`;
-                    
-                    videoContainer.innerHTML = `
-                        <iframe id="live-iframe" src="${streamData.link}" allow="encrypted-media; autoplay; fullscreen" allowfullscreen></iframe>
-                    `;
-                    
+                    videoContainer.innerHTML = `<iframe id="live-iframe" src="${streamData.link}" allow="encrypted-media; autoplay; fullscreen" allowfullscreen></iframe>`;
                     setupFullscreenHandler();
-                    
                     setTimeout(() => {
                         document.getElementById('telegramModal').classList.add('active');
                     }, 2000);
-
                 } else {
                     renderError("Stream Not Found", `The stream with ID "${TARGET_STREAM_ID}" is invalid or offline.`);
                 }
@@ -464,7 +422,7 @@
             document.addEventListener("fullscreenchange", () => {
                 if (document.fullscreenElement) {
                     if (screen.orientation && screen.orientation.lock) {
-                        screen.orientation.lock("landscape").catch(err => console.log("Landscape lock failed:", err));
+                        screen.orientation.lock("landscape").catch(err => {});
                     }
                 } else {
                     if (screen.orientation && screen.orientation.unlock) {
@@ -479,5 +437,4 @@
         }
     </script>
 </body>
-  </html>
-
+</html>

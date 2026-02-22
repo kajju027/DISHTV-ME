@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Premium Live Stream Player">
+    <meta name="theme-color" content="#e0eafc">
+    <meta name="color-scheme" content="light">
+    <title>Premium Live Stream</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amaranth:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-gradient: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%);
+            --glass-bg: rgba(255, 255, 255, 0.85);
+            --glass-border: rgba(255, 255, 255, 0.5);
+            --glass-blur: blur(16px);
+            --glass-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+            --accent-gradient: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            --telegram-blue: #0088cc;
+            --telegram-gradient: linear-gradient(135deg, #0088cc 0%, #00aaff 100%);
+            --text-primary: #1e293b;
+            --text-secondary: #475569;
+            --danger: #ef4444;
+            --danger-glow: rgba(239, 68, 68, 0.25);
+            --success: #10b981;
+            --success-glow: rgba(16, 185, 129, 0.25);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            outline: none;
+        }
+
+        body {
+            font-family: "Amaranth", sans-serif;
+            font-weight: 400;
+            background: var(--bg-gradient);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1.5rem 1rem;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1300px;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            opacity: 0;
+            transform: translateY(15px);
+            animation: slideUpFade 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+        }
+
+        @keyframes slideUpFade { 
+            to { opacity: 1; transform: translateY(0); } 
+        }
+
+        .header-section {
+            background: var(--glass-bg);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border: 1px solid var(--glass-border);
+            padding: 1.2rem 1.5rem;
+            border-radius: 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--glass-shadow);
+            gap: 0.8rem;
+        }
+
+        .header-section h1 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-align: center;
+        }
+
+        .header-badges {
+            display: flex;
+            gap: 0.8rem;
+            align-items: center;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .online-badge {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 10px var(--success-glow);
+            letter-spacing: 0.5px;
+        }
+
+        .online-badge svg {
+            width: 14px;
+            height: 14px;
+            fill: currentColor;
+        }
+
+        .live-badge {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--danger);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 10px var(--danger-glow);
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .live-badge svg {
+            width: 10px;
+            height: 10px;
+            fill: currentColor;
+            animation: pulseRed 2s infinite;
+        }
+
+        @keyframes pulseRed {
+            0% { transform: scale(0.9); opacity: 0.7; }
+            50% { transform: scale(1.2); opacity: 1; }
+            100% { transform: scale(0.9); opacity: 0.7; }
+        }
+
+        .player-section {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background: #000;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.25);
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 1.2rem;
+        }
+
+        .player-section iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .action-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.2rem;
+        }
+
+        .action-card {
+            background: var(--glass-bg);
+            backdrop-filter: var(--glass-blur);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: var(--glass-shadow);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .action-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.1);
+        }
+
+        .action-card h2 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-secondary);
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .action-card h2 svg {
+            width: 20px;
+            height: 20px;
+            fill: var(--text-secondary);
+        }
+
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            padding: 0.85rem 1rem;
+            border-radius: 12px;
+            background: var(--accent-gradient);
+            color: white;
+            font-size: 1rem;
+            font-weight: 700;
+            font-family: "Amaranth", sans-serif;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 6px 15px rgba(37, 99, 235, 0.15);
+        }
+
+        .btn svg { width: 18px; height: 18px; fill: currentColor; }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
+        }
+        
+        .btn.btn-telegram {
+            background: var(--telegram-gradient);
+            box-shadow: 0 6px 15px rgba(0, 136, 204, 0.2);
+        }
+        
+        .btn.copied {
+            background: var(--success);
+            box-shadow: 0 6px 15px rgba(16, 185, 129, 0.2);
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(6px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-content {
+            background: #ffffff;
+            padding: 2rem 1.5rem;
+            border-radius: 20px;
+            text-align: center;
+            width: 90%;
+            max-width: 380px;
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.2);
+            transform: scale(0.9);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .modal-overlay.active { display: flex; opacity: 1; }
+        .modal-overlay.active .modal-content { transform: scale(1); }
+        
+        .modal-content h2 {
+            color: #1e293b;
+            font-size: 1.4rem;
+            margin-bottom: 0.8rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .modal-content h2 svg { width: 24px; height: 24px; fill: var(--telegram-blue); }
+        
+        .modal-content p {
+            color: #64748b;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 1.5rem;
+        }
+        
+        .btn-outline {
+            background: transparent;
+            color: var(--text-secondary);
+            border: 1px solid #cbd5e1;
+            margin-top: 0.8rem;
+            box-shadow: none;
+        }
+        
+        .btn-outline:hover {
+            background: #f1f5f9;
+            transform: none;
+        }
+
+        @media (max-width: 768px) {
+            .header-section { padding: 1rem; }
+            .player-section { border-radius: 12px; }
+            .action-card { padding: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <main class="container">
+        
+        <header class="header-section">
+            <h1 id="stream-title">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M21 3H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h5v2h8v-2h5c1.1 0 1.99-.9 1.99-2L23 5c0-1.1-.9-2-2-2zm0 14H3V5h18v12z"/></svg>
+                Loading Stream...
+            </h1>
+            <div class="header-badges">
+                <div class="live-badge">
+                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/></svg>
+                    Live Now
+                </div>
+                <div class="online-badge" id="online-users-badge" style="display: none;">
+                    <svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+                    <span id="online-count">0</span>&nbsp;Watching
+                </div>
+            </div>
+        </header>
+
+        <section class="player-section" id="video-container">
+             Loading player...
+        </section>
+
+        <section class="action-section">
+            <div class="action-card">
+                <h2>
+                    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.18-.08-.05-.19-.02-.27 0-.11.03-1.93 1.23-5.46 3.62-.51.35-.98.52-1.4.51-.46-.01-1.35-.26-2.01-.48-.81-.27-1.46-.42-1.4-.88.03-.24.33-.48.91-.74 3.56-1.55 5.94-2.58 7.14-3.08 3.39-1.41 4.1-1.66 4.56-1.67.1 0 .32.02.46.14.12.1.15.24.16.35-.01.03-.01.07-.02.12z"/></svg>
+                    Our Official Channel
+                </h2>
+                <a href="https://whatsapp.com/channel/0029VaeylYYBPzjVNomWuZ0T" target="_blank" rel="noopener noreferrer" class="btn btn-telegram">
+                    Join WhatsApp Now
+                </a>
+            </div>
+
+            <div class="action-card">
+                <h2>
+                    <svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/></svg>
+                    Share With Your Friends.
+                </h2>
+                <button class="btn" id="shareButton">Copy Stream Link</button>
+            </div>
+        </section>
+    </main>
+
+    <div class="modal-overlay" id="telegramModal">
+        <div class="modal-content">
+            <h2>
+                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.18-.08-.05-.19-.02-.27 0-.11.03-1.93 1.23-5.46 3.62-.51.35-.98.52-1.4.51-.46-.01-1.35-.26-2.01-.48-.81-.27-1.46-.42-1.4-.88.03-.24.33-.48.91-.74 3.56-1.55 5.94-2.58 7.14-3.08 3.39-1.41 4.1-1.66 4.56-1.67.1 0 .32.02.46.14.12.1.15.24.16.35-.01.03-.01.07-.02.12z"/></svg>
+                Join For Updates
+            </h2>
+            <p>Get Instant Live Links & Exclusive Updates On Our Official Channel.</p>
+            <a href="https://whatsapp.com/channel/0029VaeylYYBPzjVNomWuZ0T" target="_blank" rel="noopener noreferrer" class="btn btn-telegram">Join  Now</a>
+            <button class="btn btn-outline" onclick="closeModal()"> Already Joined</button>
+        </div>
+    </div>
+
+    <script>
+        const TARGET_STREAM_ID = "Hindi"; 
+        const JSON_URL = "https://sayan-json-official.pages.dev/api/Events.json";
+        const TRACKER_API_URL = "https://sayan-primee.pages.dev/api/online";
+
+        document.addEventListener("DOMContentLoaded", () => {
+            initializeApp();
+            setupShareButton();
+            startOnlineUserTracking();
+        });
+
+        async function startOnlineUserTracking() {
+            const currentDomain = window.location.hostname || "dishtv.pages.dev";
+            
+            const fetchOnlineCount = async () => {
+                try {
+                    const response = await fetch(`${TRACKER_API_URL}?domain=${currentDomain}`);
+                    if (!response.ok) throw new Error("Tracker API Error");
+                    const data = await response.json();
+                    
+                    if (data.status === "success" && data.online_users !== undefined) {
+                        const badge = document.getElementById('online-users-badge');
+                        const countSpan = document.getElementById('online-count');
+                        
+                        countSpan.innerText = data.online_users;
+                        badge.style.display = "flex";
+                    }
+                } catch (error) {
+                    console.error("Failed to fetch online users:", error);
+                }
+            };
+
+            fetchOnlineCount();
+            setInterval(fetchOnlineCount, 180000);
+        }
+
+        async function initializeApp() {
+            const videoContainer = document.getElementById('video-container');
+            const streamTitle = document.getElementById('stream-title');
+            
+            try {
+                const response = await fetch(JSON_URL);
+                if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+                const data = await response.json();
+
+                const streamData = data.channels.find(channel => channel.id === TARGET_STREAM_ID);
+
+                if (streamData) {
+                    document.title = `${streamData.name} // Live Stream`;
+                    streamTitle.innerHTML = `<svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M21 3H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h5v2h8v-2h5c1.1 0 1.99-.9 1.99-2L23 5c0-1.1-.9-2-2-2zm0 14H3V5h18v12z"/></svg> ${streamData.name}`;
+                    
+                    videoContainer.innerHTML = `
+                        <iframe id="live-iframe" src="${streamData.link}" allow="encrypted-media; autoplay; fullscreen" allowfullscreen></iframe>
+                    `;
+                    
+                    setupFullscreenHandler();
+                    
+                    setTimeout(() => {
+                        document.getElementById('telegramModal').classList.add('active');
+                    }, 2000);
+
+                } else {
+                    renderError("Stream Not Found", `The stream with ID "${TARGET_STREAM_ID}" is invalid or offline.`);
+                }
+            } catch (error) {
+                console.error("Initialization failed:", error);
+                renderError("Failed to Load", "Could not load stream data. Check your connection or the JSON source.");
+            }
+        }
+        
+        function renderError(title, message) {
+            document.getElementById('stream-title').innerHTML = `<svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M21 3H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h5v2h8v-2h5c1.1 0 1.99-.9 1.99-2L23 5c0-1.1-.9-2-2-2zm0 14H3V5h18v12z"/></svg> ${title}`;
+            document.getElementById('video-container').innerHTML = `<p style="color: #ef4444; font-size: 1.1rem; text-align: center; padding: 2rem;">${message}</p>`;
+        }
+
+        function setupShareButton() {
+            const shareBtn = document.getElementById('shareButton');
+            shareBtn.addEventListener('click', async () => {
+                const originalHTML = shareBtn.innerHTML;
+                try {
+                    await navigator.clipboard.writeText(window.location.href);
+                    shareBtn.innerHTML = `<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Link Copied!`;
+                    shareBtn.classList.add('copied');
+                    setTimeout(() => {
+                        shareBtn.innerHTML = originalHTML;
+                        shareBtn.classList.remove('copied');
+                    }, 2500);
+                } catch (err) { console.error('Failed to copy', err); }
+            });
+        }
+        
+        function setupFullscreenHandler() {
+            document.addEventListener("fullscreenchange", () => {
+                if (document.fullscreenElement) {
+                    if (screen.orientation && screen.orientation.lock) {
+                        screen.orientation.lock("landscape").catch(err => console.log("Landscape lock failed:", err));
+                    }
+                } else {
+                    if (screen.orientation && screen.orientation.unlock) {
+                        screen.orientation.unlock();
+                    }
+                }
+            });
+        }
+
+        function closeModal() {
+            document.getElementById('telegramModal').classList.remove('active');
+        }
+    </script>
+</body>
+  </html>
+

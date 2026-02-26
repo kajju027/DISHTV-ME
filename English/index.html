@@ -1,483 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Premium Live Stream Player">
-    <meta name="theme-color" content="#e0eafc">
-    <meta name="color-scheme" content="light">
-    <title>Premium Live Stream</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Amaranth:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg-gradient: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%);
-            --glass-bg: rgba(255, 255, 255, 0.85);
-            --glass-border: rgba(255, 255, 255, 0.5);
-            --glass-blur: blur(16px);
-            --glass-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
-            --accent-gradient: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
-            --telegram-blue: #0088cc;
-            --telegram-gradient: linear-gradient(135deg, #0088cc 0%, #00aaff 100%);
-            --text-primary: #1e293b;
-            --text-secondary: #475569;
-            --danger: #ef4444;
-            --danger-glow: rgba(239, 68, 68, 0.25);
-            --success: #10b981;
-            --success-glow: rgba(16, 185, 129, 0.25);
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            outline: none;
-        }
+<!-- ===== BASIC SEO ===== -->
+<title>Cricket News Point // Sayan 2026 // Cricket News Point (CNP) – T20 World Cup 2026 & IPL 2026 Live Coverage</title>
+<meta name="description" content="Cricket News Point (CNP) – T20 World Cup 2026 & IPL 2026 Live Coverage | Real-Time Cricket Scores, Match News, Team India Updates, WPL, ILT20, International Cricket & Viral Cricketers Stories">
+<meta name="keywords" content="Cricket News, Live Cricket Scores, T20 World Cup 2026, T20 World Cup Live, IPL 2026, IPL Live Updates, WPL 2026, ILT20 League, International Cricket, Team India News, Indian Cricket Updates, ICC Tournaments, T20 Cricket News, Match Highlights, Pre Match Analysis, Post Match Updates, Viral Cricketers, Cricket Breaking News, Global Cricket Updates, Cricket Fans Community, Cricket WhatsApp Channel, Live Match Links, Cricket World Cup, T20 Leagues, Cricket Insights">
+<meta name="author" content="sayan">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://cnptv.pages.dev/">
 
-        body {
-            font-family: "Amaranth", sans-serif;
-            font-weight: 400;
-            background: var(--bg-gradient);
-            color: var(--text-primary);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 1.5rem 1rem;
-            overflow-x: hidden;
-        }
+<!-- ===== OPEN GRAPH (Facebook / WhatsApp Preview) ===== -->
+<meta property="og:title" content="Cricket News Point">
+<meta property="og:description" content="Cricket News Point (CNP) – T20 World Cup 2026 & IPL 2026 Live Coverage | Real-Time Cricket Scores, Match News, Team India Updates, WPL, ILT20, International Cricket & Viral Cricketers Stories">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://cnptv.pages.dev/">
+<meta property="og:image" content="https://cnptv.pages.dev/file_0000000040247208bac79a46b2a55a4a.png">
 
-        .container {
-            width: 100%;
-            max-width: 1300px;
-            display: flex;
-            flex-direction: column;
-            gap: 1.2rem;
-            opacity: 0;
-            transform: translateY(15px);
-            animation: slideUpFade 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-        }
+<!-- ===== TWITTER CARD ===== -->
+<meta name="twitter:card" content="https://cnptv.pages.dev/file_0000000040247208bac79a46b2a55a4a.png">
+<meta name="twitter:title" content="Cricket News Point // Sayan 2026 // Cricket News Point (CNP) – T20 World Cup 2026 & IPL 2026 Live Coverage">
+<meta name="twitter:description" content="Cricket News, Live Cricket Scores, T20 World Cup 2026, T20 World Cup Live, IPL 2026, IPL Live Updates, WPL 2026, ILT20 League, International Cricket, Team India News, Indian Cricket Updates, ICC Tournaments, T20 Cricket News, Match Highlights, Pre Match Analysis, Post Match Updates, Viral Cricketers, Cricket Breaking News, Global Cricket Updates, Cricket Fans Community, Cricket WhatsApp Channel, Live Match Links, Cricket World Cup, T20 Leagues, Cricket Insights">
+<meta name="twitter:image" content="https://cnptv.pages.dev/file_0000000040247208bac79a46b2a55a4a.png">
 
-        @keyframes slideUpFade { 
-            to { opacity: 1; transform: translateY(0); } 
-        }
+<!-- ===== FAVICON ===== -->
+<link rel="icon" type="image/png" href="https://cnptv.pages.dev/file_0000000040247208bac79a46b2a55a4a.png">
 
-        .header-section {
-            background: var(--glass-bg);
-            backdrop-filter: var(--glass-blur);
-            -webkit-backdrop-filter: var(--glass-blur);
-            border: 1px solid var(--glass-border);
-            padding: 1.2rem 1.5rem;
-            border-radius: 16px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            box-shadow: var(--glass-shadow);
-            gap: 0.8rem;
-        }
+<!-- ===== GOOGLE SITE VERIFICATION (Search Console) ===== -->
+<meta name="google-site-verification" content="googlef5395e3bcc48d6bd">
 
-        .header-section h1 {
-            font-size: 1.6rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            text-align: center;
-        }
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-G5NE717HVD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-        .header-badges {
-            display: flex;
-            gap: 0.8rem;
-            align-items: center;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
+  gtag('config', 'G-G5NE717HVD');
+</script>
 
-        .online-badge {
-            background: rgba(16, 185, 129, 0.1);
-            color: var(--success);
-            border: 1px solid rgba(16, 185, 129, 0.2);
-            padding: 0.4rem 1rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            box-shadow: 0 4px 10px var(--success-glow);
-            letter-spacing: 0.5px;
-        }
-
-        .online-badge svg {
-            width: 14px;
-            height: 14px;
-            fill: currentColor;
-        }
-
-        .live-badge {
-            background: rgba(239, 68, 68, 0.1);
-            color: var(--danger);
-            border: 1px solid rgba(239, 68, 68, 0.2);
-            padding: 0.4rem 1rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            box-shadow: 0 4px 10px var(--danger-glow);
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-        }
-
-        .live-badge svg {
-            width: 10px;
-            height: 10px;
-            fill: currentColor;
-            animation: pulseRed 2s infinite;
-        }
-
-        @keyframes pulseRed {
-            0% { transform: scale(0.9); opacity: 0.7; }
-            50% { transform: scale(1.2); opacity: 1; }
-            100% { transform: scale(0.9); opacity: 0.7; }
-        }
-
-        .player-section {
-            width: 100%;
-            aspect-ratio: 16 / 9;
-            background: #000;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.25);
-            position: relative;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #fff;
-            font-size: 1.2rem;
-        }
-
-        .player-section iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
-        .action-section {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.2rem;
-        }
-
-        .action-card {
-            background: var(--glass-bg);
-            backdrop-filter: var(--glass-blur);
-            border: 1px solid var(--glass-border);
-            border-radius: 16px;
-            padding: 1.5rem;
-            text-align: center;
-            box-shadow: var(--glass-shadow);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        .action-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.1);
-        }
-
-        .action-card h2 {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: var(--text-secondary);
-            margin-bottom: 1.2rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-        
-        .action-card h2 svg {
-            width: 20px;
-            height: 20px;
-            fill: var(--text-secondary);
-        }
-
-        .btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            width: 100%;
-            padding: 0.85rem 1rem;
-            border-radius: 12px;
-            background: var(--accent-gradient);
-            color: white;
-            font-size: 1rem;
-            font-weight: 700;
-            font-family: "Amaranth", sans-serif;
-            text-decoration: none;
-            border: none;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            box-shadow: 0 6px 15px rgba(37, 99, 235, 0.15);
-        }
-
-        .btn svg { width: 18px; height: 18px; fill: currentColor; }
-        
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
-        }
-        
-        .btn.btn-telegram {
-            background: var(--telegram-gradient);
-            box-shadow: 0 6px 15px rgba(0, 136, 204, 0.2);
-        }
-        
-        .btn.copied {
-            background: var(--success);
-            box-shadow: 0 6px 15px rgba(16, 185, 129, 0.2);
-        }
-
-        .modal-overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(6px);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .modal-content {
-            background: #ffffff;
-            padding: 2rem 1.5rem;
-            border-radius: 20px;
-            text-align: center;
-            width: 90%;
-            max-width: 380px;
-            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.2);
-            transform: scale(0.9);
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .modal-overlay.active { display: flex; opacity: 1; }
-        .modal-overlay.active .modal-content { transform: scale(1); }
-        
-        .modal-content h2 {
-            color: #1e293b;
-            font-size: 1.4rem;
-            margin-bottom: 0.8rem;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .modal-content h2 svg { width: 24px; height: 24px; fill: var(--telegram-blue); }
-        
-        .modal-content p {
-            color: #64748b;
-            font-size: 0.95rem;
-            line-height: 1.5;
-            margin-bottom: 1.5rem;
-        }
-        
-        .btn-outline {
-            background: transparent;
-            color: var(--text-secondary);
-            border: 1px solid #cbd5e1;
-            margin-top: 0.8rem;
-            box-shadow: none;
-        }
-        
-        .btn-outline:hover {
-            background: #f1f5f9;
-            transform: none;
-        }
-
-        @media (max-width: 768px) {
-            .header-section { padding: 1rem; }
-            .player-section { border-radius: 12px; }
-            .action-card { padding: 1.2rem; }
-        }
-    </style>
-</head>
-<body>
-
-    <main class="container">
-        
-        <header class="header-section">
-            <h1 id="stream-title">
-                <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M21 3H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h5v2h8v-2h5c1.1 0 1.99-.9 1.99-2L23 5c0-1.1-.9-2-2-2zm0 14H3V5h18v12z"/></svg>
-                Loading Stream...
-            </h1>
-            <div class="header-badges">
-                <div class="live-badge">
-                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/></svg>
-                    Live Now
-                </div>
-                <div class="online-badge" id="online-users-badge" style="display: none;">
-                    <svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
-                    <span id="online-count">0</span>&nbsp;Watching
-                </div>
-            </div>
-        </header>
-
-        <section class="player-section" id="video-container">
-             Loading player...
-        </section>
-
-        <section class="action-section">
-            <div class="action-card">
-                <h2>
-                    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.18-.08-.05-.19-.02-.27 0-.11.03-1.93 1.23-5.46 3.62-.51.35-.98.52-1.4.51-.46-.01-1.35-.26-2.01-.48-.81-.27-1.46-.42-1.4-.88.03-.24.33-.48.91-.74 3.56-1.55 5.94-2.58 7.14-3.08 3.39-1.41 4.1-1.66 4.56-1.67.1 0 .32.02.46.14.12.1.15.24.16.35-.01.03-.01.07-.02.12z"/></svg>
-                    Our Official Channel
-                </h2>
-                <a href="https://whatsapp.com/channel/0029VaeylYYBPzjVNomWuZ0T" target="_blank" rel="noopener noreferrer" class="btn btn-telegram">
-                    Join WhatsApp Now
-                </a>
-            </div>
-
-            <div class="action-card">
-                <h2>
-                    <svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/></svg>
-                    Share With Your Friends.
-                </h2>
-                <button class="btn" id="shareButton">Copy Stream Link</button>
-            </div>
-        </section>
-    </main>
-
-    <div class="modal-overlay" id="telegramModal">
-        <div class="modal-content">
-            <h2>
-                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.18-.08-.05-.19-.02-.27 0-.11.03-1.93 1.23-5.46 3.62-.51.35-.98.52-1.4.51-.46-.01-1.35-.26-2.01-.48-.81-.27-1.46-.42-1.4-.88.03-.24.33-.48.91-.74 3.56-1.55 5.94-2.58 7.14-3.08 3.39-1.41 4.1-1.66 4.56-1.67.1 0 .32.02.46.14.12.1.15.24.16.35-.01.03-.01.07-.02.12z"/></svg>
-                Join For Updates
-            </h2>
-            <p>Get Instant Live Links & Exclusive Updates On Our Official Channel.</p>
-            <a href="https://whatsapp.com/channel/0029VaeylYYBPzjVNomWuZ0T" target="_blank" rel="noopener noreferrer" class="btn btn-telegram">Join  Now</a>
-            <button class="btn btn-outline" onclick="closeModal()"> Already Joined</button>
-        </div>
-    </div>
-
+<!-- ===== STRUCTURED DATA (SCHEMA) ===== -->
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "WebSite",
+ "name": "Cricket News Point",
+ "url": "https://cnptv.pages.dev/file_0000000040247208bac79a46b2a55a4a.png"
+}
+</script>
     <script>
-        const TARGET_STREAM_ID = "English"; 
-        const JSON_URL = "https://sayan-json-official.pages.dev/api/Events.json";
-        const TRACKER_API_URL = "https://sayan-primee.pages.dev/api/online";
-
-        document.addEventListener("DOMContentLoaded", () => {
-            initializeApp();
-            setupShareButton();
-            startOnlineUserTracking();
-        });
-
-        async function startOnlineUserTracking() {
-            const currentDomain = window.location.hostname || "dishtv.pages.dev";
-            
-            const fetchOnlineCount = async () => {
-                try {
-                    const response = await fetch(`${TRACKER_API_URL}?domain=${currentDomain}`);
-                    if (!response.ok) throw new Error("Tracker API Error");
-                    const data = await response.json();
-                    
-                    if (data.status === "success" && data.online_users !== undefined) {
-                        const badge = document.getElementById('online-users-badge');
-                        const countSpan = document.getElementById('online-count');
-                        
-                        countSpan.innerText = data.online_users;
-                        badge.style.display = "flex";
-                    }
-                } catch (error) {
-                    console.error("Failed to fetch online users:", error);
-                }
-            };
-
-            fetchOnlineCount();
-            setInterval(fetchOnlineCount, 180000);
-        }
-
-        async function initializeApp() {
-            const videoContainer = document.getElementById('video-container');
-            const streamTitle = document.getElementById('stream-title');
-            
+        // The encrypted string is injected here:
+        let encrypted = "PCFET0NUWVBFIGh0bWw+CjxodG1sIGxhbmc9ImVuIj4KPGhlYWQ+CjxtZXRhIGNoYXJzZXQ9IlVURi04Ij4KPG1ldGEgbmFtZT0idmlld3BvcnQiIGNvbnRlbnQ9IndpZHRoPWRldmljZS13aWR0aCwgaW5pdGlhbC1zY2FsZT0xLjAiPgoKPHRpdGxlPkNyaWNrZXQgTmV3cyBQb2ludCAvLyBTYXlhbiAyMDI2IC8vIENyaWNrZXQgTmV3cyBQb2ludCAoQ05QKSDigJMgVDIwIFdvcmxkIEN1cCAyMDI2ICYgSVBMIDIwMjYgTGl2ZSBDb3ZlcmFnZTwvdGl0bGU+CjxtZXRhIG5hbWU9ImRlc2NyaXB0aW9uIiBjb250ZW50PSJDcmlja2V0IE5ld3MgUG9pbnQgKENOUCkg4oCTIFQyMCBXb3JsZCBDdXAgMjAyNiAmIElQTCAyMDI2IExpdmUgQ292ZXJhZ2UgfCBSZWFsLVRpbWUgQ3JpY2tldCBTY29yZXMsIE1hdGNoIE5ld3MsIFRlYW0gSW5kaWEgVXBkYXRlcywgV1BMLCBJTFQyMCwgSW50ZXJuYXRpb25hbCBDcmlja2V0ICYgVmlyYWwgQ3JpY2tldGVycyBTdG9yaWVzIj4KPG1ldGEgbmFtZT0ia2V5d29yZHMiIGNvbnRlbnQ9IkNyaWNrZXQgTmV3cywgTGl2ZSBDcmlja2V0IFNjb3JlcywgVDIwIFdvcmxkIEN1cCAyMDI2LCBUMjAgV29ybGQgQ3VwIExpdmUsIElQTCAyMDI2LCBJUEwgTGl2ZSBVcGRhdGVzLCBXUEwgMjAyNiwgSUxUMjAgTGVhZ3VlLCBJbnRlcm5hdGlvbmFsIENyaWNrZXQsIFRlYW0gSW5kaWEgTmV3cywgSW5kaWFuIENyaWNrZXQgVXBkYXRlcywgSUNDIFRvdXJuYW1lbnRzLCBUMjAgQ3JpY2tldCBOZXdzLCBNYXRjaCBIaWdobGlnaHRzLCBQcmUgTWF0Y2ggQW5hbHlzaXMsIFBvc3QgTWF0Y2ggVXBkYXRlcywgVmlyYWwgQ3JpY2tldGVycywgQ3JpY2tldCBCcmVha2luZyBOZXdzLCBHbG9iYWwgQ3JpY2tldCBVcGRhdGVzLCBDcmlja2V0IEZhbnMgQ29tbXVuaXR5LCBDcmlja2V0IFdoYXRzQXBwIENoYW5uZWwsIExpdmUgTWF0Y2ggTGlua3MsIENyaWNrZXQgV29ybGQgQ3VwLCBUMjAgTGVhZ3VlcywgQ3JpY2tldCBJbnNpZ2h0cyI+CjxtZXRhIG5hbWU9ImF1dGhvciIgY29udGVudD0ic2F5YW4iPgo8bWV0YSBuYW1lPSJyb2JvdHMiIGNvbnRlbnQ9ImluZGV4LCBmb2xsb3ciPgo8bGluayByZWw9ImNhbm9uaWNhbCIgaHJlZj0iaHR0cHM6Ly9jbnB0di5wYWdlcy5kZXYvIj4KCjxtZXRhIHByb3BlcnR5PSJvZzp0aXRsZSIgY29udGVudD0iQ3JpY2tldCBOZXdzIFBvaW50Ij4KPG1ldGEgcHJvcGVydHk9Im9nOmRlc2NyaXB0aW9uIiBjb250ZW50PSJDcmlja2V0IE5ld3MgUG9pbnQgKENOUCkg4oCTIFQyMCBXb3JsZCBDdXAgMjAyNiAmIElQTCAyMDI2IExpdmUgQ292ZXJhZ2UgfCBSZWFsLVRpbWUgQ3JpY2tldCBTY29yZXMsIE1hdGNoIE5ld3MsIFRlYW0gSW5kaWEgVXBkYXRlcywgV1BMLCBJTFQyMCwgSW50ZXJuYXRpb25hbCBDcmlja2V0ICYgVmlyYWwgQ3JpY2tldGVycyBTdG9yaWVzIj4KPG1ldGEgcHJvcGVydHk9Im9nOnR5cGUiIGNvbnRlbnQ9IndlYnNpdGUiPgo8bWV0YSBwcm9wZXJ0eT0ib2c6dXJsIiBjb250ZW50PSJodHRwczovL2NucHR2LnBhZ2VzLmRldi8iPgo8bWV0YSBwcm9wZXJ0eT0ib2c6aW1hZ2UiIGNvbnRlbnQ9Imh0dHBzOi8vY25wdHYucGFnZXMuZGV2L2ZpbGVfMDAwMDAwMDA0MDI0NzIwOGJhYzc5YTQ2YjJhNTVhNGEucG5nIj4KCjxtZXRhIG5hbWU9InR3aXR0ZXI6Y2FyZCIgY29udGVudD0ic3VtbWFyeV9sYXJnZV9pbWFnZSI+CjxtZXRhIG5hbWU9InR3aXR0ZXI6dGl0bGUiIGNvbnRlbnQ9IkNyaWNrZXQgTmV3cyBQb2ludCAvLyBTYXlhbiAyMDI2IC8vIENyaWNrZXQgTmV3cyBQb2ludCAoQ05QKSDigJMgVDIwIFdvcmxkIEN1cCAyMDI2ICYgSVBMIDIwMjYgTGl2ZSBDb3ZlcmFnZSI+CjxtZXRhIG5hbWU9InR3aXR0ZXI6ZGVzY3JpcHRpb24iIGNvbnRlbnQ9IkNyaWNrZXQgTmV3cywgTGl2ZSBDcmlja2V0IFNjb3JlcywgVDIwIFdvcmxkIEN1cCAyMDI2LCBJUEwgMjAyNiwgV1BMIDIwMjYsIElMVDIwIExlYWd1ZSwgSW50ZXJuYXRpb25hbCBDcmlja2V0LCBUZWFtIEluZGlhIE5ld3MiPgo8bWV0YSBuYW1lPSJ0d2l0dGVyOmltYWdlIiBjb250ZW50PSJodHRwczovL2NucHR2LnBhZ2VzLmRldi9maWxlXzAwMDAwMDAwNDAyNDcyMDhiYWM3OWE0NmIyYTU1YTRhLnBuZyI+Cgo8bGluayByZWw9Imljb24iIHR5cGU9ImltYWdlL3BuZyIgaHJlZj0iaHR0cHM6Ly9jbnB0di5wYWdlcy5kZXYvZmlsZV8wMDAwMDAwMDQwMjQ3MjA4YmFjNzlhNDZiMmE1NWE0YS5wbmciPgoKPG1ldGEgbmFtZT0iZ29vZ2xlLXNpdGUtdmVyaWZpY2F0aW9uIiBjb250ZW50PSJnb29nbGVmNTM5NWUzYmNjNDhkNmJkIj4KCjxzY3JpcHQgYXN5bmMgc3JjPSJodHRwczovL3d3dy5nb29nbGV0YWdtYW5hZ2VyLmNvbS9ndGFnL2pzP2lkPUctRzVORTcxN0hWRCI+PC9zY3JpcHQ+CjxzY3JpcHQ+CndpbmRvdy5kYXRhTGF5ZXI9d2luZG93LmRhdGFMYXllcnx8W107CmZ1bmN0aW9uIGd0YWcoKXtkYXRhTGF5ZXIucHVzaChhcmd1bWVudHMpO30KZ3RhZygnanMnLG5ldyBEYXRlKCkpOwpndGFnKCdjb25maWcnLCdHLUc1TkU3MTdIVkQnKTsKPC9zY3JpcHQ+Cgo8c2NyaXB0IHR5cGU9ImFwcGxpY2F0aW9uL2xkK2pzb24iPgp7CiAiQGNvbnRleHQiOiJodHRwczovL3NjaGVtYS5vcmciLAogIkB0eXBlIjoiV2ViU2l0ZSIsCiAibmFtZSI6IkNyaWNrZXQgTmV3cyBQb2ludCIsCiAidXJsIjoiaHR0cHM6Ly9jbnB0di5wYWdlcy5kZXYvIgp9Cjwvc2NyaXB0PgoKPGxpbmsgaHJlZj0iaHR0cHM6Ly9mb250cy5nb29nbGVhcGlzLmNvbS9jc3MyP2ZhbWlseT1Qb3BwaW5zOndnaHRANDAwOzYwMDs3MDAmZGlzcGxheT1zd2FwIiByZWw9InN0eWxlc2hlZXQiPgoKPHN0eWxlPgoqewptYXJnaW46MDsKcGFkZGluZzowOwpib3gtc2l6aW5nOmJvcmRlci1ib3g7CmZvbnQtZmFtaWx5OidQb3BwaW5zJyxzYW5zLXNlcmlmOwp9Cgpib2R5ewpiYWNrZ3JvdW5kOiNlOWVlZjM7CmRpc3BsYXk6ZmxleDsKanVzdGlmeS1jb250ZW50OmNlbnRlcjsKcGFkZGluZzoxMnB4Owp9CgouY29udGFpbmVyewp3aWR0aDoxMDAlOwptYXgtd2lkdGg6NTAwcHg7CmRpc3BsYXk6ZmxleDsKZmxleC1kaXJlY3Rpb246Y29sdW1uOwpnYXA6MTVweDsKfQoKLmNhcmR7CmJhY2tncm91bmQ6bGluZWFyLWdyYWRpZW50KDEzNWRlZywjMGQ2ZWZkLCMwYTU4Y2EpOwpib3JkZXItcmFkaXVzOjE0cHg7CnBhZGRpbmc6MTVweDsKY29sb3I6I2ZmZjsKdGV4dC1hbGlnbjpjZW50ZXI7CmJveC1zaGFkb3c6MCA2cHggMThweCByZ2JhKDAsMCwwLDAuMTUpOwp9CgouaGVhZGVyewpmb250LXNpemU6MjVweDsKZm9udC13ZWlnaHQ6NzAwOwptaW4taGVpZ2h0OjMwcHg7Cn0KCi52aWRlby13cmFwcGVyewpiYWNrZ3JvdW5kOiMwMDA7CmJvcmRlci1yYWRpdXM6MTZweDsKb3ZlcmZsb3c6aGlkZGVuOwpwb3NpdGlvbjpyZWxhdGl2ZTsKcGFkZGluZy10b3A6ODUlOwpib3gtc2hhZG93OjAgMCAwIDRweCAjMGQ2ZWZkOwptYXJnaW4tYm90dG9tOjI1cHg7Cn0KCi52aWRlby13cmFwcGVyIGlmcmFtZXsKcG9zaXRpb246YWJzb2x1dGU7CnRvcDowOwpsZWZ0OjA7CndpZHRoOjEwMCU7CmhlaWdodDoxMDAlOwpib3JkZXI6MDsKfQoKLmVycm9yLWJveHsKZGlzcGxheTpub25lOwpiYWNrZ3JvdW5kOiNmZjRkNGQ7CmNvbG9yOiNmZmY7CnBhZGRpbmc6MTVweDsKYm9yZGVyLXJhZGl1czoxMnB4Owpmb250LXdlaWdodDo2MDA7CnRleHQtYWxpZ246Y2VudGVyOwp9CgouY29tbXVuaXR5IGgzewptYXJnaW46MCAwIDE1cHg7CmRpc3BsYXk6ZmxleDsKYWxpZ24taXRlbXM6Y2VudGVyOwpqdXN0aWZ5LWNvbnRlbnQ6Y2VudGVyOwpnYXA6MTBweDsKfQoKLmJ0bnsKYmFja2dyb3VuZDojMjVkMzY2Owpib3JkZXI6MnB4IHNvbGlkICNmZmY7CmJvcmRlci1yYWRpdXM6MzBweDsKcGFkZGluZzoxMnB4Owpjb2xvcjojZmZmOwpmb250LXdlaWdodDo3MDA7CnRleHQtZGVjb3JhdGlvbjpub25lOwpkaXNwbGF5OmZsZXg7CmFsaWduLWl0ZW1zOmNlbnRlcjsKanVzdGlmeS1jb250ZW50OmNlbnRlcjsKZ2FwOjEwcHg7CnRyYW5zaXRpb246MC4zczsKfQoKLmJ0bjpob3ZlcnsKYmFja2dyb3VuZDojZmZmOwpjb2xvcjojMjVkMzY2Owp9CgouYnRuIHN2Z3sKd2lkdGg6MjJweDsKaGVpZ2h0OjIycHg7CmZpbGw6Y3VycmVudENvbG9yOwp9Cgouc2hhcmUtYnRuewpiYWNrZ3JvdW5kOiNmZmY7CmNvbG9yOiMwZDZlZmQ7CmJvcmRlcjpub25lOwpib3JkZXItcmFkaXVzOjEycHg7CnBhZGRpbmc6MTRweDsKZm9udC13ZWlnaHQ6NzAwOwpjdXJzb3I6cG9pbnRlcjsKd2lkdGg6MTAwJTsKZm9udC1zaXplOjE2cHg7Cn0KCi5wb3B1cC1vdmVybGF5ewpwb3NpdGlvbjpmaXhlZDsKaW5zZXQ6MDsKYmFja2dyb3VuZDpyZ2JhKDAsMCwwLDAuODUpOwpkaXNwbGF5OmZsZXg7CmFsaWduLWl0ZW1zOmNlbnRlcjsKanVzdGlmeS1jb250ZW50OmNlbnRlcjsKcGFkZGluZzoyMHB4Owp6LWluZGV4Ojk5OTk7Cn0KCi5wb3B1cC1ib3h7CndpZHRoOjEwMCU7Cm1heC13aWR0aDo0MjBweDsKYmFja2dyb3VuZDpsaW5lYXItZ3JhZGllbnQoMTQ1ZGVnLCMxMTEsIzFiMWIxYik7CmJvcmRlci1yYWRpdXM6MjJweDsKcGFkZGluZzozMHB4IDIycHg7CmJvcmRlcjoycHggc29saWQgI2Y3YzYwMDsKYm94LXNoYWRvdzowIDAgMjVweCByZ2JhKDI1NSwxOTYsMCwwLjM1KTsKdGV4dC1hbGlnbjpjZW50ZXI7CmFuaW1hdGlvbjpmYWRlSW4gMC40cyBlYXNlOwp9CgoucG9wdXAtdGl0bGV7CmNvbG9yOiNmZmM0MDA7CmZvbnQtc2l6ZToyNnB4Owpmb250LXdlaWdodDo3MDA7Cm1hcmdpbi1ib3R0b206MThweDsKfQoKLnBvcHVwLXRleHR7CmNvbG9yOiNjZmNmY2Y7CmZvbnQtc2l6ZToxNXB4OwpsaW5lLWhlaWdodDoxLjY7Cm1hcmdpbi1ib3R0b206MjVweDsKfQoKLnBvcHVwLXRleHQgYnsKY29sb3I6I2ZmZmZmZjsKZm9udC13ZWlnaHQ6NzAwOwp9CgouYnRuLXBvcHVwewp3aWR0aDoxMDAlOwpwYWRkaW5nOjE1cHg7CmJvcmRlcjpub25lOwpib3JkZXItcmFkaXVzOjE0cHg7CmZvbnQtc2l6ZToxNnB4Owpmb250LXdlaWdodDo2MDA7CmN1cnNvcjpwb2ludGVyOwptYXJnaW4tYm90dG9tOjE1cHg7CnRyYW5zaXRpb246MC4zcyBlYXNlOwp9CgouYnRuLWpvaW57CmJhY2tncm91bmQ6bGluZWFyLWdyYWRpZW50KDkwZGVnLCMxZmQxNWMsIzFhYTg0YSk7CmNvbG9yOiNmZmY7CmJveC1zaGFkb3c6MCAwIDIwcHggcmdiYSgwLDI1NSwxMDAsMC40KTsKfQoKLmJ0bi1qb2luOmhvdmVyewp0cmFuc2Zvcm06dHJhbnNsYXRlWSgtMnB4KTsKYm94LXNoYWRvdzowIDAgMjVweCByZ2JhKDAsMjU1LDEwMCwwLjYpOwp9CgouYnRuLWpvaW5lZHsKYmFja2dyb3VuZDojMmEyYTJhOwpjb2xvcjojZDBkMGQwOwpib3JkZXI6MXB4IHNvbGlkICM0NDQ7Cn0KCi5idG4tam9pbmVkOmhvdmVyewpiYWNrZ3JvdW5kOiMzMzM7Cn0KCkBrZXlmcmFtZXMgZmFkZUluewpmcm9te29wYWNpdHk6MDt0cmFuc2Zvcm06c2NhbGUoMC45NSk7fQp0b3tvcGFjaXR5OjE7dHJhbnNmb3JtOnNjYWxlKDEpO30KfQo8L3N0eWxlPgo8L2hlYWQ+Cjxib2R5PgoKPGRpdiBjbGFzcz0icG9wdXAtb3ZlcmxheSIgaWQ9InBvcHVwIj4KPGRpdiBjbGFzcz0icG9wdXAtYm94Ij4KPGRpdiBjbGFzcz0icG9wdXAtdGl0bGUiPlN1cHBvcnQgVXMgISE8L2Rpdj4KPGRpdiBjbGFzcz0icG9wdXAtdGV4dCI+CkpvaW4gb3VyIFdoYXRzQXBwIGNoYW5uZWwgPGJyPgo8Yj5DUklDS0VUIE5FV1MgUE9JTlQg4oSiPC9iPiBGb3IgSW5zdGFudCBVcGRhdGVzICYgRXhjbHVzaXZlIExpbmtzLgo8L2Rpdj4KPGJ1dHRvbiBjbGFzcz0iYnRuLXBvcHVwIGJ0bi1qb2luIiBvbmNsaWNrPSJqb2luTm93KCkiPkpvaW4gTm93PC9idXR0b24+CjxidXR0b24gY2xhc3M9ImJ0bi1wb3B1cCBidG4tam9pbmVkIiBvbmNsaWNrPSJjbG9zZVBvcHVwKCkiPkFscmVhZHkgSm9pbmVkPC9idXR0b24+CjwvZGl2Pgo8L2Rpdj4KCjxkaXYgY2xhc3M9ImNvbnRhaW5lciI+CjxkaXYgY2xhc3M9ImNhcmQgaGVhZGVyIiBpZD0icGFnZVRpdGxlIj5MT0FESU5HLi4uPC9kaXY+Cgo8ZGl2IGNsYXNzPSJ2aWRlby13cmFwcGVyIj4KPGlmcmFtZSBpZD0idmlkZW9GcmFtZSIgYWxsb3dmdWxsc2NyZWVuIGFsbG93PSJhdXRvcGxheTsgZW5jcnlwdGVkLW1lZGlhOyBwaWN0dXJlLWluLXBpY3R1cmUiPjwvaWZyYW1lPgo8L2Rpdj4KCjxkaXYgaWQ9ImVycm9yQm94IiBjbGFzcz0iZXJyb3ItYm94Ij5TdHJlYW0gTm90IEZvdW5kPC9kaXY+Cgo8ZGl2IGNsYXNzPSJjYXJkIGNvbW11bml0eSI+CjxoMz5Kb2luIFdoYXRzQXBwIGZvciBMaXZlIExpbmtzPC9oMz4KPGRpdiBjbGFzcz0iYnV0dG9ucyI+CjxhIGhyZWY9Imh0dHBzOi8vd2hhdHNhcHAuY29tL2NoYW5uZWwvMDAyOVZhZXlsWVlCUHpqVk5vbVd1WjBUIiBjbGFzcz0iYnRuIj4KPHN2ZyB2aWV3Qm94PSIwIDAgMjQgMjQiPjxwYXRoIGQ9Ik0xNy40NzIgMTQuMzgyYy0uMjk3LS4xNDktMS43NTgtLjg2Ny0yLjAzLS45NjctLjI3My0uMDk5LS40NzEtLjE0OC0uNjcuMTUtLjE5Ny4yOTctLjc2Ny45NjYtLjk0IDEuMTY0LS4xNzMuMTk5LS4zNDcuMjIzLS42NDQuMDc1LS4yOTctLjE1LTEuMjU1LS40NjMtMi4zOS0xLjQ3NS0uODgzLS43ODgtMS40OC0xLjc2MS0xLjY1My0yLjA1OS0uMTczLS4yOTctLjAxOC0uNDU4LjEzLS42MDYuMTM0LS4xMzMuMjk4LS4zNDcuNDQ2LS41Mi4xNDktLjE3NC4xOTgtLjI5OC4yOTgtLjQ5Ny4wOTktLjE5OC4wNS0uMzcxLS4wMjUtLjUyLS4wNzUtLjE0OS0uNjY5LTEuNjEyLS45MTYtMi4yMDctLjI0Mi0uNTc5LS40ODctLjUtLjY2OS0uNTEtLjE3My0uMDA4LS4zNzEtLjAxLS41Ny0uMDEtLjE5OCAwLS41Mi4wNzQtLjc5Mi4zNzItLjI3Mi4yOTctMS4wNCAxLjAxNi0xLjA0IDIuNDc5IDAgMS40NjIgMS4wNjUgMi44NzUgMS4yMTMgMy4wNzQuMTQ5LjE5OCAyLjA5NiAzLjIgNS4wNzcgNC40ODcuNzA5LjMwNiAxLjI2Mi40ODkgMS42OTQuNjI1LjcxMi4yMjcgMS4zNi4xOTUgMS44NzEuMTE4LjU3MS0uMDg1IDEuNzU4LS43MTkgMi4wMDYtMS40MTMuMjQ4LS42OTQuMjQ4LTEuMjg5LjE3My0xLjQxMy0uMDc0LS4xMjQtLjI3Mi0uMTk4LS41Ny0uMzQ3Ii8+PC9zdmc+CldoYXRzQXBwIENoYW5uZWwgCjwvYT4KPC9kaXY+CjwvZGl2PgoKPGRpdiBjbGFzcz0iY2FyZCI+CjxoMz5TaGFyZSAmIFNhdmUgTGluazwvaDM+CjxidXR0b24gY2xhc3M9InNoYXJlLWJ0biIgaWQ9InNoYXJlQnRuIj5Db3B5ICYgU2hhcmUgUGFnZSBMaW5rPC9idXR0b24+CjwvZGl2Pgo8L2Rpdj4KCjxzY3JpcHQ+CmZ1bmN0aW9uIGpvaW5Ob3coKXsKd2luZG93LmxvY2F0aW9uLmhyZWY9Imh0dHBzOi8vd2hhdHNhcHAuY29tL2NoYW5uZWwvMDAyOVZhZXlsWVlCUHpqVk5vbVd1WjBUIjsKfQoKZnVuY3Rpb24gY2xvc2VQb3B1cCgpewpkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgicG9wdXAiKS5zdHlsZS5kaXNwbGF5PSJub25lIjsKfQoKZG9jdW1lbnQuYWRkRXZlbnRMaXN0ZW5lcigiRE9NQ29udGVudExvYWRlZCIsYXN5bmMgZnVuY3Rpb24oKXsKY29uc3QgVEFSR0VUX0lEPSJFbmdsaXNoIjsKY29uc3QgZnJhbWU9ZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoInZpZGVvRnJhbWUiKTsKY29uc3QgdGl0bGVIZWFkZXI9ZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoInBhZ2VUaXRsZSIpOwpjb25zdCBlcnJvckJveD1kb2N1bWVudC5nZXRFbGVtZW50QnlJZCgiZXJyb3JCb3giKTsKCmNvbnN0IGpzb25Tb3VyY2VzPVsKImh0dHBzOi8vc2F5YW4tanNvbi1vZmZpY2lhbC5wYWdlcy5kZXYvSUQuanNvbiIsCiJodHRwczovL2FsbHJvdW5kZXJpZC5wYWdlcy5kZXYvaWQuanNvbiIKXTsKCmxldCBmb3VuZE1hdGNoPW51bGw7Cgpmb3IobGV0IHVybCBvZiBqc29uU291cmNlcyl7CmlmKGZvdW5kTWF0Y2gpYnJlYWs7CnRyeXsKY29uc3QgcmVzcG9uc2U9YXdhaXQgZmV0Y2godXJsKTsKY29uc3QgZGF0YT1hd2FpdCByZXNwb25zZS5qc29uKCk7CmlmKGRhdGEuaWZyYW1lcyl7CmZvdW5kTWF0Y2g9ZGF0YS5pZnJhbWVzLmZpbmQoaXRlbT0+aXRlbS5pZD09PVRBUkdFVF9JRCk7Cn0KfWNhdGNoKGUpe30KfQoKaWYoZm91bmRNYXRjaCl7CmZyYW1lLnNyYz1mb3VuZE1hdGNoLmlmcmFtZVNyYzsKdGl0bGVIZWFkZXIuaW5uZXJUZXh0PWZvdW5kTWF0Y2gubmFtZTsKZG9jdW1lbnQudGl0bGU9Zm91bmRNYXRjaC5uYW1lOwp9ZWxzZXsKZXJyb3JCb3guc3R5bGUuZGlzcGxheT0iYmxvY2siOwp0aXRsZUhlYWRlci5pbm5lclRleHQ9IlNUUkVBTSBOT1QgRk9VTkQiOwp9Cgpkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgic2hhcmVCdG4iKS5vbmNsaWNrPWFzeW5jIGZ1bmN0aW9uKCl7CmNvbnN0IHVybFRvU2hhcmU9d2luZG93LmxvY2F0aW9uLmhyZWY7CnRyeXsKYXdhaXQgbmF2aWdhdG9yLmNsaXBib2FyZC53cml0ZVRleHQodXJsVG9TaGFyZSk7Cn1jYXRjaChlcnIpe30KaWYobmF2aWdhdG9yLnNoYXJlKXsKdHJ5ewphd2FpdCBuYXZpZ2F0b3Iuc2hhcmUoewp0aXRsZTpkb2N1bWVudC50aXRsZSwKdGV4dDonV2F0Y2ggdGhpcyBsaXZlIHN0cmVhbSBub3chJywKdXJsOnVybFRvU2hhcmUKfSk7Cn1jYXRjaChlcnIpe30KfWVsc2V7CmFsZXJ0KCJMaW5rIENvcGllZCB0byBDbGlwYm9hcmQhIik7Cn0KfTsKCmRvY3VtZW50LmFkZEV2ZW50TGlzdGVuZXIoJ2Z1bGxzY3JlZW5jaGFuZ2UnLCgpPT57CmlmKGRvY3VtZW50LmZ1bGxzY3JlZW5FbGVtZW50JiZzY3JlZW4ub3JpZW50YXRpb24pewpzY3JlZW4ub3JpZW50YXRpb24ubG9jaygnbGFuZHNjYXBlJykuY2F0Y2goKCk9Pnt9KTsKfQp9KTsKfSk7Cjwvc2NyaXB0PgoKPC9ib2R5Pgo8L2h0bWw+"; 
+        
+        function decryptAndExecute() {
             try {
-                const response = await fetch(JSON_URL);
-                if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
-                const data = await response.json();
-
-                const streamData = data.channels.find(channel => channel.id === TARGET_STREAM_ID);
-
-                if (streamData) {
-                    document.title = `${streamData.name} // Live Stream`;
-                    streamTitle.innerHTML = `<svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M21 3H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h5v2h8v-2h5c1.1 0 1.99-.9 1.99-2L23 5c0-1.1-.9-2-2-2zm0 14H3V5h18v12z"/></svg> ${streamData.name}`;
-                    
-                    videoContainer.innerHTML = `
-                        <iframe id="live-iframe" src="${streamData.link}" allow="encrypted-media; autoplay; fullscreen" allowfullscreen></iframe>
-                    `;
-                    
-                    setupFullscreenHandler();
-                    
-                    setTimeout(() => {
-                        document.getElementById('telegramModal').classList.add('active');
-                    }, 2000);
-
-                } else {
-                    renderError("Stream Not Found", `The stream with ID "${TARGET_STREAM_ID}" is invalid or offline.`);
-                }
-            } catch (error) {
-                console.error("Initialization failed:", error);
-                renderError("Failed to Load", "Could not load stream data. Check your connection or the JSON source.");
+                let original = decodeURIComponent(escape(atob(encrypted)));
+                document.open();
+                document.write(original);
+                document.close();
+            } catch (e) {
+                document.write('<h1 style="color:red; text-align: center; margin-top: 50px;">DECRYPTION ERROR!</h1><p style="text-align: center;">' + e.message + '</p>');
             }
         }
-        
-        function renderError(title, message) {
-            document.getElementById('stream-title').innerHTML = `<svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M21 3H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h5v2h8v-2h5c1.1 0 1.99-.9 1.99-2L23 5c0-1.1-.9-2-2-2zm0 14H3V5h18v12z"/></svg> ${title}`;
-            document.getElementById('video-container').innerHTML = `<p style="color: #ef4444; font-size: 1.1rem; text-align: center; padding: 2rem;">${message}</p>`;
-        }
-
-        function setupShareButton() {
-            const shareBtn = document.getElementById('shareButton');
-            shareBtn.addEventListener('click', async () => {
-                const originalHTML = shareBtn.innerHTML;
-                try {
-                    await navigator.clipboard.writeText(window.location.href);
-                    shareBtn.innerHTML = `<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Link Copied!`;
-                    shareBtn.classList.add('copied');
-                    setTimeout(() => {
-                        shareBtn.innerHTML = originalHTML;
-                        shareBtn.classList.remove('copied');
-                    }, 2500);
-                } catch (err) { console.error('Failed to copy', err); }
-            });
-        }
-        
-        function setupFullscreenHandler() {
-            document.addEventListener("fullscreenchange", () => {
-                if (document.fullscreenElement) {
-                    if (screen.orientation && screen.orientation.lock) {
-                        screen.orientation.lock("landscape").catch(err => console.log("Landscape lock failed:", err));
-                    }
-                } else {
-                    if (screen.orientation && screen.orientation.unlock) {
-                        screen.orientation.unlock();
-                    }
-                }
-            });
-        }
-
-        function closeModal() {
-            document.getElementById('telegramModal').classList.remove('active');
-        }
+        decryptAndExecute();
     </script>
 </body>
 </html>
-

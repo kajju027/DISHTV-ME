@@ -1,0 +1,33 @@
+name: Auto News Update
+
+on:
+  schedule:
+    - cron: '0 * * * *' # প্রতি ঘণ্টায় আপডেট হবে
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm install rss-parser
+
+      - name: Update news content
+        run: node fetch_news.js
+
+      - name: Push changes
+        run: |
+          git config --global user.name "kajju027"
+          git config --global user.email "kajju3864@gmail.com"
+          git add index.html
+          git commit -m "Auto News Update [Skip CI]" || exit 0
+          git push
+          

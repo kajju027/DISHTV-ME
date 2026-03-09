@@ -1,15 +1,20 @@
-name: Auto News Update
+name: Auto Sports News Update
 
 on:
   schedule:
-    - cron: '0 * * * *' # প্রতি ঘণ্টায় আপডেট হবে
-  workflow_dispatch:
+    - cron: '0 * * * *' # এটি প্রতি ১ ঘণ্টা পরপর নিজে থেকে নিউজ আপডেট করবে
+  workflow_dispatch: # এটি থাকলে আপনি নিজেও ম্যানুয়ালি রান করতে পারবেন
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    
+    # এটি সবচেয়ে গুরুত্বপূর্ণ অংশ (যাতে ফাইল এডিট করে পুশ করতে পারে)
+    permissions:
+      contents: write
+
     steps:
-      - name: Checkout repository
+      - name: Checkout Repository
         uses: actions/checkout@v3
 
       - name: Setup Node.js
@@ -17,17 +22,18 @@ jobs:
         with:
           node-version: '18'
 
-      - name: Install dependencies
+      - name: Install Dependencies
         run: npm install rss-parser
 
-      - name: Update news content
+      - name: Fetch and Update News
         run: node fetch_news.js
 
-      - name: Push changes
+      - name: Commit and Push Changes
         run: |
-          git config --global user.name "kajju027"
+          git config --global user.name "Kajju027"
           git config --global user.email "kajju3864@gmail.com"
           git add index.html
-          git commit -m "Auto News Update [Skip CI]" || exit 0
+          # যদি কোনো পরিবর্তন না থাকে তবে এরর দেবে না
+          git commit -m "Automated News Update [Skip CI]" || echo "No changes to commit"
           git push
           

@@ -32,7 +32,7 @@ function formatDate(dateString) {
         let newsCardsHtml = '';
 
         allNews.forEach(item => {
-            let imgUrl = 'https://via.placeholder.com/600x400?text=News+Update';
+            let imgUrl = 'https://cnpoint.pages.dev/Photo/file_0000000040247208bac79a46b2a55a4a.png';
             if (item.enclosure && item.enclosure.url) {
                 imgUrl = item.enclosure.url;
             } else if (item.content && item.content.includes('src=')) {
@@ -75,7 +75,7 @@ function formatDate(dateString) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Cricket News Point | Sayan Official</title>
+    <title>Cricket News Point | Cnptv | Sayan Official</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }

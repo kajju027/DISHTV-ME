@@ -2,14 +2,13 @@ name: Auto Sports News Update
 
 on:
   schedule:
-    - cron: '0 * * * *' # এটি প্রতি ১ ঘণ্টা পরপর নিজে থেকে নিউজ আপডেট করবে
-  workflow_dispatch: # এটি থাকলে আপনি নিজেও ম্যানুয়ালি রান করতে পারবেন
+    - cron: '0 * * * *'
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
     
-    # এটি সবচেয়ে গুরুত্বপূর্ণ অংশ (যাতে ফাইল এডিট করে পুশ করতে পারে)
     permissions:
       contents: write
 
@@ -33,7 +32,6 @@ jobs:
           git config --global user.name "Kajju027"
           git config --global user.email "kajju3864@gmail.com"
           git add index.html
-          # যদি কোনো পরিবর্তন না থাকে তবে এরর দেবে না
           git commit -m "Automated News Update [Skip CI]" || echo "No changes to commit"
           git push
           

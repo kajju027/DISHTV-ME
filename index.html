@@ -2,648 +2,905 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cricket News Point| Sayan Official</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Cricket News Point | Sayan Official</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f4f7f6; color: #1a1a1a; line-height: 1.6; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f0f2f5; color: #1c1e21; -webkit-font-smoothing: antialiased; }
         
-        header { background: #fff; padding: 20px; text-align: center; box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 100; }
-        .signature { font-size: 12px; font-weight: 800; color: #d63031; text-transform: uppercase; letter-spacing: 2px; display: block; margin-bottom: 5px; }
-        h1 { font-size: 24px; font-weight: 800; color: #111; }
+        header { background: #ffffff; padding: 16px 20px; text-align: center; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid #e4e6eb; }
+        .signature { font-size: 11px; font-weight: 700; color: #e50914; text-transform: uppercase; letter-spacing: 1.5px; display: block; margin-bottom: 4px; }
+        h1 { font-size: 22px; font-weight: 800; color: #050505; letter-spacing: -0.5px; }
         
-        .main-container { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
-        .news-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 30px; }
+        .main-container { width: 100%; max-width: 1280px; margin: 0 auto; padding: 24px 16px; }
+        .news-grid { display: grid; grid-template-columns: 1fr; gap: 24px; }
         
-        .news-card { background: #fff; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: transform 0.3s ease, box-shadow 0.3s ease; display: flex; flex-direction: column; border: 1px solid #eaeaea; }
-        .news-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
-        .news-image { width: 100%; height: 220px; object-fit: cover; display: block; border-bottom: 1px solid #eee; background-color: #f0f0f0; }
-        .news-content { padding: 20px; display: flex; flex-direction: column; flex-grow: 1; }
+        .news-card { background: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.08); display: flex; flex-direction: column; transition: transform 0.2s ease, box-shadow 0.2s ease; }
+        .news-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.12); }
         
-        .card-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
-        .badge { background: #ffeaa7; color: #d35400; padding: 5px 12px; border-radius: 20px; font-size: 11px; font-weight: 800; letter-spacing: 1px; }
-        .date-text { font-size: 12px; color: #888; font-weight: 600; }
+        .image-wrapper { position: relative; width: 100%; padding-top: 56.25%; background-color: #e4e6eb; }
+        .news-image { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; }
+        .badge { position: absolute; top: 12px; left: 12px; background: rgba(229, 9, 20, 0.9); color: #ffffff; padding: 4px 10px; border-radius: 6px; font-size: 10px; font-weight: 800; letter-spacing: 0.5px; backdrop-filter: blur(4px); }
         
-        .news-title { font-size: 18px; font-weight: 700; color: #2d3436; margin-bottom: 10px; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-        .news-desc { font-size: 14px; color: #636e72; margin-bottom: 20px; flex-grow: 1; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+        .news-content { padding: 16px; display: flex; flex-direction: column; flex-grow: 1; }
+        .news-title { font-size: 17px; font-weight: 700; color: #050505; margin-bottom: 8px; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        .news-desc { font-size: 14px; color: #65676b; margin-bottom: 16px; line-height: 1.5; flex-grow: 1; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
         
-        .read-btn { display: inline-block; background: #000; color: #fff; text-decoration: none; padding: 12px 20px; border-radius: 8px; font-weight: 600; font-size: 14px; text-align: center; transition: background 0.3s ease; width: 100%; }
-        .read-btn:hover { background: #333; }
+        .card-footer { display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding-top: 16px; border-top: 1px solid #f0f2f5; }
+        .date-text { display: flex; align-items: center; gap: 6px; font-size: 12px; color: #65676b; font-weight: 500; }
+        .read-btn { background: #e4e6eb; color: #050505; text-decoration: none; padding: 8px 16px; border-radius: 6px; font-weight: 600; font-size: 13px; transition: background 0.2s ease; }
+        .read-btn:hover { background: #d8dadf; }
+
+        @media (min-width: 640px) {
+            .news-grid { grid-template-columns: repeat(2, 1fr); }
+        }
         
-        @media (max-width: 600px) { 
-            .main-container { margin: 20px auto; } 
-            .news-grid { gap: 20px; } 
-            h1 { font-size: 20px; } 
+        @media (min-width: 1024px) {
+            .news-grid { grid-template-columns: repeat(3, 1fr); gap: 32px; padding: 32px 24px; }
+            h1 { font-size: 28px; }
+            .news-title { font-size: 19px; }
+            .news-desc { font-size: 15px; }
+            .read-btn { padding: 10px 20px; font-size: 14px; }
         }
     </style>
 </head>
 <body>
     <header>
-        <span class="signature">Powered by TOI</span>
-        <h1>Latest World Updates</h1>
+        <span class="signature"></span>
+        <h1>CRICKET NEWS POINT</h1>
     </header>
     <main class="main-container">
         <div class="news-grid">
             
             <article class="news-card">
-                <img src="https://static.toiimg.com/photo/msid-129381933,imgsize-43136.cms" alt="News Image" class="news-image">
+                <div class="image-wrapper">
+                    <img src="https://static.toiimg.com/photo/msid-129385254,imgsize-91594.cms" alt="News Image" class="news-image" loading="lazy">
+                    <span class="badge">LATEST</span>
+                </div>
                 <div class="news-content">
-                    <div class="card-meta">
-                        <span class="badge">LATEST</span>
-                        <span class="date-text">10 Mar 2026, 07:40 am</span>
+                    <h2 class="news-title">‘He always plays with intent’: Ashwin hails Samson but rues his missed T20 WC hundreds</h2>
+                    <p class="news-desc">Ravichandran Ashwin shared his thoughts on Sanju Samson's T20 World Cup 2026 performances. Ashwin stated Samson narrowly missed three centur...</p>
+                    <div class="card-footer">
+                        <span class="date-text">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                            10 Mar 2026, 08:54 am
+                        </span>
+                        <a href="https://timesofindia.indiatimes.com/sports/cricket/icc-mens-t20-world-cup/he-always-plays-with-intent-r-ashwin-hails-sanju-samson-but-rues-his-missed-t20-world-cup-hundreds/articleshow/129384966.cms" target="_blank" rel="noopener noreferrer" class="read-btn">Read More</a>
                     </div>
-                    <h2 class="news-title">‘Kash aap mere paas hote’: Rinku’s emotional tribute to father after T20 WC triumph</h2>
-                    <p class="news-desc">Indian batter Rinku Singh dedicated the T20 World Cup triumph to his late father, Khanchand Singh, who passed away durin...</p>
-                    <a href="https://timesofindia.indiatimes.com/sports/cricket/icc-mens-t20-world-cup/kash-aap-mere-paas-hote-rinku-singhs-emotional-tribute-to-father-after-t20-world-cup-triumph/articleshow/129381642.cms" target="_blank" class="read-btn">Read Full Story</a>
                 </div>
             </article>
             <article class="news-card">
-                <img src="https://static.toiimg.com/photo/msid-129381933,imgsize-43136.cms" alt="News Image" class="news-image">
+                <div class="image-wrapper">
+                    <img src="https://static.toiimg.com/photo/msid-129381933,imgsize-43136.cms" alt="News Image" class="news-image" loading="lazy">
+                    <span class="badge">LATEST</span>
+                </div>
                 <div class="news-content">
-                    <div class="card-meta">
-                        <span class="badge">LATEST</span>
-                        <span class="date-text">10 Mar 2026, 07:40 am</span>
-                    </div>
                     <h2 class="news-title">‘Kash aap mere paas hote’: Rinku’s emotional tribute to father after T20 WC triumph</h2>
-                    <p class="news-desc">Indian batter Rinku Singh dedicated the T20 World Cup triumph to his late father, Khanchand Singh, who passed away durin...</p>
-                    <a href="https://timesofindia.indiatimes.com/sports/cricket/icc-mens-t20-world-cup/kash-aap-mere-paas-hote-rinku-singhs-emotional-tribute-to-father-after-t20-world-cup-triumph/articleshow/129381642.cms" target="_blank" class="read-btn">Read Full Story</a>
+                    <p class="news-desc">Indian batter Rinku Singh dedicated the T20 World Cup triumph to his late father, Khanchand Singh, who passed away during the tournament.  R...</p>
+                    <div class="card-footer">
+                        <span class="date-text">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                            10 Mar 2026, 07:40 am
+                        </span>
+                        <a href="https://timesofindia.indiatimes.com/sports/cricket/icc-mens-t20-world-cup/kash-aap-mere-paas-hote-rinku-singhs-emotional-tribute-to-father-after-t20-world-cup-triumph/articleshow/129381642.cms" target="_blank" rel="noopener noreferrer" class="read-btn">Read More</a>
+                    </div>
                 </div>
             </article>
             <article class="news-card">
-                <img src="https://static.toiimg.com/photo/msid-129379750,imgsize-67576.cms" alt="News Image" class="news-image">
+                <div class="image-wrapper">
+                    <img src="https://static.toiimg.com/photo/msid-129381933,imgsize-43136.cms" alt="News Image" class="news-image" loading="lazy">
+                    <span class="badge">LATEST</span>
+                </div>
                 <div class="news-content">
-                    <div class="card-meta">
-                        <span class="badge">LATEST</span>
-                        <span class="date-text">10 Mar 2026, 06:56 am</span>
+                    <h2 class="news-title">‘Kash aap mere paas hote’: Rinku’s emotional tribute to father after T20 WC triumph</h2>
+                    <p class="news-desc">Indian batter Rinku Singh dedicated the T20 World Cup triumph to his late father, Khanchand Singh, who passed away during the tournament.  R...</p>
+                    <div class="card-footer">
+                        <span class="date-text">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                            10 Mar 2026, 07:40 am
+                        </span>
+                        <a href="https://timesofindia.indiatimes.com/sports/cricket/icc-mens-t20-world-cup/kash-aap-mere-paas-hote-rinku-singhs-emotional-tribute-to-father-after-t20-world-cup-triumph/articleshow/129381642.cms" target="_blank" rel="noopener noreferrer" class="read-btn">Read More</a>
                     </div>
+                </div>
+            </article>
+            <article class="news-card">
+                <div class="image-wrapper">
+                    <img src="https://static.toiimg.com/photo/msid-129379750,imgsize-67576.cms" alt="News Image" class="news-image" loading="lazy">
+                    <span class="badge">LATEST</span>
+                </div>
+                <div class="news-content">
                     <h2 class="news-title">Stranded 10 days in Doha, Indian men’s basketball team finally returns</h2>
-                    <p class="news-desc">Stranded in Doha for ten days due to regional tensions disrupting flights, the Indian men's basketball team is finally r...</p>
-                    <a href="https://timesofindia.indiatimes.com/sports/more-sports/others/middle-east-crisis-stranded-10-days-in-doha-indian-mens-basketball-team-finally-returns/articleshow/129379613.cms" target="_blank" class="read-btn">Read Full Story</a>
+                    <p class="news-desc">Stranded in Doha for ten days due to regional tensions disrupting flights, the Indian men's basketball team is finally returning home. The Q...</p>
+                    <div class="card-footer">
+                        <span class="date-text">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                            10 Mar 2026, 06:56 am
+                        </span>
+                        <a href="https://timesofindia.indiatimes.com/sports/more-sports/others/middle-east-crisis-stranded-10-days-in-doha-indian-mens-basketball-team-finally-returns/articleshow/129379613.cms" target="_blank" rel="noopener noreferrer" class="read-btn">Read More</a>
+                    </div>
                 </div>
             </article>
             <article class="news-card">
-                <img src="https://static.toiimg.com/photo/msid-129380048,imgsize-153950.cms" alt="News Image" class="news-image">
+                <div class="image-wrapper">
+                    <img src="https://static.toiimg.com/photo/msid-129380048,imgsize-153950.cms" alt="News Image" class="news-image" loading="lazy">
+                    <span class="badge">LATEST</span>
+                </div>
                 <div class="news-content">
-                    <div class="card-meta">
-                        <span class="badge">LATEST</span>
-                        <span class="date-text">10 Mar 2026, 06:33 am</span>
-                    </div>
                     <h2 class="news-title">Amit Mishra faces third legal case over abuse, dowry allegations</h2>
-                    <p class="news-desc">Model Garima Tiwari has filed a fresh complaint in Kanpur against IPL cricketer Amit Mishra and his family, accusing the...</p>
-                    <a href="https://timesofindia.indiatimes.com/sports/off-the-field/cricketer-amit-mishra-faces-third-legal-case-over-abuse-dowry-allegations/articleshow/129378751.cms" target="_blank" class="read-btn">Read Full Story</a>
+                    <p class="news-desc">Model Garima Tiwari has filed a fresh complaint in Kanpur against IPL cricketer Amit Mishra and his family, accusing them of dowry harassmen...</p>
+                    <div class="card-footer">
+                        <span class="date-text">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                            10 Mar 2026, 06:33 am
+                        </span>
+                        <a href="https://timesofindia.indiatimes.com/sports/off-the-field/cricketer-amit-mishra-faces-third-legal-case-over-abuse-dowry-allegations/articleshow/129378751.cms" target="_blank" rel="noopener noreferrer" class="read-btn">Read More</a>
+                    </div>
                 </div>
             </article>
             <article class="news-card">
-                <img src="https://static.toiimg.com/photo/msid-129378128,imgsize-462960.cms" alt="News Image" class="news-image">
+                <div class="image-wrapper">
+                    <img src="https://static.toiimg.com/photo/msid-129378128,imgsize-462960.cms" alt="News Image" class="news-image" loading="lazy">
+                    <span class="badge">LATEST</span>
+                </div>
                 <div class="news-content">
-                    <div class="card-meta">
-                        <span class="badge">LATEST</span>
-                        <span class="date-text">10 Mar 2026, 06:20 am</span>
-                    </div>
                     <h2 class="news-title">BCCI announces Rs 131 crore reward for India after T20 World Cup 2026 triumph</h2>
-                    <p class="news-desc">Team India has been awarded a Rs 131 crore cash reward by the BCCI following their historic ICC Men's T20 World Cup 2026...</p>
-                    <a href="https://timesofindia.indiatimes.com/sports/cricket/icc-mens-t20-world-cup/bcci-announces-rs-131-crore-reward-for-india-after-t20-world-cup-2026-triumph/articleshow/129378140.cms" target="_blank" class="read-btn">Read Full Story</a>
+                    <p class="news-desc">Team India has been awarded a Rs 131 crore cash reward by the BCCI following their historic ICC Men's T20 World Cup 2026 victory. Dominating...</p>
+                    <div class="card-footer">
+                        <span class="date-text">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                            10 Mar 2026, 06:20 am
+                        </span>
+                        <a href="https://timesofindia.indiatimes.com/sports/cricket/icc-mens-t20-world-cup/bcci-announces-rs-131-crore-reward-for-india-after-t20-world-cup-2026-triumph/articleshow/129378140.cms" target="_blank" rel="noopener noreferrer" class="read-btn">Read More</a>
+                    </div>
                 </div>
             </article>
             <article class="news-card">
-                <img src="https://static.toiimg.com/photo/msid-129378128,imgsize-462960.cms" alt="News Image" class="news-image">
+                <div class="image-wrapper">
+                    <img src="https://static.toiimg.com/photo/msid-129378128,imgsize-462960.cms" alt="News Image" class="news-image" loading="lazy">
+                    <span class="badge">LATEST</span>
+                </div>
                 <div class="news-content">
-                    <div class="card-meta">
-                        <span class="badge">LATEST</span>
-                        <span class="date-text">10 Mar 2026, 06:20 am</span>
-                    </div>
                     <h2 class="news-title">BCCI announces Rs 131 crore reward for India after T20 World Cup 2026 triumph</h2>
-                    <p class="news-desc">Team India has been awarded a Rs 131 crore cash reward by the BCCI following their historic ICC Men's T20 World Cup 2026...</p>
-                    <a href="https://timesofindia.indiatimes.com/sports/cricket/icc-mens-t20-world-cup/bcci-announces-rs-131-crore-reward-for-india-after-t20-world-cup-2026-triumph/articleshow/129378140.cms" target="_blank" class="read-btn">Read Full Story</a>
+                    <p class="news-desc">Team India has been awarded a Rs 131 crore cash reward by the BCCI following their historic ICC Men's T20 World Cup 2026 victory. Dominating...</p>
+                    <div class="card-footer">
+                        <span class="date-text">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                            10 Mar 2026, 06:20 am
+                        </span>
+                        <a href="https://timesofindia.indiatimes.com/sports/cricket/icc-mens-t20-world-cup/bcci-announces-rs-131-crore-reward-for-india-after-t20-world-cup-2026-triumph/articleshow/129378140.cms" target="_blank" rel="noopener noreferrer" class="read-btn">Read More</a>
+                    </div>
                 </div>
             </article>
             <article class="news-card">
-                <img src="https://static.toiimg.com/photo/msid-129377873,imgsize-881538.cms" alt="News Image" class="news-image">
+                <div class="image-wrapper">
+                    <img src="https://static.toiimg.com/photo/msid-129377873,imgsize-881538.cms" alt="News Image" class="news-image" loading="lazy">
+                    <span class="badge">LATEST</span>
+                </div>
                 <div class="news-content">
-                    <div class="card-meta">
-                        <span class="badge">LATEST</span>
-                        <span class="date-text">10 Mar 2026, 06:14 am</span>
-                    </div>
                     <h2 class="news-title">IPL 2026: Gujarat Titans appoint Matthew Hayden as batting coach</h2>
-                    <p class="news-desc">Gujarat Titans have secured the services of Australian legend Matthew Hayden as their new batting coach for the upcoming...</p>
-                    <a href="https://timesofindia.indiatimes.com/sports/cricket/ipl/top-stories/ipl-2026-gujarat-titans-appoint-matthew-hayden-as-batting-coach/articleshow/129377932.cms" target="_blank" class="read-btn">Read Full Story</a>
+                    <p class="news-desc">Gujarat Titans have secured the services of Australian legend Matthew Hayden as their new batting coach for the upcoming IPL season.  A two-...</p>
+                    <div class="card-footer">
+                        <span class="date-text">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                            10 Mar 2026, 06:14 am
+                        </span>
+                        <a href="https://timesofindia.indiatimes.com/sports/cricket/ipl/top-stories/ipl-2026-gujarat-titans-appoint-matthew-hayden-as-batting-coach/articleshow/129377932.cms" target="_blank" rel="noopener noreferrer" class="read-btn">Read More</a>
+                    </div>
                 </div>
             </article>
             <article class="news-card">
-                <img src="https://static.toiimg.com/photo/msid-129377334,imgsize-108664.cms" alt="News Image" class="news-image">
+                <div class="image-wrapper">
+                    <img src="https://static.toiimg.com/photo/msid-129377334,imgsize-108664.cms" alt="News Image" class="news-image" loading="lazy">
+                    <span class="badge">LATEST</span>
+                </div>
                 <div class="news-content">
-                    <div class="card-meta">
-                        <span class="badge">LATEST</span>
-                        <span class="date-text">10 Mar 2026, 06:03 am</span>
-                    </div>
                     <h2 class="news-title">‘Feeling so proud’: Tharoor shares birthday call from Samson after T20 WC win</h2>
-                    <p class="news-desc">Congress MP Shashi Tharoor celebrated Sanju Samson's stellar T20 World Cup performances, revealing the cricketer called ...</p>
-                    <a href="https://timesofindia.indiatimes.com/sports/cricket/icc-mens-t20-world-cup/feeling-so-proud-words-cannot-suffice-shashi-tharoor-shares-birthday-call-from-sanju-samson-after-t20-world-cup-win/articleshow/129377346.cms" target="_blank" class="read-btn">Read Full Story</a>
+                    <p class="news-desc">Congress MP Shashi Tharoor celebrated Sanju Samson's stellar T20 World Cup performances, revealing the cricketer called him on his birthday....</p>
+                    <div class="card-footer">
+                        <span class="date-text">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                            10 Mar 2026, 06:03 am
+                        </span>
+                        <a href="https://timesofindia.indiatimes.com/sports/cricket/icc-mens-t20-world-cup/feeling-so-proud-words-cannot-suffice-shashi-tharoor-shares-birthday-call-from-sanju-samson-after-t20-world-cup-win/articleshow/129377346.cms" target="_blank" rel="noopener noreferrer" class="read-btn">Read More</a>
+                    </div>
                 </div>
             </article>
             <article class="news-card">
-                <img src="https://static.toiimg.com/photo/msid-129377334,imgsize-108664.cms" alt="News Image" class="news-image">
+                <div class="image-wrapper">
+                    <img src="https://static.toiimg.com/photo/msid-129377334,imgsize-108664.cms" alt="News Image" class="news-image" loading="lazy">
+                    <span class="badge">LATEST</span>
+                </div>
                 <div class="news-content">
-                    <div class="card-meta">
-                        <span class="badge">LATEST</span>
-                        <span class="date-text">10 Mar 2026, 06:03 am</span>
-                    </div>
                     <h2 class="news-title">‘Feeling so proud’: Tharoor shares birthday call from Samson after T20 WC win</h2>
-                    <p class="news-desc">Congress MP Shashi Tharoor celebrated Sanju Samson's stellar T20 World Cup performances, revealing the cricketer called ...</p>
-                    <a href="https://timesofindia.indiatimes.com/sports/cricket/icc-mens-t20-world-cup/feeling-so-proud-words-cannot-suffice-shashi-tharoor-shares-birthday-call-from-sanju-samson-after-t20-world-cup-win/articleshow/129377346.cms" target="_blank" class="read-btn">Read Full Story</a>
+                    <p class="news-desc">Congress MP Shashi Tharoor celebrated Sanju Samson's stellar T20 World Cup performances, revealing the cricketer called him on his birthday....</p>
+                    <div class="card-footer">
+                        <span class="date-text">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                            10 Mar 2026, 06:03 am
+                        </span>
+                        <a href="https://timesofindia.indiatimes.com/sports/cricket/icc-mens-t20-world-cup/feeling-so-proud-words-cannot-suffice-shashi-tharoor-shares-birthday-call-from-sanju-samson-after-t20-world-cup-win/articleshow/129377346.cms" target="_blank" rel="noopener noreferrer" class="read-btn">Read More</a>
+                    </div>
                 </div>
             </article>
             <article class="news-card">
-                <img src="https://static.toiimg.com/photo/msid-129376130,imgsize-276848.cms" alt="News Image" class="news-image">
+                <div class="image-wrapper">
+                    <img src="https://static.toiimg.com/photo/msid-129376130,imgsize-276848.cms" alt="News Image" class="news-image" loading="lazy">
+                    <span class="badge">LATEST</span>
+                </div>
                 <div class="news-content">
-                    <div class="card-meta">
-                        <span class="badge">LATEST</span>
-                        <span class="date-text">10 Mar 2026, 05:37 am</span>
-                    </div>
                     <h2 class="news-title">Iran women footballers granted asylum in Australia amid war fears</h2>
-                    <p class="news-desc">Five Iranian women's football players have found safety in Australia, accepting asylum after conflict erupted back home ...</p>
-                    <a href="https://timesofindia.indiatimes.com/sports/football/top-stories/iran-women-footballers-granted-asylum-in-australia-amid-war-fears/articleshow/129376164.cms" target="_blank" class="read-btn">Read Full Story</a>
+                    <p class="news-desc">Five Iranian women's football players have found safety in Australia, accepting asylum after conflict erupted back home during their tournam...</p>
+                    <div class="card-footer">
+                        <span class="date-text">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                            10 Mar 2026, 05:37 am
+                        </span>
+                        <a href="https://timesofindia.indiatimes.com/sports/football/top-stories/iran-women-footballers-granted-asylum-in-australia-amid-war-fears/articleshow/129376164.cms" target="_blank" rel="noopener noreferrer" class="read-btn">Read More</a>
+                    </div>
                 </div>
             </article>
             <article class="news-card">
-                <img src="https://static.toiimg.com/photo/msid-129375330,imgsize-83500.cms" alt="News Image" class="news-image">
+                <div class="image-wrapper">
+                    <img src="https://static.toiimg.com/photo/msid-129375330,imgsize-83500.cms" alt="News Image" class="news-image" loading="lazy">
+                    <span class="badge">LATEST</span>
+                </div>
                 <div class="news-content">
-                    <div class="card-meta">
-                        <span class="badge">LATEST</span>
-                        <span class="date-text">10 Mar 2026, 05:18 am</span>
-                    </div>
                     <h2 class="news-title">'India deserved the title': Afridi lauds Samson, Bumrah for outstanding T20 WC show</h2>
-                    <p class="news-desc">Shahid Afridi lauded India for their historic achievement of defending the ICC Men's T20 World Cup title, becoming the f...</p>
-                    <a href="https://timesofindia.indiatimes.com/sports/cricket/icc-mens-t20-world-cup/india-deserved-the-title-ex-pakistan-captain-lauds-samson-bumrah-for-outstanding-t20-world-cup-show/articleshow/129375023.cms" target="_blank" class="read-btn">Read Full Story</a>
+                    <p class="news-desc">Shahid Afridi lauded India for their historic achievement of defending the ICC Men's T20 World Cup title, becoming the first team to do so. ...</p>
+                    <div class="card-footer">
+                        <span class="date-text">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                            10 Mar 2026, 05:18 am
+                        </span>
+                        <a href="https://timesofindia.indiatimes.com/sports/cricket/icc-mens-t20-world-cup/india-deserved-the-title-ex-pakistan-captain-lauds-samson-bumrah-for-outstanding-t20-world-cup-show/articleshow/129375023.cms" target="_blank" rel="noopener noreferrer" class="read-btn">Read More</a>
+                    </div>
                 </div>
             </article>
             <article class="news-card">
-                <img src="https://static.toiimg.com/photo/msid-129375330,imgsize-83500.cms" alt="News Image" class="news-image">
+                <div class="image-wrapper">
+                    <img src="https://static.toiimg.com/photo/msid-129375330,imgsize-83500.cms" alt="News Image" class="news-image" loading="lazy">
+                    <span class="badge">LATEST</span>
+                </div>
                 <div class="news-content">
-                    <div class="card-meta">
-                        <span class="badge">LATEST</span>
-                        <span class="date-text">10 Mar 2026, 05:18 am</span>
-                    </div>
                     <h2 class="news-title">'India deserved the title': Afridi lauds Samson, Bumrah for outstanding T20 WC show</h2>
-                    <p class="news-desc">Shahid Afridi lauded India for their historic achievement of defending the ICC Men's T20 World Cup title, becoming the f...</p>
-                    <a href="https://timesofindia.indiatimes.com/sports/cricket/icc-mens-t20-world-cup/india-deserved-the-title-ex-pakistan-captain-lauds-samson-bumrah-for-outstanding-t20-world-cup-show/articleshow/129375023.cms" target="_blank" class="read-btn">Read Full Story</a>
+                    <p class="news-desc">Shahid Afridi lauded India for their historic achievement of defending the ICC Men's T20 World Cup title, becoming the first team to do so. ...</p>
+                    <div class="card-footer">
+                        <span class="date-text">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                            10 Mar 2026, 05:18 am
+                        </span>
+                        <a href="https://timesofindia.indiatimes.com/sports/cricket/icc-mens-t20-world-cup/india-deserved-the-title-ex-pakistan-captain-lauds-samson-bumrah-for-outstanding-t20-world-cup-show/articleshow/129375023.cms" target="_blank" rel="noopener noreferrer" class="read-btn">Read More</a>
+                    </div>
                 </div>
             </article>
             <article class="news-card">
-                <img src="https://static.toiimg.com/photo/msid-129375028,imgsize-296742.cms" alt="News Image" class="news-image">
+                <div class="image-wrapper">
+                    <img src="https://static.toiimg.com/photo/msid-129375028,imgsize-296742.cms" alt="News Image" class="news-image" loading="lazy">
+                    <span class="badge">LATEST</span>
+                </div>
                 <div class="news-content">
-                    <div class="card-meta">
-                        <span class="badge">LATEST</span>
-                        <span class="date-text">10 Mar 2026, 05:12 am</span>
-                    </div>
                     <h2 class="news-title">T20 World Cup 2026: TOI’s Team of the Tournament</h2>
-                    <p class="news-desc">India's T20 World Cup triumph is highlighted by four players in the tournament's XI, including Player of the Tournament ...</p>
-                    <a href="https://timesofindia.indiatimes.com/sports/cricket/icc-mens-t20-world-cup/t20-world-cup-2026-tois-team-of-the-tournament/articleshow/129374625.cms" target="_blank" class="read-btn">Read Full Story</a>
+                    <p class="news-desc">India's T20 World Cup triumph is highlighted by four players in the tournament's XI, including Player of the Tournament Sanju Samson.  Jaspr...</p>
+                    <div class="card-footer">
+                        <span class="date-text">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                            10 Mar 2026, 05:12 am
+                        </span>
+                        <a href="https://timesofindia.indiatimes.com/sports/cricket/icc-mens-t20-world-cup/t20-world-cup-2026-tois-team-of-the-tournament/articleshow/129374625.cms" target="_blank" rel="noopener noreferrer" class="read-btn">Read More</a>
+                    </div>
                 </div>
             </article>
             <article class="news-card">
-                <img src="https://static.toiimg.com/photo/msid-129375028,imgsize-296742.cms" alt="News Image" class="news-image">
+                <div class="image-wrapper">
+                    <img src="https://static.toiimg.com/photo/msid-129375028,imgsize-296742.cms" alt="News Image" class="news-image" loading="lazy">
+                    <span class="badge">LATEST</span>
+                </div>
                 <div class="news-content">
-                    <div class="card-meta">
-                        <span class="badge">LATEST</span>
-                        <span class="date-text">10 Mar 2026, 05:12 am</span>
-                    </div>
                     <h2 class="news-title">T20 World Cup 2026: TOI’s Team of the Tournament</h2>
-                    <p class="news-desc">India's T20 World Cup triumph is highlighted by four players in the tournament's XI, including Player of the Tournament ...</p>
-                    <a href="https://timesofindia.indiatimes.com/sports/cricket/icc-mens-t20-world-cup/t20-world-cup-2026-tois-team-of-the-tournament/articleshow/129374625.cms" target="_blank" class="read-btn">Read Full Story</a>
+                    <p class="news-desc">India's T20 World Cup triumph is highlighted by four players in the tournament's XI, including Player of the Tournament Sanju Samson.  Jaspr...</p>
+                    <div class="card-footer">
+                        <span class="date-text">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                            10 Mar 2026, 05:12 am
+                        </span>
+                        <a href="https://timesofindia.indiatimes.com/sports/cricket/icc-mens-t20-world-cup/t20-world-cup-2026-tois-team-of-the-tournament/articleshow/129374625.cms" target="_blank" rel="noopener noreferrer" class="read-btn">Read More</a>
+                    </div>
                 </div>
             </article>
             <article class="news-card">
-                <img src="https://via.placeholder.com/600x400?text=News+Update" alt="News Image" class="news-image">
+                <div class="image-wrapper">
+                    <img src="https://via.placeholder.com/600x400?text=News+Update" alt="News Image" class="news-image" loading="lazy">
+                    <span class="badge">LATEST</span>
+                </div>
                 <div class="news-content">
-                    <div class="card-meta">
-                        <span class="badge">LATEST</span>
-                        <span class="date-text">10 Mar 2026, 05:04 am</span>
-                    </div>
                     <h2 class="news-title">'India have ruined cricket': Shoaib Akhtar slams India after historic T20 World Cup win</h2>
-                    <p class="news-desc">India's triumphant T20 World Cup victory over New Zealand has ignited global debate, with former Pakistan bowler Shoaib ...</p>
-                    <a href="https://timesofindia.indiatimes.com/sports/cricket/icc-mens-t20-world-cup/india-have-ruined-cricket-shoaib-akhtar-slams-india-after-historic-t20-world-cup-win/articleshow/129315213.cms" target="_blank" class="read-btn">Read Full Story</a>
+                    <p class="news-desc">India's triumphant T20 World Cup victory over New Zealand has ignited global debate, with former Pakistan bowler Shoaib Akhtar controversial...</p>
+                    <div class="card-footer">
+                        <span class="date-text">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                            10 Mar 2026, 05:04 am
+                        </span>
+                        <a href="https://timesofindia.indiatimes.com/sports/cricket/icc-mens-t20-world-cup/india-have-ruined-cricket-shoaib-akhtar-slams-india-after-historic-t20-world-cup-win/articleshow/129315213.cms" target="_blank" rel="noopener noreferrer" class="read-btn">Read More</a>
+                    </div>
                 </div>
             </article>
             <article class="news-card">
-                <img src="https://static.toiimg.com/photo/msid-129373414,imgsize-105966.cms" alt="News Image" class="news-image">
+                <div class="image-wrapper">
+                    <img src="https://static.toiimg.com/photo/msid-129373414,imgsize-105966.cms" alt="News Image" class="news-image" loading="lazy">
+                    <span class="badge">LATEST</span>
+                </div>
                 <div class="news-content">
-                    <div class="card-meta">
-                        <span class="badge">LATEST</span>
-                        <span class="date-text">10 Mar 2026, 04:31 am</span>
-                    </div>
                     <h2 class="news-title">‘Minute adjustments’ help Samson take giant strides at the T20 World Cup</h2>
-                    <p class="news-desc">India batter Sanju Samson's remarkable transformation into a steady, consistent batsman, evident in his T20 World Cup Pl...</p>
-                    <a href="https://timesofindia.indiatimes.com/sports/cricket/icc-mens-t20-world-cup/minute-adjustments-help-sanju-samson-take-giant-strides-at-the-t20-world-cup/articleshow/129373298.cms" target="_blank" class="read-btn">Read Full Story</a>
+                    <p class="news-desc">India batter Sanju Samson's remarkable transformation into a steady, consistent batsman, evident in his T20 World Cup Player of the Tourname...</p>
+                    <div class="card-footer">
+                        <span class="date-text">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                            10 Mar 2026, 04:31 am
+                        </span>
+                        <a href="https://timesofindia.indiatimes.com/sports/cricket/icc-mens-t20-world-cup/minute-adjustments-help-sanju-samson-take-giant-strides-at-the-t20-world-cup/articleshow/129373298.cms" target="_blank" rel="noopener noreferrer" class="read-btn">Read More</a>
+                    </div>
                 </div>
             </article>
             <article class="news-card">
-                <img src="https://static.toiimg.com/photo/msid-129373414,imgsize-105966.cms" alt="News Image" class="news-image">
+                <div class="image-wrapper">
+                    <img src="https://static.toiimg.com/photo/msid-129373414,imgsize-105966.cms" alt="News Image" class="news-image" loading="lazy">
+                    <span class="badge">LATEST</span>
+                </div>
                 <div class="news-content">
-                    <div class="card-meta">
-                        <span class="badge">LATEST</span>
-                        <span class="date-text">10 Mar 2026, 04:31 am</span>
-                    </div>
                     <h2 class="news-title">‘Minute adjustments’ help Sanju Samson take giant strides at the T20 World Cup</h2>
-                    <p class="news-desc">India batter Sanju Samson's remarkable transformation into a steady, consistent batsman, evident in his T20 World Cup Pl...</p>
-                    <a href="https://timesofindia.indiatimes.com/sports/cricket/icc-mens-t20-world-cup/minute-adjustments-help-sanju-samson-take-giant-strides-at-the-t20-world-cup/articleshow/129373298.cms" target="_blank" class="read-btn">Read Full Story</a>
+                    <p class="news-desc">India batter Sanju Samson's remarkable transformation into a steady, consistent batsman, evident in his T20 World Cup Player of the Tourname...</p>
+                    <div class="card-footer">
+                        <span class="date-text">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                            10 Mar 2026, 04:31 am
+                        </span>
+                        <a href="https://timesofindia.indiatimes.com/sports/cricket/icc-mens-t20-world-cup/minute-adjustments-help-sanju-samson-take-giant-strides-at-the-t20-world-cup/articleshow/129373298.cms" target="_blank" rel="noopener noreferrer" class="read-btn">Read More</a>
+                    </div>
                 </div>
             </article>
             <article class="news-card">
-                <img src="https://via.placeholder.com/600x400?text=News+Update" alt="News Image" class="news-image">
+                <div class="image-wrapper">
+                    <img src="https://via.placeholder.com/600x400?text=News+Update" alt="News Image" class="news-image" loading="lazy">
+                    <span class="badge">LATEST</span>
+                </div>
                 <div class="news-content">
-                    <div class="card-meta">
-                        <span class="badge">LATEST</span>
-                        <span class="date-text">10 Mar 2026, 04:07 am</span>
-                    </div>
                     <h2 class="news-title">'Iran war to end soon,' says Donald Trump, warns Tehran not to try 'anything cute'</h2>
-                    <p class="news-desc">President Trump declared the Iran war is nearing its end, calling it a "short-term excursion." He warned Tehran against ...</p>
-                    <a href="https://timesofindia.indiatimes.com/world/us/iran-war-to-end-soon-says-donald-trump-warns-tehran-not-to-try-anything-cute/articleshow/129363058.cms" target="_blank" class="read-btn">Read Full Story</a>
+                    <p class="news-desc">President Trump declared the Iran war is nearing its end, calling it a "short-term excursion." He warned Tehran against "anything cute," sta...</p>
+                    <div class="card-footer">
+                        <span class="date-text">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                            10 Mar 2026, 04:07 am
+                        </span>
+                        <a href="https://timesofindia.indiatimes.com/world/us/iran-war-to-end-soon-says-donald-trump-warns-tehran-not-to-try-anything-cute/articleshow/129363058.cms" target="_blank" rel="noopener noreferrer" class="read-btn">Read More</a>
+                    </div>
                 </div>
             </article>
             <article class="news-card">
-                <img src="https://static.toiimg.com/photo/msid-129372026,imgsize-84324.cms" alt="News Image" class="news-image">
+                <div class="image-wrapper">
+                    <img src="https://static.toiimg.com/photo/msid-129372026,imgsize-84324.cms" alt="News Image" class="news-image" loading="lazy">
+                    <span class="badge">LATEST</span>
+                </div>
                 <div class="news-content">
-                    <div class="card-meta">
-                        <span class="badge">LATEST</span>
-                        <span class="date-text">10 Mar 2026, 03:56 am</span>
-                    </div>
                     <h2 class="news-title">Watch: Preity Zinta celebrates from stands as India defend T20 World Cup title</h2>
-                    <p class="news-desc">Bollywood stars erupted in celebration as India clinched their third ICC Men's T20 World Cup title with a dominant victo...</p>
-                    <a href="https://timesofindia.indiatimes.com/sports/cricket/icc-mens-t20-world-cup/none-of-us-could-keep-calm-preity-zinta-celebrates-from-stands-as-india-defend-t20-world-cup-title/articleshow/129371865.cms" target="_blank" class="read-btn">Read Full Story</a>
+                    <p class="news-desc">Bollywood stars erupted in celebration as India clinched their third ICC Men's T20 World Cup title with a dominant victory over New Zealand....</p>
+                    <div class="card-footer">
+                        <span class="date-text">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                            10 Mar 2026, 03:56 am
+                        </span>
+                        <a href="https://timesofindia.indiatimes.com/sports/cricket/icc-mens-t20-world-cup/none-of-us-could-keep-calm-preity-zinta-celebrates-from-stands-as-india-defend-t20-world-cup-title/articleshow/129371865.cms" target="_blank" rel="noopener noreferrer" class="read-btn">Read More</a>
+                    </div>
                 </div>
             </article>
             <article class="news-card">
-                <img src="https://static.toiimg.com/photo/msid-129372026,imgsize-84324.cms" alt="News Image" class="news-image">
+                <div class="image-wrapper">
+                    <img src="https://static.toiimg.com/photo/msid-129372026,imgsize-84324.cms" alt="News Image" class="news-image" loading="lazy">
+                    <span class="badge">LATEST</span>
+                </div>
                 <div class="news-content">
-                    <div class="card-meta">
-                        <span class="badge">LATEST</span>
-                        <span class="date-text">10 Mar 2026, 03:56 am</span>
-                    </div>
                     <h2 class="news-title">Watch: Preity Zinta celebrates from stands as India defend T20 World Cup title</h2>
-                    <p class="news-desc">Bollywood stars erupted in celebration as India clinched their third ICC Men's T20 World Cup title with a dominant victo...</p>
-                    <a href="https://timesofindia.indiatimes.com/sports/cricket/icc-mens-t20-world-cup/none-of-us-could-keep-calm-preity-zinta-celebrates-from-stands-as-india-defend-t20-world-cup-title/articleshow/129371865.cms" target="_blank" class="read-btn">Read Full Story</a>
+                    <p class="news-desc">Bollywood stars erupted in celebration as India clinched their third ICC Men's T20 World Cup title with a dominant victory over New Zealand....</p>
+                    <div class="card-footer">
+                        <span class="date-text">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                            10 Mar 2026, 03:56 am
+                        </span>
+                        <a href="https://timesofindia.indiatimes.com/sports/cricket/icc-mens-t20-world-cup/none-of-us-could-keep-calm-preity-zinta-celebrates-from-stands-as-india-defend-t20-world-cup-title/articleshow/129371865.cms" target="_blank" rel="noopener noreferrer" class="read-btn">Read More</a>
+                    </div>
                 </div>
             </article>
             <article class="news-card">
-                <img src="https://static.toiimg.com/photo/msid-129369912,imgsize-567022.cms" alt="News Image" class="news-image">
+                <div class="image-wrapper">
+                    <img src="https://static.toiimg.com/photo/msid-129369912,imgsize-567022.cms" alt="News Image" class="news-image" loading="lazy">
+                    <span class="badge">LATEST</span>
+                </div>
                 <div class="news-content">
-                    <div class="card-meta">
-                        <span class="badge">LATEST</span>
-                        <span class="date-text">10 Mar 2026, 03:21 am</span>
-                    </div>
                     <h2 class="news-title">Team India Report Card: Perfect finish to a not-so-perfect T20 WC campaign</h2>
-                    <p class="news-desc">Defending champions India clinched their third T20 World Cup title, overcoming a challenging campaign to defeat New Zeal...</p>
-                    <a href="https://timesofindia.indiatimes.com/sports/cricket/icc-mens-t20-world-cup/team-india-report-card-perfect-finish-to-a-not-so-perfect-t20-world-cup-2026/articleshow/129369539.cms" target="_blank" class="read-btn">Read Full Story</a>
+                    <p class="news-desc">Defending champions India clinched their third T20 World Cup title, overcoming a challenging campaign to defeat New Zealand in the final. De...</p>
+                    <div class="card-footer">
+                        <span class="date-text">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                            10 Mar 2026, 03:21 am
+                        </span>
+                        <a href="https://timesofindia.indiatimes.com/sports/cricket/icc-mens-t20-world-cup/team-india-report-card-perfect-finish-to-a-not-so-perfect-t20-world-cup-2026/articleshow/129369539.cms" target="_blank" rel="noopener noreferrer" class="read-btn">Read More</a>
+                    </div>
                 </div>
             </article>
             <article class="news-card">
-                <img src="https://static.toiimg.com/photo/msid-129369912,imgsize-567022.cms" alt="News Image" class="news-image">
+                <div class="image-wrapper">
+                    <img src="https://static.toiimg.com/photo/msid-129369912,imgsize-567022.cms" alt="News Image" class="news-image" loading="lazy">
+                    <span class="badge">LATEST</span>
+                </div>
                 <div class="news-content">
-                    <div class="card-meta">
-                        <span class="badge">LATEST</span>
-                        <span class="date-text">10 Mar 2026, 03:21 am</span>
-                    </div>
                     <h2 class="news-title">Team India Report Card: Perfect finish to a not-so-perfect T20 World Cup campaign</h2>
-                    <p class="news-desc">Defending champions India clinched their third T20 World Cup title, overcoming a challenging campaign to defeat New Zeal...</p>
-                    <a href="https://timesofindia.indiatimes.com/sports/cricket/icc-mens-t20-world-cup/team-india-report-card-perfect-finish-to-a-not-so-perfect-t20-world-cup-2026/articleshow/129369539.cms" target="_blank" class="read-btn">Read Full Story</a>
+                    <p class="news-desc">Defending champions India clinched their third T20 World Cup title, overcoming a challenging campaign to defeat New Zealand in the final. De...</p>
+                    <div class="card-footer">
+                        <span class="date-text">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                            10 Mar 2026, 03:21 am
+                        </span>
+                        <a href="https://timesofindia.indiatimes.com/sports/cricket/icc-mens-t20-world-cup/team-india-report-card-perfect-finish-to-a-not-so-perfect-t20-world-cup-2026/articleshow/129369539.cms" target="_blank" rel="noopener noreferrer" class="read-btn">Read More</a>
+                    </div>
                 </div>
             </article>
             <article class="news-card">
-                <img src="https://via.placeholder.com/600x400?text=News+Update" alt="News Image" class="news-image">
+                <div class="image-wrapper">
+                    <img src="https://via.placeholder.com/600x400?text=News+Update" alt="News Image" class="news-image" loading="lazy">
+                    <span class="badge">LATEST</span>
+                </div>
                 <div class="news-content">
-                    <div class="card-meta">
-                        <span class="badge">LATEST</span>
-                        <span class="date-text">10 Mar 2026, 02:10 am</span>
-                    </div>
                     <h2 class="news-title">Amazon sends letter to FCC saying: Reject application of Elon Musk's Spacex for Space data centers; gives three reasons to dismiss</h2>
-                    <p class="news-desc">Amazon's Project Kuiper has urged the FCC to reject SpaceX's proposal for a million-satellite constellation, citing a la...</p>
-                    <a href="https://timesofindia.indiatimes.com/technology/tech-news/amazon-sends-letter-to-fcc-saying-reject-application-of-elon-musks-spacex-for-space-data-centers-gives-three-reasons-to-dismiss/articleshow/129229812.cms" target="_blank" class="read-btn">Read Full Story</a>
+                    <p class="news-desc">Amazon's Project Kuiper has urged the FCC to reject SpaceX's proposal for a million-satellite constellation, citing a lack of essential tech...</p>
+                    <div class="card-footer">
+                        <span class="date-text">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                            10 Mar 2026, 02:10 am
+                        </span>
+                        <a href="https://timesofindia.indiatimes.com/technology/tech-news/amazon-sends-letter-to-fcc-saying-reject-application-of-elon-musks-spacex-for-space-data-centers-gives-three-reasons-to-dismiss/articleshow/129229812.cms" target="_blank" rel="noopener noreferrer" class="read-btn">Read More</a>
+                    </div>
                 </div>
             </article>
             <article class="news-card">
-                <img src="https://via.placeholder.com/600x400?text=News+Update" alt="News Image" class="news-image">
+                <div class="image-wrapper">
+                    <img src="https://via.placeholder.com/600x400?text=News+Update" alt="News Image" class="news-image" loading="lazy">
+                    <span class="badge">LATEST</span>
+                </div>
                 <div class="news-content">
-                    <div class="card-meta">
-                        <span class="badge">LATEST</span>
-                        <span class="date-text">10 Mar 2026, 02:08 am</span>
-                    </div>
                     <h2 class="news-title">Google CEO Sundar Pichai says ‘chose the wrong match…’, Microsoft's Satya Nadella wishes team as India win ICC Men's T20 World Cup</h2>
-                    <p class="news-desc">India achieved a historic T20 World Cup victory, becoming the first nation to defend its title and win on home soil. Thi...</p>
-                    <a href="https://timesofindia.indiatimes.com/technology/social/google-ceo-sundar-pichai-says-chose-the-wrong-match-microsofts-satya-nadella-wishes-team-as-india-win-icc-mens-t20-world-cup/articleshow/129284951.cms" target="_blank" class="read-btn">Read Full Story</a>
+                    <p class="news-desc">India achieved a historic T20 World Cup victory, becoming the first nation to defend its title and win on home soil. This marks their third ...</p>
+                    <div class="card-footer">
+                        <span class="date-text">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                            10 Mar 2026, 02:08 am
+                        </span>
+                        <a href="https://timesofindia.indiatimes.com/technology/social/google-ceo-sundar-pichai-says-chose-the-wrong-match-microsofts-satya-nadella-wishes-team-as-india-win-icc-mens-t20-world-cup/articleshow/129284951.cms" target="_blank" rel="noopener noreferrer" class="read-btn">Read More</a>
+                    </div>
                 </div>
             </article>
             <article class="news-card">
-                <img src="https://static.toiimg.com/photo/msid-129340245,imgsize-62802.cms" alt="News Image" class="news-image">
+                <div class="image-wrapper">
+                    <img src="https://static.toiimg.com/photo/msid-129340245,imgsize-62802.cms" alt="News Image" class="news-image" loading="lazy">
+                    <span class="badge">LATEST</span>
+                </div>
                 <div class="news-content">
-                    <div class="card-meta">
-                        <span class="badge">LATEST</span>
-                        <span class="date-text">10 Mar 2026, 12:43 am</span>
-                    </div>
                     <h2 class="news-title">'Dream is to play senior WC': Yash Dhull opens up on heart surgery and comeback</h2>
-                    <p class="news-desc">Under-19 World Cup-winning captain Yash Dhull faced a challenging period after heart surgery, battling a strong desire t...</p>
-                    <a href="https://timesofindia.indiatimes.com/sports/cricket/news/dream-is-to-play-senior-world-cup-yash-dhull-opens-up-on-heart-surgery-and-comeback-exclusive/articleshow/129339475.cms" target="_blank" class="read-btn">Read Full Story</a>
+                    <p class="news-desc">Under-19 World Cup-winning captain Yash Dhull faced a challenging period after heart surgery, battling a strong desire to return to cricket....</p>
+                    <div class="card-footer">
+                        <span class="date-text">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                            10 Mar 2026, 12:43 am
+                        </span>
+                        <a href="https://timesofindia.indiatimes.com/sports/cricket/news/dream-is-to-play-senior-world-cup-yash-dhull-opens-up-on-heart-surgery-and-comeback-exclusive/articleshow/129339475.cms" target="_blank" rel="noopener noreferrer" class="read-btn">Read More</a>
+                    </div>
                 </div>
             </article>
             <article class="news-card">
-                <img src="https://static.toiimg.com/photo/msid-129340245,imgsize-62802.cms" alt="News Image" class="news-image">
+                <div class="image-wrapper">
+                    <img src="https://static.toiimg.com/photo/msid-129340245,imgsize-62802.cms" alt="News Image" class="news-image" loading="lazy">
+                    <span class="badge">LATEST</span>
+                </div>
                 <div class="news-content">
-                    <div class="card-meta">
-                        <span class="badge">LATEST</span>
-                        <span class="date-text">10 Mar 2026, 12:43 am</span>
-                    </div>
                     <h2 class="news-title">'Dream is to play senior WC': Yash Dhull opens up on heart surgery and comeback</h2>
-                    <p class="news-desc">Under-19 World Cup-winning captain Yash Dhull faced a challenging period after heart surgery, battling a strong desire t...</p>
-                    <a href="https://timesofindia.indiatimes.com/sports/cricket/news/dream-is-to-play-senior-world-cup-yash-dhull-opens-up-on-heart-surgery-and-comeback-exclusive/articleshow/129339475.cms" target="_blank" class="read-btn">Read Full Story</a>
+                    <p class="news-desc">Under-19 World Cup-winning captain Yash Dhull faced a challenging period after heart surgery, battling a strong desire to return to cricket....</p>
+                    <div class="card-footer">
+                        <span class="date-text">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                            10 Mar 2026, 12:43 am
+                        </span>
+                        <a href="https://timesofindia.indiatimes.com/sports/cricket/news/dream-is-to-play-senior-world-cup-yash-dhull-opens-up-on-heart-surgery-and-comeback-exclusive/articleshow/129339475.cms" target="_blank" rel="noopener noreferrer" class="read-btn">Read More</a>
+                    </div>
                 </div>
             </article>
             <article class="news-card">
-                <img src="https://static.toiimg.com/photo/msid-129335355,imgsize-1329956.cms" alt="News Image" class="news-image">
+                <div class="image-wrapper">
+                    <img src="https://static.toiimg.com/photo/msid-129335355,imgsize-1329956.cms" alt="News Image" class="news-image" loading="lazy">
+                    <span class="badge">LATEST</span>
+                </div>
                 <div class="news-content">
-                    <div class="card-meta">
-                        <span class="badge">LATEST</span>
-                        <span class="date-text">10 Mar 2026, 12:30 am</span>
-                    </div>
                     <h2 class="news-title">ICC breaks silence on bias claims after England exit leaves WI, SA stuck in India</h2>
-                    <p class="news-desc">Travel chaos has stranded West Indies and South Africa teams in India post-T20 World Cup due to Middle East airspace res...</p>
-                    <a href="https://timesofindia.indiatimes.com/sports/cricket/news/icc-breaks-silence-on-bias-claims-after-england-exit-leaves-west-indies-south-africa-stuck-in-india/articleshow/129334932.cms" target="_blank" class="read-btn">Read Full Story</a>
+                    <p class="news-desc">Travel chaos has stranded West Indies and South Africa teams in India post-T20 World Cup due to Middle East airspace restrictions. Accusatio...</p>
+                    <div class="card-footer">
+                        <span class="date-text">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                            10 Mar 2026, 12:30 am
+                        </span>
+                        <a href="https://timesofindia.indiatimes.com/sports/cricket/news/icc-breaks-silence-on-bias-claims-after-england-exit-leaves-west-indies-south-africa-stuck-in-india/articleshow/129334932.cms" target="_blank" rel="noopener noreferrer" class="read-btn">Read More</a>
+                    </div>
                 </div>
             </article>
             <article class="news-card">
-                <img src="https://static.toiimg.com/photo/msid-129335355,imgsize-1329956.cms" alt="News Image" class="news-image">
+                <div class="image-wrapper">
+                    <img src="https://static.toiimg.com/photo/msid-129335355,imgsize-1329956.cms" alt="News Image" class="news-image" loading="lazy">
+                    <span class="badge">LATEST</span>
+                </div>
                 <div class="news-content">
-                    <div class="card-meta">
-                        <span class="badge">LATEST</span>
-                        <span class="date-text">10 Mar 2026, 12:30 am</span>
-                    </div>
                     <h2 class="news-title">ICC breaks silence on bias claims after England exit leaves WI, SA stuck in India</h2>
-                    <p class="news-desc">Travel chaos has stranded West Indies and South Africa teams in India post-T20 World Cup due to Middle East airspace res...</p>
-                    <a href="https://timesofindia.indiatimes.com/sports/cricket/news/icc-breaks-silence-on-bias-claims-after-england-exit-leaves-west-indies-south-africa-stuck-in-india/articleshow/129334932.cms" target="_blank" class="read-btn">Read Full Story</a>
+                    <p class="news-desc">Travel chaos has stranded West Indies and South Africa teams in India post-T20 World Cup due to Middle East airspace restrictions. Accusatio...</p>
+                    <div class="card-footer">
+                        <span class="date-text">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                            10 Mar 2026, 12:30 am
+                        </span>
+                        <a href="https://timesofindia.indiatimes.com/sports/cricket/news/icc-breaks-silence-on-bias-claims-after-england-exit-leaves-west-indies-south-africa-stuck-in-india/articleshow/129334932.cms" target="_blank" rel="noopener noreferrer" class="read-btn">Read More</a>
+                    </div>
                 </div>
             </article>
             <article class="news-card">
-                <img src="https://static.toiimg.com/photo/msid-129343255,imgsize-46002.cms" alt="News Image" class="news-image">
+                <div class="image-wrapper">
+                    <img src="https://static.toiimg.com/photo/msid-129343255,imgsize-46002.cms" alt="News Image" class="news-image" loading="lazy">
+                    <span class="badge">LATEST</span>
+                </div>
                 <div class="news-content">
-                    <div class="card-meta">
-                        <span class="badge">LATEST</span>
-                        <span class="date-text">10 Mar 2026, 12:00 am</span>
-                    </div>
                     <h2 class="news-title">'Pani pilana, bat uthana': Siraj's viral dig on his &amp; Kuldeep's role in T20 WC</h2>
-                    <p class="news-desc">Mohammed Siraj humorously described his role as a water carrier and bat holder after India's T20 World Cup 2026 victory....</p>
-                    <a href="https://timesofindia.indiatimes.com/sports/cricket/icc-mens-t20-world-cup/pani-pilana-bat-uthana-mohammed-sirajs-viral-dig-on-his-and-kuldeep-yadavs-role-in-t20-world-cup-triumph/articleshow/129342984.cms" target="_blank" class="read-btn">Read Full Story</a>
+                    <p class="news-desc">Mohammed Siraj humorously described his role as a water carrier and bat holder after India's T20 World Cup 2026 victory. Despite not playing...</p>
+                    <div class="card-footer">
+                        <span class="date-text">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                            10 Mar 2026, 12:00 am
+                        </span>
+                        <a href="https://timesofindia.indiatimes.com/sports/cricket/icc-mens-t20-world-cup/pani-pilana-bat-uthana-mohammed-sirajs-viral-dig-on-his-and-kuldeep-yadavs-role-in-t20-world-cup-triumph/articleshow/129342984.cms" target="_blank" rel="noopener noreferrer" class="read-btn">Read More</a>
+                    </div>
                 </div>
             </article>
             <article class="news-card">
-                <img src="https://static.toiimg.com/photo/msid-129343255,imgsize-46002.cms" alt="News Image" class="news-image">
+                <div class="image-wrapper">
+                    <img src="https://static.toiimg.com/photo/msid-129343255,imgsize-46002.cms" alt="News Image" class="news-image" loading="lazy">
+                    <span class="badge">LATEST</span>
+                </div>
                 <div class="news-content">
-                    <div class="card-meta">
-                        <span class="badge">LATEST</span>
-                        <span class="date-text">10 Mar 2026, 12:00 am</span>
-                    </div>
                     <h2 class="news-title">'Pani pilana, bat uthana': Siraj's viral dig on his &amp; Kuldeep's role in T20 WC</h2>
-                    <p class="news-desc">Mohammed Siraj humorously described his role as a water carrier and bat holder after India's T20 World Cup 2026 victory....</p>
-                    <a href="https://timesofindia.indiatimes.com/sports/cricket/icc-mens-t20-world-cup/pani-pilana-bat-uthana-mohammed-sirajs-viral-dig-on-his-and-kuldeep-yadavs-role-in-t20-world-cup-triumph/articleshow/129342984.cms" target="_blank" class="read-btn">Read Full Story</a>
+                    <p class="news-desc">Mohammed Siraj humorously described his role as a water carrier and bat holder after India's T20 World Cup 2026 victory. Despite not playing...</p>
+                    <div class="card-footer">
+                        <span class="date-text">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                            10 Mar 2026, 12:00 am
+                        </span>
+                        <a href="https://timesofindia.indiatimes.com/sports/cricket/icc-mens-t20-world-cup/pani-pilana-bat-uthana-mohammed-sirajs-viral-dig-on-his-and-kuldeep-yadavs-role-in-t20-world-cup-triumph/articleshow/129342984.cms" target="_blank" rel="noopener noreferrer" class="read-btn">Read More</a>
+                    </div>
                 </div>
             </article>
             <article class="news-card">
-                <img src="https://static.toiimg.com/photo/msid-129340856,imgsize-91884.cms" alt="News Image" class="news-image">
+                <div class="image-wrapper">
+                    <img src="https://static.toiimg.com/photo/msid-129340856,imgsize-91884.cms" alt="News Image" class="news-image" loading="lazy">
+                    <span class="badge">LATEST</span>
+                </div>
                 <div class="news-content">
-                    <div class="card-meta">
-                        <span class="badge">LATEST</span>
-                        <span class="date-text">9 Mar 2026, 11:31 pm</span>
-                    </div>
                     <h2 class="news-title">The 25-minute talk that changed Sanju Samson's World Cup</h2>
-                    <p class="news-desc">Sanju Samson revealed a new T20 World Cup game plan, learning from past failures to regain form and play a key role in I...</p>
-                    <a href="https://timesofindia.indiatimes.com/sports/cricket/icc-mens-t20-world-cup/the-25-minute-talk-that-changed-sanju-samsons-world-cup/articleshow/129340714.cms" target="_blank" class="read-btn">Read Full Story</a>
+                    <p class="news-desc">Sanju Samson revealed a new T20 World Cup game plan, learning from past failures to regain form and play a key role in India's title win. He...</p>
+                    <div class="card-footer">
+                        <span class="date-text">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                            9 Mar 2026, 11:31 pm
+                        </span>
+                        <a href="https://timesofindia.indiatimes.com/sports/cricket/icc-mens-t20-world-cup/the-25-minute-talk-that-changed-sanju-samsons-world-cup/articleshow/129340714.cms" target="_blank" rel="noopener noreferrer" class="read-btn">Read More</a>
+                    </div>
                 </div>
             </article>
             <article class="news-card">
-                <img src="https://static.toiimg.com/photo/msid-129340856,imgsize-91884.cms" alt="News Image" class="news-image">
+                <div class="image-wrapper">
+                    <img src="https://static.toiimg.com/photo/msid-129340856,imgsize-91884.cms" alt="News Image" class="news-image" loading="lazy">
+                    <span class="badge">LATEST</span>
+                </div>
                 <div class="news-content">
-                    <div class="card-meta">
-                        <span class="badge">LATEST</span>
-                        <span class="date-text">9 Mar 2026, 11:31 pm</span>
-                    </div>
                     <h2 class="news-title">The 25-minute talk that changed Sanju Samson's World Cup</h2>
-                    <p class="news-desc">Sanju Samson revealed a new T20 World Cup game plan, learning from past failures to regain form and play a key role in I...</p>
-                    <a href="https://timesofindia.indiatimes.com/sports/cricket/icc-mens-t20-world-cup/the-25-minute-talk-that-changed-sanju-samsons-world-cup/articleshow/129340714.cms" target="_blank" class="read-btn">Read Full Story</a>
+                    <p class="news-desc">Sanju Samson revealed a new T20 World Cup game plan, learning from past failures to regain form and play a key role in India's title win. He...</p>
+                    <div class="card-footer">
+                        <span class="date-text">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                            9 Mar 2026, 11:31 pm
+                        </span>
+                        <a href="https://timesofindia.indiatimes.com/sports/cricket/icc-mens-t20-world-cup/the-25-minute-talk-that-changed-sanju-samsons-world-cup/articleshow/129340714.cms" target="_blank" rel="noopener noreferrer" class="read-btn">Read More</a>
+                    </div>
                 </div>
             </article>
             <article class="news-card">
-                <img src="https://static.toiimg.com/photo/msid-129342045,imgsize-248362.cms" alt="News Image" class="news-image">
+                <div class="image-wrapper">
+                    <img src="https://static.toiimg.com/photo/msid-129342045,imgsize-248362.cms" alt="News Image" class="news-image" loading="lazy">
+                    <span class="badge">LATEST</span>
+                </div>
                 <div class="news-content">
-                    <div class="card-meta">
-                        <span class="badge">LATEST</span>
-                        <span class="date-text">9 Mar 2026, 11:30 pm</span>
-                    </div>
                     <h2 class="news-title">'Not about spin matchups': Gambhir reveals real reason behind Samson’s recall</h2>
-                    <p class="news-desc">India's head coach Gautam Gambhir revealed Sanju Samson's return aimed to inject more attacking firepower into the top o...</p>
-                    <a href="https://timesofindia.indiatimes.com/sports/cricket/icc-mens-t20-world-cup/not-about-spin-matchups-gautam-gambhir-reveals-real-reason-behind-sanju-samsons-recall-watch/articleshow/129342107.cms" target="_blank" class="read-btn">Read Full Story</a>
+                    <p class="news-desc">India's head coach Gautam Gambhir revealed Sanju Samson's return aimed to inject more attacking firepower into the top order, not to counter...</p>
+                    <div class="card-footer">
+                        <span class="date-text">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                            9 Mar 2026, 11:30 pm
+                        </span>
+                        <a href="https://timesofindia.indiatimes.com/sports/cricket/icc-mens-t20-world-cup/not-about-spin-matchups-gautam-gambhir-reveals-real-reason-behind-sanju-samsons-recall-watch/articleshow/129342107.cms" target="_blank" rel="noopener noreferrer" class="read-btn">Read More</a>
+                    </div>
                 </div>
             </article>
             <article class="news-card">
-                <img src="https://static.toiimg.com/photo/msid-129342045,imgsize-248362.cms" alt="News Image" class="news-image">
+                <div class="image-wrapper">
+                    <img src="https://static.toiimg.com/photo/msid-129342045,imgsize-248362.cms" alt="News Image" class="news-image" loading="lazy">
+                    <span class="badge">LATEST</span>
+                </div>
                 <div class="news-content">
-                    <div class="card-meta">
-                        <span class="badge">LATEST</span>
-                        <span class="date-text">9 Mar 2026, 11:30 pm</span>
-                    </div>
                     <h2 class="news-title">'Not about spin matchups': Gambhir reveals real reason behind Samson’s recall</h2>
-                    <p class="news-desc">India's head coach Gautam Gambhir revealed Sanju Samson's return aimed to inject more attacking firepower into the top o...</p>
-                    <a href="https://timesofindia.indiatimes.com/sports/cricket/icc-mens-t20-world-cup/not-about-spin-matchups-gautam-gambhir-reveals-real-reason-behind-sanju-samsons-recall-watch/articleshow/129342107.cms" target="_blank" class="read-btn">Read Full Story</a>
+                    <p class="news-desc">India's head coach Gautam Gambhir revealed Sanju Samson's return aimed to inject more attacking firepower into the top order, not to counter...</p>
+                    <div class="card-footer">
+                        <span class="date-text">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                            9 Mar 2026, 11:30 pm
+                        </span>
+                        <a href="https://timesofindia.indiatimes.com/sports/cricket/icc-mens-t20-world-cup/not-about-spin-matchups-gautam-gambhir-reveals-real-reason-behind-sanju-samsons-recall-watch/articleshow/129342107.cms" target="_blank" rel="noopener noreferrer" class="read-btn">Read More</a>
+                    </div>
                 </div>
             </article>
             <article class="news-card">
-                <img src="https://static.toiimg.com/photo/msid-129346693,imgsize-235246.cms" alt="News Image" class="news-image">
+                <div class="image-wrapper">
+                    <img src="https://static.toiimg.com/photo/msid-129346693,imgsize-235246.cms" alt="News Image" class="news-image" loading="lazy">
+                    <span class="badge">LATEST</span>
+                </div>
                 <div class="news-content">
-                    <div class="card-meta">
-                        <span class="badge">LATEST</span>
-                        <span class="date-text">9 Mar 2026, 05:12 pm</span>
-                    </div>
                     <h2 class="news-title">'Indian cricket in golden phase': BCCI after T20 World Cup 2026 triumph</h2>
-                    <p class="news-desc">India has won the ICC Men's T20 World Cup 2026. The team secured a commanding victory in the final. This win marks a his...</p>
-                    <a href="https://timesofindia.indiatimes.com/sports/cricket/icc-mens-t20-world-cup/indian-cricket-in-golden-phase-bcci-after-t20-world-cup-2026-triumph/articleshow/129346723.cms" target="_blank" class="read-btn">Read Full Story</a>
+                    <p class="news-desc">India has won the ICC Men's T20 World Cup 2026. The team secured a commanding victory in the final. This win marks a historic achievement as...</p>
+                    <div class="card-footer">
+                        <span class="date-text">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                            9 Mar 2026, 05:12 pm
+                        </span>
+                        <a href="https://timesofindia.indiatimes.com/sports/cricket/icc-mens-t20-world-cup/indian-cricket-in-golden-phase-bcci-after-t20-world-cup-2026-triumph/articleshow/129346723.cms" target="_blank" rel="noopener noreferrer" class="read-btn">Read More</a>
+                    </div>
                 </div>
             </article>
             <article class="news-card">
-                <img src="https://static.toiimg.com/photo/msid-129346693,imgsize-235246.cms" alt="News Image" class="news-image">
+                <div class="image-wrapper">
+                    <img src="https://static.toiimg.com/photo/msid-129346693,imgsize-235246.cms" alt="News Image" class="news-image" loading="lazy">
+                    <span class="badge">LATEST</span>
+                </div>
                 <div class="news-content">
-                    <div class="card-meta">
-                        <span class="badge">LATEST</span>
-                        <span class="date-text">9 Mar 2026, 05:12 pm</span>
-                    </div>
                     <h2 class="news-title">'Indian cricket in golden phase': BCCI after T20 World Cup 2026 triumph</h2>
-                    <p class="news-desc">India has won the ICC Men's T20 World Cup 2026. The team secured a commanding victory in the final. This win marks a his...</p>
-                    <a href="https://timesofindia.indiatimes.com/sports/cricket/icc-mens-t20-world-cup/indian-cricket-in-golden-phase-bcci-after-t20-world-cup-2026-triumph/articleshow/129346723.cms" target="_blank" class="read-btn">Read Full Story</a>
+                    <p class="news-desc">India has won the ICC Men's T20 World Cup 2026. The team secured a commanding victory in the final. This win marks a historic achievement as...</p>
+                    <div class="card-footer">
+                        <span class="date-text">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                            9 Mar 2026, 05:12 pm
+                        </span>
+                        <a href="https://timesofindia.indiatimes.com/sports/cricket/icc-mens-t20-world-cup/indian-cricket-in-golden-phase-bcci-after-t20-world-cup-2026-triumph/articleshow/129346723.cms" target="_blank" rel="noopener noreferrer" class="read-btn">Read More</a>
+                    </div>
                 </div>
             </article>
             <article class="news-card">
-                <img src="https://static.toiimg.com/photo/msid-129344268,imgsize-68842.cms" alt="News Image" class="news-image">
+                <div class="image-wrapper">
+                    <img src="https://static.toiimg.com/photo/msid-129344268,imgsize-68842.cms" alt="News Image" class="news-image" loading="lazy">
+                    <span class="badge">LATEST</span>
+                </div>
                 <div class="news-content">
-                    <div class="card-meta">
-                        <span class="badge">LATEST</span>
-                        <span class="date-text">9 Mar 2026, 04:22 pm</span>
-                    </div>
                     <h2 class="news-title">Sri Lanka call off Afghanistan series in UAE due to Middle East conflict</h2>
-                    <p class="news-desc">Sri Lanka has indefinitely postponed their white-ball series against Afghanistan, originally set to take place in the UA...</p>
-                    <a href="https://timesofindia.indiatimes.com/sports/cricket/news/sri-lanka-call-off-afghanistan-series-in-uae-due-to-middle-east-conflict/articleshow/129344073.cms" target="_blank" class="read-btn">Read Full Story</a>
+                    <p class="news-desc">Sri Lanka has indefinitely postponed their white-ball series against Afghanistan, originally set to take place in the UAE this week. The dec...</p>
+                    <div class="card-footer">
+                        <span class="date-text">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                            9 Mar 2026, 04:22 pm
+                        </span>
+                        <a href="https://timesofindia.indiatimes.com/sports/cricket/news/sri-lanka-call-off-afghanistan-series-in-uae-due-to-middle-east-conflict/articleshow/129344073.cms" target="_blank" rel="noopener noreferrer" class="read-btn">Read More</a>
+                    </div>
                 </div>
             </article>
             <article class="news-card">
-                <img src="https://static.toiimg.com/photo/msid-129344268,imgsize-68842.cms" alt="News Image" class="news-image">
+                <div class="image-wrapper">
+                    <img src="https://static.toiimg.com/photo/msid-129344268,imgsize-68842.cms" alt="News Image" class="news-image" loading="lazy">
+                    <span class="badge">LATEST</span>
+                </div>
                 <div class="news-content">
-                    <div class="card-meta">
-                        <span class="badge">LATEST</span>
-                        <span class="date-text">9 Mar 2026, 04:22 pm</span>
-                    </div>
                     <h2 class="news-title">Sri Lanka call off Afghanistan series in UAE due to Middle East conflict</h2>
-                    <p class="news-desc">Sri Lanka has indefinitely postponed their white-ball series against Afghanistan, originally set to take place in the UA...</p>
-                    <a href="https://timesofindia.indiatimes.com/sports/cricket/news/sri-lanka-call-off-afghanistan-series-in-uae-due-to-middle-east-conflict/articleshow/129344073.cms" target="_blank" class="read-btn">Read Full Story</a>
+                    <p class="news-desc">Sri Lanka has indefinitely postponed their white-ball series against Afghanistan, originally set to take place in the UAE this week. The dec...</p>
+                    <div class="card-footer">
+                        <span class="date-text">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                            9 Mar 2026, 04:22 pm
+                        </span>
+                        <a href="https://timesofindia.indiatimes.com/sports/cricket/news/sri-lanka-call-off-afghanistan-series-in-uae-due-to-middle-east-conflict/articleshow/129344073.cms" target="_blank" rel="noopener noreferrer" class="read-btn">Read More</a>
+                    </div>
                 </div>
             </article>
             <article class="news-card">
-                <img src="https://static.toiimg.com/photo/msid-129340209,imgsize-136214.cms" alt="News Image" class="news-image">
+                <div class="image-wrapper">
+                    <img src="https://static.toiimg.com/photo/msid-129340209,imgsize-136214.cms" alt="News Image" class="news-image" loading="lazy">
+                    <span class="badge">LATEST</span>
+                </div>
                 <div class="news-content">
-                    <div class="card-meta">
-                        <span class="badge">LATEST</span>
-                        <span class="date-text">9 Mar 2026, 02:53 pm</span>
-                    </div>
                     <h2 class="news-title">Samson, Bumrah lead four Indians in ICC T20 World Cup Team of the Tournament</h2>
-                    <p class="news-desc">India secured a record third ICC Men's T20 World Cup title in 2026, with four players making the official Team of the To...</p>
-                    <a href="https://timesofindia.indiatimes.com/sports/cricket/icc-mens-t20-world-cup/sanju-samson-jasprit-bumrah-lead-four-indians-in-icc-t20-world-cup-team-of-the-tournament/articleshow/129340291.cms" target="_blank" class="read-btn">Read Full Story</a>
+                    <p class="news-desc">India secured a record third ICC Men's T20 World Cup title in 2026, with four players making the official Team of the Tournament. Player of ...</p>
+                    <div class="card-footer">
+                        <span class="date-text">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                            9 Mar 2026, 02:53 pm
+                        </span>
+                        <a href="https://timesofindia.indiatimes.com/sports/cricket/icc-mens-t20-world-cup/sanju-samson-jasprit-bumrah-lead-four-indians-in-icc-t20-world-cup-team-of-the-tournament/articleshow/129340291.cms" target="_blank" rel="noopener noreferrer" class="read-btn">Read More</a>
+                    </div>
                 </div>
             </article>
             <article class="news-card">
-                <img src="https://static.toiimg.com/photo/msid-129340209,imgsize-136214.cms" alt="News Image" class="news-image">
+                <div class="image-wrapper">
+                    <img src="https://static.toiimg.com/photo/msid-129340209,imgsize-136214.cms" alt="News Image" class="news-image" loading="lazy">
+                    <span class="badge">LATEST</span>
+                </div>
                 <div class="news-content">
-                    <div class="card-meta">
-                        <span class="badge">LATEST</span>
-                        <span class="date-text">9 Mar 2026, 02:53 pm</span>
-                    </div>
                     <h2 class="news-title">Samson, Bumrah lead four Indians in ICC T20 World Cup Team of the Tournament</h2>
-                    <p class="news-desc">India secured a record third ICC Men's T20 World Cup title in 2026, with four players making the official Team of the To...</p>
-                    <a href="https://timesofindia.indiatimes.com/sports/cricket/icc-mens-t20-world-cup/sanju-samson-jasprit-bumrah-lead-four-indians-in-icc-t20-world-cup-team-of-the-tournament/articleshow/129340291.cms" target="_blank" class="read-btn">Read Full Story</a>
+                    <p class="news-desc">India secured a record third ICC Men's T20 World Cup title in 2026, with four players making the official Team of the Tournament. Player of ...</p>
+                    <div class="card-footer">
+                        <span class="date-text">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                            9 Mar 2026, 02:53 pm
+                        </span>
+                        <a href="https://timesofindia.indiatimes.com/sports/cricket/icc-mens-t20-world-cup/sanju-samson-jasprit-bumrah-lead-four-indians-in-icc-t20-world-cup-team-of-the-tournament/articleshow/129340291.cms" target="_blank" rel="noopener noreferrer" class="read-btn">Read More</a>
+                    </div>
                 </div>
             </article>
             <article class="news-card">
-                <img src="https://static.toiimg.com/photo/msid-129337497,imgsize-116760.cms" alt="News Image" class="news-image">
-                <div class="news-content">
-                    <div class="card-meta">
-                        <span class="badge">LATEST</span>
-                        <span class="date-text">9 Mar 2026, 01:50 pm</span>
-                    </div>
-                    <h2 class="news-title">'I was facing a lot of difficulties personally': Hardik Pandya</h2>
-                    <p class="news-desc">Hardik Pandya celebrated India's back-to-back T20 World Cup victories, fulfilling a personal promise to win trophies for...</p>
-                    <a href="https://timesofindia.indiatimes.com/sports/cricket/icc-mens-t20-world-cup/i-was-facing-a-lot-of-difficulties-personally-hardik-pandya-opens-up-on-tough-phase/articleshow/129337516.cms" target="_blank" class="read-btn">Read Full Story</a>
+                <div class="image-wrapper">
+                    <img src="https://static.toiimg.com/photo/msid-129325493,imgsize-100164.cms" alt="News Image" class="news-image" loading="lazy">
+                    <span class="badge">LATEST</span>
                 </div>
-            </article>
-            <article class="news-card">
-                <img src="https://static.toiimg.com/photo/msid-129325493,imgsize-100164.cms" alt="News Image" class="news-image">
                 <div class="news-content">
-                    <div class="card-meta">
-                        <span class="badge">LATEST</span>
-                        <span class="date-text">9 Mar 2026, 09:58 am</span>
-                    </div>
                     <h2 class="news-title">'Career was on the line': Gambhir makes huge Samson admission after World Cup glory</h2>
-                    <p class="news-desc">Head coach Gautam Gambhir lauded Sanju Samson's exceptional performances during India's T20 World Cup victory. Samson's ...</p>
-                    <a href="https://timesofindia.indiatimes.com/sports/cricket/icc-mens-t20-world-cup/career-was-on-the-line-gautam-gambhir-makes-huge-sanju-samson-admission-after-world-cup-glory/articleshow/129325264.cms" target="_blank" class="read-btn">Read Full Story</a>
+                    <p class="news-desc">Head coach Gautam Gambhir lauded Sanju Samson's exceptional performances during India's T20 World Cup victory. Samson's match-winning contri...</p>
+                    <div class="card-footer">
+                        <span class="date-text">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                            9 Mar 2026, 09:58 am
+                        </span>
+                        <a href="https://timesofindia.indiatimes.com/sports/cricket/icc-mens-t20-world-cup/career-was-on-the-line-gautam-gambhir-makes-huge-sanju-samson-admission-after-world-cup-glory/articleshow/129325264.cms" target="_blank" rel="noopener noreferrer" class="read-btn">Read More</a>
+                    </div>
                 </div>
             </article>
             <article class="news-card">
-                <img src="https://static.toiimg.com/photo/msid-129325493,imgsize-100164.cms" alt="News Image" class="news-image">
+                <div class="image-wrapper">
+                    <img src="https://static.toiimg.com/photo/msid-129325493,imgsize-100164.cms" alt="News Image" class="news-image" loading="lazy">
+                    <span class="badge">LATEST</span>
+                </div>
                 <div class="news-content">
-                    <div class="card-meta">
-                        <span class="badge">LATEST</span>
-                        <span class="date-text">9 Mar 2026, 09:58 am</span>
-                    </div>
                     <h2 class="news-title">'Career was on the line': Gambhir makes huge Samson admission after World Cup glory</h2>
-                    <p class="news-desc">Head coach Gautam Gambhir lauded Sanju Samson's exceptional performances during India's T20 World Cup victory. Samson's ...</p>
-                    <a href="https://timesofindia.indiatimes.com/sports/cricket/icc-mens-t20-world-cup/career-was-on-the-line-gautam-gambhir-makes-huge-sanju-samson-admission-after-world-cup-glory/articleshow/129325264.cms" target="_blank" class="read-btn">Read Full Story</a>
+                    <p class="news-desc">Head coach Gautam Gambhir lauded Sanju Samson's exceptional performances during India's T20 World Cup victory. Samson's match-winning contri...</p>
+                    <div class="card-footer">
+                        <span class="date-text">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                            9 Mar 2026, 09:58 am
+                        </span>
+                        <a href="https://timesofindia.indiatimes.com/sports/cricket/icc-mens-t20-world-cup/career-was-on-the-line-gautam-gambhir-makes-huge-sanju-samson-admission-after-world-cup-glory/articleshow/129325264.cms" target="_blank" rel="noopener noreferrer" class="read-btn">Read More</a>
+                    </div>
                 </div>
             </article>
             <article class="news-card">
-                <img src="https://via.placeholder.com/600x400?text=News+Update" alt="News Image" class="news-image">
+                <div class="image-wrapper">
+                    <img src="https://via.placeholder.com/600x400?text=News+Update" alt="News Image" class="news-image" loading="lazy">
+                    <span class="badge">LATEST</span>
+                </div>
                 <div class="news-content">
-                    <div class="card-meta">
-                        <span class="badge">LATEST</span>
-                        <span class="date-text">9 Mar 2026, 07:56 am</span>
-                    </div>
                     <h2 class="news-title">Gulf tensions: Dumping of goods by ships at ports worries exporters</h2>
                     <p class="news-desc"></p>
-                    <a href="https://timesofindia.indiatimes.com/business/india-business/gulf-tensions-dumping-of-goods-by-ships-at-ports-worries-exporters/articleshow/129290619.cms" target="_blank" class="read-btn">Read Full Story</a>
+                    <div class="card-footer">
+                        <span class="date-text">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                            9 Mar 2026, 07:56 am
+                        </span>
+                        <a href="https://timesofindia.indiatimes.com/business/india-business/gulf-tensions-dumping-of-goods-by-ships-at-ports-worries-exporters/articleshow/129290619.cms" target="_blank" rel="noopener noreferrer" class="read-btn">Read More</a>
+                    </div>
                 </div>
             </article>
             <article class="news-card">
-                <img src="https://static.toiimg.com/photo/msid-129319226,imgsize-79300.cms" alt="News Image" class="news-image">
+                <div class="image-wrapper">
+                    <img src="https://static.toiimg.com/photo/msid-129319226,imgsize-79300.cms" alt="News Image" class="news-image" loading="lazy">
+                    <span class="badge">LATEST</span>
+                </div>
                 <div class="news-content">
-                    <div class="card-meta">
-                        <span class="badge">LATEST</span>
-                        <span class="date-text">9 Mar 2026, 07:44 am</span>
-                    </div>
                     <h2 class="news-title">Gautam Gambhir: Stubborn cricketer, instinctive coach and a man who owns the big nights</h2>
-                    <p class="news-desc">Gautam Gambhir was India's MVP in their two World Cup triumphs, the 2007 T20 World Cup and the 2011 ODI World Cup. In bo...</p>
-                    <a href="https://timesofindia.indiatimes.com/sports/cricket/icc-mens-t20-world-cup/gautam-gambhir-stubborn-cricketer-instinctive-coach-and-a-man-who-owns-the-big-nights/articleshow/129318862.cms" target="_blank" class="read-btn">Read Full Story</a>
+                    <p class="news-desc">Gautam Gambhir was India's MVP in their two World Cup triumphs, the 2007 T20 World Cup and the 2011 ODI World Cup. In both finals, he steppe...</p>
+                    <div class="card-footer">
+                        <span class="date-text">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                            9 Mar 2026, 07:44 am
+                        </span>
+                        <a href="https://timesofindia.indiatimes.com/sports/cricket/icc-mens-t20-world-cup/gautam-gambhir-stubborn-cricketer-instinctive-coach-and-a-man-who-owns-the-big-nights/articleshow/129318862.cms" target="_blank" rel="noopener noreferrer" class="read-btn">Read More</a>
+                    </div>
                 </div>
             </article>
             <article class="news-card">
-                <img src="https://via.placeholder.com/600x400?text=News+Update" alt="News Image" class="news-image">
+                <div class="image-wrapper">
+                    <img src="https://via.placeholder.com/600x400?text=News+Update" alt="News Image" class="news-image" loading="lazy">
+                    <span class="badge">LATEST</span>
+                </div>
                 <div class="news-content">
-                    <div class="card-meta">
-                        <span class="badge">LATEST</span>
-                        <span class="date-text">9 Mar 2026, 03:58 am</span>
-                    </div>
                     <h2 class="news-title">Employee organisations across US representing 700,000 employees from Amazon, Google, Microsoft demand: Our companies ...</h2>
-                    <p class="news-desc">Employees from major tech firms like Amazon, Google, and Microsoft are demanding their companies reject Pentagon contrac...</p>
-                    <a href="https://timesofindia.indiatimes.com/technology/tech-news/employee-organisations-and-unions-across-america-representing-700000-employees-from-amazon-google-microsoft-demand-our-companies-must-reject-/articleshow/129193292.cms" target="_blank" class="read-btn">Read Full Story</a>
+                    <p class="news-desc">Employees from major tech firms like Amazon, Google, and Microsoft are demanding their companies reject Pentagon contracts that compromise A...</p>
+                    <div class="card-footer">
+                        <span class="date-text">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                            9 Mar 2026, 03:58 am
+                        </span>
+                        <a href="https://timesofindia.indiatimes.com/technology/tech-news/employee-organisations-and-unions-across-america-representing-700000-employees-from-amazon-google-microsoft-demand-our-companies-must-reject-/articleshow/129193292.cms" target="_blank" rel="noopener noreferrer" class="read-btn">Read More</a>
+                    </div>
                 </div>
             </article>
             <article class="news-card">
-                <img src="https://via.placeholder.com/600x400?text=News+Update" alt="News Image" class="news-image">
+                <div class="image-wrapper">
+                    <img src="https://via.placeholder.com/600x400?text=News+Update" alt="News Image" class="news-image" loading="lazy">
+                    <span class="badge">LATEST</span>
+                </div>
                 <div class="news-content">
-                    <div class="card-meta">
-                        <span class="badge">LATEST</span>
-                        <span class="date-text">9 Mar 2026, 02:58 am</span>
-                    </div>
                     <h2 class="news-title">How Ishan Kishan fought personal grief to rise on the biggest night of his career</h2>
-                    <p class="news-desc">Battling personal tragedy after losing close relatives in a car accident, Ishan Kishan produced a match-winning performa...</p>
-                    <a href="https://timesofindia.indiatimes.com/sports/cricket/icc-mens-t20-world-cup/how-ishan-kishan-fought-personal-grief-to-rise-on-the-biggest-night-of-his-career/articleshow/129280860.cms" target="_blank" class="read-btn">Read Full Story</a>
+                    <p class="news-desc">Battling personal tragedy after losing close relatives in a car accident, Ishan Kishan produced a match-winning performance in the T20 World...</p>
+                    <div class="card-footer">
+                        <span class="date-text">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                            9 Mar 2026, 02:58 am
+                        </span>
+                        <a href="https://timesofindia.indiatimes.com/sports/cricket/icc-mens-t20-world-cup/how-ishan-kishan-fought-personal-grief-to-rise-on-the-biggest-night-of-his-career/articleshow/129280860.cms" target="_blank" rel="noopener noreferrer" class="read-btn">Read More</a>
+                    </div>
                 </div>
             </article>
             <article class="news-card">
-                <img src="https://via.placeholder.com/600x400?text=News+Update" alt="News Image" class="news-image">
+                <div class="image-wrapper">
+                    <img src="https://via.placeholder.com/600x400?text=News+Update" alt="News Image" class="news-image" loading="lazy">
+                    <span class="badge">LATEST</span>
+                </div>
                 <div class="news-content">
-                    <div class="card-meta">
-                        <span class="badge">LATEST</span>
-                        <span class="date-text">8 Mar 2026, 07:58 pm</span>
-                    </div>
                     <h2 class="news-title">Threemendous: T20 kings keep the crown</h2>
                     <p class="news-desc"></p>
-                    <a href="https://timesofindia.indiatimes.com/sports/cricket/icc-mens-t20-world-cup/threemendous-t20-kings-keep-the-crown/articleshow/129288767.cms" target="_blank" class="read-btn">Read Full Story</a>
+                    <div class="card-footer">
+                        <span class="date-text">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                            8 Mar 2026, 07:58 pm
+                        </span>
+                        <a href="https://timesofindia.indiatimes.com/sports/cricket/icc-mens-t20-world-cup/threemendous-t20-kings-keep-the-crown/articleshow/129288767.cms" target="_blank" rel="noopener noreferrer" class="read-btn">Read More</a>
+                    </div>
                 </div>
             </article>
             <article class="news-card">
-                <img src="https://via.placeholder.com/600x400?text=News+Update" alt="News Image" class="news-image">
+                <div class="image-wrapper">
+                    <img src="https://via.placeholder.com/600x400?text=News+Update" alt="News Image" class="news-image" loading="lazy">
+                    <span class="badge">LATEST</span>
+                </div>
                 <div class="news-content">
-                    <div class="card-meta">
-                        <span class="badge">LATEST</span>
-                        <span class="date-text">8 Mar 2026, 06:05 pm</span>
-                    </div>
                     <h2 class="news-title">The drug paradox of Queen Victoria: New book says she ‘loved’ drugs while empire sold opium worldwide</h2>
-                    <p class="news-desc">During the reign of Queen Victoria, the British Empire profited heavily from exporting opium from colonial India to Chin...</p>
-                    <a href="https://timesofindia.indiatimes.com/etimes/trending/the-drug-paradox-of-queen-victoria-new-book-says-she-loved-drugs-while-empire-sold-opium-worldwide/articleshow/129278125.cms" target="_blank" class="read-btn">Read Full Story</a>
+                    <p class="news-desc">During the reign of Queen Victoria, the British Empire profited heavily from exporting opium from colonial India to China, fuelling addictio...</p>
+                    <div class="card-footer">
+                        <span class="date-text">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                            8 Mar 2026, 06:05 pm
+                        </span>
+                        <a href="https://timesofindia.indiatimes.com/etimes/trending/the-drug-paradox-of-queen-victoria-new-book-says-she-loved-drugs-while-empire-sold-opium-worldwide/articleshow/129278125.cms" target="_blank" rel="noopener noreferrer" class="read-btn">Read More</a>
+                    </div>
                 </div>
             </article>
             <article class="news-card">
-                <img src="https://via.placeholder.com/600x400?text=News+Update" alt="News Image" class="news-image">
+                <div class="image-wrapper">
+                    <img src="https://via.placeholder.com/600x400?text=News+Update" alt="News Image" class="news-image" loading="lazy">
+                    <span class="badge">LATEST</span>
+                </div>
                 <div class="news-content">
-                    <div class="card-meta">
-                        <span class="badge">LATEST</span>
-                        <span class="date-text">8 Mar 2026, 11:14 am</span>
-                    </div>
                     <h2 class="news-title">A 35-year-old who has railed against India, China and the US may soon run Nepal</h2>
-                    <p class="news-desc">Former rapper Balendra Shah, known as Balen, defeated three-time prime minister KP Sharma Oli and is leading his party t...</p>
-                    <a href="https://timesofindia.indiatimes.com/toi-plus/international/a-35-year-old-who-has-railed-against-india-china-and-the-us-may-soon-run-nepal/articleshow/129264054.cms" target="_blank" class="read-btn">Read Full Story</a>
+                    <p class="news-desc">Former rapper Balendra Shah, known as Balen, defeated three-time prime minister KP Sharma Oli and is leading his party towards one of the bi...</p>
+                    <div class="card-footer">
+                        <span class="date-text">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                            8 Mar 2026, 11:14 am
+                        </span>
+                        <a href="https://timesofindia.indiatimes.com/toi-plus/international/a-35-year-old-who-has-railed-against-india-china-and-the-us-may-soon-run-nepal/articleshow/129264054.cms" target="_blank" rel="noopener noreferrer" class="read-btn">Read More</a>
+                    </div>
                 </div>
             </article>
         </div>

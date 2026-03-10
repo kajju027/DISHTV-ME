@@ -17,8 +17,7 @@ function formatDate(dateString) {
     try {
         const feeds = [
             'https://timesofindia.indiatimes.com/rssfeeds/4719148.cms',
-            'https://timesofindia.indiatimes.com/rssfeedmostread.cms',
-            'https://timesofindia.indiatimes.com/rssfeeds/54829575.cms'
+            'https://timesofindia.indiatimes.com/rssfeedmostread.cms'
         ];
 
         let allNews = [];

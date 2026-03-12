@@ -130,7 +130,7 @@ function formatDate(dateString) {
 </body>
 </html>`;
 
-        fs.writeFileSync('index.html', fullHtml);
+        fs.writeFileSync('cricket-news-point.html', fullHtml);
     } catch (error) {
         process.exit(1);
     }

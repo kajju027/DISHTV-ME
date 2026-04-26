@@ -1,234 +1,279 @@
-/* ═══════════════════════════════════════════════════
-   Cricket News Point — Blue Light Theme
-   ═══════════════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════
+   Cricket News Point — Parameter System
+   ═══════════════════════════════════════════════ */
 
-function hideLoader() {
-    var loader = document.getElementById("loadingScreen");
-    if (loader) {
-        loader.style.opacity = "0";
-        loader.style.transition = "0.3s";
-        setTimeout(function() { loader.style.display = "none"; }, 300);
-    }
-}
+var allStreams = [];
+
+/* ── Popup ── */
+document.getElementById('popupJoinBtn').addEventListener('click', joinNow);
+document.getElementById('popupSkipBtn').addEventListener('click', closePopup);
 
 function joinNow() {
     localStorage.setItem('hasJoined', 'true');
-    window.open("https://t.me/+dxIv8TLRVhU3OGQ1", "_blank");
-    document.getElementById("popup").style.display = "none";
+    window.open('https://t.me/+dxIv8TLRVhU3OGQ1', '_blank');
+    document.getElementById('popup').style.display = 'none';
 }
 
 function closePopup() {
-    var hasJoined = localStorage.getItem('hasJoined');
-    if (hasJoined === 'true') {
-        document.getElementById("popup").style.display = "none";
+    if (localStorage.getItem('hasJoined') === 'true') {
+        document.getElementById('popup').style.display = 'none';
         return;
     }
-    var skipCount = parseInt(localStorage.getItem('skipCount')) || 0;
-    skipCount++;
-    localStorage.setItem('skipCount', skipCount);
-    if (skipCount >= 3) {
-        joinNow();
-    } else {
-        document.getElementById("popup").style.display = "none";
-    }
+    var skip = parseInt(localStorage.getItem('skipCount') || '0') + 1;
+    localStorage.setItem('skipCount', skip);
+    if (skip >= 3) { joinNow(); }
+    else { document.getElementById('popup').style.display = 'none'; }
 }
 
 function showPopup() {
-    document.getElementById("popup").classList.add("show");
+    document.getElementById('popup').style.display = 'flex';
 }
 
+/* ── Slide Panel ── */
+document.getElementById('bellBtn')?.addEventListener('click', openPanel);
+document.getElementById('closePanelBtn').addEventListener('click', closePanel);
+document.getElementById('slideOverlay').addEventListener('click', closePanel);
+
+function openPanel() {
+    document.getElementById('slideOverlay').classList.add('active');
+    document.getElementById('slidePanel').classList.add('active');
+    document.body.style.overflow = 'hidden';
+    loadNotifications();
+}
+
+function closePanel() {
+    document.getElementById('slideOverlay').classList.remove('active');
+    document.getElementById('slidePanel').classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+function loadNotifications() {
+    var list = document.getElementById('notificationList');
+    list.innerHTML =
+        '<div class="loading-skeleton">' +
+            '<div class="skeleton-card"><div class="skeleton-line"></div><div class="skeleton-line short"></div></div>' +
+            '<div class="skeleton-card"><div class="skeleton-line"></div><div class="skeleton-line short"></div></div>' +
+            '<div class="skeleton-card"><div class="skeleton-line"></div><div class="skeleton-line short"></div></div>' +
+        '</div>';
+
+    setTimeout(function() {
+        if (allStreams.length === 0) {
+            list.innerHTML = '<div class="no-notification">No live streams available right now.</div>';
+            return;
+        }
+        var html = '';
+        allStreams.forEach(function(s, i) {
+            var url = window.location.pathname + '?id=' + encodeURIComponent(s.id);
+            html +=
+                '<div class="notif-card" onclick="visitStream(\'' + encodeURIComponent(s.id) + '\')">' +
+                    '<div class="notif-message">' + escHtml(s.name) + '</div>' +
+                    '<div class="notif-footer">' +
+                        '<div class="notif-meta">' +
+                            '<span class="notif-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> LIVE</span>' +
+                            '<span class="notif-views"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8 4-8 11-8z"/><circle cx="12" cy="12" r="3"/></svg> Stream</span>' +
+                        '</div>' +
+                        '<a class="visit-btn-slide" href="' + url + '">Visit →</a>' +
+                    '</div>' +
+                '</div>';
+        });
+        list.innerHTML = html;
+    }, 800);
+}
+
+function visitStream(id) {
+    window.location.href = window.location.pathname + '?id=' + id;
+}
+
+function escHtml(str) {
+    var d = document.createElement('div');
+    d.textContent = str;
+    return d.innerHTML;
+}
+
+/* ── Share ── */
+function setupShare(data) {
+    var btn = document.getElementById('shareBtn');
+    if (!btn) return;
+    btn.addEventListener('click', function() {
+        var shareData = {
+            title: data.name,
+            text: data.name + '\n\nFrom Cricket News Point\n\nWatch Live Cricket Streaming Free in HD!',
+            url: window.location.href
+        };
+        if (navigator.share) {
+            navigator.share(shareData).then(function() {
+                setShareFeedback(btn, 'Shared Successfully');
+            }).catch(function() {
+                fallbackCopy(data.name, btn);
+            });
+        } else {
+            fallbackCopy(data.name, btn);
+        }
+    });
+}
+
+function fallbackCopy(name, btn) {
+    var text = name + '\n\nFrom Cricket News Point\n\n' + window.location.href;
+    navigator.clipboard.writeText(text).then(function() {
+        setShareFeedback(btn, 'Link Copied!');
+    });
+}
+
+function setShareFeedback(btn, msg) {
+    btn.innerHTML = msg;
+    btn.classList.add('copied');
+    setTimeout(function() {
+        btn.innerHTML = '<i class="fa-solid fa-share-nodes" style="font-size:16px"></i> Share This Stream';
+        btn.classList.remove('copied');
+    }, 2200);
+}
+
+/* ── Orientation Lock ── */
 function lockLandscape() {
     try {
-        if ('orientation' in screen && screen.orientation && screen.orientation.lock) {
-            return screen.orientation.lock("landscape").then(function() {
-                return { locked: true };
-            });
-        } else if (window.screen && window.screen.lockOrientation) {
-            return { locked: !!window.screen.lockOrientation('landscape') };
-        }
-        return { locked: false, reason: 'no-api' };
-    } catch (e) {
-        return { locked: false, error: e };
-    }
+        if (screen.orientation && screen.orientation.lock) return screen.orientation.lock('landscape');
+        if (screen.lockOrientation) return { locked: !!screen.lockOrientation('landscape') };
+        return { locked: false };
+    } catch (e) { return { locked: false }; }
 }
-
 function unlockOrientation() {
     try {
-        if ('orientation' in screen && screen.orientation && screen.orientation.unlock) {
-            screen.orientation.unlock();
-        } else if (window.screen && window.screen.unlockOrientation) {
-            window.screen.unlockOrientation();
-        }
+        if (screen.orientation && screen.orientation.unlock) screen.orientation.unlock();
+        else if (screen.unlockOrientation) screen.unlockOrientation();
     } catch (e) {}
 }
+function applyRotateFallback() {
+    var p = document.getElementById('playerWrap');
+    if (p) p.classList.add('player-rotated');
+}
+function removeRotateFallback() {
+    var p = document.getElementById('playerWrap');
+    if (p) p.classList.remove('player-rotated');
+}
+function onFSChange() {
+    var fs = document.fullscreenElement || document.webkitFullscreenElement;
+    if (fs) { lockLandscape().then(function(r) { if (!r.locked) applyRotateFallback(); }); }
+    else { unlockOrientation(); removeRotateFallback(); }
+}
+document.addEventListener('fullscreenchange', onFSChange);
+document.addEventListener('webkitfullscreenchange', onFSChange);
 
-function applyRotateCssFallback() {
-    var pc = document.getElementById('player-container');
-    if (pc) pc.classList.add('player-rotated');
-    var notice = document.querySelector('.rotate-fallback-notice');
-    if (notice) notice.style.display = 'block';
+/* ── Render Functions ── */
+function renderStreamPage(data) {
+    var c = document.getElementById('mainContainer');
+    c.innerHTML =
+        '<div class="card">' +
+            '<div class="header-content">' +
+                '<span class="header">CRICKET NEWS POINT</span>' +
+            '</div>' +
+            '<div class="bell-container" id="bellBtn">' +
+                '<svg class="bell-svg" viewBox="0 0 24 24"><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C10.63 5.36 9 7.92 9 11v5l-1 2h8l-1-2z"/></svg>' +
+            '</div>' +
+        '</div>' +
+        '<div class="stream-badge">' +
+            '<span class="stream-badge-dot"></span>' +
+            '<span class="stream-badge-name">' + escHtml(data.name) + '</span>' +
+        '</div>' +
+        '<div class="video-wrapper" id="playerWrap">' +
+            '<iframe src="' + data.iframeSrc + '" allow="encrypted-media; autoplay; fullscreen" allowfullscreen></iframe>' +
+        '</div>' +
+        '<div class="info-card join-card">' +
+            '<div class="action-title">' +
+                '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#43A047" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>' +
+                '<span style="font-size:13px;color:#6b7280;font-weight:500;font-family:Plus Jakarta Sans,sans-serif">Join for Instant Updates</span>' +
+            '</div>' +
+            '<a href="https://t.me/+dxIv8TLRVhU3OGQ1" target="_blank" rel="noopener" class="action-button btn-join-style">' +
+                '<i class="fa-brands fa-whatsapp" style="font-size:17px"></i> Join WhatsApp Channel' +
+            '</a>' +
+        '</div>' +
+        '<div class="info-card share-card">' +
+            '<div class="action-title">' +
+                '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0d6efd" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/></svg>' +
+                '<span style="font-size:13px;color:#6b7280;font-weight:500;font-family:Plus Jakarta Sans,sans-serif">Share With Friends</span>' +
+            '</div>' +
+            '<button class="action-button btn-share-style" id="shareBtn">' +
+                '<i class="fa-solid fa-share-nodes" style="font-size:16px"></i> Share This Stream' +
+            '</button>' +
+        '</div>';
+
+    setupShare(data);
 }
 
-function removeRotateCssFallback() {
-    var pc = document.getElementById('player-container');
-    if (pc) pc.classList.remove('player-rotated');
-    var notice = document.querySelector('.rotate-fallback-notice');
-    if (notice) notice.style.display = 'none';
+function renderErrorPage() {
+    var c = document.getElementById('mainContainer');
+    c.innerHTML =
+        '<div class="card">' +
+            '<div class="header-content">' +
+                '<span class="header">CRICKET NEWS POINT</span>' +
+            '</div>' +
+            '<div class="bell-container" id="bellBtn">' +
+                '<svg class="bell-svg" viewBox="0 0 24 24"><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C10.63 5.36 9 7.92 9 11v5l-1 2h8l-1-2z"/></svg>' +
+            '</div>' +
+        '</div>' +
+        '<div class="error-box" style="display:block">' +
+            '⚠ Invalid or unavailable stream ID. Check the link or tap the bell to browse live streams.' +
+        '</div>';
 }
 
-function onFullScreenChange() {
-    var fs = document.fullscreenElement ||
-             document.webkitFullscreenElement ||
-             document.msFullscreenElement;
-    if (fs) {
-        lockLandscape().then(function(res) {
-            if (!res.locked) applyRotateCssFallback();
-        });
-    } else {
-        unlockOrientation();
-        removeRotateCssFallback();
-    }
+function renderSelectPrompt() {
+    var c = document.getElementById('mainContainer');
+    c.innerHTML =
+        '<div class="card">' +
+            '<div class="header-content">' +
+                '<span class="header">CRICKET NEWS POINT</span>' +
+            '</div>' +
+            '<div class="bell-container" id="bellBtn">' +
+                '<svg class="bell-svg" viewBox="0 0 24 24"><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C10.63 5.36 9 7.92 9 11v5l-1 2h8l-1-2z"/></svg>' +
+            '</div>' +
+        '</div>' +
+        '<div class="select-prompt" style="display:block">' +
+            '<div class="select-prompt-icon">' +
+                '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>' +
+            '</div>' +
+            '<p class="select-prompt-text"><strong>No stream selected.</strong><br>Tap the bell icon to browse all live streams.</p>' +
+        '</div>';
 }
 
-document.addEventListener('fullscreenchange', onFullScreenChange);
-document.addEventListener('webkitfullscreenchange', onFullScreenChange);
-document.addEventListener('msfullscreenchange', onFullScreenChange);
-
+/* ── App Init ── */
 async function initializeApp() {
     try {
-        var results = await Promise.allSettled([
-            fetch('https://sayan-json-official.pages.dev/loura.json'),
-            fetch('https://allrounderid2.pages.dev/id.json')
-        ]);
+        var r1 = await fetch('https://sayan-json-official.pages.dev/loura.json');
+        var r2 = await fetch('https://allrounderid2.pages.dev/id.json');
+        var d1 = r1.ok ? (await r1.json()).iframes || [] : [];
+        var d2 = r2.ok ? (await r2.json()).iframes || [] : [];
+        allStreams = d1.concat(d2);
 
-        var data1 = [], data2 = [];
-
-        if (results[0].status === 'fulfilled' && results[0].value.ok) {
-            var j1 = await results[0].value.json();
-            data1 = j1.iframes || [];
-        }
-        if (results[1].status === 'fulfilled' && results[1].value.ok) {
-            var j2 = await results[1].value.json();
-            data2 = j2.iframes || [];
-        }
-
-        var streamId = new URLSearchParams(window.location.search).get('id');
-
-        var stream = data1.find(function(i) { return i.id === streamId; }) ||
-                    data2.find(function(i) { return i.id === streamId; });
+        var id = new URLSearchParams(window.location.search).get('id');
+        var stream = allStreams.find(function(s) { return s.id === id; });
 
         if (stream) {
-            renderIframeUI(stream);
-            setTimeout(showPopup, 1000);
+            renderStreamPage(stream);
+            setTimeout(showPopup, 1200);
+        } else if (id) {
+            renderErrorPage();
         } else {
-            renderErrorUI();
+            renderSelectPrompt();
+            setTimeout(openPanel, 600);
         }
     } catch (err) {
         console.error(err);
-        renderErrorUI();
+        renderErrorPage();
     }
 
     startCounterExtraction();
-    hideLoader();
 }
 
-function renderIframeUI(data) {
-    var el = document.getElementById('stream-content');
-
-    el.innerHTML =
-        '<div class="stream-header">' +
-            '<h1>' + data.name + '</h1>' +
-        '</div>' +
-
-        '<div id="player-container">' +
-            '<iframe src="' + data.iframeSrc + '" style="width:100%;height:100%;border:0;" allow="encrypted-media; autoplay; fullscreen" allowfullscreen></iframe>' +
-            '<div class="view-counter">' +
-                '<div class="name" id="viewChannelName">' + data.name + '</div>' +
-                '<div class="views" id="viewCount">...</div>' +
-            '</div>' +
-            '<div class="rotate-fallback-notice" id="rotateNotice">Rotation active — tap exit to return</div>' +
-        '</div>' +
-
-        '<div class="info-card">' +
-            '<div class="action-title">' +
-                '<svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="color:#2563eb;width:14px;height:14px;">' +
-                    '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>' +
-                '</svg>' +
-                '<span style="font-weight:500;color:#6b7280;font-size:.78rem;">Join for Instant Updates</span>' +
-            '</div>' +
-            '<a href="https://t.me/+dxIv8TLRVhU3OGQ1" target="_blank" rel="noopener" class="action-button">' +
-                '<span style="font-weight:500;">Join WhatsApp Channel</span>' +
-            '</a>' +
-        '</div>';
-
-    startViewCounter(data.id);
-}
-
-function renderErrorUI() {
-    var el = document.getElementById('stream-content');
-    document.title = "Signal Lost";
-
-    el.innerHTML =
-        '<div class="error-container">' +
-            '<div class="err-icon-wrap">' +
-                '<svg viewBox="0 0 24 24">' +
-                    '<line x1="1" y1="1" x2="23" y2="23"/>' +
-                    '<path d="M16.72 11.06A10.94 10.94 0 0 1 19 12.55"/>' +
-                    '<path d="M5 12.55a10.94 10.94 0 0 1 5.17-2.39"/>' +
-                    '<path d="M10.71 5.05A16 16 0 0 1 22.56 9"/>' +
-                    '<path d="M1.42 9a15.91 15.91 0 0 1 4.7-2.88"/>' +
-                    '<path d="M8.53 16.11a6 6 0 0 1 6.95 0"/>' +
-                    '<line x1="12" y1="20" x2="12.01" y2="20" stroke-width="3" stroke-linecap="round"/>' +
-                '</svg>' +
-            '</div>' +
-            '<h1 class="err-title">Signal Lost</h1>' +
-            '<p class="err-desc">' +
-                'We couldn\'t connect to the requested stream. ' +
-                'The ID might be invalid, expired, or the broadcast has ended.' +
-            '</p>' +
-            '<div class="error-grid">' +
-
-                '<a href="#" class="error-card">' +
-                    '<div class="error-card-icon">' +
-                        '<svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>' +
-                    '</div>' +
-                    '<span class="error-card-label">All Streams</span>' +
-                '</a>' +
-
-                '<a href="#" class="error-card">' +
-                    '<div class="error-card-icon">' +
-                        '<svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="13" y2="17"/></svg>' +
-                    '</div>' +
-                    '<span class="error-card-label">Scorecard</span>' +
-                '</a>' +
-
-                '<a href="#" class="error-card">' +
-                    '<div class="error-card-icon">' +
-                        '<svg viewBox="0 0 24 24"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>' +
-                    '</div>' +
-                    '<span class="error-card-label">Contact Us</span>' +
-                '</a>' +
-
-                '<a href="#" class="error-card">' +
-                    '<div class="error-card-icon">' +
-                        '<svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>' +
-                    '</div>' +
-                    '<span class="error-card-label">Terms & Privacy</span>' +
-                '</a>' +
-
-            '</div>' +
-        '</div>';
-}
+document.addEventListener('DOMContentLoaded', initializeApp);
 
 /* ── Supercounters Extraction ── */
 function extractCounter() {
-    var hidden = document.getElementById('sc-hidden');
-    if (!hidden) return null;
-    var img = hidden.querySelector('img');
+    var h = document.getElementById('sc-hidden');
+    if (!h) return null;
+    var img = h.querySelector('img');
     if (img && img.alt) { var n = parseInt(img.alt, 10); if (!isNaN(n) && n > 0) return n; }
-    var span = hidden.querySelector('span');
-    if (span && span.textContent) { var n2 = parseInt(span.textContent, 10); if (!isNaN(n2) && n2 > 0) return n2; }
-    var all = hidden.querySelectorAll('*');
+    var sp = h.querySelector('span');
+    if (sp && sp.textContent) { var n2 = parseInt(sp.textContent, 10); if (!isNaN(n2) && n2 > 0) return n2; }
+    var all = h.querySelectorAll('*');
     for (var i = 0; i < all.length; i++) {
         var t = (all[i].alt || all[i].textContent || '').trim();
         var n3 = parseInt(t, 10); if (!isNaN(n3) && n3 > 0) return n3;
@@ -254,53 +299,3 @@ function displayCounter(num) {
     var el = document.getElementById('footerCount');
     if (el) el.textContent = num;
 }
-
-/* ── View Counter ── */
-var globalRawViews = 0;
-var isMillionCycleState = false;
-
-function startMillionToggleCycle() {
-    (function run() {
-        isMillionCycleState = false; updateDisplay();
-        setTimeout(function() {
-            isMillionCycleState = true; updateDisplay();
-            setTimeout(run, 6000);
-        }, 25000);
-    })();
-}
-
-function updateDisplay() {
-    var el = document.getElementById("viewCount");
-    if (!el) return;
-    if (globalRawViews === 0 || isNaN(globalRawViews)) { el.innerText = "0 Views"; el.style.color = "#ffffff"; return; }
-    var str = "", isBlue = false;
-    if (globalRawViews < 10000) { str = globalRawViews + " Views"; }
-    else if (globalRawViews < 1500000) { str = (globalRawViews / 1000).toFixed(1) + "K Views"; }
-    else if (globalRawViews < 100000000) {
-        if (isMillionCycleState) { str = (globalRawViews / 1000000).toFixed(2) + "M Views"; isBlue = true; }
-        else { str = (globalRawViews / 1000).toFixed(1) + "K Views"; }
-    } else { str = (globalRawViews / 1000000).toFixed(2) + "M Views"; isBlue = true; }
-    el.innerText = str;
-    el.style.color = isBlue ? "#60a5fa" : "#ffffff";
-}
-
-async function fetchViews(streamId) {
-    try {
-        var res = await fetch('https://sayan-prime.pages.dev/api/get?key=' + streamId, { method: 'GET', credentials: 'omit' });
-        if (!res.ok) throw new Error('err');
-        var json = await res.json();
-        if (json.total) globalRawViews = parseInt(json.total, 10);
-    } catch (e) {
-        if (globalRawViews === 0) { var el = document.getElementById("viewCount"); if (el) el.innerText = "N/A"; }
-    }
-    updateDisplay();
-}
-
-async function startViewCounter(streamId) {
-    try { await fetch('https://sayan-prime.pages.dev/api/hit?key=' + streamId + '&unique=1', { credentials: 'omit' }); } catch (e) {}
-    await fetchViews(streamId);
-    setInterval(function() { fetchViews(streamId); }, 100000);
-    startMillionToggleCycle();
-}
-
-document.addEventListener("DOMContentLoaded", initializeApp);
